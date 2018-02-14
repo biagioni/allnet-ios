@@ -1,0 +1,825 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 47;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		29B44907203350CC0050B64D /* KeyExchangeUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B44903203350CC0050B64D /* KeyExchangeUIView.m */; };
+		29B44908203350CC0050B64D /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B44904203350CC0050B64D /* FirstViewController.m */; };
+		29B44932203362950050B64D /* cutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44931203362950050B64D /* cutil.c */; };
+		29B44938203363290050B64D /* allnet_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44936203363290050B64D /* allnet_log.c */; };
+		29B4493B203363490050B64D /* configfiles.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44939203363490050B64D /* configfiles.c */; };
+		29B44941203363790050B64D /* priority.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B4493F203363790050B64D /* priority.c */; };
+		29B44944203363CA0050B64D /* sha.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44942203363C90050B64D /* sha.c */; };
+		29B44947203363E70050B64D /* keys.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44946203363E70050B64D /* keys.c */; };
+		29B4494D2033654B0050B64D /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B4494C2033654B0050B64D /* util.c */; };
+		29B44950203365630050B64D /* cipher.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B4494E203365620050B64D /* cipher.c */; };
+		29B44954203365900050B64D /* ai.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44952203365900050B64D /* ai.c */; };
+		29B44957203365A80050B64D /* stream.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44956203365A80050B64D /* stream.c */; };
+		29B4495A203365BF0050B64D /* wp_aes.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44958203365BF0050B64D /* wp_aes.c */; };
+		29B44960203365E80050B64D /* wp_arith.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B4495E203365E80050B64D /* wp_arith.c */; };
+		29B4496A2033668B0050B64D /* retransmit.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B449682033668B0050B64D /* retransmit.c */; };
+		29B44970203366CF0050B64D /* store.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B4496E203366CE0050B64D /* store.c */; };
+		29B44975203367300050B64D /* mapchar.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44973203367300050B64D /* mapchar.c */; };
+		29B44979203367820050B64D /* message.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44977203367810050B64D /* message.c */; };
+		29B4498A203368530050B64D /* dcache.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44987203368530050B64D /* dcache.c */; };
+		29B4498F2033688D0050B64D /* pipemsg.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B4498C2033688D0050B64D /* pipemsg.c */; };
+		29B449912033688D0050B64D /* allnet_queue.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B4498E2033688D0050B64D /* allnet_queue.c */; };
+		29B44998203369790050B64D /* listen.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44995203369790050B64D /* listen.c */; };
+		29B44999203369790050B64D /* alocal.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44996203369790050B64D /* alocal.c */; };
+		29B449A020336D730050B64D /* app_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B4499F20336D730050B64D /* app_util.c */; };
+		29B449A220336DA70050B64D /* acache.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B449A120336DA70050B64D /* acache.c */; };
+		29B449A420336DEE0050B64D /* astart.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B449A320336DEE0050B64D /* astart.c */; };
+		29B449A620336E3A0050B64D /* ad.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B449A520336E3A0050B64D /* ad.c */; };
+		29B449A920336E660050B64D /* social.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B449A820336E650050B64D /* social.c */; };
+		29B449AE20336EBF0050B64D /* table.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B449AC20336EBF0050B64D /* table.c */; };
+		29B449B120336EE50050B64D /* record.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B449AF20336EE50050B64D /* record.c */; };
+		29B449B320336F220050B64D /* track.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B449B220336F210050B64D /* track.c */; };
+		29B449B520336F590050B64D /* aip.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B449B420336F590050B64D /* aip.c */; };
+		29B449B920336F920050B64D /* adht.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B449B620336F910050B64D /* adht.c */; };
+		29B449BA20336F920050B64D /* routing.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B449B720336F920050B64D /* routing.c */; };
+		29B449BB20336F920050B64D /* xcommon.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B449B820336F920050B64D /* xcommon.c */; };
+		29B449BD20336FD20050B64D /* traced.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B449BC20336FD20050B64D /* traced.c */; };
+		29B449BF203370000050B64D /* trace_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B449BE203370000050B64D /* trace_util.c */; };
+		29B449C1203370290050B64D /* keyd.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B449C0203370280050B64D /* keyd.c */; };
+		29B449C7203377020050B64D /* crypt_sel.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B449C6203377020050B64D /* crypt_sel.c */; };
+		29B449C8203379FF0050B64D /* libPods-allnet-xchat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B449C9203379FF0050B64D /* libPods-allnet-xchat.a */; };
+		29B449D620337A2B0050B64D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29B449CB20337A2B0050B64D /* Images.xcassets */; };
+		29B449DC20337AFC0050B64D /* XChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 428DEE961B0FB9D000163976 /* XChat.m */; };
+		425A7D951AEC898C00C74E12 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 425A7D941AEC898C00C74E12 /* main.m */; };
+		425A7D981AEC898C00C74E12 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 425A7D971AEC898C00C74E12 /* AppDelegate.m */; };
+		425A7D9E1AEC898C00C74E12 /* NewContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 425A7D9D1AEC898C00C74E12 /* NewContactViewController.m */; };
+		425A7DA11AEC898C00C74E12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 425A7D9F1AEC898C00C74E12 /* Main.storyboard */; };
+		425A7DA61AEC898C00C74E12 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 425A7DA41AEC898C00C74E12 /* LaunchScreen.xib */; };
+		429067421B539F1B002EA3C1 /* KeyExchangeUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 429067411B539F1B002EA3C1 /* KeyExchangeUIViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		29B44903203350CC0050B64D /* KeyExchangeUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyExchangeUIView.m; sourceTree = "<group>"; };
+		29B44904203350CC0050B64D /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		29B44905203350CC0050B64D /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		29B44906203350CC0050B64D /* KeyExchangeUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyExchangeUIView.h; sourceTree = "<group>"; };
+		29B44929203358400050B64D /* allnet-xchat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "allnet-xchat-Bridging-Header.h"; sourceTree = "<group>"; };
+		29B44930203362950050B64D /* cutil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cutil.h; sourceTree = "<group>"; };
+		29B44931203362950050B64D /* cutil.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cutil.c; sourceTree = "<group>"; };
+		29B44933203362DC0050B64D /* packet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = packet.h; sourceTree = "<group>"; };
+		29B44934203362ED0050B64D /* media.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = media.h; sourceTree = "<group>"; };
+		29B44935203363010050B64D /* pipemsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pipemsg.h; sourceTree = "<group>"; };
+		29B44936203363290050B64D /* allnet_log.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = allnet_log.c; sourceTree = "<group>"; };
+		29B44937203363290050B64D /* allnet_log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = allnet_log.h; sourceTree = "<group>"; };
+		29B44939203363490050B64D /* configfiles.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = configfiles.c; sourceTree = "<group>"; };
+		29B4493A203363490050B64D /* configfiles.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = configfiles.h; sourceTree = "<group>"; };
+		29B4493D203363660050B64D /* app_util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = app_util.h; sourceTree = "<group>"; };
+		29B4493F203363790050B64D /* priority.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = priority.c; sourceTree = "<group>"; };
+		29B44940203363790050B64D /* priority.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = priority.h; sourceTree = "<group>"; };
+		29B44942203363C90050B64D /* sha.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sha.c; sourceTree = "<group>"; };
+		29B44943203363C90050B64D /* sha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha.h; sourceTree = "<group>"; };
+		29B44945203363E70050B64D /* keys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keys.h; sourceTree = "<group>"; };
+		29B44946203363E70050B64D /* keys.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = keys.c; sourceTree = "<group>"; };
+		29B44949203364110050B64D /* crypt_sel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = crypt_sel.h; sourceTree = "<group>"; };
+		29B4494B2033654B0050B64D /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		29B4494C2033654B0050B64D /* util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = util.c; sourceTree = "<group>"; };
+		29B4494E203365620050B64D /* cipher.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cipher.c; sourceTree = "<group>"; };
+		29B4494F203365620050B64D /* cipher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cipher.h; sourceTree = "<group>"; };
+		29B449512033657D0050B64D /* mgmt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mgmt.h; sourceTree = "<group>"; };
+		29B44952203365900050B64D /* ai.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ai.c; sourceTree = "<group>"; };
+		29B44953203365900050B64D /* ai.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ai.h; sourceTree = "<group>"; };
+		29B44955203365A80050B64D /* stream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stream.h; sourceTree = "<group>"; };
+		29B44956203365A80050B64D /* stream.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = stream.c; sourceTree = "<group>"; };
+		29B44958203365BF0050B64D /* wp_aes.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wp_aes.c; sourceTree = "<group>"; };
+		29B44959203365BF0050B64D /* wp_aes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wp_aes.h; sourceTree = "<group>"; };
+		29B4495B203365DA0050B64D /* wp_rsa.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wp_rsa.h; sourceTree = "<group>"; };
+		29B4495E203365E80050B64D /* wp_arith.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wp_arith.c; sourceTree = "<group>"; };
+		29B4495F203365E80050B64D /* wp_arith.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wp_arith.h; sourceTree = "<group>"; };
+		29B44964203366260050B64D /* chat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chat.h; sourceTree = "<group>"; };
+		29B449682033668B0050B64D /* retransmit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = retransmit.c; sourceTree = "<group>"; };
+		29B449692033668B0050B64D /* retransmit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = retransmit.h; sourceTree = "<group>"; };
+		29B4496C2033669A0050B64D /* xcommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xcommon.h; sourceTree = "<group>"; };
+		29B4496E203366CE0050B64D /* store.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = store.c; sourceTree = "<group>"; };
+		29B4496F203366CE0050B64D /* store.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = store.h; sourceTree = "<group>"; };
+		29B449712033672F0050B64D /* mapchar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mapchar.h; sourceTree = "<group>"; };
+		29B44973203367300050B64D /* mapchar.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mapchar.c; sourceTree = "<group>"; };
+		29B44976203367810050B64D /* message.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = message.h; sourceTree = "<group>"; };
+		29B44977203367810050B64D /* message.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = message.c; sourceTree = "<group>"; };
+		29B4497C203367FC0050B64D /* trace_util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = trace_util.h; sourceTree = "<group>"; };
+		29B44987203368530050B64D /* dcache.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dcache.c; sourceTree = "<group>"; };
+		29B44988203368530050B64D /* dcache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dcache.h; sourceTree = "<group>"; };
+		29B4498B2033688D0050B64D /* allnet_queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = allnet_queue.h; sourceTree = "<group>"; };
+		29B4498C2033688D0050B64D /* pipemsg.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pipemsg.c; sourceTree = "<group>"; };
+		29B4498E2033688D0050B64D /* allnet_queue.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = allnet_queue.c; sourceTree = "<group>"; };
+		29B44992203368EE0050B64D /* gui_socket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gui_socket.h; sourceTree = "<group>"; };
+		29B44995203369790050B64D /* listen.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = listen.c; sourceTree = "<group>"; };
+		29B44996203369790050B64D /* alocal.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = alocal.c; sourceTree = "<group>"; };
+		29B44997203369790050B64D /* listen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = listen.h; sourceTree = "<group>"; };
+		29B4499B203369A00050B64D /* routing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = routing.h; sourceTree = "<group>"; };
+		29B4499F20336D730050B64D /* app_util.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = app_util.c; sourceTree = "<group>"; };
+		29B449A120336DA70050B64D /* acache.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = acache.c; sourceTree = "<group>"; };
+		29B449A320336DEE0050B64D /* astart.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = astart.c; sourceTree = "<group>"; };
+		29B449A520336E3A0050B64D /* ad.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ad.c; sourceTree = "<group>"; };
+		29B449A720336E650050B64D /* social.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = social.h; sourceTree = "<group>"; };
+		29B449A820336E650050B64D /* social.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = social.c; sourceTree = "<group>"; };
+		29B449AA20336E9B0050B64D /* track.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = track.h; sourceTree = "<group>"; };
+		29B449AB20336E9C0050B64D /* OALAudioTrack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OALAudioTrack.h; sourceTree = "<group>"; };
+		29B449AC20336EBF0050B64D /* table.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = table.c; sourceTree = "<group>"; };
+		29B449AD20336EBF0050B64D /* table.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = table.h; sourceTree = "<group>"; };
+		29B449AF20336EE50050B64D /* record.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = record.c; sourceTree = "<group>"; };
+		29B449B020336EE50050B64D /* record.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = record.h; sourceTree = "<group>"; };
+		29B449B220336F210050B64D /* track.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = track.c; sourceTree = "<group>"; };
+		29B449B420336F590050B64D /* aip.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = aip.c; sourceTree = "<group>"; };
+		29B449B620336F910050B64D /* adht.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = adht.c; sourceTree = "<group>"; };
+		29B449B720336F920050B64D /* routing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = routing.c; sourceTree = "<group>"; };
+		29B449B820336F920050B64D /* xcommon.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = xcommon.c; sourceTree = "<group>"; };
+		29B449BC20336FD20050B64D /* traced.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = traced.c; sourceTree = "<group>"; };
+		29B449BE203370000050B64D /* trace_util.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = trace_util.c; sourceTree = "<group>"; };
+		29B449C0203370280050B64D /* keyd.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = keyd.c; sourceTree = "<group>"; };
+		29B449C6203377020050B64D /* crypt_sel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = crypt_sel.c; sourceTree = "<group>"; };
+		29B449C9203379FF0050B64D /* libPods-allnet-xchat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-allnet-xchat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29B449CB20337A2B0050B64D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		420127451AF970BE00A61978 /* ContactsUITableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsUITableViewController.h; sourceTree = "<group>"; };
+		420127461AF970BE00A61978 /* ContactsUITableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = ContactsUITableViewController.m; sourceTree = "<group>"; };
+		422B56221E9E9B890072212E /* allnet-xchat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "allnet-xchat.entitlements"; sourceTree = "<group>"; };
+		425455A11B2D858800A33CB6 /* ConversationUITextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationUITextView.h; sourceTree = "<group>"; };
+		425455A21B2D858800A33CB6 /* ConversationUITextView.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.objc; path = ConversationUITextView.m; sourceTree = "<group>"; };
+		425A7D8F1AEC898C00C74E12 /* allnet-xchat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "allnet-xchat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		425A7D931AEC898C00C74E12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		425A7D941AEC898C00C74E12 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		425A7D961AEC898C00C74E12 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		425A7D971AEC898C00C74E12 /* AppDelegate.m */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		425A7D9C1AEC898C00C74E12 /* NewContactViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewContactViewController.h; sourceTree = "<group>"; };
+		425A7D9D1AEC898C00C74E12 /* NewContactViewController.m */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = NewContactViewController.m; sourceTree = "<group>"; };
+		425A7DA01AEC898C00C74E12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		425A7DA51AEC898C00C74E12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		426C481C1D2C5340001612B1 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		426C481D1D2C5340001612B1 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		428DEE961B0FB9D000163976 /* XChat.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = XChat.m; sourceTree = "<group>"; };
+		428DEE981B0FC34F00163976 /* XChat.h */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = XChat.h; sourceTree = "<group>"; };
+		429067401B539F1B002EA3C1 /* KeyExchangeUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyExchangeUIViewController.h; sourceTree = "<group>"; };
+		429067411B539F1B002EA3C1 /* KeyExchangeUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = KeyExchangeUIViewController.m; sourceTree = "<group>"; };
+		42AC8CE21B4A70B1008437BC /* ConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationViewController.h; sourceTree = "<group>"; };
+		42AC8CE31B4A70B1008437BC /* ConversationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = ConversationViewController.m; sourceTree = "<group>"; };
+		42B59FB81BC0D73000D710A8 /* iOSKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSKeys.h; sourceTree = "<group>"; };
+		42B59FB91BC0D73000D710A8 /* iOSKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = iOSKeys.m; sourceTree = "<group>"; };
+		42CC5D7A1BF04B5B00437C67 /* MoreUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreUIViewController.h; sourceTree = "<group>"; };
+		42CC5D7B1BF04B5B00437C67 /* MoreUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = MoreUIViewController.m; sourceTree = "<group>"; };
+		42CC5D7E1BF06F9800437C67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		6124C4CC7071F14CBE49FE1C /* Pods-allnet-xchat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-allnet-xchat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-allnet-xchat/Pods-allnet-xchat.debug.xcconfig"; sourceTree = "<group>"; };
+		AFB2BF2A72ED41B94BA16D5D /* Pods-allnet-xchat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-allnet-xchat.release.xcconfig"; path = "Pods/Target Support Files/Pods-allnet-xchat/Pods-allnet-xchat.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		425A7D8C1AEC898C00C74E12 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29B449C8203379FF0050B64D /* libPods-allnet-xchat.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		29B449DB20337A9A0050B64D /* cfiles */ = {
+			isa = PBXGroup;
+			children = (
+				29B4495B203365DA0050B64D /* wp_rsa.h */,
+				428DEE981B0FC34F00163976 /* XChat.h */,
+				428DEE961B0FB9D000163976 /* XChat.m */,
+				29B4496C2033669A0050B64D /* xcommon.h */,
+				29B449AC20336EBF0050B64D /* table.c */,
+				29B449AD20336EBF0050B64D /* table.h */,
+				29B4497C203367FC0050B64D /* trace_util.h */,
+				29B449AA20336E9B0050B64D /* track.h */,
+				29B449B220336F210050B64D /* track.c */,
+				29B4494C2033654B0050B64D /* util.c */,
+				29B4494B2033654B0050B64D /* util.h */,
+				29B44958203365BF0050B64D /* wp_aes.c */,
+				29B44959203365BF0050B64D /* wp_aes.h */,
+				29B4495E203365E80050B64D /* wp_arith.c */,
+				29B4495F203365E80050B64D /* wp_arith.h */,
+				29B449B820336F920050B64D /* xcommon.c */,
+				29B4499B203369A00050B64D /* routing.h */,
+				29B449B420336F590050B64D /* aip.c */,
+				29B44942203363C90050B64D /* sha.c */,
+				29B44943203363C90050B64D /* sha.h */,
+				29B449A820336E650050B64D /* social.c */,
+				29B449A720336E650050B64D /* social.h */,
+				29B4496E203366CE0050B64D /* store.c */,
+				29B4496F203366CE0050B64D /* store.h */,
+				29B44956203365A80050B64D /* stream.c */,
+				29B44955203365A80050B64D /* stream.h */,
+				29B44933203362DC0050B64D /* packet.h */,
+				29B4498C2033688D0050B64D /* pipemsg.c */,
+				29B44935203363010050B64D /* pipemsg.h */,
+				29B4493F203363790050B64D /* priority.c */,
+				29B44940203363790050B64D /* priority.h */,
+				29B449C0203370280050B64D /* keyd.c */,
+				29B449AF20336EE50050B64D /* record.c */,
+				29B449B020336EE50050B64D /* record.h */,
+				29B449682033668B0050B64D /* retransmit.c */,
+				29B449692033668B0050B64D /* retransmit.h */,
+				29B449B620336F910050B64D /* adht.c */,
+				29B449BE203370000050B64D /* trace_util.c */,
+				29B449B720336F920050B64D /* routing.c */,
+				29B449BC20336FD20050B64D /* traced.c */,
+				29B44995203369790050B64D /* listen.c */,
+				29B44997203369790050B64D /* listen.h */,
+				29B44973203367300050B64D /* mapchar.c */,
+				29B449712033672F0050B64D /* mapchar.h */,
+				29B44934203362ED0050B64D /* media.h */,
+				29B44977203367810050B64D /* message.c */,
+				29B44976203367810050B64D /* message.h */,
+				29B449512033657D0050B64D /* mgmt.h */,
+				29B44946203363E70050B64D /* keys.c */,
+				29B44945203363E70050B64D /* keys.h */,
+				29B44992203368EE0050B64D /* gui_socket.h */,
+				29B44996203369790050B64D /* alocal.c */,
+				29B4499F20336D730050B64D /* app_util.c */,
+				29B4493D203363660050B64D /* app_util.h */,
+				29B449A320336DEE0050B64D /* astart.c */,
+				29B44964203366260050B64D /* chat.h */,
+				29B4494E203365620050B64D /* cipher.c */,
+				29B4494F203365620050B64D /* cipher.h */,
+				29B44939203363490050B64D /* configfiles.c */,
+				29B4493A203363490050B64D /* configfiles.h */,
+				29B449A120336DA70050B64D /* acache.c */,
+				29B44949203364110050B64D /* crypt_sel.h */,
+				29B44931203362950050B64D /* cutil.c */,
+				29B44930203362950050B64D /* cutil.h */,
+				29B44987203368530050B64D /* dcache.c */,
+				29B44988203368530050B64D /* dcache.h */,
+				29B449A520336E3A0050B64D /* ad.c */,
+				29B44952203365900050B64D /* ai.c */,
+				29B44953203365900050B64D /* ai.h */,
+				29B44936203363290050B64D /* allnet_log.c */,
+				29B44937203363290050B64D /* allnet_log.h */,
+				29B449C6203377020050B64D /* crypt_sel.c */,
+				29B4498E2033688D0050B64D /* allnet_queue.c */,
+				29B4498B2033688D0050B64D /* allnet_queue.h */,
+			);
+			path = cfiles;
+			sourceTree = "<group>";
+		};
+		29B449DD20337B160050B64D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				429067401B539F1B002EA3C1 /* KeyExchangeUIViewController.h */,
+				429067411B539F1B002EA3C1 /* KeyExchangeUIViewController.m */,
+				425A7D961AEC898C00C74E12 /* AppDelegate.h */,
+				425A7D971AEC898C00C74E12 /* AppDelegate.m */,
+				420127451AF970BE00A61978 /* ContactsUITableViewController.h */,
+				420127461AF970BE00A61978 /* ContactsUITableViewController.m */,
+				42AC8CE21B4A70B1008437BC /* ConversationViewController.h */,
+				42AC8CE31B4A70B1008437BC /* ConversationViewController.m */,
+				29B44905203350CC0050B64D /* FirstViewController.h */,
+				29B44904203350CC0050B64D /* FirstViewController.m */,
+				42CC5D7A1BF04B5B00437C67 /* MoreUIViewController.h */,
+				42CC5D7B1BF04B5B00437C67 /* MoreUIViewController.m */,
+				425A7D9C1AEC898C00C74E12 /* NewContactViewController.h */,
+				425A7D9D1AEC898C00C74E12 /* NewContactViewController.m */,
+				426C481C1D2C5340001612B1 /* SettingsViewController.h */,
+				426C481D1D2C5340001612B1 /* SettingsViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		29B449DE20337B4F0050B64D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				425455A11B2D858800A33CB6 /* ConversationUITextView.h */,
+				425455A21B2D858800A33CB6 /* ConversationUITextView.m */,
+				42B59FB81BC0D73000D710A8 /* iOSKeys.h */,
+				42B59FB91BC0D73000D710A8 /* iOSKeys.m */,
+				29B44906203350CC0050B64D /* KeyExchangeUIView.h */,
+				29B44903203350CC0050B64D /* KeyExchangeUIView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		29B449DF20337B6F0050B64D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				29B449AB20336E9C0050B64D /* OALAudioTrack.h */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		2A79950D9D014169F0510A63 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B449C9203379FF0050B64D /* libPods-allnet-xchat.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		425A7D861AEC898C00C74E12 = {
+			isa = PBXGroup;
+			children = (
+				422B56221E9E9B890072212E /* allnet-xchat.entitlements */,
+				425A7D911AEC898C00C74E12 /* xchatUI */,
+				425A7D901AEC898C00C74E12 /* Products */,
+				5541FBB1735D16DA3B9CF84F /* Pods */,
+				2A79950D9D014169F0510A63 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		425A7D901AEC898C00C74E12 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				425A7D8F1AEC898C00C74E12 /* allnet-xchat.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		425A7D911AEC898C00C74E12 /* xchatUI */ = {
+			isa = PBXGroup;
+			children = (
+				29B449DF20337B6F0050B64D /* Utils */,
+				29B449DE20337B4F0050B64D /* View */,
+				29B449DD20337B160050B64D /* Controller */,
+				29B449DB20337A9A0050B64D /* cfiles */,
+				29B44929203358400050B64D /* allnet-xchat-Bridging-Header.h */,
+				425A7D921AEC898C00C74E12 /* Supporting Files */,
+			);
+			path = xchatUI;
+			sourceTree = "<group>";
+		};
+		425A7D921AEC898C00C74E12 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				29B449CB20337A2B0050B64D /* Images.xcassets */,
+				425A7DA41AEC898C00C74E12 /* LaunchScreen.xib */,
+				425A7D9F1AEC898C00C74E12 /* Main.storyboard */,
+				425A7D931AEC898C00C74E12 /* Info.plist */,
+				425A7D941AEC898C00C74E12 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5541FBB1735D16DA3B9CF84F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6124C4CC7071F14CBE49FE1C /* Pods-allnet-xchat.debug.xcconfig */,
+				AFB2BF2A72ED41B94BA16D5D /* Pods-allnet-xchat.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		425A7D8E1AEC898C00C74E12 /* allnet-xchat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 425A7DB51AEC898C00C74E12 /* Build configuration list for PBXNativeTarget "allnet-xchat" */;
+			buildPhases = (
+				2D5C573AFA0B90A15FD243DF /* [CP] Check Pods Manifest.lock */,
+				425A7D8B1AEC898C00C74E12 /* Sources */,
+				425A7D8C1AEC898C00C74E12 /* Frameworks */,
+				425A7D8D1AEC898C00C74E12 /* Resources */,
+				2B4616912D5A350179B109A1 /* [CP] Embed Pods Frameworks */,
+				B8A399E8F211297F23297759 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "allnet-xchat";
+			productName = "xchat UI";
+			productReference = 425A7D8F1AEC898C00C74E12 /* allnet-xchat.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		425A7D871AEC898C00C74E12 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = allnet;
+				TargetAttributes = {
+					425A7D8E1AEC898C00C74E12 = {
+						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = 7TW6282C6A;
+						LastSwiftMigration = 0920;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.WAC = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 425A7D8A1AEC898C00C74E12 /* Build configuration list for PBXProject "allnet-xchat" */;
+			compatibilityVersion = "Xcode 6.3";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				English,
+			);
+			mainGroup = 425A7D861AEC898C00C74E12;
+			productRefGroup = 425A7D901AEC898C00C74E12 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				425A7D8E1AEC898C00C74E12 /* allnet-xchat */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		425A7D8D1AEC898C00C74E12 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29B449D620337A2B0050B64D /* Images.xcassets in Resources */,
+				425A7DA11AEC898C00C74E12 /* Main.storyboard in Resources */,
+				425A7DA61AEC898C00C74E12 /* LaunchScreen.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2B4616912D5A350179B109A1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-allnet-xchat/Pods-allnet-xchat-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2D5C573AFA0B90A15FD243DF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-allnet-xchat-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B8A399E8F211297F23297759 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-allnet-xchat/Pods-allnet-xchat-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		425A7D8B1AEC898C00C74E12 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29B449BA20336F920050B64D /* routing.c in Sources */,
+				29B449A420336DEE0050B64D /* astart.c in Sources */,
+				29B4498A203368530050B64D /* dcache.c in Sources */,
+				29B449912033688D0050B64D /* allnet_queue.c in Sources */,
+				29B449A220336DA70050B64D /* acache.c in Sources */,
+				29B449B920336F920050B64D /* adht.c in Sources */,
+				29B449B120336EE50050B64D /* record.c in Sources */,
+				29B449BF203370000050B64D /* trace_util.c in Sources */,
+				29B4498F2033688D0050B64D /* pipemsg.c in Sources */,
+				29B449A020336D730050B64D /* app_util.c in Sources */,
+				29B44998203369790050B64D /* listen.c in Sources */,
+				29B449C1203370290050B64D /* keyd.c in Sources */,
+				29B44999203369790050B64D /* alocal.c in Sources */,
+				29B44960203365E80050B64D /* wp_arith.c in Sources */,
+				29B44954203365900050B64D /* ai.c in Sources */,
+				29B44947203363E70050B64D /* keys.c in Sources */,
+				425A7D9E1AEC898C00C74E12 /* NewContactViewController.m in Sources */,
+				29B4493B203363490050B64D /* configfiles.c in Sources */,
+				29B449DC20337AFC0050B64D /* XChat.m in Sources */,
+				29B44908203350CC0050B64D /* FirstViewController.m in Sources */,
+				29B44975203367300050B64D /* mapchar.c in Sources */,
+				29B449A920336E660050B64D /* social.c in Sources */,
+				29B44950203365630050B64D /* cipher.c in Sources */,
+				29B44970203366CF0050B64D /* store.c in Sources */,
+				29B4494D2033654B0050B64D /* util.c in Sources */,
+				29B44979203367820050B64D /* message.c in Sources */,
+				29B449B520336F590050B64D /* aip.c in Sources */,
+				29B449B320336F220050B64D /* track.c in Sources */,
+				29B449C7203377020050B64D /* crypt_sel.c in Sources */,
+				429067421B539F1B002EA3C1 /* KeyExchangeUIViewController.m in Sources */,
+				29B44932203362950050B64D /* cutil.c in Sources */,
+				29B44957203365A80050B64D /* stream.c in Sources */,
+				29B44944203363CA0050B64D /* sha.c in Sources */,
+				29B44907203350CC0050B64D /* KeyExchangeUIView.m in Sources */,
+				29B4496A2033668B0050B64D /* retransmit.c in Sources */,
+				29B449A620336E3A0050B64D /* ad.c in Sources */,
+				29B449AE20336EBF0050B64D /* table.c in Sources */,
+				425A7D981AEC898C00C74E12 /* AppDelegate.m in Sources */,
+				29B449BB20336F920050B64D /* xcommon.c in Sources */,
+				29B44941203363790050B64D /* priority.c in Sources */,
+				29B449BD20336FD20050B64D /* traced.c in Sources */,
+				29B44938203363290050B64D /* allnet_log.c in Sources */,
+				425A7D951AEC898C00C74E12 /* main.m in Sources */,
+				29B4495A203365BF0050B64D /* wp_aes.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		425A7D9F1AEC898C00C74E12 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				425A7DA01AEC898C00C74E12 /* Base */,
+				42CC5D7E1BF06F9800437C67 /* en */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		425A7DA41AEC898C00C74E12 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				425A7DA51AEC898C00C74E12 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		425A7DB31AEC898C00C74E12 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		425A7DB41AEC898C00C74E12 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Edoardo Biagioni (2NAWJ2B33J)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		425A7DB61AEC898C00C74E12 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6124C4CC7071F14CBE49FE1C /* Pods-allnet-xchat.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "launch images";
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_STATIC_ANALYZER_MODE = deep;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 0.001;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7TW6282C6A;
+				ENABLE_BITCODE = NO;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_SHADOW = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/xchatUI/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/xchatUI",
+					"$(SRCROOT)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-DHAVE_OPENSSL";
+				OTHER_LDFLAGS = "$(inherited)";
+				"OTHER_LDFLAGS[arch=*]" = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.alnt.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "allnet-xchat";
+				PROVISIONING_PROFILE = "";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				STRIP_PNG_TEXT = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "xchatUI/allnet-xchat-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				SYSTEM_HEADER_SEARCH_PATHS = "";
+				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		425A7DB71AEC898C00C74E12 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFB2BF2A72ED41B94BA16D5D /* Pods-allnet-xchat.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "launch images";
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_STATIC_ANALYZER_MODE = deep;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 0.001;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7TW6282C6A;
+				ENABLE_BITCODE = NO;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_SHADOW = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/xchatUI/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/xchatUI",
+					"$(SRCROOT)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-DHAVE_OPENSSL";
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.alnt.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "allnet-xchat";
+				PROVISIONING_PROFILE = "";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				STRIP_PNG_TEXT = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "xchatUI/allnet-xchat-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+				SYSTEM_HEADER_SEARCH_PATHS = "";
+				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		425A7D8A1AEC898C00C74E12 /* Build configuration list for PBXProject "allnet-xchat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				425A7DB31AEC898C00C74E12 /* Debug */,
+				425A7DB41AEC898C00C74E12 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		425A7DB51AEC898C00C74E12 /* Build configuration list for PBXNativeTarget "allnet-xchat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				425A7DB61AEC898C00C74E12 /* Debug */,
+				425A7DB71AEC898C00C74E12 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 425A7D871AEC898C00C74E12 /* Project object */;
+}
