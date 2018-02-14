@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29952BF32034D976009054D4 /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF22034D976009054D4 /* ContactListVC.swift */; };
 		29B44907203350CC0050B64D /* KeyExchangeUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B44903203350CC0050B64D /* KeyExchangeUIView.m */; };
 		29B44908203350CC0050B64D /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B44904203350CC0050B64D /* FirstViewController.m */; };
 		29B44932203362950050B64D /* cutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44931203362950050B64D /* cutil.c */; };
@@ -58,6 +59,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29952BF22034D976009054D4 /* ContactListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListVC.swift; sourceTree = "<group>"; };
 		29B44903203350CC0050B64D /* KeyExchangeUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyExchangeUIView.m; sourceTree = "<group>"; };
 		29B44904203350CC0050B64D /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		29B44905203350CC0050B64D /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
@@ -185,8 +187,6 @@
 			isa = PBXGroup;
 			children = (
 				29B4495B203365DA0050B64D /* wp_rsa.h */,
-				428DEE981B0FC34F00163976 /* XChat.h */,
-				428DEE961B0FB9D000163976 /* XChat.m */,
 				29B4496C2033669A0050B64D /* xcommon.h */,
 				29B449AC20336EBF0050B64D /* table.c */,
 				29B449AD20336EBF0050B64D /* table.h */,
@@ -281,6 +281,7 @@
 				425A7D9D1AEC898C00C74E12 /* NewContactViewController.m */,
 				426C481C1D2C5340001612B1 /* SettingsViewController.h */,
 				426C481D1D2C5340001612B1 /* SettingsViewController.m */,
+				29952BF22034D976009054D4 /* ContactListVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -301,6 +302,8 @@
 		29B449DF20337B6F0050B64D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				428DEE981B0FC34F00163976 /* XChat.h */,
+				428DEE961B0FB9D000163976 /* XChat.m */,
 				29B449AB20336E9C0050B64D /* OALAudioTrack.h */,
 			);
 			path = Utils;
@@ -523,6 +526,7 @@
 				29B449C1203370290050B64D /* keyd.c in Sources */,
 				29B44999203369790050B64D /* alocal.c in Sources */,
 				29B44960203365E80050B64D /* wp_arith.c in Sources */,
+				29952BF32034D976009054D4 /* ContactListVC.swift in Sources */,
 				29B44954203365900050B64D /* ai.c in Sources */,
 				29B44947203363E70050B64D /* keys.c in Sources */,
 				425A7D9E1AEC898C00C74E12 /* NewContactViewController.m in Sources */,
