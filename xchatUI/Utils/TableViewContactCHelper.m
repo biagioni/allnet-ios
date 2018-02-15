@@ -23,9 +23,13 @@
 
 @implementation TableViewContactCHelper : NSObject
 #define NUM_HEADER_ROWS     4
--(NSInteger) getRowsCount: (NSMutableArray*) contacts :  (BOOL*) displaySettings {
+-(NSInteger) getRowsCount: (NSMutableArray* _Nullable) contacts :  (BOOL) displaySettings {
     // Return the number of rows in the section.
-    int contactsCount = (int)[contacts count];
+    int contactsCount;
+    if (contacts != NULL)
+        contactsCount = (int)[contacts count];
+    else
+        contactsCount = 0;
     int hiddenCount = invisible_contacts (NULL);
     if (displaySettings)
         contactsCount += hiddenCount;
@@ -33,49 +37,6 @@
     if (displaySettings || (contactsCount > 0) || (hiddenCount > 0))
         settingsButtonCount = 1;
     return contactsCount + NUM_HEADER_ROWS + settingsButtonCount;
-}
-
-- (void)contactButtonClicked:(id) source : (NSMutableArray*) contacts : (UILabel*) contactName : (ConversationUITextView*) conversation : (NSMutableDictionary*) contactsWithNewMessages : (UITableView*) tableView {
-    UIButton * button = (UIButton *) source;
-    NSString * contact = nil;
-    contact = [contacts objectAtIndex:button.tag];
-    NSLog(@"in contactButtonClicked, text %@, contact %@\n", button.currentTitle, contact);
-    if (contactName != nil) {
-        contactName.text = contact;
-        [self displayingContact:contact :contactsWithNewMessages :tableView];
-        if (conversation != nil) {
-            [conversation displayContact:contact];
-            //self.tabBarController.selectedIndex = 1;
-        }
-    }
-}
-
-- (void)editButtonClicked:(id) source : (NSMutableArray*) contacts : (NSMutableArray*) hiddenContacts : (UIStoryboard*) storyboard : (UIViewController*) vc : (UILabel*) contactName : (NSMutableDictionary*) contactsWithNewMessages : (UITableView*) tableView {
-    UIButton * button = (UIButton *) source;
-    NSLog(@"in editButtonClicked, source %@, tag %d\n", source, (int)button.tag);
-    NSString * contact = nil;
-    if (button.tag < [contacts count])
-        contact = [contacts objectAtIndex:button.tag];
-    else if (button.tag < ([contacts count] + [hiddenContacts count]))
-        contact = [hiddenContacts objectAtIndex:(button.tag - [contacts count])];
-    else
-        NSLog(@"error in ButtonClicked, tag %d, lengths %d %d, ignoring\n", (int)button.tag, (int)[contacts count], (int)[hiddenContacts count]);
-    NSLog(@"in editButtonClicked, text %@, contact %@\n", button.currentTitle, contact);
-    SettingsViewController * next = nil;
-    if (next == nil)
-        next = [storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
-    if ((contact != nil) && (next != nil)) {
-        [next initialize:strcpy_malloc (contact.UTF8String, "editButtonClicked")];
-        [vc presentViewController:next animated:NO completion:nil];
-        contactName.text = contact;
-        [self displayingContact:contact :contactsWithNewMessages :tableView];
-    }
-}
-
-- (void)settingsButtonClicked:(id) source :  (BOOL) displaySettings : (UITableView*) tableView{
-    displaySettings = ! displaySettings;
-    [tableView reloadData];
-    NSLog(@"settings button clicked, %d\n", displaySettings);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView :(NSIndexPath *)indexPath : (NSMutableArray*) contacts : (BOOL) displaySettings : (NSMutableArray*) hiddenContacts : (NSMutableDictionary*) contactsWithNewMessages : (ContactListVC*) vc{
@@ -193,6 +154,49 @@
         [cell.contentView addSubview:button];
     }
     return cell;
+}
+
+- (void)contactButtonClicked:(id) source : (NSMutableArray*) contacts : (UILabel*) contactName : (ConversationUITextView*) conversation : (NSMutableDictionary*) contactsWithNewMessages : (UITableView*) tableView {
+    UIButton * button = (UIButton *) source;
+    NSString * contact = nil;
+    contact = [contacts objectAtIndex:button.tag];
+    NSLog(@"in contactButtonClicked, text %@, contact %@\n", button.currentTitle, contact);
+    if (contactName != nil) {
+        contactName.text = contact;
+        [self displayingContact:contact :contactsWithNewMessages :tableView];
+        if (conversation != nil) {
+            [conversation displayContact:contact];
+            //self.tabBarController.selectedIndex = 1;
+        }
+    }
+}
+
+- (void)editButtonClicked:(id) source : (NSMutableArray*) contacts : (NSMutableArray*) hiddenContacts : (UIStoryboard*) storyboard : (UIViewController*) vc : (UILabel*) contactName : (NSMutableDictionary*) contactsWithNewMessages : (UITableView*) tableView {
+    UIButton * button = (UIButton *) source;
+    NSLog(@"in editButtonClicked, source %@, tag %d\n", source, (int)button.tag);
+    NSString * contact = nil;
+    if (button.tag < [contacts count])
+        contact = [contacts objectAtIndex:button.tag];
+    else if (button.tag < ([contacts count] + [hiddenContacts count]))
+        contact = [hiddenContacts objectAtIndex:(button.tag - [contacts count])];
+    else
+        NSLog(@"error in ButtonClicked, tag %d, lengths %d %d, ignoring\n", (int)button.tag, (int)[contacts count], (int)[hiddenContacts count]);
+    NSLog(@"in editButtonClicked, text %@, contact %@\n", button.currentTitle, contact);
+    SettingsViewController * next = nil;
+    if (next == nil)
+        next = [storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
+    if ((contact != nil) && (next != nil)) {
+        [next initialize:strcpy_malloc (contact.UTF8String, "editButtonClicked")];
+        [vc presentViewController:next animated:NO completion:nil];
+        contactName.text = contact;
+        [self displayingContact:contact :contactsWithNewMessages :tableView];
+    }
+}
+
+- (void)settingsButtonClicked:(id) source :  (BOOL) displaySettings : (UITableView*) tableView{
+    displaySettings = ! displaySettings;
+    [tableView reloadData];
+    NSLog(@"settings button clicked, %d\n", displaySettings);
 }
 
 // if n is 0, sets to zero.  Otherwise, adds n (positive or negative) to the current badge number

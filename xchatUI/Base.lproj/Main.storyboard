@@ -16,7 +16,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Contact ListVC-->
+        <!--Contacts-->
         <scene sceneID="7iP-R4-G2h">
             <objects>
                 <viewController id="iF2-6w-Lc0" customClass="ContactListVC" customModule="allnet_xchat" customModuleProvider="target" sceneMemberID="viewController">
@@ -42,8 +42,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="iF2-6w-Lc0" id="yts-aP-mdw"/>
-                                    <outlet property="delegate" destination="iF2-6w-Lc0" id="Ztn-KZ-KjY"/>
+                                    <outlet property="dataSource" destination="iF2-6w-Lc0" id="pke-fK-j9r"/>
+                                    <outlet property="delegate" destination="iF2-6w-Lc0" id="coy-lg-hLU"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -55,7 +55,7 @@
                             <constraint firstItem="tuf-Ie-K8T" firstAttribute="top" secondItem="Ddz-Ra-TDK" secondAttribute="top" id="rT3-WX-BzL"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="aG3-BW-Cat"/>
+                    <navigationItem key="navigationItem" title="Contacts" id="PGb-4J-Sd8"/>
                     <connections>
                         <outlet property="tableView" destination="tuf-Ie-K8T" id="Fg4-uu-Czu"/>
                     </connections>

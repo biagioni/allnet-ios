@@ -19,7 +19,6 @@
 
 #import "XChat.h"
 #import "ConversationUITextView.h"
-#import "ContactsUITableViewController.h"
 #import "KeyExchangeUIViewController.h"
 #import "NewContactViewController.h"
 #import "MoreUIViewController.h"

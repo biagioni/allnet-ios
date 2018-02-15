@@ -10,7 +10,6 @@
 #define xchat_UI_XChat_h
 
 #import "ConversationUITextView.h"
-#import "ContactsUITableViewController.h"
 #import "NewContactViewController.h"
 #import "MoreUIViewController.h"
 

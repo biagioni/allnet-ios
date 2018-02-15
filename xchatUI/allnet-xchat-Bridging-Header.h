@@ -3,7 +3,6 @@
 //
 
 #import "AppDelegate.h"
-#import "ContactsUITableViewController.h"
 #import "XChat.h"
 #import "ConversationUITextView.h"
 #import "ConversationViewController.h"

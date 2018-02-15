@@ -24,8 +24,8 @@ import UIKit
     var cHelper: TableViewContactCHelper!
     
     var xchat: XChat!
-    var contacts: [Any]?
-    var hiddenContacts: [Any]!
+    var contacts: NSMutableArray?
+    var hiddenContacts: NSMutableArray?
     var contactsWithNewMessages: NSMutableDictionary!
     var conversationIsDisplayed: Bool!
     var displaySettings: Bool!
@@ -37,8 +37,8 @@ import UIKit
         NSLog("in ContactsUITableViewController, view did load")
         self.conversation = nil
         self.xchat = XChat()
-        self.contacts = [Any]()
-        self.hiddenContacts = [Any]()
+        self.contacts = NSMutableArray()
+        self.hiddenContacts = NSMutableArray()
         self.contactsWithNewMessages = NSMutableDictionary()
         setContacts()
 
@@ -52,7 +52,7 @@ import UIKit
         self.sendButton = nil
 
         self.cvc = tabBarController!.viewControllers![1] as! ConversationViewController
-        //register for notifications in cvc
+        cvc.notifyChange(self)
         
         let subViews = self.cvc.view.subviews
         for item in subViews {
@@ -80,12 +80,12 @@ import UIKit
             }
         }
         if (self.conversation != nil) {
-            //self.xchat.initialize(conversation, contacts: self, vc: mayCreateNewContact, mvc: more)
+            self.xchat.initialize(conversation, contacts: self, vc: mayCreateNewContact, mvc: more)
             self.conversation?.initialize(xchat.getSocket(), messageField: message, send: sendButton, contact: initialLatestContact, decorativeLabel: nMessageLabel)
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.setXChatValue(xchat)
             appDelegate.setConversationValue(conversation)
-            //appDelegate.setTvc(self)
+            appDelegate.setContactsUITVC(self)
         } else {
             NSLog("warning: failed to initialize xchat %@, exiting\n", self.xchat)
             exit (1);
@@ -139,17 +139,15 @@ import UIKit
     }
     
     func loadInitialData(){
-        if contacts != nil {
-            contacts!.removeAll()
-        }
+        contacts?.removeAllObjects()
         var c:UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>?
         var nc = all_contacts(&c)
         for i  in 0..<nc {
             let title = NSString(utf8String: c![Int(i)]!)
             if contacts == nil {
-                contacts = [Any]()
+                contacts = NSMutableArray()
             }
-            self.contacts!.append(title!)
+            self.contacts!.add(title!)
         }
         ///TODO sort contacts
         if c != nil {
@@ -157,11 +155,11 @@ import UIKit
         }
         self.contacts = nil
         
-        hiddenContacts.removeAll()
+        hiddenContacts?.removeAllObjects()
         nc = invisible_contacts(&c)
         for i  in 0..<nc {
             let title = NSString(utf8String: c![Int(i)]!)
-            self.hiddenContacts.append(title!)
+            self.hiddenContacts?.add(title!)
         }
         ///TODO sort hiddencontacts
         if c != nil {
@@ -221,17 +219,22 @@ import UIKit
         }
         return result
     }
+    
     func newMessage(contact: String){
         cHelper.newMessage(contact, message, conversationIsDisplayed, contactsWithNewMessages, self, tableView)
+    }
+    
+    func notifyConversationChange(beingDisplayed: Bool){
+        cHelper.notifyConversationChange(beingDisplayed, conversationIsDisplayed, conversation, self, tableView, contactsWithNewMessages)
     }
 }
 
 extension ContactListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contacts != nil ? cHelper.getRowsCount(contacts! as! NSMutableArray, displaySettings) : 0
+        return cHelper.getRowsCount(contacts, displaySettings)
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return cHelper.tableView(tableView, indexPath, contacts as! NSMutableArray, displaySettings, hiddenContacts as! NSMutableArray, contactsWithNewMessages, self)
+        return cHelper.tableView(tableView, indexPath, contacts, displaySettings, hiddenContacts, contactsWithNewMessages, self)
     }
 }
 
