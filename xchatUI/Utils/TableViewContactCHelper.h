@@ -11,8 +11,14 @@
 
 @interface TableViewContactCHelper : NSObject
 
+- (void) newMessage: (NSString *) contact : (UITextView*) conversation : (BOOL) conversationIsDisplayed : (NSMutableDictionary*) contactsWithNewMessages : (UIViewController*) vc : (UITableView*) tableView;
+
+-(NSInteger) getRowsCount: (NSMutableArray*) contacts :  (BOOL) displaySettings;
+
+- (UITableViewCell *)tableView:(UITableView *)tableView :(NSIndexPath *)indexPath : (NSMutableArray*) contacts : (BOOL) displaySettings : (NSMutableArray*) hiddenContacts : (NSMutableDictionary*) contactsWithNewMessages : (UIViewController*) vc;
 
 @end
+
 
 
 #endif /* TableViewContactCHelper_h */

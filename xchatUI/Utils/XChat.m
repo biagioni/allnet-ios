@@ -23,6 +23,7 @@
 #import "KeyExchangeUIViewController.h"
 #import "NewContactViewController.h"
 #import "MoreUIViewController.h"
+#import "allnet_xchat-Swift.h"
 
 #include "xcommon.h"
 #include "limits.h"
@@ -38,7 +39,7 @@
 
 @property int sock;
 @property ConversationUITextView * conversation;
-@property ContactsUITableViewController * contacts;
+@property ContactListVC * contacts;
 @property KeyExchangeUIViewController * keyExchange;
 @property NewContactViewController * ncvcForNewContact;
 @property MoreUIViewController * more;
@@ -58,7 +59,7 @@ static pd p;
 static XChat * mySelf = NULL;
 static void * splitPacketBuffer = NULL;
 
-- (void) initialize: (ConversationUITextView *) conversation contacts: (ContactsUITableViewController *) contacts vc: (NewContactViewController *) vcForNewContact mvc: (MoreUIViewController *) mvc {
+- (void) initialize: (ConversationUITextView *) conversation contacts: (ContactListVC *) contacts vc: (NewContactViewController *) vcForNewContact mvc: (MoreUIViewController *) mvc {
   NSLog(@"calling xchat_init\n");
   self.conversation = conversation;
   self.contacts = contacts;
@@ -254,7 +255,7 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
           mlen, verified, duplicate, broadcast, peer);
     NSString * contact = [[NSString alloc] initWithUTF8String:peer];
     if (! duplicate) {
-      [mySelf.contacts newMessage:contact];
+      [mySelf.contacts newMessageWithContact:contact];
       AppDelegate * appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
       NSString * msg = [[NSString alloc] initWithUTF8String:message];
       [appDelegate notifyMessageReceived:contact message:msg];
