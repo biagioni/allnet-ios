@@ -6,4 +6,8 @@
 #import "XChat.h"
 #import "ConversationViewController.h"
 #import "NewContactViewController.h"
+#import "MoreUIViewController.h"
 #import "AppDelegate.h"
+
+#include "keys.h"
+#include "store.h"

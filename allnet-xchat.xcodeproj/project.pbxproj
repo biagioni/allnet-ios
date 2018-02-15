@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		29952BF32034D976009054D4 /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF22034D976009054D4 /* ContactListVC.swift */; };
+		29952BF720354E4C009054D4 /* TableViewContactCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF620354E4C009054D4 /* TableViewContactCHelper.m */; };
 		29B44907203350CC0050B64D /* KeyExchangeUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B44903203350CC0050B64D /* KeyExchangeUIView.m */; };
 		29B44908203350CC0050B64D /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B44904203350CC0050B64D /* FirstViewController.m */; };
 		29B44932203362950050B64D /* cutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44931203362950050B64D /* cutil.c */; };
@@ -60,6 +61,8 @@
 
 /* Begin PBXFileReference section */
 		29952BF22034D976009054D4 /* ContactListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListVC.swift; sourceTree = "<group>"; };
+		29952BF620354E4C009054D4 /* TableViewContactCHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewContactCHelper.m; sourceTree = "<group>"; };
+		29952BF820355093009054D4 /* TableViewContactCHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewContactCHelper.h; sourceTree = "<group>"; };
 		29B44903203350CC0050B64D /* KeyExchangeUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyExchangeUIView.m; sourceTree = "<group>"; };
 		29B44904203350CC0050B64D /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		29B44905203350CC0050B64D /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
@@ -302,7 +305,10 @@
 		29B449DF20337B6F0050B64D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				29B449DB20337A9A0050B64D /* cfiles */,
 				428DEE981B0FC34F00163976 /* XChat.h */,
+				29952BF620354E4C009054D4 /* TableViewContactCHelper.m */,
+				29952BF820355093009054D4 /* TableViewContactCHelper.h */,
 				428DEE961B0FB9D000163976 /* XChat.m */,
 				29B449AB20336E9C0050B64D /* OALAudioTrack.h */,
 			);
@@ -342,7 +348,6 @@
 				29B449DF20337B6F0050B64D /* Utils */,
 				29B449DE20337B4F0050B64D /* View */,
 				29B449DD20337B160050B64D /* Controller */,
-				29B449DB20337A9A0050B64D /* cfiles */,
 				29B44929203358400050B64D /* allnet-xchat-Bridging-Header.h */,
 				425A7D921AEC898C00C74E12 /* Supporting Files */,
 			);
@@ -536,6 +541,7 @@
 				29B44975203367300050B64D /* mapchar.c in Sources */,
 				29B449A920336E660050B64D /* social.c in Sources */,
 				29B44950203365630050B64D /* cipher.c in Sources */,
+				29952BF720354E4C009054D4 /* TableViewContactCHelper.m in Sources */,
 				29B44970203366CF0050B64D /* store.c in Sources */,
 				29B4494D2033654B0050B64D /* util.c in Sources */,
 				29B44979203367820050B64D /* message.c in Sources */,
@@ -708,6 +714,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 0.001;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7TW6282C6A;
 				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
@@ -764,6 +771,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 0.001;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7TW6282C6A;
 				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
