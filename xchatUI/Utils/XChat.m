@@ -254,7 +254,7 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
           mlen, verified, duplicate, broadcast, peer);
     NSString * contact = [[NSString alloc] initWithUTF8String:peer];
     if (! duplicate) {
-      [mySelf.contacts newMessageWithContact:contact];
+      //[mySelf.contacts newMessageWithContact:contact];
       AppDelegate * appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
       NSString * msg = [[NSString alloc] initWithUTF8String:message];
       [appDelegate notifyMessageReceived:contact message:msg];

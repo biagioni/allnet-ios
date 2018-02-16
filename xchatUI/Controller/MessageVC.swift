@@ -13,10 +13,10 @@ class MessageVC: UIViewController {
     @IBOutlet weak var textFieldMessage: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       // self.xchat.initialize(conversation, contacts: self, vc: mayCreateNewContact, mvc: more)
+       // self.conversation?.initialize(xchat.getSocket(), messageField: message, send: sendButton, contact: initialLatestContact as! String, decorativeLabel: nMessageLabel)
         let tap  = UITapGestureRecognizer(target: self, action: #selector(closeKeyboard))
         tableView.addGestureRecognizer(tap)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -42,6 +42,18 @@ class MessageVC: UIViewController {
             self.view.frame.origin.y += keyboardSize.height
         }
     }
+    
+//    func reIniSocket() {
+//        conversation?.setSocket(xchat.getSocket())
+//    }
+//    
+//    func newMessage(contact: String){
+//        cHelper.newMessage(contact, message, conversationIsDisplayed, contactsWithNewMessages, self, tableView)
+//    }
+//    
+//    func notifyConversationChange(beingDisplayed: Bool){
+//        cHelper.notifyConversationChange(beingDisplayed, conversationIsDisplayed, conversation, self, tableView, contactsWithNewMessages)
+//    }
 }
 
 extension MessageVC: UITableViewDataSource {

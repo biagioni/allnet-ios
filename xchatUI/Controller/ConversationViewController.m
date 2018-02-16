@@ -106,15 +106,15 @@
     CGPoint endPoint = {0, offset};
     [self.cvcScrollView setContentOffset:endPoint];
   }
-  if (self.tvc != nil)
-    [self.tvc notifyConversationChangeWithBeingDisplayed:YES];
+  //if (self.tvc != nil)
+   // [self.tvc notifyConversationChangeWithBeingDisplayed:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
   [super viewDidDisappear:animated];
   //NSLog(@"\nview did disappear\n\n");
-  if (self.tvc != nil)
-    [self.tvc notifyConversationChangeWithBeingDisplayed:YES];
+  //if (self.tvc != nil)
+    //[self.tvc notifyConversationChangeWithBeingDisplayed:YES];
 }
 
 #pragma mark - Navigation

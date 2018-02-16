@@ -335,9 +335,9 @@ static int able_to_connect ()
   acache_save_data ();
   set_speculative_computation(0);
   isInForeground = NO;
-  if (self.tvc != nil) {
-    [((ContactListVC*) self.tvc) notifyConversationChangeWithBeingDisplayed:NO];
-  }
+//  if (self.tvc != nil) {
+//    [((ContactListVC*) self.tvc) notifyConversationChangeWithBeingDisplayed:NO];
+//  }
   if (self.conversation != nil) {
     [self.conversation enterBackgroundMode];
   }
@@ -352,9 +352,9 @@ static int able_to_connect ()
   set_speculative_computation([UIDevice currentDevice].batteryState != UIDeviceBatteryStateUnplugged);
   isSuspended = NO;
   isInForeground = YES;
-  if (self.tvc != nil) {
-    [((ContactListVC*) self.tvc) notifyConversationChangeWithBeingDisplayed:YES];
-  }
+//  if (self.tvc != nil) {
+//    [((ContactListVC*) self.tvc) notifyConversationChangeWithBeingDisplayed:YES];
+//  }
 }
 
 - (BOOL) appIsInForeground {
@@ -365,9 +365,9 @@ static int able_to_connect ()
 - (void)applicationDidBecomeActive:(UIApplication *)application {
   // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
   set_speculative_computation ([UIDevice currentDevice].batteryState != UIDeviceBatteryStateUnplugged);
-  if (self.tvc != nil) {
-    [((ContactListVC*) self.tvc) notifyConversationChangeWithBeingDisplayed:YES];
-  }
+//  if (self.tvc != nil) {
+//    [((ContactListVC*) self.tvc) notifyConversationChangeWithBeingDisplayed:YES];
+//  }
   NSLog(@"application entering active state\n");
 }
 
