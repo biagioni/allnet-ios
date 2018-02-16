@@ -13,6 +13,8 @@ import UIKit
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var labelCountContacts: UILabel!
     
+    var contactVM: ContactViewModel!
+    
     var message: UITextView?
     var sendButton: UIButton?
     var contactName: UILabel?
@@ -25,27 +27,32 @@ import UIKit
     var cHelper: TableViewContactCHelper!
     
     var xchat: XChat!
-    var contacts: NSMutableArray?
-    var hiddenContacts: NSMutableArray?
-    var contactsWithNewMessages: NSMutableDictionary!
+    var hiddenContacts: [String]?
+    var contactsWithNewMessages: NSMutableDictionary! {
+        didSet{
+            labelCountContacts.text = contactsWithNewMessages.count.description
+        }
+    }
     var conversationIsDisplayed: Bool!
     var displaySettings: Bool!
-    var initialLatestContact: NSString?
+    var initialLatestContact: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         cHelper = TableViewContactCHelper()
         NSLog("in ContactsUITableViewController, view did load")
         self.conversation = nil
         self.xchat = XChat()
-        self.contacts = NSMutableArray()
-        self.hiddenContacts = NSMutableArray()
+        self.hiddenContacts = [String]()
         self.contactsWithNewMessages = NSMutableDictionary()
-        setContacts()
+        
+        contactVM =  ContactViewModel()
+        self.navigationItem.title = "\(contactVM.count) Contacts"
 
         self.mayCreateNewContact = tabBarController!.viewControllers![2] as! NewContactViewController
         
-        initialLatestContact = latestContact()
+        initialLatestContact = contactVM.latestContact()
         
         self.conversationIsDisplayed = false
         self.displaySettings = false
@@ -81,6 +88,7 @@ import UIKit
             }
         }
         if (self.conversation != nil) {
+            //initializa conversation
             self.xchat.initialize(conversation, contacts: self, vc: mayCreateNewContact, mvc: more)
             self.conversation?.initialize(xchat.getSocket(), messageField: message, send: sendButton, contact: initialLatestContact as! String, decorativeLabel: nMessageLabel)
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -106,99 +114,15 @@ import UIKit
     override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
     }
     
+    func loadData(){
+        contactVM.fetchData()
+        self.navigationItem.title = "\(contactVM.count) Contacts"
+    }
+    
     func reIniSocket() {
         conversation?.setSocket(xchat.getSocket())
     }
-    
-    func setContacts(){
-        loadInitialData()
-    }
-    
-    func contactsHeader(contactsCount: Int, contactsWithMessages: Int){
-        labelCountContacts.text = contactsWithMessages.description
-        self.navigationItem.title = "\(contactsCount) Contacts"
-    }
-    
-    func loadInitialData(){
-        contacts?.removeAllObjects()
-        var c:UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>?
-        var nc = all_contacts(&c)
-        for i  in 0..<nc {
-            let title = NSString(utf8String: c![Int(i)]!)
-            if contacts == nil {
-                contacts = NSMutableArray()
-            }
-            self.contacts!.add(title!)
-        }
-        ///TODO sort contacts
-        if c != nil {
-            free(c)
-        }
         
-        hiddenContacts?.removeAllObjects()
-        nc = invisible_contacts(&c)
-        for i  in 0..<nc {
-            let title = NSString(utf8String: c![Int(i)]!)
-            self.hiddenContacts?.add(title!)
-        }
-        ///TODO sort hiddencontacts
-        if c != nil {
-            free(c)
-        }
-    }
-    
-    func lastTime(objCContact: NSString, msgType: Int) -> Double {
-        var k: UnsafeMutablePointer<keyset>?
-        let contactPointer = objCContact.utf8String//objCContact.utf8CString
-        let nk = all_keys(contactPointer, &k)
-        var latest_time: UInt64 = 0
-        for ik in 0..<nk {
-            var seq: UInt64 = 0
-            var time: UInt64 = 0
-            var tz_min: Int32 = 0
-            var ack: UnsafeMutablePointer<CChar>!
-            let mtype = highest_seq_record(contactPointer, k! [Int(ik)], Int32(msgType), &seq, &time, &tz_min, nil, ack, nil, nil);
-            if mtype != MSG_TYPE_DONE && time > latest_time {
-                latest_time = time
-            }
-        }
-        if nk > 0 {
-            free(k)
-        }
-        return Double(latest_time)
-    }
-    
-    func lastReceived(contact: NSString) -> String? {
-        let latest_time_received = lastTime(objCContact: contact, msgType: Int(MSG_TYPE_RCVD))
-        if latest_time_received == 0 {
-            return nil
-        }
-        let unixTime = latest_time_received + Double(ALLNET_Y2K_SECONDS_IN_UNIX)
-        let date = Date(timeIntervalSince1970: unixTime)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .medium
-        return dateFormatter.string(from: date)
-    }
-    
-    func latestContact() -> NSString? {
-        var result: NSString? = nil
-        var latest: Double = 0
-        if (self.contacts != nil) {
-            for item in self.contacts! {
-                if item is String {
-                    let contact = item as! NSString
-                    let latestForThisContact = lastTime(objCContact: contact, msgType: Int(MSG_TYPE_ANY))
-                    if ((result == nil) || (latest < latestForThisContact)) {
-                        result = contact
-                        latest = latestForThisContact
-                    }
-                }
-            }
-        }
-        return result
-    }
-    
     func newMessage(contact: String){
         cHelper.newMessage(contact, message, conversationIsDisplayed, contactsWithNewMessages, self, tableView)
     }
@@ -210,13 +134,13 @@ import UIKit
 
 extension ContactListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if displaySettings {
-            return (contacts != nil ? contacts!.count : 0) + (hiddenContacts != nil ? hiddenContacts!.count : 0)
-        }
-        return (contacts != nil ? contacts!.count : 0)
+        return contactVM.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactCell
+        if let item = contactVM[indexPath.row] {
+            cell.update(with: item)
+        }
         return cell
     }
 }

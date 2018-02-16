@@ -35,13 +35,46 @@
                                 <rect key="frame" x="0.0" y="101" width="375" height="566"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactCell" id="2S5-G8-oBD">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactCell" rowHeight="63" id="2S5-G8-oBD" customClass="ContactCell" customModule="allnet_xchat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="63"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2S5-G8-oBD" id="gmq-LP-Yef">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="62.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9PE-hc-UMa">
+                                                    <rect key="frame" x="15" y="11" width="345" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="zUA-do-h2m"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEP-fj-Q4x">
+                                                    <rect key="frame" x="15" y="32" width="345" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="Sfz-Yd-gqr"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="11"/>
+                                                    <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="gEP-fj-Q4x" firstAttribute="top" secondItem="9PE-hc-UMa" secondAttribute="bottom" id="1V5-gD-A1X"/>
+                                                <constraint firstItem="gEP-fj-Q4x" firstAttribute="bottom" secondItem="gmq-LP-Yef" secondAttribute="bottomMargin" id="6Ia-VD-Lcz"/>
+                                                <constraint firstItem="gEP-fj-Q4x" firstAttribute="trailing" secondItem="gmq-LP-Yef" secondAttribute="trailingMargin" id="JJh-6C-B52"/>
+                                                <constraint firstItem="gEP-fj-Q4x" firstAttribute="leading" secondItem="gmq-LP-Yef" secondAttribute="leadingMargin" id="LVD-vL-qRm"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="9PE-hc-UMa" secondAttribute="trailing" id="Reg-fv-NM5"/>
+                                                <constraint firstItem="9PE-hc-UMa" firstAttribute="leading" secondItem="gmq-LP-Yef" secondAttribute="leadingMargin" id="fzh-hz-Qwn"/>
+                                                <constraint firstItem="9PE-hc-UMa" firstAttribute="top" secondItem="gmq-LP-Yef" secondAttribute="topMargin" id="whu-hP-Zjy"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="labelDate" destination="gEP-fj-Q4x" id="tUe-jK-lY8"/>
+                                            <outlet property="labelName" destination="9PE-hc-UMa" id="Jlt-qn-82B"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

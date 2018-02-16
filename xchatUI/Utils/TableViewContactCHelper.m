@@ -114,7 +114,7 @@
         else
             next = [[NSNumber alloc] initWithInt:((int)previous.integerValue + 1)];
         [contactsWithNewMessages setObject:next forKey:contact];
-        [vc setContacts];   // refresh the contacts list
+        [vc loadData];   // refresh the contacts list
         [tableView reloadData];
         [self addToBadgeNumber:1];
     } else {  // this contact is already displayed, update the contents

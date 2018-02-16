@@ -54,6 +54,8 @@
 		29B449C8203379FF0050B64D /* libPods-allnet-xchat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B449C9203379FF0050B64D /* libPods-allnet-xchat.a */; };
 		29B449D620337A2B0050B64D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29B449CB20337A2B0050B64D /* Images.xcassets */; };
 		29B449DC20337AFC0050B64D /* XChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 428DEE961B0FB9D000163976 /* XChat.m */; };
+		29EB67F42036A85600D9647F /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB67F32036A85600D9647F /* ContactCell.swift */; };
+		29EB67F72036B0AB00D9647F /* ContactsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB67F62036B0AB00D9647F /* ContactsViewModel.swift */; };
 		425A7D951AEC898C00C74E12 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 425A7D941AEC898C00C74E12 /* main.m */; };
 		425A7D981AEC898C00C74E12 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 425A7D971AEC898C00C74E12 /* AppDelegate.m */; };
 		425A7D9E1AEC898C00C74E12 /* NewContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 425A7D9D1AEC898C00C74E12 /* NewContactViewController.m */; };
@@ -146,6 +148,8 @@
 		29B449C6203377020050B64D /* crypt_sel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = crypt_sel.c; sourceTree = "<group>"; };
 		29B449C9203379FF0050B64D /* libPods-allnet-xchat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-allnet-xchat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B449CB20337A2B0050B64D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		29EB67F32036A85600D9647F /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
+		29EB67F62036B0AB00D9647F /* ContactsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewModel.swift; sourceTree = "<group>"; };
 		422B56221E9E9B890072212E /* allnet-xchat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "allnet-xchat.entitlements"; sourceTree = "<group>"; };
 		425455A11B2D858800A33CB6 /* ConversationUITextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationUITextView.h; sourceTree = "<group>"; };
 		425455A21B2D858800A33CB6 /* ConversationUITextView.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.objc; path = ConversationUITextView.m; sourceTree = "<group>"; };
@@ -297,6 +301,7 @@
 				42B59FB91BC0D73000D710A8 /* iOSKeys.m */,
 				29B44906203350CC0050B64D /* KeyExchangeUIView.h */,
 				29B44903203350CC0050B64D /* KeyExchangeUIView.m */,
+				29EB67F32036A85600D9647F /* ContactCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -312,6 +317,14 @@
 				29B449AB20336E9C0050B64D /* OALAudioTrack.h */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		29EB67F52036B09500D9647F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				29EB67F62036B0AB00D9647F /* ContactsViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		2A79950D9D014169F0510A63 /* Frameworks */ = {
@@ -344,10 +357,10 @@
 		425A7D911AEC898C00C74E12 /* xchatUI */ = {
 			isa = PBXGroup;
 			children = (
+				29EB67F52036B09500D9647F /* ViewModel */,
 				29B449DF20337B6F0050B64D /* Utils */,
 				29B449DE20337B4F0050B64D /* View */,
 				29B449DD20337B160050B64D /* Controller */,
-				29B44929203358400050B64D /* allnet-xchat-Bridging-Header.h */,
 				425A7D921AEC898C00C74E12 /* Supporting Files */,
 			);
 			path = xchatUI;
@@ -356,6 +369,7 @@
 		425A7D921AEC898C00C74E12 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				29B44929203358400050B64D /* allnet-xchat-Bridging-Header.h */,
 				29B449CB20337A2B0050B64D /* Images.xcassets */,
 				425A7DA41AEC898C00C74E12 /* LaunchScreen.xib */,
 				425A7D9F1AEC898C00C74E12 /* Main.storyboard */,
@@ -556,11 +570,13 @@
 				29B44944203363CA0050B64D /* sha.c in Sources */,
 				29B44907203350CC0050B64D /* KeyExchangeUIView.m in Sources */,
 				29B4496A2033668B0050B64D /* retransmit.c in Sources */,
+				29EB67F42036A85600D9647F /* ContactCell.swift in Sources */,
 				29B449A620336E3A0050B64D /* ad.c in Sources */,
 				29B449AE20336EBF0050B64D /* table.c in Sources */,
 				425A7D981AEC898C00C74E12 /* AppDelegate.m in Sources */,
 				29B449BB20336F920050B64D /* xcommon.c in Sources */,
 				29B44941203363790050B64D /* priority.c in Sources */,
+				29EB67F72036B0AB00D9647F /* ContactsViewModel.swift in Sources */,
 				29B449BD20336FD20050B64D /* traced.c in Sources */,
 				29B44938203363290050B64D /* allnet_log.c in Sources */,
 				425A7D951AEC898C00C74E12 /* main.m in Sources */,
