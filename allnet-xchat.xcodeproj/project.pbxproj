@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29952BF32034D976009054D4 /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF22034D976009054D4 /* ContactListVC.swift */; };
+		29952BF720354E4C009054D4 /* TableViewContactCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF620354E4C009054D4 /* TableViewContactCHelper.m */; };
+		29952BF920357564009054D4 /* MoreUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CC5D7B1BF04B5B00437C67 /* MoreUIViewController.m */; };
+		29952BFA20357582009054D4 /* ConversationUITextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 425455A21B2D858800A33CB6 /* ConversationUITextView.m */; };
+		29952BFB20357592009054D4 /* ConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42AC8CE31B4A70B1008437BC /* ConversationViewController.m */; };
 		29B44907203350CC0050B64D /* KeyExchangeUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B44903203350CC0050B64D /* KeyExchangeUIView.m */; };
 		29B44908203350CC0050B64D /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B44904203350CC0050B64D /* FirstViewController.m */; };
 		29B44932203362950050B64D /* cutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44931203362950050B64D /* cutil.c */; };
@@ -48,8 +53,7 @@
 		29B449C7203377020050B64D /* crypt_sel.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B449C6203377020050B64D /* crypt_sel.c */; };
 		29B449C8203379FF0050B64D /* libPods-allnet-xchat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B449C9203379FF0050B64D /* libPods-allnet-xchat.a */; };
 		29B449D620337A2B0050B64D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29B449CB20337A2B0050B64D /* Images.xcassets */; };
-		29EB677A20367CA400D9647F /* iOSKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 29EB677720367CA400D9647F /* iOSKeys.m */; };
-		29EB677E20367D0D00D9647F /* XChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 29EB677D20367D0D00D9647F /* XChat.m */; };
+		29B449DC20337AFC0050B64D /* XChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 428DEE961B0FB9D000163976 /* XChat.m */; };
 		425A7D951AEC898C00C74E12 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 425A7D941AEC898C00C74E12 /* main.m */; };
 		425A7D981AEC898C00C74E12 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 425A7D971AEC898C00C74E12 /* AppDelegate.m */; };
 		425A7D9E1AEC898C00C74E12 /* NewContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 425A7D9D1AEC898C00C74E12 /* NewContactViewController.m */; };
@@ -59,6 +63,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29952BF22034D976009054D4 /* ContactListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListVC.swift; sourceTree = "<group>"; };
+		29952BF620354E4C009054D4 /* TableViewContactCHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewContactCHelper.m; sourceTree = "<group>"; };
+		29952BF820355093009054D4 /* TableViewContactCHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewContactCHelper.h; sourceTree = "<group>"; };
 		29B44903203350CC0050B64D /* KeyExchangeUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyExchangeUIView.m; sourceTree = "<group>"; };
 		29B44904203350CC0050B64D /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		29B44905203350CC0050B64D /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
@@ -139,12 +146,6 @@
 		29B449C6203377020050B64D /* crypt_sel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = crypt_sel.c; sourceTree = "<group>"; };
 		29B449C9203379FF0050B64D /* libPods-allnet-xchat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-allnet-xchat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B449CB20337A2B0050B64D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		29EB677620367CA400D9647F /* iOSKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSKeys.h; sourceTree = "<group>"; };
-		29EB677720367CA400D9647F /* iOSKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSKeys.m; sourceTree = "<group>"; };
-		29EB677C20367D0D00D9647F /* XChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XChat.h; sourceTree = "<group>"; };
-		29EB677D20367D0D00D9647F /* XChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XChat.m; sourceTree = "<group>"; };
-		420127451AF970BE00A61978 /* ContactsUITableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsUITableViewController.h; sourceTree = "<group>"; };
-		420127461AF970BE00A61978 /* ContactsUITableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = ContactsUITableViewController.m; sourceTree = "<group>"; };
 		422B56221E9E9B890072212E /* allnet-xchat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "allnet-xchat.entitlements"; sourceTree = "<group>"; };
 		425455A11B2D858800A33CB6 /* ConversationUITextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationUITextView.h; sourceTree = "<group>"; };
 		425455A21B2D858800A33CB6 /* ConversationUITextView.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.objc; path = ConversationUITextView.m; sourceTree = "<group>"; };
@@ -159,10 +160,14 @@
 		425A7DA51AEC898C00C74E12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		426C481C1D2C5340001612B1 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		426C481D1D2C5340001612B1 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		428DEE961B0FB9D000163976 /* XChat.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = XChat.m; sourceTree = "<group>"; };
+		428DEE981B0FC34F00163976 /* XChat.h */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = XChat.h; sourceTree = "<group>"; };
 		429067401B539F1B002EA3C1 /* KeyExchangeUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyExchangeUIViewController.h; sourceTree = "<group>"; };
 		429067411B539F1B002EA3C1 /* KeyExchangeUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = KeyExchangeUIViewController.m; sourceTree = "<group>"; };
 		42AC8CE21B4A70B1008437BC /* ConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationViewController.h; sourceTree = "<group>"; };
 		42AC8CE31B4A70B1008437BC /* ConversationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = ConversationViewController.m; sourceTree = "<group>"; };
+		42B59FB81BC0D73000D710A8 /* iOSKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSKeys.h; sourceTree = "<group>"; };
+		42B59FB91BC0D73000D710A8 /* iOSKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = iOSKeys.m; sourceTree = "<group>"; };
 		42CC5D7A1BF04B5B00437C67 /* MoreUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreUIViewController.h; sourceTree = "<group>"; };
 		42CC5D7B1BF04B5B00437C67 /* MoreUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = MoreUIViewController.m; sourceTree = "<group>"; };
 		42CC5D7E1BF06F9800437C67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
@@ -185,16 +190,55 @@
 		29B449DB20337A9A0050B64D /* cfiles */ = {
 			isa = PBXGroup;
 			children = (
-				29B449A120336DA70050B64D /* acache.c */,
-				29B449A520336E3A0050B64D /* ad.c */,
-				29B449B620336F910050B64D /* adht.c */,
-				29B44952203365900050B64D /* ai.c */,
-				29B44953203365900050B64D /* ai.h */,
+				29B4495B203365DA0050B64D /* wp_rsa.h */,
+				29B4496C2033669A0050B64D /* xcommon.h */,
+				29B449AC20336EBF0050B64D /* table.c */,
+				29B449AD20336EBF0050B64D /* table.h */,
+				29B4497C203367FC0050B64D /* trace_util.h */,
+				29B449AA20336E9B0050B64D /* track.h */,
+				29B449B220336F210050B64D /* track.c */,
+				29B4494C2033654B0050B64D /* util.c */,
+				29B4494B2033654B0050B64D /* util.h */,
+				29B44958203365BF0050B64D /* wp_aes.c */,
+				29B44959203365BF0050B64D /* wp_aes.h */,
+				29B4495E203365E80050B64D /* wp_arith.c */,
+				29B4495F203365E80050B64D /* wp_arith.h */,
+				29B449B820336F920050B64D /* xcommon.c */,
+				29B4499B203369A00050B64D /* routing.h */,
 				29B449B420336F590050B64D /* aip.c */,
-				29B44936203363290050B64D /* allnet_log.c */,
-				29B44937203363290050B64D /* allnet_log.h */,
-				29B4498E2033688D0050B64D /* allnet_queue.c */,
-				29B4498B2033688D0050B64D /* allnet_queue.h */,
+				29B44942203363C90050B64D /* sha.c */,
+				29B44943203363C90050B64D /* sha.h */,
+				29B449A820336E650050B64D /* social.c */,
+				29B449A720336E650050B64D /* social.h */,
+				29B4496E203366CE0050B64D /* store.c */,
+				29B4496F203366CE0050B64D /* store.h */,
+				29B44956203365A80050B64D /* stream.c */,
+				29B44955203365A80050B64D /* stream.h */,
+				29B44933203362DC0050B64D /* packet.h */,
+				29B4498C2033688D0050B64D /* pipemsg.c */,
+				29B44935203363010050B64D /* pipemsg.h */,
+				29B4493F203363790050B64D /* priority.c */,
+				29B44940203363790050B64D /* priority.h */,
+				29B449C0203370280050B64D /* keyd.c */,
+				29B449AF20336EE50050B64D /* record.c */,
+				29B449B020336EE50050B64D /* record.h */,
+				29B449682033668B0050B64D /* retransmit.c */,
+				29B449692033668B0050B64D /* retransmit.h */,
+				29B449B620336F910050B64D /* adht.c */,
+				29B449BE203370000050B64D /* trace_util.c */,
+				29B449B720336F920050B64D /* routing.c */,
+				29B449BC20336FD20050B64D /* traced.c */,
+				29B44995203369790050B64D /* listen.c */,
+				29B44997203369790050B64D /* listen.h */,
+				29B44973203367300050B64D /* mapchar.c */,
+				29B449712033672F0050B64D /* mapchar.h */,
+				29B44934203362ED0050B64D /* media.h */,
+				29B44977203367810050B64D /* message.c */,
+				29B44976203367810050B64D /* message.h */,
+				29B449512033657D0050B64D /* mgmt.h */,
+				29B44946203363E70050B64D /* keys.c */,
+				29B44945203363E70050B64D /* keys.h */,
+				29B44992203368EE0050B64D /* gui_socket.h */,
 				29B44996203369790050B64D /* alocal.c */,
 				29B4499F20336D730050B64D /* app_util.c */,
 				29B4493D203363660050B64D /* app_util.h */,
@@ -204,59 +248,20 @@
 				29B4494F203365620050B64D /* cipher.h */,
 				29B44939203363490050B64D /* configfiles.c */,
 				29B4493A203363490050B64D /* configfiles.h */,
-				29B449C6203377020050B64D /* crypt_sel.c */,
+				29B449A120336DA70050B64D /* acache.c */,
 				29B44949203364110050B64D /* crypt_sel.h */,
 				29B44931203362950050B64D /* cutil.c */,
 				29B44930203362950050B64D /* cutil.h */,
 				29B44987203368530050B64D /* dcache.c */,
 				29B44988203368530050B64D /* dcache.h */,
-				29B44992203368EE0050B64D /* gui_socket.h */,
-				29B449C0203370280050B64D /* keyd.c */,
-				29B44946203363E70050B64D /* keys.c */,
-				29B44945203363E70050B64D /* keys.h */,
-				29B44995203369790050B64D /* listen.c */,
-				29B44997203369790050B64D /* listen.h */,
-				29B44973203367300050B64D /* mapchar.c */,
-				29B449712033672F0050B64D /* mapchar.h */,
-				29B44934203362ED0050B64D /* media.h */,
-				29B44977203367810050B64D /* message.c */,
-				29B44976203367810050B64D /* message.h */,
-				29B449512033657D0050B64D /* mgmt.h */,
-				29B44933203362DC0050B64D /* packet.h */,
-				29B4498C2033688D0050B64D /* pipemsg.c */,
-				29B44935203363010050B64D /* pipemsg.h */,
-				29B4493F203363790050B64D /* priority.c */,
-				29B44940203363790050B64D /* priority.h */,
-				29B449AF20336EE50050B64D /* record.c */,
-				29B449B020336EE50050B64D /* record.h */,
-				29B449682033668B0050B64D /* retransmit.c */,
-				29B449692033668B0050B64D /* retransmit.h */,
-				29B449B720336F920050B64D /* routing.c */,
-				29B4499B203369A00050B64D /* routing.h */,
-				29B44942203363C90050B64D /* sha.c */,
-				29B44943203363C90050B64D /* sha.h */,
-				29B449A820336E650050B64D /* social.c */,
-				29B449A720336E650050B64D /* social.h */,
-				29B4496E203366CE0050B64D /* store.c */,
-				29B4496F203366CE0050B64D /* store.h */,
-				29B44956203365A80050B64D /* stream.c */,
-				29B44955203365A80050B64D /* stream.h */,
-				29B449AC20336EBF0050B64D /* table.c */,
-				29B449AD20336EBF0050B64D /* table.h */,
-				29B449BE203370000050B64D /* trace_util.c */,
-				29B4497C203367FC0050B64D /* trace_util.h */,
-				29B449BC20336FD20050B64D /* traced.c */,
-				29B449B220336F210050B64D /* track.c */,
-				29B449AA20336E9B0050B64D /* track.h */,
-				29B4494C2033654B0050B64D /* util.c */,
-				29B4494B2033654B0050B64D /* util.h */,
-				29B44958203365BF0050B64D /* wp_aes.c */,
-				29B44959203365BF0050B64D /* wp_aes.h */,
-				29B4495E203365E80050B64D /* wp_arith.c */,
-				29B4495F203365E80050B64D /* wp_arith.h */,
-				29B4495B203365DA0050B64D /* wp_rsa.h */,
-				29B449B820336F920050B64D /* xcommon.c */,
-				29B4496C2033669A0050B64D /* xcommon.h */,
+				29B449A520336E3A0050B64D /* ad.c */,
+				29B44952203365900050B64D /* ai.c */,
+				29B44953203365900050B64D /* ai.h */,
+				29B44936203363290050B64D /* allnet_log.c */,
+				29B44937203363290050B64D /* allnet_log.h */,
+				29B449C6203377020050B64D /* crypt_sel.c */,
+				29B4498E2033688D0050B64D /* allnet_queue.c */,
+				29B4498B2033688D0050B64D /* allnet_queue.h */,
 			);
 			path = cfiles;
 			sourceTree = "<group>";
@@ -268,8 +273,6 @@
 				429067411B539F1B002EA3C1 /* KeyExchangeUIViewController.m */,
 				425A7D961AEC898C00C74E12 /* AppDelegate.h */,
 				425A7D971AEC898C00C74E12 /* AppDelegate.m */,
-				420127451AF970BE00A61978 /* ContactsUITableViewController.h */,
-				420127461AF970BE00A61978 /* ContactsUITableViewController.m */,
 				42AC8CE21B4A70B1008437BC /* ConversationViewController.h */,
 				42AC8CE31B4A70B1008437BC /* ConversationViewController.m */,
 				29B44905203350CC0050B64D /* FirstViewController.h */,
@@ -280,6 +283,7 @@
 				425A7D9D1AEC898C00C74E12 /* NewContactViewController.m */,
 				426C481C1D2C5340001612B1 /* SettingsViewController.h */,
 				426C481D1D2C5340001612B1 /* SettingsViewController.m */,
+				29952BF22034D976009054D4 /* ContactListVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -287,12 +291,10 @@
 		29B449DE20337B4F0050B64D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				29EB677C20367D0D00D9647F /* XChat.h */,
-				29EB677D20367D0D00D9647F /* XChat.m */,
-				29EB677620367CA400D9647F /* iOSKeys.h */,
-				29EB677720367CA400D9647F /* iOSKeys.m */,
 				425455A11B2D858800A33CB6 /* ConversationUITextView.h */,
 				425455A21B2D858800A33CB6 /* ConversationUITextView.m */,
+				42B59FB81BC0D73000D710A8 /* iOSKeys.h */,
+				42B59FB91BC0D73000D710A8 /* iOSKeys.m */,
 				29B44906203350CC0050B64D /* KeyExchangeUIView.h */,
 				29B44903203350CC0050B64D /* KeyExchangeUIView.m */,
 			);
@@ -302,6 +304,11 @@
 		29B449DF20337B6F0050B64D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				29B449DB20337A9A0050B64D /* cfiles */,
+				428DEE981B0FC34F00163976 /* XChat.h */,
+				29952BF620354E4C009054D4 /* TableViewContactCHelper.m */,
+				29952BF820355093009054D4 /* TableViewContactCHelper.h */,
+				428DEE961B0FB9D000163976 /* XChat.m */,
 				29B449AB20336E9C0050B64D /* OALAudioTrack.h */,
 			);
 			path = Utils;
@@ -340,7 +347,6 @@
 				29B449DF20337B6F0050B64D /* Utils */,
 				29B449DE20337B4F0050B64D /* View */,
 				29B449DD20337B160050B64D /* Controller */,
-				29B449DB20337A9A0050B64D /* cfiles */,
 				29B44929203358400050B64D /* allnet-xchat-Bridging-Header.h */,
 				425A7D921AEC898C00C74E12 /* Supporting Files */,
 			);
@@ -510,6 +516,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29952BFB20357592009054D4 /* ConversationViewController.m in Sources */,
+				29952BFA20357582009054D4 /* ConversationUITextView.m in Sources */,
+				29952BF920357564009054D4 /* MoreUIViewController.m in Sources */,
 				29B449BA20336F920050B64D /* routing.c in Sources */,
 				29B449A420336DEE0050B64D /* astart.c in Sources */,
 				29B4498A203368530050B64D /* dcache.c in Sources */,
@@ -519,20 +528,22 @@
 				29B449B120336EE50050B64D /* record.c in Sources */,
 				29B449BF203370000050B64D /* trace_util.c in Sources */,
 				29B4498F2033688D0050B64D /* pipemsg.c in Sources */,
-				29EB677E20367D0D00D9647F /* XChat.m in Sources */,
 				29B449A020336D730050B64D /* app_util.c in Sources */,
 				29B44998203369790050B64D /* listen.c in Sources */,
 				29B449C1203370290050B64D /* keyd.c in Sources */,
 				29B44999203369790050B64D /* alocal.c in Sources */,
 				29B44960203365E80050B64D /* wp_arith.c in Sources */,
+				29952BF32034D976009054D4 /* ContactListVC.swift in Sources */,
 				29B44954203365900050B64D /* ai.c in Sources */,
 				29B44947203363E70050B64D /* keys.c in Sources */,
 				425A7D9E1AEC898C00C74E12 /* NewContactViewController.m in Sources */,
 				29B4493B203363490050B64D /* configfiles.c in Sources */,
+				29B449DC20337AFC0050B64D /* XChat.m in Sources */,
 				29B44908203350CC0050B64D /* FirstViewController.m in Sources */,
 				29B44975203367300050B64D /* mapchar.c in Sources */,
 				29B449A920336E660050B64D /* social.c in Sources */,
 				29B44950203365630050B64D /* cipher.c in Sources */,
+				29952BF720354E4C009054D4 /* TableViewContactCHelper.m in Sources */,
 				29B44970203366CF0050B64D /* store.c in Sources */,
 				29B4494D2033654B0050B64D /* util.c in Sources */,
 				29B44979203367820050B64D /* message.c in Sources */,
@@ -546,7 +557,6 @@
 				29B44907203350CC0050B64D /* KeyExchangeUIView.m in Sources */,
 				29B4496A2033668B0050B64D /* retransmit.c in Sources */,
 				29B449A620336E3A0050B64D /* ad.c in Sources */,
-				29EB677A20367CA400D9647F /* iOSKeys.m in Sources */,
 				29B449AE20336EBF0050B64D /* table.c in Sources */,
 				425A7D981AEC898C00C74E12 /* AppDelegate.m in Sources */,
 				29B449BB20336F920050B64D /* xcommon.c in Sources */,
@@ -706,8 +716,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 0.001;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7TW6282C6A;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -762,8 +773,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 0.001;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 7TW6282C6A;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_NO_COMMON_BLOCKS = YES;

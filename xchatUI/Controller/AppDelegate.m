@@ -23,6 +23,8 @@
 #include "allnet_log.h"
 #import "iOSKeys.h"
 #import "pipemsg.h"
+#import "allnet_xchat-Swift.h"
+
 
 #include <syslog.h>   // for the syslog test
 
@@ -77,6 +79,7 @@ static int able_to_connect ()
     [self.conversation setSocket:[self.xChat getSocket]];
     sleep (1);
   }
+  // see https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/BackgroundExecution/BackgroundExecution.html#//apple_ref/doc/uid/TP40007072-CH4-SW1
   task = [application beginBackgroundTaskWithExpirationHandler:^{
     NSLog(@"allnet task ending background task (started by calling astart_main)\n");
     acache_save_data ();
@@ -260,7 +263,7 @@ static int able_to_connect ()
   self.conversation = conversation;
 }
 
-- (void) setContactsUITVC: (ContactsUITableViewController *) tvc{
+- (void) setContactsUITVC: (ContactListVC*) tvc{
   self.tvc = tvc;
 }
 
@@ -333,7 +336,7 @@ static int able_to_connect ()
   set_speculative_computation(0);
   isInForeground = NO;
   if (self.tvc != nil) {
-    [self.tvc notifyConversationChange:NO];
+    [((ContactListVC*) self.tvc) notifyConversationChangeWithBeingDisplayed:NO];
   }
   if (self.conversation != nil) {
     [self.conversation enterBackgroundMode];
@@ -350,7 +353,7 @@ static int able_to_connect ()
   isSuspended = NO;
   isInForeground = YES;
   if (self.tvc != nil) {
-    [self.tvc notifyConversationChange:YES];
+    [((ContactListVC*) self.tvc) notifyConversationChangeWithBeingDisplayed:YES];
   }
 }
 
@@ -363,7 +366,7 @@ static int able_to_connect ()
   // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
   set_speculative_computation ([UIDevice currentDevice].batteryState != UIDeviceBatteryStateUnplugged);
   if (self.tvc != nil) {
-    [self.tvc notifyConversationChange:YES];
+    [((ContactListVC*) self.tvc) notifyConversationChangeWithBeingDisplayed:YES];
   }
   NSLog(@"application entering active state\n");
 }
