@@ -25,6 +25,7 @@ import UIKit
     var mayCreateNewContact: NewContactViewController!
     var more: MoreUIViewController!
     var cHelper: TableViewContactCHelper!
+    var sectionsCount = 1
     
     var xchat: XChat!
     var hiddenContacts: [String]?
@@ -53,9 +54,10 @@ import UIKit
         self.mayCreateNewContact = tabBarController!.viewControllers![2] as! NewContactViewController
         
         initialLatestContact = contactVM.latestContact()
+        self.displaySettings = false
         
         self.conversationIsDisplayed = false
-        self.displaySettings = false
+        
         self.message = nil
         self.sendButton = nil
 
@@ -114,9 +116,20 @@ import UIKit
     override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
     }
     
+    @IBAction func showHidden(_ sender: UIBarButtonItem) {
+        displaySettings = !displaySettings
+        if displaySettings {
+            sectionsCount = 2
+        }else{
+            sectionsCount = 1
+        }
+        tableView.reloadData()
+    }
+    
+    
     func loadData(){
         contactVM.fetchData()
-        self.navigationItem.title = "\(contactVM.count) Contacts"
+        self.navigationItem.title = "\(contactVM.count) Contact(s)"
     }
     
     func reIniSocket() {
@@ -133,15 +146,41 @@ import UIKit
 }
 
 extension ContactListVC: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sectionsCount
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contactVM.count
+        if section == 0 {
+            return contactVM.count
+        }else{
+            return contactVM.hiddenCount
+        }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactCell
-        if let item = contactVM[indexPath.row] {
-            cell.update(with: item)
+        if indexPath.section == 0 {
+            if let item = contactVM[indexPath.row] {
+                cell.update(with: item)
+            }
+        }else{
+            if let item = contactVM.hidden(index: indexPath.row) {
+                cell.update(with: item)
+            }
         }
         return cell
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Visible Contacts"
+        }else{
+            return "Hidden Contacts"
+        }
+    }
+}
+
+extension ContactListVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
 }
 

@@ -115,7 +115,13 @@
                             <constraint firstAttribute="trailingMargin" secondItem="SI0-0q-aUv" secondAttribute="trailing" id="lH8-zY-uIe"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Contacts" id="PGb-4J-Sd8"/>
+                    <navigationItem key="navigationItem" title="Contacts" id="PGb-4J-Sd8">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="cdk-Xa-UIl">
+                            <connections>
+                                <action selector="showHidden:" destination="iF2-6w-Lc0" id="Wo9-PT-z67"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="labelCountContacts" destination="SI0-0q-aUv" id="vVY-hS-HSo"/>
                         <outlet property="tableView" destination="tuf-Ie-K8T" id="Fg4-uu-Czu"/>
@@ -154,7 +160,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eSs-My-7AI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1914" y="-1154"/>
+            <point key="canvasLocation" x="1444" y="-1922"/>
         </scene>
         <!--MoreUI View Controller-->
         <scene sceneID="Q6P-Qa-5jw">

@@ -22,6 +22,15 @@ class ContactViewModel {
         return _contacts.count > 0 ? _contacts[0] : nil
     }
     
+    func hidden(index: Int) -> (String, String)? {
+        return _hiddenContacts.count > 0 ? _hiddenContacts[0] : nil
+    }
+    
+    var hiddenCount: Int {
+        return _hiddenContacts.count
+    }
+    
+    
     var count: Int {
         return _contacts.count
     }
