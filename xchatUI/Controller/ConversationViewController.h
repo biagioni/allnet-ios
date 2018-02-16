@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ContactsUITableViewController.h"
 
 @interface ConversationViewController : UIViewController
 
-- (void)notifyChange: (UIViewController *) conversation;
+- (void)notifyChange: (ContactsUITableViewController *) conversation;
 
 #define TEXTVIEWSIZE    1000  // maximum size of conversationuitextview
 

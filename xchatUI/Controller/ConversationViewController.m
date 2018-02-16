@@ -9,11 +9,10 @@
 #import "ConversationViewController.h"
 #import "ConversationUITextView.h"
 #import "SettingsViewController.h"
-#import "allnet_xchat-Swift.h"
 
 @interface ConversationViewController ()
 
-@property ContactListVC * tvc;
+@property ContactsUITableViewController * tvc;
 
 @property UIScrollView * cvcScrollView;
 
@@ -26,7 +25,7 @@
 
 @implementation ConversationViewController
 
-- (void)notifyChange: (ContactListVC *) contactsUI {
+- (void)notifyChange: (ContactsUITableViewController *) contactsUI {
   self.tvc = contactsUI;
 }
 
@@ -107,14 +106,14 @@
     [self.cvcScrollView setContentOffset:endPoint];
   }
   if (self.tvc != nil)
-    [self.tvc notifyConversationChangeWithBeingDisplayed:YES];
+    [self.tvc notifyConversationChange:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
   [super viewDidDisappear:animated];
   //NSLog(@"\nview did disappear\n\n");
   if (self.tvc != nil)
-    [self.tvc notifyConversationChangeWithBeingDisplayed:YES];
+    [self.tvc notifyConversationChange:YES];
 }
 
 #pragma mark - Navigation
