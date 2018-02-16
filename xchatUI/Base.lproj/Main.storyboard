@@ -11,6 +11,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Avenir.ttc">
+            <string>Avenir-Heavy</string>
+        </array>
         <array key="Courier.ttc">
             <string>Courier</string>
         </array>
@@ -29,10 +32,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tuf-Ie-K8T">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="101" width="375" height="566"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ListPrototypeCell" id="2S5-G8-oBD">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactCell" id="2S5-G8-oBD">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2S5-G8-oBD" id="gmq-LP-Yef">
@@ -46,17 +49,42 @@
                                     <outlet property="delegate" destination="iF2-6w-Lc0" id="coy-lg-hLU"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New messages:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsB-5G-5KH">
+                                <rect key="frame" x="16" y="72" width="111" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="C0w-jV-Kb3"/>
+                                    <constraint firstAttribute="width" constant="111" id="Gk9-f6-0co"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
+                                <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SI0-0q-aUv">
+                                <rect key="frame" x="135" y="72" width="224" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="gkm-VT-lvs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
+                                <color key="textColor" red="0.078076150223679169" green="0.66673928499221802" blue="0.42849150742599085" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="tuf-Ie-K8T" secondAttribute="bottom" id="CcW-1e-1fu"/>
-                            <constraint firstAttribute="trailing" secondItem="tuf-Ie-K8T" secondAttribute="trailing" id="I78-Ok-GIH"/>
-                            <constraint firstItem="tuf-Ie-K8T" firstAttribute="leading" secondItem="Ddz-Ra-TDK" secondAttribute="leading" id="quS-f7-54k"/>
-                            <constraint firstItem="tuf-Ie-K8T" firstAttribute="top" secondItem="Ddz-Ra-TDK" secondAttribute="top" id="rT3-WX-BzL"/>
+                            <constraint firstAttribute="bottom" secondItem="tuf-Ie-K8T" secondAttribute="bottom" id="7XJ-8A-7I6"/>
+                            <constraint firstItem="tuf-Ie-K8T" firstAttribute="top" secondItem="vsB-5G-5KH" secondAttribute="bottom" constant="8" id="AEZ-sX-hlw"/>
+                            <constraint firstItem="vsB-5G-5KH" firstAttribute="top" secondItem="ph8-Nj-4Qk" secondAttribute="bottom" constant="8" id="Bj8-qt-CIq"/>
+                            <constraint firstItem="SI0-0q-aUv" firstAttribute="leading" secondItem="vsB-5G-5KH" secondAttribute="trailing" constant="8" id="C57-s9-VXK"/>
+                            <constraint firstAttribute="trailing" secondItem="tuf-Ie-K8T" secondAttribute="trailing" id="G0L-jv-e4h"/>
+                            <constraint firstItem="SI0-0q-aUv" firstAttribute="top" secondItem="ph8-Nj-4Qk" secondAttribute="bottom" constant="8" id="T7d-2q-9fa"/>
+                            <constraint firstItem="vsB-5G-5KH" firstAttribute="leading" secondItem="Ddz-Ra-TDK" secondAttribute="leadingMargin" id="eWL-VO-vH4"/>
+                            <constraint firstItem="tuf-Ie-K8T" firstAttribute="leading" secondItem="Ddz-Ra-TDK" secondAttribute="leading" id="ijJ-X6-kD9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="SI0-0q-aUv" secondAttribute="trailing" id="lH8-zY-uIe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Contacts" id="PGb-4J-Sd8"/>
                     <connections>
+                        <outlet property="labelCountContacts" destination="SI0-0q-aUv" id="vVY-hS-HSo"/>
                         <outlet property="tableView" destination="tuf-Ie-K8T" id="Fg4-uu-Czu"/>
                     </connections>
                 </viewController>

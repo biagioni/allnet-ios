@@ -13,9 +13,6 @@
 
 - (void) newMessage: (NSString *) contact : (UITextView*) conversation : (BOOL) conversationIsDisplayed : (NSMutableDictionary*) contactsWithNewMessages : (UIViewController*) vc : (UITableView*) tableView;
 
--(NSInteger) getRowsCount: (NSMutableArray*) contacts :  (BOOL) displaySettings;
-
-- (UITableViewCell *)tableView:(UITableView *)tableView :(NSIndexPath *)indexPath : (NSMutableArray*) contacts : (BOOL) displaySettings : (NSMutableArray*) hiddenContacts : (NSMutableDictionary*) contactsWithNewMessages : (UIViewController*) vc;
 
 - (void) notifyConversationChange: (BOOL) beingDisplayed : (BOOL) conversationIsDisplayed : (UITextView*) conversation : (UIViewController*) vc : (UITableView*) tableView : (NSMutableDictionary*) contactsWithNewMessages;
 
