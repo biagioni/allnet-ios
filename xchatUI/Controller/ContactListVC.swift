@@ -180,7 +180,11 @@ extension ContactListVC: UITableViewDataSource {
 
 extension ContactListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if displaySettings {
+            
+        }else{
+            self.performSegue(withIdentifier: "showMessage", sender: nil)
+        }
     }
 }
 

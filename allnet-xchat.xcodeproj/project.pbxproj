@@ -56,6 +56,8 @@
 		29B449DC20337AFC0050B64D /* XChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 428DEE961B0FB9D000163976 /* XChat.m */; };
 		29EB67F42036A85600D9647F /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB67F32036A85600D9647F /* ContactCell.swift */; };
 		29EB67F72036B0AB00D9647F /* ContactsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB67F62036B0AB00D9647F /* ContactsViewModel.swift */; };
+		29EB67F920374DD300D9647F /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB67F820374DD300D9647F /* MessageVC.swift */; };
+		29EB67FB20374E8300D9647F /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB67FA20374E8300D9647F /* MessageCell.swift */; };
 		425A7D951AEC898C00C74E12 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 425A7D941AEC898C00C74E12 /* main.m */; };
 		425A7D981AEC898C00C74E12 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 425A7D971AEC898C00C74E12 /* AppDelegate.m */; };
 		425A7D9E1AEC898C00C74E12 /* NewContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 425A7D9D1AEC898C00C74E12 /* NewContactViewController.m */; };
@@ -150,6 +152,8 @@
 		29B449CB20337A2B0050B64D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		29EB67F32036A85600D9647F /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		29EB67F62036B0AB00D9647F /* ContactsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewModel.swift; sourceTree = "<group>"; };
+		29EB67F820374DD300D9647F /* MessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVC.swift; sourceTree = "<group>"; };
+		29EB67FA20374E8300D9647F /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		422B56221E9E9B890072212E /* allnet-xchat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "allnet-xchat.entitlements"; sourceTree = "<group>"; };
 		425455A11B2D858800A33CB6 /* ConversationUITextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationUITextView.h; sourceTree = "<group>"; };
 		425455A21B2D858800A33CB6 /* ConversationUITextView.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.objc; path = ConversationUITextView.m; sourceTree = "<group>"; };
@@ -288,6 +292,7 @@
 				426C481C1D2C5340001612B1 /* SettingsViewController.h */,
 				426C481D1D2C5340001612B1 /* SettingsViewController.m */,
 				29952BF22034D976009054D4 /* ContactListVC.swift */,
+				29EB67F820374DD300D9647F /* MessageVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -302,6 +307,7 @@
 				29B44906203350CC0050B64D /* KeyExchangeUIView.h */,
 				29B44903203350CC0050B64D /* KeyExchangeUIView.m */,
 				29EB67F32036A85600D9647F /* ContactCell.swift */,
+				29EB67FA20374E8300D9647F /* MessageCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -534,6 +540,7 @@
 				29952BFA20357582009054D4 /* ConversationUITextView.m in Sources */,
 				29952BF920357564009054D4 /* MoreUIViewController.m in Sources */,
 				29B449BA20336F920050B64D /* routing.c in Sources */,
+				29EB67F920374DD300D9647F /* MessageVC.swift in Sources */,
 				29B449A420336DEE0050B64D /* astart.c in Sources */,
 				29B4498A203368530050B64D /* dcache.c in Sources */,
 				29B449912033688D0050B64D /* allnet_queue.c in Sources */,
@@ -577,6 +584,7 @@
 				29B449BB20336F920050B64D /* xcommon.c in Sources */,
 				29B44941203363790050B64D /* priority.c in Sources */,
 				29EB67F72036B0AB00D9647F /* ContactsViewModel.swift in Sources */,
+				29EB67FB20374E8300D9647F /* MessageCell.swift in Sources */,
 				29B449BD20336FD20050B64D /* traced.c in Sources */,
 				29B44938203363290050B64D /* allnet_log.c in Sources */,
 				425A7D951AEC898C00C74E12 /* main.m in Sources */,
