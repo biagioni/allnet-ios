@@ -13,13 +13,15 @@
 #import "NewContactViewController.h"
 #import "MoreUIViewController.h"
 
-
 @interface XChat : NSObject
 
 // - (void) initialize: (ConversationUITextView *) conversation contacts: (ContactsUITableViewController *) contacts vc: (NewContactViewController *) vcForNewContact;
 - (void) initialize;
 - (void) disconnect;
 - (void) reconnect;
+
+- (void) setMessageVM:(NSObject *)object;
+- (void) setContactVM:(NSObject *)object;
 
 - (void) requestNewContact:(NSString *)contact
                    maxHops:(NSUInteger) hops

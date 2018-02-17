@@ -7,16 +7,18 @@
 //
 
 protocol MessageDelegate {
-    func doneFetchingData()
+    func messagesUpdated()
+    func newMessageReceived(fromContact contact: String)
 }
 
-class MessageViewModel {
+
+class MessageViewModel : NSObject {
     var delegate: MessageDelegate?
     private var _contact: String
     private var _cHelper: CHelper!
     private var _messages: [MessageModel]{
         didSet{
-            delegate?.doneFetchingData()
+            delegate?.messagesUpdated()
         }
     }
     
@@ -25,6 +27,14 @@ class MessageViewModel {
         _contact = contact
         _cHelper.initialize(sock, _contact)
         _messages = [MessageModel]()
+    }
+    
+    func receivedNewMessage(forContact contact: String){
+        if contact == contact {
+            fetchData()
+        }else{
+            delegate?.newMessageReceived(fromContact: contact)
+        }
     }
     
     func fetchData(){

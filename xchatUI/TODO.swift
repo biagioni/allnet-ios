@@ -10,6 +10,8 @@
  contactlistvc
     notifications for messages
     contacts settings
+    hold all the viewmodels
+    contactsWithNewMessages
  
  contactviewmodel
     sort contacts

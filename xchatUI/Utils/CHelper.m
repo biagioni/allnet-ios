@@ -33,6 +33,7 @@
 
 @implementation CHelper : NSObject
 
+//clean
 - (void) initialize: (int) sock : (NSString *) contact {
     self.sock = sock;
     self.xcontact = strcpy_malloc (contact.UTF8String, "ConversationUITextView initialize contact");
@@ -40,6 +41,7 @@
     update_time_read (contact.UTF8String);
 }
 
+//clean
 - (NSMutableArray *)getMessages {
   NSMutableArray * result_messages = [[NSMutableArray alloc] initWithCapacity:1000];
     keyset * k;
@@ -132,10 +134,10 @@
         free ((void *)mi.message);
     }
     converted_messages = [[converted_messages reverseObjectEnumerator] allObjects];
-    
     return converted_messages;
 }
 
+//clean
 static NSString * basicDate (uint64_t time, int tzMin) {
     // objective C time begins on January 1st, 2001.  allnet time begins on January 1st, 2000.
     uint64_t unixTime = time + ALLNET_Y2K_SECONDS_IN_UNIX;
@@ -159,6 +161,7 @@ static NSString * basicDate (uint64_t time, int tzMin) {
     return dateString;
 }
 
+//clean
 static int local_time_offset ()
 {
     time_t now = time (NULL);
@@ -167,14 +170,6 @@ static int local_time_offset ()
     localtime_r (&now, &now_ltime_tm);
     struct tm gtime_tm;
     gmtime_r (&now, &gtime_tm);
-    /*
-     printf ("local time %s", asctime (&now_ltime_tm));
-     printf ("   gm time %s", asctime (&gtime_tm));
-     printf ("local time %d:%02d:%02d, gm time %d:%02d:%02d\n",
-     now_ltime_tm.tm_hour, now_ltime_tm.tm_min, now_ltime_tm.tm_sec,
-     gtime_tm.tm_hour, gtime_tm.tm_min, gtime_tm.tm_sec);
-     printf ("local time offset %d\n", delta_minutes (&now_ltime_tm, &gtime_tm));
-     */
     return (delta_minutes (&now_ltime_tm, &gtime_tm));
 }
 
@@ -202,25 +197,6 @@ static int delta_minutes (struct tm * local, struct tm * gm)
     return result;
 }
 
-
-//- (void)assignContentForContact {
-//    struct message_store_info * messages = NULL;
-//    int messages_used = 0;
-//    int messages_allocated = 0;
-//    NSMutableArray * result_messages = [[NSMutableArray alloc] initWithCapacity:1000];
-//    list_all_messages (self.xcontact, &messages, &messages_allocated, &messages_used);
-//    if (messages_used > 0) {
-//        for (int i = 0; i < messages_used; i++) {
-//            [self addMessageToView:(messages + (messages_used - i - 1)) time:self.newMessagesFrom];
-//        }
-//    }
-//    if (messages != NULL)
-//        free_all_messages(messages, messages_used);
-//}
-
-- (void) addMessageToView:(struct message_store_info *) info time:(uint64_t)now {
-    //NSAttributedString * boxedString = makeMessage (info, now, 0);
-}
 
 - (void)contactButtonClicked:(id) source : (NSMutableArray*) contacts : (UILabel*) contactName : (ConversationUITextView*) conversation : (NSMutableDictionary*) contactsWithNewMessages : (UITableView*) tableView {
     UIButton * button = (UIButton *) source;
@@ -259,11 +235,6 @@ static int delta_minutes (struct tm * local, struct tm * gm)
     }
 }
 
-- (void)settingsButtonClicked:(id) source :  (BOOL) displaySettings : (UITableView*) tableView{
-    displaySettings = ! displaySettings;
-    [tableView reloadData];
-    NSLog(@"settings button clicked, %d\n", displaySettings);
-}
 
 // if n is 0, sets to zero.  Otherwise, adds n (positive or negative) to the current badge number
 - (void) addToBadgeNumber: (NSInteger) n {

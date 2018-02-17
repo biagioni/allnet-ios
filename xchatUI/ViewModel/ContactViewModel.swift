@@ -8,14 +8,22 @@
 
 import UIKit
 
-class ContactViewModel {
+protocol ContactDelegate {
+    func contactUpdated()
+}
+
+class ContactViewModel: NSObject {
+    var delegate: ContactDelegate?
     private var _contacts: [(String, String)]
-    private var _hiddenContacts: [(String, String)]
+    private var _hiddenContacts: [(String, String)]{
+        didSet{
+            delegate?.contactUpdated()
+        }
+    }
     
-    init() {
+    override init() {
         _contacts = [(String, String)]()
         _hiddenContacts = [(String, String)]()
-        fetchData()
     }
     
     subscript(index: Int) -> (String, String)? {

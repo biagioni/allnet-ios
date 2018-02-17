@@ -8,14 +8,18 @@
 
 import UIKit
 
+protocol MessageViewDelegate {
+    func newMessage(fromContact contact: String)
+}
+
 class MessageVC: UIViewController {
 
     @IBOutlet weak var textFieldMessage: UITextField!
     @IBOutlet weak var tableView: UITableView!
-    
-    var xChatC: XChat!
+
     var messageVM: MessageViewModel!
     var contact: String!
+    var delegate: MessageViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +28,10 @@ class MessageVC: UIViewController {
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 52
-        
-        xChatC = XChat()
-        xChatC.initialize()
-        
-        messageVM = MessageViewModel(contact: contact, sock: xChatC.getSocket())
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        messageVM = MessageViewModel(contact: contact, sock: appDelegate.xChat.getSocket())
         messageVM.delegate = self
+        appDelegate.xChat.setMessageVM(messageVM)
         messageVM.fetchData()
         
         let tap  = UITapGestureRecognizer(target: self, action: #selector(closeKeyboard))
@@ -58,14 +60,8 @@ class MessageVC: UIViewController {
         }
     }
     
-//    func reIniSocket() {
-//        conversation?.setSocket(xchat.getSocket())
-//    }
-//    
-//    func newMessage(contact: String){
-//        cHelper.newMessage(contact, message, conversationIsDisplayed, contactsWithNewMessages, self, tableView)
-//    }
-//    
+
+//
 //    func notifyConversationChange(beingDisplayed: Bool){
 //        cHelper.notifyConversationChange(beingDisplayed, conversationIsDisplayed, conversation, self, tableView, contactsWithNewMessages)
 //    }
@@ -95,11 +91,14 @@ extension MessageVC: UITableViewDataSource {
 }
 
 extension MessageVC: MessageDelegate {
-    func doneFetchingData() {
+    func messagesUpdated() {
          tableView.reloadData()
         DispatchQueue.main.async {
             let indexPath = IndexPath(row: self.messageVM.count-1, section: 0)
             self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
         }
+    }
+    func newMessageReceived(fromContact contact: String) {
+        delegate?.newMessage(fromContact: contact)
     }
 }

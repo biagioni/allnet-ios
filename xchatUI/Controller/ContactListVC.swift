@@ -20,7 +20,13 @@ import UIKit
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        contactVM =  ContactViewModel()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.setXChatValue(XChat())
+        appDelegate.xChat.initialize()
+        
+        contactVM = ContactViewModel()
+        contactVM.delegate = self
+        contactVM.fetchData()
         navigationItem.title = "\(contactVM.count) Contacts"
         displaySettings = false
     }
@@ -29,6 +35,7 @@ import UIKit
         if segue.identifier == "showMessage"{
             let destination = segue.destination as! MessageVC
             destination.contact = sender as! String
+            destination.delegate = self
         }
     }
     
@@ -89,6 +96,18 @@ extension ContactListVC: UITableViewDelegate {
         }else{
             self.performSegue(withIdentifier: "showMessage", sender: contactVM[indexPath.row]!.0)
         }
+    }
+}
+
+extension ContactListVC: ContactDelegate {
+    func contactUpdated() {
+        tableView.reloadData()
+    }
+}
+
+extension ContactListVC: MessageViewDelegate {
+    func newMessage(fromContact contact: String) {
+        print("NEWWWWWWWWWWWWWWWWWW")
     }
 }
 

@@ -37,8 +37,9 @@
 @interface XChat ()
 
 @property int sock;
-@property ConversationUITextView * conversation;
-@property ContactListVC * contacts;
+///TODO convert to delegate in the 
+@property MessageViewModel * conversation;
+@property ContactViewModel * contacts;
 @property KeyExchangeUIViewController * keyExchange;
 @property NewContactViewController * ncvcForNewContact;
 @property MoreUIViewController * more;
@@ -213,13 +214,9 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
 {
   static int last_length = 0;
   if (dlen != last_length) {
-    //NSLog(@"got %d\n", dlen);
-    //printf ("got %d: ", dlen);
+
     last_length = dlen;
   }
-  //int ptype = data[1];
-  //printf ("%d", ptype);
-  //NSLog(@"received data of length %d\n", psize);
   int verified, duplicate, broadcast;
   uint64_t seq;
   char * peer;
@@ -230,24 +227,20 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
   acks.num_acks = 0;
   struct allnet_mgmt_trace_reply * trace = NULL;
   time_t mtime = 0;
-  // if necessary, wait for the key to be generated before calling handle_packet
   pthread_mutex_lock(&key_generated_mutex);  // don't allow changes to keyContact until a key has been generated
   if ((! waiting_for_key) && (mySelf.keyExchange != nil)) {
     [mySelf.keyExchange notificationOfGeneratedKey:[[NSString alloc] initWithUTF8String:keyContact]];
     mySelf.keyExchange = nil;
   }
-  // NSLog(@"calling handle_packet %d, %d bytes\n", sock, dlen);
   int mlen = handle_packet(sock, (char *)data, dlen, priority, &peer, &kset, &message, &desc,
                            &verified, &seq, &mtime, &duplicate, &broadcast, &acks, &trace);
-  // NSLog(@"handle_packet completed, peer %p (%s), mlen %d\n", peer, peer, mlen);
   pthread_mutex_unlock(&key_generated_mutex);
-  //printf (".%d/", mlen);
   if ((mlen > 0) && verified) {  // received a packet
     NSLog(@"mlen %d, verified %d, duplicate %d, broadcast %d, peer %s\n",
           mlen, verified, duplicate, broadcast, peer);
     NSString * contact = [[NSString alloc] initWithUTF8String:peer];
     if (! duplicate) {
-      //[mySelf.contacts newMessageWithContact:contact];
+      [mySelf.conversation receivedNewMessageForContact:contact];
       AppDelegate * appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
       NSString * msg = [[NSString alloc] initWithUTF8String:message];
       [appDelegate notifyMessageReceived:contact message:msg];
@@ -267,10 +260,16 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
       NSLog(@"got subscription %s\n", peer);
   }
   for (int i = 0; i < acks.num_acks; i++) {
-//    NSLog(@"displaying ack sequence number %lld for peer %s, conversation %@\n", acks.acks[i], acks.peers[i], mySelf.conversation);
     printf ("displaying ack sequence number %lld for peer %s\n", acks.acks[i], acks.peers[i]);
-    [mySelf.conversation markAsAcked:acks.peers[i] ackNumber:acks.acks[i]];
+    //[mySelf.conversation markAsAcked:acks.peers[i] ackNumber:acks.acks[i]];
   }
+}
+
+- (void) setMessageVM:(NSObject *)object {
+  mySelf.conversation = (MessageViewModel*)object;
+}
+- (void) setContactVM:(NSObject *)object{
+  mySelf.contacts = (ContactViewModel*)object;
 }
 
 - (void) removeNewContact: (NSString *) contact {

@@ -324,9 +324,9 @@
 			children = (
 				29B449DB20337A9A0050B64D /* cfiles */,
 				428DEE981B0FC34F00163976 /* XChat.h */,
+				428DEE961B0FB9D000163976 /* XChat.m */,
 				29952BF620354E4C009054D4 /* CHelper.m */,
 				29952BF820355093009054D4 /* CHelper.h */,
-				428DEE961B0FB9D000163976 /* XChat.m */,
 				29B449AB20336E9C0050B64D /* OALAudioTrack.h */,
 			);
 			path = Utils;
