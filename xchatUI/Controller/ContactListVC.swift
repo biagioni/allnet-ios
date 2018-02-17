@@ -25,6 +25,13 @@ import UIKit
         displaySettings = false
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMessage"{
+            let destination = segue.destination as! MessageVC
+            destination.contact = sender as! String
+        }
+    }
+    
     @IBAction func showHidden(_ sender: UIBarButtonItem) {
         displaySettings = !displaySettings
         if displaySettings {
@@ -76,10 +83,11 @@ extension ContactListVC: UITableViewDataSource {
 
 extension ContactListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         if displaySettings {
             
         }else{
-            self.performSegue(withIdentifier: "showMessage", sender: nil)
+            self.performSegue(withIdentifier: "showMessage", sender: contactVM[indexPath.row]!.0)
         }
     }
 }

@@ -13,10 +13,17 @@ class MessageVC: UIViewController {
     @IBOutlet weak var textFieldMessage: UITextField!
     @IBOutlet weak var tableView: UITableView!
     
+    var xChatC: XChat!
+    var messageVM: MessageViewModel!
+    var contact: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       // self.xchat.initialize(conversation, contacts: self, vc: mayCreateNewContact, mvc: more)
-       // self.conversation?.initialize(xchat.getSocket(), messageField: message, send: sendButton, contact: initialLatestContact as! String, decorativeLabel: nMessageLabel)
+        xChatC = XChat()
+        xChatC.initialize()
+        
+        messageVM = MessageViewModel(contact: contact, sock: xChatC.getSocket())
+        
         let tap  = UITapGestureRecognizer(target: self, action: #selector(closeKeyboard))
         tableView.addGestureRecognizer(tap)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -58,10 +65,20 @@ class MessageVC: UIViewController {
 
 extension MessageVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return messageVM.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
+        var identifier = ""
+        if let item = messageVM[indexPath.row] {
+            if item.msg_type == MSG_TYPE_SENT {
+                identifier = "MessageCellSent"
+            }else{
+                identifier = "MessageCellReceived"
+            }
+        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MessageCell
+        cell.labelMessage.text = messageVM[indexPath.row]?.message
+        cell.labelDate.text = messageVM[indexPath.row]?.dated
         return cell
     }
 }

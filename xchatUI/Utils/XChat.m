@@ -58,26 +58,19 @@ static pd p;
 static XChat * mySelf = NULL;
 static void * splitPacketBuffer = NULL;
 
-- (void) initialize: (ConversationUITextView *) conversation contacts: (ContactListVC *) contacts vc: (NewContactViewController *) vcForNewContact mvc: (MoreUIViewController *) mvc {
+- (void) initialize {
   NSLog(@"calling xchat_init\n");
-  self.conversation = conversation;
-  self.contacts = contacts;
-  self.more = mvc;
   struct allnet_log * alog = init_log ("ios xchat");
   p = init_pipe_descriptor(alog);
   splitPacketBuffer = NULL;
   self.sock = xchat_init ("xchat", NULL, p);
   NSLog(@"self.sock is %d\n", self.sock);
-  self.ncvcForNewContact = vcForNewContact;
-  // NSLog(@"done calling xchat_init, socket %d, conversation %p\n", self.sock, self.conversation);
   CFSocketRef iOSSock = CFSocketCreateWithNative(NULL, self.sock, kCFSocketDataCallBack,
                                                  (CFSocketCallBack)&dataAvailable, NULL);
-  // if you ever need to bind, use CFSocketSetAddress -- but not needed here
   self.runLoop = CFSocketCreateRunLoopSource(NULL, iOSSock, 100);
   CFRunLoopRef currentRunLoop = CFRunLoopGetCurrent();
   CFRunLoopAddSource(currentRunLoop, self.runLoop, kCFRunLoopCommonModes);
   mySelf = self;
-  // NSLog(@"Xchat.m: initialized my socket %d\n", self.sock);
   pthread_mutex_init(&key_generated_mutex, NULL);
   waiting_for_key = 0;
 }

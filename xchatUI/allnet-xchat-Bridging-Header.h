@@ -10,7 +10,8 @@
 #import "KeyExchangeUIViewController.h"
 #import "MoreUIViewController.h"
 #import "SettingsViewController.h"
-#import "TableViewContactCHelper.h"
+#import "CHelper.h"
+#import "MessageModel.h"
 
 #include "packet.h"
 #include "util.h"

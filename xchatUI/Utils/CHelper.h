@@ -1,23 +1,25 @@
 //
-//  TableViewContactCHelper.h
+//  CHelper.h
 //  allnet-xchat
 //
 //  Created by Tiago Do Couto on 2/14/18.
 //  Copyright © 2018 allnet. All rights reserved.
 //
 
-#ifndef TableViewContactCHelper_h
-#define TableViewContactCHelper_h
+#ifndef CHelper_h
+#define CHelper_h
 
-@interface TableViewContactCHelper : NSObject
+@interface CHelper : NSObject
+@property char * xcontact;
 
 - (void) newMessage: (NSString *) contact : (UITextView*) conversation : (BOOL) conversationIsDisplayed : (NSMutableDictionary*) contactsWithNewMessages : (UIViewController*) vc : (UITableView*) tableView;
 
+- (NSMutableArray *)getMessages;
+- (void) initialize: (int) sock : (NSString *) contact;
 
 - (void) notifyConversationChange: (BOOL) beingDisplayed : (BOOL) conversationIsDisplayed : (UITextView*) conversation : (UIViewController*) vc : (UITableView*) tableView : (NSMutableDictionary*) contactsWithNewMessages;
-
 @end
 
 
 
-#endif /* TableViewContactCHelper_h */
+#endif /* CHelper_h */

@@ -17,7 +17,7 @@
 @interface XChat : NSObject
 
 // - (void) initialize: (ConversationUITextView *) conversation contacts: (ContactsUITableViewController *) contacts vc: (NewContactViewController *) vcForNewContact;
-- (void) initialize: (ConversationUITextView *) conversation contacts: (UIViewController *) contacts vc: (NewContactViewController *) vcForNewContact mvc: (MoreUIViewController *) mvc;
+- (void) initialize;
 - (void) disconnect;
 - (void) reconnect;
 
