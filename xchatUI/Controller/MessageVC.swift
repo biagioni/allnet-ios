@@ -19,10 +19,18 @@ class MessageVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = contact
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 52
+        
         xChatC = XChat()
         xChatC.initialize()
         
         messageVM = MessageViewModel(contact: contact, sock: xChatC.getSocket())
+        messageVM.delegate = self
+        messageVM.fetchData()
         
         let tap  = UITapGestureRecognizer(target: self, action: #selector(closeKeyboard))
         tableView.addGestureRecognizer(tap)
@@ -64,6 +72,9 @@ class MessageVC: UIViewController {
 }
 
 extension MessageVC: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messageVM.count
     }
@@ -80,5 +91,15 @@ extension MessageVC: UITableViewDataSource {
         cell.labelMessage.text = messageVM[indexPath.row]?.message
         cell.labelDate.text = messageVM[indexPath.row]?.dated
         return cell
+    }
+}
+
+extension MessageVC: MessageDelegate {
+    func doneFetchingData() {
+         tableView.reloadData()
+        DispatchQueue.main.async {
+            let indexPath = IndexPath(row: self.messageVM.count-1, section: 0)
+            self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+        }
     }
 }

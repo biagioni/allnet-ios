@@ -6,17 +6,29 @@
 //  Copyright © 2018 allnet. All rights reserved.
 //
 
+protocol MessageDelegate {
+    func doneFetchingData()
+}
+
 class MessageViewModel {
+    var delegate: MessageDelegate?
     private var _contact: String
-    var cHelper: CHelper!
-    private var _messages: [MessageModel]
+    private var _cHelper: CHelper!
+    private var _messages: [MessageModel]{
+        didSet{
+            delegate?.doneFetchingData()
+        }
+    }
     
     init(contact: String, sock: Int32) {
-        cHelper = CHelper()
+        _cHelper = CHelper()
         _contact = contact
-        cHelper.initialize(sock, _contact)
+        _cHelper.initialize(sock, _contact)
         _messages = [MessageModel]()
-        _messages = cHelper.getMessages() as! [MessageModel]
+    }
+    
+    func fetchData(){
+        _messages = _cHelper.getMessages() as! [MessageModel]
     }
     
     subscript(index: Int) -> MessageModel? {

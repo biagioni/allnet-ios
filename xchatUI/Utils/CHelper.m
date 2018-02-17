@@ -131,6 +131,7 @@
         }
         free ((void *)mi.message);
     }
+    converted_messages = [[converted_messages reverseObjectEnumerator] allObjects];
     
     return converted_messages;
 }
