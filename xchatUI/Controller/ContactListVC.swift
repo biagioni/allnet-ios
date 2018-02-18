@@ -12,10 +12,13 @@ import UIKit
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var labelCountContacts: UILabel!
+    @IBOutlet weak var buttonEdit: UIBarButtonItem!
     
     var contactVM: ContactViewModel!
+    var messageVM: MessageViewModel!
     var sectionsCount = 1
     var displaySettings: Bool!
+    var unreadMessages: [String]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,34 +27,60 @@ import UIKit
         appDelegate.setXChatValue(XChat())
         appDelegate.xChat.initialize()
         
+        messageVM = MessageViewModel()
+        messageVM.contactDelegate = self
+        appDelegate.xChat.setMessageVM(messageVM)
+
         contactVM = ContactViewModel()
         contactVM.delegate = self
         contactVM.fetchData()
-        navigationItem.title = "\(contactVM.count) Contacts"
+        
+        unreadMessages = [String]()
+        navigationItem.title = "\(contactVM.count) Contact(s)"
         displaySettings = false
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        labelCountContacts.text = unreadMessages.count.description
+        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showMessage"{
+            let selectedContact = sender as! String
+            unreadMessages = unreadMessages.filter{$0 != selectedContact}
+            
             let destination = segue.destination as! MessageVC
-            destination.contact = sender as! String
-            destination.delegate = self
+            destination.contact = selectedContact
+            destination.messageVM = messageVM
         }
     }
     
     @IBAction func showHidden(_ sender: UIBarButtonItem) {
         displaySettings = !displaySettings
+        var button: UIBarButtonItem!
         if displaySettings {
             sectionsCount = 2
+            button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(showHidden))
         }else{
             sectionsCount = 1
+            button = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(showHidden))
         }
+        navigationItem.setRightBarButton(button, animated: true)
+    
         tableView.reloadData()
     }
     
     func loadData(){
         contactVM.fetchData()
         self.navigationItem.title = "\(contactVM.count) Contact(s)"
+    }
+    func updateNotification(contact: String, cell: ContactCell){
+        if unreadMessages.contains(contact){
+            cell.labelNotification.isHidden = false
+        }else{
+            cell.labelNotification.isHidden = true
+        }
     }
 }
 
@@ -70,12 +99,20 @@ extension ContactListVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath) as! ContactCell
         if indexPath.section == 0 {
             if let item = contactVM[indexPath.row] {
+                updateNotification(contact: item.0, cell: cell)
                 cell.update(with: item)
             }
         }else{
             if let item = contactVM.hidden(index: indexPath.row) {
+                updateNotification(contact: item.0, cell: cell)
                 cell.update(with: item)
             }
+        }
+        
+        if displaySettings {
+            cell.imageViewSettings.isHidden = false
+        }else{
+            cell.imageViewSettings.isHidden = true
         }
         return cell
     }
@@ -100,14 +137,17 @@ extension ContactListVC: UITableViewDelegate {
 }
 
 extension ContactListVC: ContactDelegate {
+    func newMessageReceived(fromContact contact: String) {
+        unreadMessages.append(contact)
+        if let index = contactVM.indexOf(contact: contact) {
+            let indexPath = IndexPath(row: index, section: 0)
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+        labelCountContacts.text = unreadMessages.count.description
+    }
+    
     func contactUpdated() {
         tableView.reloadData()
-    }
-}
-
-extension ContactListVC: MessageViewDelegate {
-    func newMessage(fromContact contact: String) {
-        print("NEWWWWWWWWWWWWWWWWWW")
     }
 }
 

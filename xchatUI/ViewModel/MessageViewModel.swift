@@ -8,13 +8,13 @@
 
 protocol MessageDelegate {
     func messagesUpdated()
-    func newMessageReceived(fromContact contact: String)
 }
 
 
 class MessageViewModel : NSObject {
     var delegate: MessageDelegate?
-    private var _contact: String
+    var contactDelegate: ContactDelegate?
+    private var _contact: String?
     private var _cHelper: CHelper!
     private var _messages: [MessageModel]{
         didSet{
@@ -22,18 +22,25 @@ class MessageViewModel : NSObject {
         }
     }
     
-    init(contact: String, sock: Int32) {
-        _cHelper = CHelper()
-        _contact = contact
-        _cHelper.initialize(sock, _contact)
+    override init() {
         _messages = [MessageModel]()
     }
     
+    func setContact(contact: String, sock: Int32) {
+        _messages.removeAll()
+        _cHelper = CHelper()
+        _contact = contact
+        _cHelper.initialize(sock, _contact)
+    }
+    
+    func removeContact(){
+        _contact = nil
+    }
     func receivedNewMessage(forContact contact: String){
-        if contact == contact {
+        if contact == _contact {
             fetchData()
         }else{
-            delegate?.newMessageReceived(fromContact: contact)
+            contactDelegate?.newMessageReceived(fromContact: contact)
         }
     }
     

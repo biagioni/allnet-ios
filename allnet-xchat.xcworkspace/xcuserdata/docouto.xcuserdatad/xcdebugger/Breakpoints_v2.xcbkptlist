@@ -9,29 +9,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "xchatUI/ViewModel/MessageViewModel.swift"
-            timestampString = "540536563.692"
+            filePath = "xchatUI/Controller/ContactListVC.swift"
+            timestampString = "540614126.358076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "receivedNewMessage(forContact:)"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "newMessageReceived(fromContact:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "xchatUI/Controller/ContactListVC.swift"
-            timestampString = "540536734.34197"
+            timestampString = "540614126.358722"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
-            landmarkName = "newMessage(fromContact:)"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "updateNotification(contact:cell:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

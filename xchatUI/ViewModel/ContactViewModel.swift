@@ -10,6 +10,7 @@ import UIKit
 
 protocol ContactDelegate {
     func contactUpdated()
+    func newMessageReceived(fromContact contact: String)
 }
 
 class ContactViewModel: NSObject {
@@ -41,6 +42,10 @@ class ContactViewModel: NSObject {
     
     var count: Int {
         return _contacts.count
+    }
+    
+    func indexOf(contact: String) -> Int? {
+        return _contacts.index(where: {$0.0 == contact})
     }
     
     func fetchData(){

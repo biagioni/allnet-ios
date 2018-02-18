@@ -19,25 +19,29 @@ class MessageVC: UIViewController {
 
     var messageVM: MessageViewModel!
     var contact: String!
-    var delegate: MessageViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = contact
         
+        let appDelegate =  UIApplication.shared.delegate as! AppDelegate
+        
+        messageVM.delegate = self
+        messageVM.setContact(contact: contact, sock: appDelegate.xChat.getSocket())
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 52
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        messageVM = MessageViewModel(contact: contact, sock: appDelegate.xChat.getSocket())
-        messageVM.delegate = self
-        appDelegate.xChat.setMessageVM(messageVM)
         messageVM.fetchData()
         
         let tap  = UITapGestureRecognizer(target: self, action: #selector(closeKeyboard))
         tableView.addGestureRecognizer(tap)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        messageVM.removeContact()
     }
     
     @IBAction func sendMessage(_ sender: UIButton) {
@@ -97,8 +101,5 @@ extension MessageVC: MessageDelegate {
             let indexPath = IndexPath(row: self.messageVM.count-1, section: 0)
             self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
         }
-    }
-    func newMessageReceived(fromContact contact: String) {
-        delegate?.newMessage(fromContact: contact)
     }
 }
