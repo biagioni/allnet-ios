@@ -130,7 +130,7 @@ extension ContactListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         if displaySettings {
-            
+            self.performSegue(withIdentifier: "showSettings", sender: contactVM[indexPath.row]!.0)
         }else{
             self.performSegue(withIdentifier: "showMessage", sender: contactVM[indexPath.row]!.0)
         }

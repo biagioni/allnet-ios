@@ -14,6 +14,11 @@
 		29952BFB20357592009054D4 /* ConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42AC8CE31B4A70B1008437BC /* ConversationViewController.m */; };
 		29A69CEB2039232F00929B53 /* NewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A69CEA2039232F00929B53 /* NewDelegate.swift */; };
 		29A69CEE203925D500929B53 /* AppDelegateCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A69CED203925D500929B53 /* AppDelegateCHelper.m */; };
+		29B0E13620396C1700F38A3E /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B0E13520396C1700F38A3E /* SettingsVC.swift */; };
+		29B0E13820396C5400F38A3E /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B0E13720396C5400F38A3E /* SettingModel.swift */; };
+		29B0E13A20396D3C00F38A3E /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B0E13920396D3C00F38A3E /* SettingViewModel.swift */; };
+		29B0E13E20396F5300F38A3E /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B0E13D20396F5300F38A3E /* UIColor+Hex.swift */; };
+		29B0E1402039709400F38A3E /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B0E13F2039709400F38A3E /* SettingCell.swift */; };
 		29B44907203350CC0050B64D /* KeyExchangeUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B44903203350CC0050B64D /* KeyExchangeUIView.m */; };
 		29B44908203350CC0050B64D /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B44904203350CC0050B64D /* FirstViewController.m */; };
 		29B44932203362950050B64D /* cutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44931203362950050B64D /* cutil.c */; };
@@ -78,6 +83,11 @@
 		29A69CEA2039232F00929B53 /* NewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDelegate.swift; sourceTree = "<group>"; };
 		29A69CEC203925D500929B53 /* AppDelegateCHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegateCHelper.h; sourceTree = "<group>"; };
 		29A69CED203925D500929B53 /* AppDelegateCHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegateCHelper.m; sourceTree = "<group>"; };
+		29B0E13520396C1700F38A3E /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		29B0E13720396C5400F38A3E /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
+		29B0E13920396D3C00F38A3E /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		29B0E13D20396F5300F38A3E /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		29B0E13F2039709400F38A3E /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		29B44903203350CC0050B64D /* KeyExchangeUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyExchangeUIView.m; sourceTree = "<group>"; };
 		29B44904203350CC0050B64D /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		29B44905203350CC0050B64D /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
@@ -306,6 +316,7 @@
 				29952BF22034D976009054D4 /* ContactListVC.swift */,
 				29EB67F820374DD300D9647F /* MessageVC.swift */,
 				29A69CEA2039232F00929B53 /* NewDelegate.swift */,
+				29B0E13520396C1700F38A3E /* SettingsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -321,6 +332,7 @@
 				29B44903203350CC0050B64D /* KeyExchangeUIView.m */,
 				29EB67F32036A85600D9647F /* ContactCell.swift */,
 				29EB67FA20374E8300D9647F /* MessageCell.swift */,
+				29B0E13F2039709400F38A3E /* SettingCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -336,6 +348,7 @@
 				29A69CEC203925D500929B53 /* AppDelegateCHelper.h */,
 				29A69CED203925D500929B53 /* AppDelegateCHelper.m */,
 				29B449AB20336E9C0050B64D /* OALAudioTrack.h */,
+				29B0E13D20396F5300F38A3E /* UIColor+Hex.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -345,6 +358,7 @@
 			children = (
 				29EB67F62036B0AB00D9647F /* ContactViewModel.swift */,
 				29EB6800203769CC00D9647F /* MessageViewModel.swift */,
+				29B0E13920396D3C00F38A3E /* SettingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -354,6 +368,7 @@
 			children = (
 				29EB680B20379D7300D9647F /* MessageModel.m */,
 				29EB680D20379DBB00D9647F /* MessageModel.h */,
+				29B0E13720396C5400F38A3E /* SettingModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -567,6 +582,7 @@
 				29952BFA20357582009054D4 /* ConversationUITextView.m in Sources */,
 				29A69CEB2039232F00929B53 /* NewDelegate.swift in Sources */,
 				29952BF920357564009054D4 /* MoreUIViewController.m in Sources */,
+				29B0E13620396C1700F38A3E /* SettingsVC.swift in Sources */,
 				29B449BA20336F920050B64D /* routing.c in Sources */,
 				29EB67F920374DD300D9647F /* MessageVC.swift in Sources */,
 				29B449A420336DEE0050B64D /* astart.c in Sources */,
@@ -575,6 +591,7 @@
 				29B449A220336DA70050B64D /* acache.c in Sources */,
 				29B449B920336F920050B64D /* adht.c in Sources */,
 				29B449B120336EE50050B64D /* record.c in Sources */,
+				29B0E13A20396D3C00F38A3E /* SettingViewModel.swift in Sources */,
 				29B449BF203370000050B64D /* trace_util.c in Sources */,
 				29B4498F2033688D0050B64D /* pipemsg.c in Sources */,
 				29B449A020336D730050B64D /* app_util.c in Sources */,
@@ -582,6 +599,7 @@
 				29B449C1203370290050B64D /* keyd.c in Sources */,
 				29B44999203369790050B64D /* alocal.c in Sources */,
 				29EB680C20379D7300D9647F /* MessageModel.m in Sources */,
+				29B0E13820396C5400F38A3E /* SettingModel.swift in Sources */,
 				29B44960203365E80050B64D /* wp_arith.c in Sources */,
 				29952BF32034D976009054D4 /* ContactListVC.swift in Sources */,
 				29B44954203365900050B64D /* ai.c in Sources */,
@@ -603,6 +621,7 @@
 				29B449B320336F220050B64D /* track.c in Sources */,
 				29B449C7203377020050B64D /* crypt_sel.c in Sources */,
 				429067421B539F1B002EA3C1 /* KeyExchangeUIViewController.m in Sources */,
+				29B0E13E20396F5300F38A3E /* UIColor+Hex.swift in Sources */,
 				29B44932203362950050B64D /* cutil.c in Sources */,
 				29B44957203365A80050B64D /* stream.c in Sources */,
 				29B44944203363CA0050B64D /* sha.c in Sources */,
@@ -612,6 +631,7 @@
 				29B449A620336E3A0050B64D /* ad.c in Sources */,
 				29B449AE20336EBF0050B64D /* table.c in Sources */,
 				425A7D981AEC898C00C74E12 /* AppDelegate.m in Sources */,
+				29B0E1402039709400F38A3E /* SettingCell.swift in Sources */,
 				29B449BB20336F920050B64D /* xcommon.c in Sources */,
 				29A69CEE203925D500929B53 /* AppDelegateCHelper.m in Sources */,
 				29B44941203363790050B64D /* priority.c in Sources */,
