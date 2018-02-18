@@ -12,6 +12,7 @@
 #import "SettingsViewController.h"
 #import "CHelper.h"
 #import "MessageModel.h"
+#import "AppDelegateCHelper.h"
 
 #include "packet.h"
 #include "util.h"
