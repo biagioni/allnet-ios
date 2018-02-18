@@ -9,10 +9,6 @@
 /*
  contactlistvc
     contacts settings
-    contactsWithNewMessages
- 
- contactviewmodel
-    sort contacts
  
  messavc
     validate acked messages and new

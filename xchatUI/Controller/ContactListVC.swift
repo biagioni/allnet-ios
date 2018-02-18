@@ -11,7 +11,6 @@ import UIKit
 @objc class ContactListVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var labelCountContacts: UILabel!
     @IBOutlet weak var buttonEdit: UIBarButtonItem!
     
     var contactVM: ContactViewModel!
@@ -41,7 +40,7 @@ import UIKit
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        labelCountContacts.text = unreadMessages.count.description
+        //labelCountContacts.text = unreadMessages.count.description
         tableView.reloadData()
     }
     
@@ -78,6 +77,8 @@ import UIKit
     func updateNotification(contact: String, cell: ContactCell){
         if unreadMessages.contains(contact){
             cell.labelNotification.isHidden = false
+            let count = unreadMessages.filter({$0 == contact}).count
+            cell.labelNotification.text = count.description
         }else{
             cell.labelNotification.isHidden = true
         }
@@ -140,10 +141,10 @@ extension ContactListVC: ContactDelegate {
     func newMessageReceived(fromContact contact: String) {
         unreadMessages.append(contact)
         if let index = contactVM.indexOf(contact: contact) {
+            contactVM.setTimeForNewMessage(index: index)
             let indexPath = IndexPath(row: index, section: 0)
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }
-        labelCountContacts.text = unreadMessages.count.description
     }
     
     func contactUpdated() {

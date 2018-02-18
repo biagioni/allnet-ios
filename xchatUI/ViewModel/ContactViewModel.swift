@@ -48,6 +48,10 @@ class ContactViewModel: NSObject {
         return _contacts.index(where: {$0.0 == contact})
     }
     
+    func setTimeForNewMessage(index: Int){
+        _contacts[index].1 = lastReceived(contact: _contacts[index].0)
+    }
+    
     func fetchData(){
         _contacts.removeAll()
         _hiddenContacts.removeAll()
@@ -58,7 +62,7 @@ class ContactViewModel: NSObject {
                 _contacts.append(title, lastReceived(contact: title))
             }
         }
-        ///TODO sort contacts
+        _contacts.sort(by: {lastTime(objCContact: $0.0, msgType: Int(MSG_TYPE_RCVD)) < lastTime(objCContact: $1.0, msgType: Int(MSG_TYPE_RCVD))})
         if c != nil {
             free(c)
         }
@@ -68,7 +72,7 @@ class ContactViewModel: NSObject {
                 _hiddenContacts.append(title, lastReceived(contact: title))
             }
         }
-        ///TODO sort hiddencontacts
+        _hiddenContacts.sort(by: {lastTime(objCContact: $0.0, msgType: Int(MSG_TYPE_RCVD)) < lastTime(objCContact: $1.0, msgType: Int(MSG_TYPE_RCVD))})
         if c != nil {
             free(c)
         }
