@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "XChat.h"
-#import "ConversationUITextView.h"
 #import "MultipeerConnectivity/MultipeerConnectivity.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate>
@@ -16,7 +15,6 @@
 @property (strong, nonatomic) UIWindow *window;
 
 @property (nonatomic, strong) XChat * xChat;
-@property (nonatomic, strong) ConversationUITextView * conversation;
 @property (nonatomic, strong) UIViewController * tvc;
 @property (nonatomic, strong) MCPeerID * peerID;
 @property (nonatomic, strong) MCNearbyServiceAdvertiser * advertiser;
@@ -26,7 +24,6 @@
 @property UIApplication * my_app;
 
 - (void) setXChatValue:(XChat *)xChat;
-- (void) setConversationValue:(ConversationUITextView *)conversation;
 - (void) setContactsUITVC: (UIViewController *) tvc;
 - (void) batteryChangedNotification;
 - (void) notifyMessageReceived:(NSString *) contact message: (NSString *) msg;

@@ -46,6 +46,11 @@ class MessageVC: UIViewController {
     
     @IBAction func sendMessage(_ sender: UIButton) {
         closeKeyboard()
+        guard let message = textFieldMessage.text, message.count > 0 else {
+            return
+        }
+        messageVM.sendMessage(message: message)
+        textFieldMessage.text = ""
     }
     
     func closeKeyboard(){

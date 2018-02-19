@@ -9,7 +9,6 @@
 #ifndef xchat_UI_XChat_h
 #define xchat_UI_XChat_h
 
-#import "ConversationUITextView.h"
 #import "NewContactViewController.h"
 #import "MoreUIViewController.h"
 

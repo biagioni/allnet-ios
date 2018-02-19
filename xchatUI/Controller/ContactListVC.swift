@@ -40,7 +40,6 @@ import UIKit
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //labelCountContacts.text = unreadMessages.count.description
         tableView.reloadData()
     }
     

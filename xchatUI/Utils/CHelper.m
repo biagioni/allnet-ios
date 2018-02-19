@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "CHelper.h"
-#import "ConversationUITextView.h"
 #import "SettingsViewController.h"
 #import "allnet_xchat-Swift.h"
 #import "AppDelegate.h"
@@ -173,6 +172,7 @@ static int local_time_offset ()
     return (delta_minutes (&now_ltime_tm, &gtime_tm));
 }
 
+//clean
 static int delta_minutes (struct tm * local, struct tm * gm)
 {
     int delta_hour = local->tm_hour - gm->tm_hour;
@@ -197,21 +197,85 @@ static int delta_minutes (struct tm * local, struct tm * gm)
     return result;
 }
 
+//clean
+static void send_message_in_separate_thread (int sock, char * contact, char * message, size_t mlen)
+{
+    struct data_to_send * d = malloc_or_fail(sizeof (struct data_to_send), "send_message_with_delay");
+    d->sock = sock;
+    d->contact = strcpy_malloc (contact, "send_message_with_delay contact");
+    d->message = memcpy_malloc(message, mlen, "send_message_with_delay message");
+    d->mlen = mlen;
+    pthread_t t;
+    if (pthread_create(&t, NULL, send_message_thread, (void *) d) != 0)
+        perror ("pthread_create for send_message_with_delay");
+}
 
-- (void)contactButtonClicked:(id) source : (NSMutableArray*) contacts : (UILabel*) contactName : (ConversationUITextView*) conversation : (NSMutableDictionary*) contactsWithNewMessages : (UITableView*) tableView {
-    UIButton * button = (UIButton *) source;
-    NSString * contact = nil;
-    contact = [contacts objectAtIndex:button.tag];
-    NSLog(@"in contactButtonClicked, text %@, contact %@\n", button.currentTitle, contact);
-    if (contactName != nil) {
-        contactName.text = contact;
-        [self displayingContact:contact :contactsWithNewMessages :tableView];
-        if (conversation != nil) {
-            [conversation displayContact:contact];
-            //self.tabBarController.selectedIndex = 1;
-        }
+//clean
+static void * send_message_thread (void * arg)
+{
+    struct data_to_send * d = (struct data_to_send *) arg;
+    int sock = d->sock;
+    char * contact = d->contact;
+    char * message = d->message;
+    int mlen = (int)(d->mlen);
+    free (arg);
+    uint64_t seq = 0;
+    pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+    pthread_mutex_lock (&lock);
+    NSLog(@"sending message to %s, socket %d\n", contact, sock);
+    while (1) {    // repeat until the message is sent
+        seq = send_data_message(sock, contact, message, mlen);
+        if (seq != 0)
+            break;   // message sent
+        NSLog (@"result of send_data_message is 0, socket is %d\n", sock);
+    }
+    NSLog(@"message sent, result %" PRIu64 ", socket %d\n", seq, sock);
+    pthread_mutex_unlock (&lock);
+    free (contact);
+    free (message);
+    return (void *) seq;
+}
+
+//clean
+struct data_to_send {
+    int sock;
+    char * contact;
+    char * message;
+    size_t mlen;
+};
+
+//clean
+- (void)sendMessage:(NSString*) message {
+    if ((message.length > 0) && (self.xcontact != NULL)) {  // don't send empty messages
+        char * message_to_send = strcpy_malloc(message.UTF8String, "messageEntered/to_save");
+        size_t length_to_send = strlen(message_to_send); // not textView.text.length
+        send_message_in_separate_thread (self.sock, self.xcontact, message_to_send, length_to_send);
+        struct message_store_info info;
+        bzero (&info, sizeof (info));
+        info.msg_type = MSG_TYPE_SENT;
+        info.message = message_to_send;
+        info.msize = length_to_send;
+        info.time = allnet_time();
+        info.tz_min = local_time_offset();
     }
 }
+#if 0
+- (void)sendMessage:(NSString*) message {
+    if ((message.length > 0) && (self.xcontact != NULL)) {  // don't send empty messages
+        char * message_to_send = strcpy_malloc(message.UTF8String, "messageEntered/to_save");
+        size_t length_to_send = strlen(message_to_send); // not textView.text.length
+        send_message_in_separate_thread (self.sock, self.xcontact, message_to_send, length_to_send);
+        struct message_store_info info;
+        bzero (&info, sizeof (info));
+        info.msg_type = MSG_TYPE_SENT;
+        info.message = message_to_send;
+        info.msize = length_to_send;
+        info.time = allnet_time();
+        info.tz_min = local_time_offset();
+    }
+}
+#endif
+
 
 - (void)editButtonClicked:(id) source : (NSMutableArray*) contacts : (NSMutableArray*) hiddenContacts : (UIStoryboard*) storyboard : (UIViewController*) vc : (UILabel*) contactName : (NSMutableDictionary*) contactsWithNewMessages : (UITableView*) tableView {
     UIButton * button = (UIButton *) source;
@@ -258,40 +322,7 @@ static int delta_minutes (struct tm * local, struct tm * gm)
     }
 }
 
-// is the conversation being displayed or hidden?
-- (void) notifyConversationChange: (BOOL) beingDisplayed : (BOOL) conversationIsDisplayed : (ConversationUITextView*) conversation : (ContactListVC*) vc : (UITableView*) tableView : (NSMutableDictionary*) contactsWithNewMessages {
-    conversationIsDisplayed = beingDisplayed;
-    // if displayed, remove any notifications for the contact being displayed
-    if ((beingDisplayed) && (conversation != nil) && ([conversation selectedContact] != nil)) {
-        [self displayingContact:[conversation selectedContact] :contactsWithNewMessages :tableView];
-        [conversation displayContact:[conversation selectedContact]];
-    }
-}
-
-// when the interface is displayed, note that this contact has a new message
-- (void) newMessage: (NSString *) contact : (ConversationUITextView*) conversation : (BOOL) conversationIsDisplayed : (NSMutableDictionary*) contactsWithNewMessages : (ContactListVC*) vc : (UITableView*) tableView {
-    // selectedContact may be nil, contact should not be nil, so use [contact isEqual:]
-    BOOL sameAsConversation = ([contact isEqual:[conversation selectedContact]]);
-    BOOL contactIsDisplayed = (conversationIsDisplayed && sameAsConversation);
-    NSLog(@"new message for contact %@, displayed %d %d\n", contact, sameAsConversation, contactIsDisplayed);
-
-    AppDelegate * appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    if ((! contactIsDisplayed) || (! [appDelegate appIsInForeground])) {   // add the notification
-        NSNumber * previous = [contactsWithNewMessages objectForKey:contact];
-        NSNumber * next = nil;
-        if (previous == nil)
-            next = [[NSNumber alloc] initWithInt: 1];
-        else
-            next = [[NSNumber alloc] initWithInt:((int)previous.integerValue + 1)];
-        [contactsWithNewMessages setObject:next forKey:contact];
-        [vc loadData];   // refresh the contacts list
-        [tableView reloadData];
-        [self addToBadgeNumber:1];
-    } else {  // this contact is already displayed, update the contents
-        [conversation displayContact: contact];
-    }
-}
-
+//clean
 static char * string_replace (char * original, char * pattern, char * repl)
 {
     char * p = strstr (original, pattern);

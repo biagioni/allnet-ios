@@ -16,6 +16,7 @@
 
 - (NSMutableArray *)getMessages;
 - (void) initialize: (int) sock : (NSString *) contact;
+- (void)sendMessage:(NSString*) message;
 
 - (void) notifyConversationChange: (BOOL) beingDisplayed : (BOOL) conversationIsDisplayed : (UITextView*) conversation : (UIViewController*) vc : (UITableView*) tableView : (NSMutableDictionary*) contactsWithNewMessages;
 @end

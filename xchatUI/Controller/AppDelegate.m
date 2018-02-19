@@ -76,7 +76,7 @@ static int able_to_connect ()
 #endif /* USE_ABLE_TO_CONNECT */
     NSLog(@"reconnecting xcommon to alocal\n");
     [self.xChat reconnect];
-    [self.conversation setSocket:[self.xChat getSocket]];
+    //[self.conversation setSocket:[self.xChat getSocket]];
     sleep (1);
   }
   // see https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/BackgroundExecution/BackgroundExecution.html#//apple_ref/doc/uid/TP40007072-CH4-SW1
@@ -259,10 +259,6 @@ static int able_to_connect ()
   self.xChat = xChat;
 }
 
-- (void) setConversationValue:(ConversationUITextView *)conversation {
-  self.conversation = conversation;
-}
-
 - (void) setContactsUITVC: (ContactListVC*) tvc{
   self.tvc = tvc;
 }
@@ -338,9 +334,6 @@ static int able_to_connect ()
 //  if (self.tvc != nil) {
 //    [((ContactListVC*) self.tvc) notifyConversationChangeWithBeingDisplayed:NO];
 //  }
-  if (self.conversation != nil) {
-    [self.conversation enterBackgroundMode];
-  }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

@@ -10,8 +10,6 @@
 		29952BF32034D976009054D4 /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF22034D976009054D4 /* ContactListVC.swift */; };
 		29952BF720354E4C009054D4 /* CHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF620354E4C009054D4 /* CHelper.m */; };
 		29952BF920357564009054D4 /* MoreUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CC5D7B1BF04B5B00437C67 /* MoreUIViewController.m */; };
-		29952BFA20357582009054D4 /* ConversationUITextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 425455A21B2D858800A33CB6 /* ConversationUITextView.m */; };
-		29952BFB20357592009054D4 /* ConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42AC8CE31B4A70B1008437BC /* ConversationViewController.m */; };
 		29A69CEB2039232F00929B53 /* NewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A69CEA2039232F00929B53 /* NewDelegate.swift */; };
 		29A69CEE203925D500929B53 /* AppDelegateCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A69CED203925D500929B53 /* AppDelegateCHelper.m */; };
 		29B0E13620396C1700F38A3E /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B0E13520396C1700F38A3E /* SettingsVC.swift */; };
@@ -177,8 +175,6 @@
 		29EB680B20379D7300D9647F /* MessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
 		29EB680D20379DBB00D9647F /* MessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
 		422B56221E9E9B890072212E /* allnet-xchat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "allnet-xchat.entitlements"; sourceTree = "<group>"; };
-		425455A11B2D858800A33CB6 /* ConversationUITextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationUITextView.h; sourceTree = "<group>"; };
-		425455A21B2D858800A33CB6 /* ConversationUITextView.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.objc; path = ConversationUITextView.m; sourceTree = "<group>"; };
 		425A7D8F1AEC898C00C74E12 /* allnet-xchat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "allnet-xchat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		425A7D931AEC898C00C74E12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		425A7D941AEC898C00C74E12 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -194,8 +190,6 @@
 		428DEE981B0FC34F00163976 /* XChat.h */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = XChat.h; sourceTree = "<group>"; };
 		429067401B539F1B002EA3C1 /* KeyExchangeUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyExchangeUIViewController.h; sourceTree = "<group>"; };
 		429067411B539F1B002EA3C1 /* KeyExchangeUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = KeyExchangeUIViewController.m; sourceTree = "<group>"; };
-		42AC8CE21B4A70B1008437BC /* ConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConversationViewController.h; sourceTree = "<group>"; };
-		42AC8CE31B4A70B1008437BC /* ConversationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = ConversationViewController.m; sourceTree = "<group>"; };
 		42B59FB81BC0D73000D710A8 /* iOSKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSKeys.h; sourceTree = "<group>"; };
 		42B59FB91BC0D73000D710A8 /* iOSKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = iOSKeys.m; sourceTree = "<group>"; };
 		42CC5D7A1BF04B5B00437C67 /* MoreUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreUIViewController.h; sourceTree = "<group>"; };
@@ -303,8 +297,6 @@
 				429067411B539F1B002EA3C1 /* KeyExchangeUIViewController.m */,
 				425A7D961AEC898C00C74E12 /* AppDelegate.h */,
 				425A7D971AEC898C00C74E12 /* AppDelegate.m */,
-				42AC8CE21B4A70B1008437BC /* ConversationViewController.h */,
-				42AC8CE31B4A70B1008437BC /* ConversationViewController.m */,
 				29B44905203350CC0050B64D /* FirstViewController.h */,
 				29B44904203350CC0050B64D /* FirstViewController.m */,
 				42CC5D7A1BF04B5B00437C67 /* MoreUIViewController.h */,
@@ -324,8 +316,6 @@
 		29B449DE20337B4F0050B64D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				425455A11B2D858800A33CB6 /* ConversationUITextView.h */,
-				425455A21B2D858800A33CB6 /* ConversationUITextView.m */,
 				42B59FB81BC0D73000D710A8 /* iOSKeys.h */,
 				42B59FB91BC0D73000D710A8 /* iOSKeys.m */,
 				29B44906203350CC0050B64D /* KeyExchangeUIView.h */,
@@ -578,8 +568,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29952BFB20357592009054D4 /* ConversationViewController.m in Sources */,
-				29952BFA20357582009054D4 /* ConversationUITextView.m in Sources */,
 				29A69CEB2039232F00929B53 /* NewDelegate.swift in Sources */,
 				29952BF920357564009054D4 /* MoreUIViewController.m in Sources */,
 				29B0E13620396C1700F38A3E /* SettingsVC.swift in Sources */,

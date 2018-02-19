@@ -18,7 +18,6 @@
 #include <dirent.h>
 
 #import "XChat.h"
-#import "ConversationUITextView.h"
 #import "KeyExchangeUIViewController.h"
 #import "NewContactViewController.h"
 #import "MoreUIViewController.h"

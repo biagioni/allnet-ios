@@ -4,8 +4,6 @@
 
 #import "AppDelegate.h"
 #import "XChat.h"
-#import "ConversationUITextView.h"
-#import "ConversationViewController.h"
 #import "NewContactViewController.h"
 #import "KeyExchangeUIViewController.h"
 #import "MoreUIViewController.h"
@@ -13,6 +11,9 @@
 #import "CHelper.h"
 #import "MessageModel.h"
 #import "AppDelegateCHelper.h"
+
+#include <sys/stat.h>
+#include <pthread.h>
 
 #include "packet.h"
 #include "util.h"
