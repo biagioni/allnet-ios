@@ -13,6 +13,10 @@
  messavc
     validate acked messages and new
  
+ settingsvc
+    manage groups
+    export conversations
+ 
 */
 
 /*

@@ -13,13 +13,10 @@
 @interface CHelper : NSObject
 @property char * xcontact;
 
-- (void) newMessage: (NSString *) contact : (UITextView*) conversation : (BOOL) conversationIsDisplayed : (NSMutableDictionary*) contactsWithNewMessages : (UIViewController*) vc : (UITableView*) tableView;
-
 - (NSMutableArray *)getMessages;
 - (void) initialize: (int) sock : (NSString *) contact;
 - (MessageModel*)sendMessage:(NSString*) message;
-
-- (void) notifyConversationChange: (BOOL) beingDisplayed : (BOOL) conversationIsDisplayed : (UITextView*) conversation : (UIViewController*) vc : (UITableView*) tableView : (NSMutableDictionary*) contactsWithNewMessages;
+- (NSString *) getMessagesSize;
 @end
 
 

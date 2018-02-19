@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "CHelper.h"
-#import "SettingsViewController.h"
 #import "allnet_xchat-Swift.h"
 #import "AppDelegate.h"
 #import "MessageModel.h"
@@ -31,6 +30,19 @@
 @end
 
 @implementation CHelper : NSObject
+
+//clean
+-(NSString *) getMessagesSize {
+    int64_t sizeInBytes = conversation_size (self.xcontact);
+    int64_t sizeInMegabytes = sizeInBytes / (1000 * 1000);
+    char sizeBuf [100];
+    if (sizeInMegabytes >= 10)
+        snprintf (sizeBuf, sizeof (sizeBuf), "%" PRId64 "", sizeInMegabytes);
+    else
+        snprintf (sizeBuf, sizeof (sizeBuf), "%" PRId64 ".%02" PRId64 "", sizeInMegabytes, (sizeInBytes / 10000) % 100);
+    NSString * actualSize = [[NSString alloc] initWithUTF8String:sizeBuf];
+    return actualSize;
+}
 
 //clean
 - (void) initialize: (int) sock : (NSString *) contact {
@@ -275,29 +287,6 @@ struct data_to_send {
     }
 }
 #endif
-
-
-- (void)editButtonClicked:(id) source : (NSMutableArray*) contacts : (NSMutableArray*) hiddenContacts : (UIStoryboard*) storyboard : (UIViewController*) vc : (UILabel*) contactName : (NSMutableDictionary*) contactsWithNewMessages : (UITableView*) tableView {
-    UIButton * button = (UIButton *) source;
-    NSLog(@"in editButtonClicked, source %@, tag %d\n", source, (int)button.tag);
-    NSString * contact = nil;
-    if (button.tag < [contacts count])
-        contact = [contacts objectAtIndex:button.tag];
-    else if (button.tag < ([contacts count] + [hiddenContacts count]))
-        contact = [hiddenContacts objectAtIndex:(button.tag - [contacts count])];
-    else
-        NSLog(@"error in ButtonClicked, tag %d, lengths %d %d, ignoring\n", (int)button.tag, (int)[contacts count], (int)[hiddenContacts count]);
-    NSLog(@"in editButtonClicked, text %@, contact %@\n", button.currentTitle, contact);
-    SettingsViewController * next = nil;
-    if (next == nil)
-        next = [storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
-    if ((contact != nil) && (next != nil)) {
-        [next initialize:strcpy_malloc (contact.UTF8String, "editButtonClicked")];
-        [vc presentViewController:next animated:NO completion:nil];
-        contactName.text = contact;
-        [self displayingContact:contact :contactsWithNewMessages :tableView];
-    }
-}
 
 
 // if n is 0, sets to zero.  Otherwise, adds n (positive or negative) to the current badge number

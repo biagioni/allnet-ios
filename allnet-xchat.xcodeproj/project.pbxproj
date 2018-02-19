@@ -11,6 +11,7 @@
 		29952BF32034D976009054D4 /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF22034D976009054D4 /* ContactListVC.swift */; };
 		29952BF720354E4C009054D4 /* CHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF620354E4C009054D4 /* CHelper.m */; };
 		29952BF920357564009054D4 /* MoreUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CC5D7B1BF04B5B00437C67 /* MoreUIViewController.m */; };
+		299C6A24203B82E7008A659E /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C6A23203B82E7008A659E /* TextFieldCell.swift */; };
 		29A69CEB2039232F00929B53 /* NewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A69CEA2039232F00929B53 /* NewDelegate.swift */; };
 		29A69CEE203925D500929B53 /* AppDelegateCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A69CED203925D500929B53 /* AppDelegateCHelper.m */; };
 		29B0E13620396C1700F38A3E /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B0E13520396C1700F38A3E /* SettingsVC.swift */; };
@@ -80,6 +81,7 @@
 		29952BF22034D976009054D4 /* ContactListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListVC.swift; sourceTree = "<group>"; };
 		29952BF620354E4C009054D4 /* CHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHelper.m; sourceTree = "<group>"; };
 		29952BF820355093009054D4 /* CHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHelper.h; sourceTree = "<group>"; };
+		299C6A23203B82E7008A659E /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		29A69CEA2039232F00929B53 /* NewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDelegate.swift; sourceTree = "<group>"; };
 		29A69CEC203925D500929B53 /* AppDelegateCHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegateCHelper.h; sourceTree = "<group>"; };
 		29A69CED203925D500929B53 /* AppDelegateCHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegateCHelper.m; sourceTree = "<group>"; };
@@ -186,8 +188,6 @@
 		425A7D9D1AEC898C00C74E12 /* NewContactViewController.m */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = NewContactViewController.m; sourceTree = "<group>"; };
 		425A7DA01AEC898C00C74E12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		425A7DA51AEC898C00C74E12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		426C481C1D2C5340001612B1 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		426C481D1D2C5340001612B1 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		428DEE961B0FB9D000163976 /* XChat.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = XChat.m; sourceTree = "<group>"; };
 		428DEE981B0FC34F00163976 /* XChat.h */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = XChat.h; sourceTree = "<group>"; };
 		429067401B539F1B002EA3C1 /* KeyExchangeUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyExchangeUIViewController.h; sourceTree = "<group>"; };
@@ -305,8 +305,6 @@
 				42CC5D7B1BF04B5B00437C67 /* MoreUIViewController.m */,
 				425A7D9C1AEC898C00C74E12 /* NewContactViewController.h */,
 				425A7D9D1AEC898C00C74E12 /* NewContactViewController.m */,
-				426C481C1D2C5340001612B1 /* SettingsViewController.h */,
-				426C481D1D2C5340001612B1 /* SettingsViewController.m */,
 				29952BF22034D976009054D4 /* ContactListVC.swift */,
 				29EB67F820374DD300D9647F /* MessageVC.swift */,
 				29B0E13520396C1700F38A3E /* SettingsVC.swift */,
@@ -326,6 +324,7 @@
 				29EB67FA20374E8300D9647F /* MessageCell.swift */,
 				29B0E13F2039709400F38A3E /* SettingCell.swift */,
 				29313F23203B5BB7000EBAD3 /* DeleteCell.swift */,
+				299C6A23203B82E7008A659E /* TextFieldCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -576,6 +575,7 @@
 				29313F24203B5BB7000EBAD3 /* DeleteCell.swift in Sources */,
 				29B0E13620396C1700F38A3E /* SettingsVC.swift in Sources */,
 				29B449BA20336F920050B64D /* routing.c in Sources */,
+				299C6A24203B82E7008A659E /* TextFieldCell.swift in Sources */,
 				29EB67F920374DD300D9647F /* MessageVC.swift in Sources */,
 				29B449A420336DEE0050B64D /* astart.c in Sources */,
 				29B4498A203368530050B64D /* dcache.c in Sources */,

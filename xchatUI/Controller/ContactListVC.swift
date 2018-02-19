@@ -18,11 +18,11 @@ import UIKit
     var sectionsCount = 1
     var displaySettings: Bool!
     var unreadMessages: [String]!
+    var appDelegate: AppDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.setXChatValue(XChat())
         appDelegate.xChat.initialize()
         
@@ -32,7 +32,6 @@ import UIKit
 
         contactVM = ContactViewModel()
         contactVM.delegate = self
-        contactVM.fetchData()
         
         unreadMessages = [String]()
         navigationItem.title = "\(contactVM.count) Contact(s)"
@@ -40,16 +39,25 @@ import UIKit
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        contactVM.fetchData()
+        navigationItem.title = "\(contactVM.count) Contact(s)"
         tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showMessage"{
+        if segue.identifier == "showMessage" {
             let selectedContact = sender as! String
             unreadMessages = unreadMessages.filter{$0 != selectedContact}
             
             let destination = segue.destination as! MessageVC
-            destination.contact = selectedContact
+            messageVM.delegate = destination
+            messageVM.setContact(contact: selectedContact, sock: appDelegate.xChat.getSocket())
+            destination.messageVM = messageVM
+        } else if segue.identifier == "showSettings" {
+            
+            let selectedContact = sender as! String
+            let destination = segue.destination as! SettingsVC
+            messageVM.setContact(contact: selectedContact, sock: appDelegate.xChat.getSocket())
             destination.messageVM = messageVM
         }
     }
@@ -122,7 +130,11 @@ extension ContactListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         if displaySettings {
-            self.performSegue(withIdentifier: "showSettings", sender: contactVM[indexPath.row]!.0)
+            if indexPath.section == 0{
+                self.performSegue(withIdentifier: "showSettings", sender: contactVM[indexPath.row]!.0)
+            }else{
+                self.performSegue(withIdentifier: "showSettings", sender: contactVM.hidden(index: indexPath.row)?.0)
+            }
         }else{
             self.performSegue(withIdentifier: "showMessage", sender: contactVM[indexPath.row]!.0)
         }

@@ -7,7 +7,6 @@
 #import "NewContactViewController.h"
 #import "KeyExchangeUIViewController.h"
 #import "MoreUIViewController.h"
-#import "SettingsViewController.h"
 #import "CHelper.h"
 #import "MessageModel.h"
 #import "AppDelegateCHelper.h"

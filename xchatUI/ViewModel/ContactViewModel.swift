@@ -28,11 +28,11 @@ class ContactViewModel: NSObject {
     }
     
     subscript(index: Int) -> (String, String)? {
-        return _contacts.count > 0 ? _contacts[0] : nil
+        return _contacts.count > 0 ? _contacts[index] : nil
     }
     
     func hidden(index: Int) -> (String, String)? {
-        return _hiddenContacts.count > 0 ? _hiddenContacts[0] : nil
+        return _hiddenContacts.count > 0 ? _hiddenContacts[index] : nil
     }
     
     var hiddenCount: Int {

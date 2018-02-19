@@ -18,17 +18,11 @@ class MessageVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     var messageVM: MessageViewModel!
-    var contact: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = contact
-        
-        let appDelegate =  UIApplication.shared.delegate as! AppDelegate
-        
-        messageVM.delegate = self
-        messageVM.setContact(contact: contact, sock: appDelegate.xChat.getSocket())
+        navigationItem.title = messageVM.selectedContact
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 52
@@ -101,10 +95,14 @@ extension MessageVC: UITableViewDataSource {
 
 extension MessageVC: MessageDelegate {
     func messagesUpdated() {
-         tableView.reloadData()
-        DispatchQueue.main.async {
-            let indexPath = IndexPath(row: self.messageVM.count-1, section: 0)
-            self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+        if tableView != nil {
+            tableView.reloadData()
+            DispatchQueue.main.async {
+                if self.messageVM.count > 0 {
+                    let indexPath = IndexPath(row: self.messageVM.count-1, section: 0)
+                    self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                }
+            }
         }
     }
 }
