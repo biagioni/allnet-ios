@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29313F24203B5BB7000EBAD3 /* DeleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29313F23203B5BB7000EBAD3 /* DeleteCell.swift */; };
 		29952BF32034D976009054D4 /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF22034D976009054D4 /* ContactListVC.swift */; };
 		29952BF720354E4C009054D4 /* CHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF620354E4C009054D4 /* CHelper.m */; };
 		29952BF920357564009054D4 /* MoreUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CC5D7B1BF04B5B00437C67 /* MoreUIViewController.m */; };
@@ -75,6 +76,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29313F23203B5BB7000EBAD3 /* DeleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCell.swift; sourceTree = "<group>"; };
 		29952BF22034D976009054D4 /* ContactListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListVC.swift; sourceTree = "<group>"; };
 		29952BF620354E4C009054D4 /* CHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHelper.m; sourceTree = "<group>"; };
 		29952BF820355093009054D4 /* CHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHelper.h; sourceTree = "<group>"; };
@@ -307,8 +309,8 @@
 				426C481D1D2C5340001612B1 /* SettingsViewController.m */,
 				29952BF22034D976009054D4 /* ContactListVC.swift */,
 				29EB67F820374DD300D9647F /* MessageVC.swift */,
-				29A69CEA2039232F00929B53 /* NewDelegate.swift */,
 				29B0E13520396C1700F38A3E /* SettingsVC.swift */,
+				29A69CEA2039232F00929B53 /* NewDelegate.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -323,6 +325,7 @@
 				29EB67F32036A85600D9647F /* ContactCell.swift */,
 				29EB67FA20374E8300D9647F /* MessageCell.swift */,
 				29B0E13F2039709400F38A3E /* SettingCell.swift */,
+				29313F23203B5BB7000EBAD3 /* DeleteCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 			files = (
 				29A69CEB2039232F00929B53 /* NewDelegate.swift in Sources */,
 				29952BF920357564009054D4 /* MoreUIViewController.m in Sources */,
+				29313F24203B5BB7000EBAD3 /* DeleteCell.swift in Sources */,
 				29B0E13620396C1700F38A3E /* SettingsVC.swift in Sources */,
 				29B449BA20336F920050B64D /* routing.c in Sources */,
 				29EB67F920374DD300D9647F /* MessageVC.swift in Sources */,

@@ -116,13 +116,6 @@ extension ContactListVC: UITableViewDataSource {
         }
         return cell
     }
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return " Visible Contacts"
-        }else{
-            return " Hidden Contacts"
-        }
-    }
 }
 
 extension ContactListVC: UITableViewDelegate {
@@ -133,6 +126,22 @@ extension ContactListVC: UITableViewDelegate {
         }else{
             self.performSegue(withIdentifier: "showMessage", sender: contactVM[indexPath.row]!.0)
         }
+    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 1 {
+            let label = UILabel()
+            label.text = "  Hidden Contacts"
+            label.font = UIFont(name: "Avenir", size: 16)
+            label.backgroundColor = UIColor(hex: "EEEEEE")
+            return label
+        }
+        return nil
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 1 {
+            return 50
+        }
+        return 0
     }
 }
 

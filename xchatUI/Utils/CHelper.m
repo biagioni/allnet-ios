@@ -245,19 +245,19 @@ struct data_to_send {
 };
 
 //clean
-- (void)sendMessage:(NSString*) message {
+- (MessageModel*)sendMessage:(NSString*) message {
     if ((message.length > 0) && (self.xcontact != NULL)) {  // don't send empty messages
         char * message_to_send = strcpy_malloc(message.UTF8String, "messageEntered/to_save");
         size_t length_to_send = strlen(message_to_send); // not textView.text.length
         send_message_in_separate_thread (self.sock, self.xcontact, message_to_send, length_to_send);
-        struct message_store_info info;
-        bzero (&info, sizeof (info));
-        info.msg_type = MSG_TYPE_SENT;
-        info.message = message_to_send;
-        info.msize = length_to_send;
-        info.time = allnet_time();
-        info.tz_min = local_time_offset();
+        MessageModel *model = [[MessageModel alloc] init];
+        model.message = [[NSString alloc] initWithUTF8String:message_to_send];
+        model.msg_type = MSG_TYPE_SENT;
+        model.dated = basicDate(allnet_time(), local_time_offset());
+        model.msize = length_to_send;
+        return model;
     }
+    return NULL;
 }
 #if 0
 - (void)sendMessage:(NSString*) message {

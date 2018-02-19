@@ -45,7 +45,7 @@ class MessageViewModel : NSObject {
     }
     
     func sendMessage(message: String){
-        _cHelper.sendMessage(message)
+        _messages.append(_cHelper.sendMessage(message))
     }
     
     func fetchData(){
