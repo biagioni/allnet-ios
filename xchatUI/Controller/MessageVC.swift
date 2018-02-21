@@ -39,10 +39,10 @@ class MessageVC: UIViewController {
     }
     
     @IBAction func sendMessage(_ sender: UIButton) {
-        closeKeyboard()
         guard let message = textFieldMessage.text, message.count > 0 else {
             return
         }
+        closeKeyboard()
         messageVM.sendMessage(message: message)
         textFieldMessage.text = ""
     }
@@ -62,12 +62,6 @@ class MessageVC: UIViewController {
             self.view.frame.origin.y += keyboardSize.height
         }
     }
-    
-
-//
-//    func notifyConversationChange(beingDisplayed: Bool){
-//        cHelper.notifyConversationChange(beingDisplayed, conversationIsDisplayed, conversation, self, tableView, contactsWithNewMessages)
-//    }
 }
 
 extension MessageVC: UITableViewDataSource {
