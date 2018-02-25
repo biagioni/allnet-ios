@@ -12,15 +12,46 @@ class ContactNewVC: UIViewController {
     @IBOutlet weak var textFieldSecret: UITextField!
     @IBOutlet weak var pickerViewConnection: UIPickerView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var heightTableView: NSLayoutConstraint!
     
     var keyVM: KeyViewModel!
+    var connectionValues: [String]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         keyVM = KeyViewModel(contact: "")
         keyVM.fetchIncompletedKeys()
+        connectionValues = ["regular internet contact", "nearby wireless contact","new group"]
+        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tableView.removeObserver(self, forKeyPath: "contentSize")
+    }
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if let obj = object as? UITableView {
+            if obj == self.tableView && keyPath == "contentSize" {
+                 heightTableView.constant = tableView.contentSize.height
+            }
+        }
+    }
+}
+
+extension ContactNewVC: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
     }
     
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return connectionValues.count
+    }
+}
+
+extension ContactNewVC: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return connectionValues[row]
+    }
 }
 
 extension ContactNewVC: UITableViewDataSource {

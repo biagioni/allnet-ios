@@ -17,6 +17,9 @@
     manage groups
     export conversations
  
+ keyviewmodel
+    incomplete_key_exchange is fetching keys that were succesfully exchanged 
+ 
 */
 
 /*
