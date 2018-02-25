@@ -16,6 +16,7 @@ class ContactNewVC: UIViewController {
     
     var keyVM: KeyViewModel!
     var connectionValues: [String]!
+    var appDelegate: AppDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,7 @@ class ContactNewVC: UIViewController {
         keyVM = KeyViewModel(contact: "")
         keyVM.fetchIncompletedKeys()
         connectionValues = ["regular internet contact", "nearby wireless contact","new group"]
+        appDelegate = UIApplication.shared.delegate as! AppDelegate
         
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -35,6 +37,24 @@ class ContactNewVC: UIViewController {
                  heightTableView.constant = tableView.contentSize.height
             }
         }
+    }
+    @IBAction func requestContact(_ sender: UIButton) {
+        var hops = 0
+        guard let name = textFieldName.text, !name.isEmpty else {
+            ///TODO message
+            return
+        }
+        if pickerViewConnection.selectedRow(inComponent: 0) == 0 {
+            hops = 6
+        } else if pickerViewConnection.selectedRow(inComponent: 0) == 1 {
+            hops = 1
+        }
+        if let key = textFieldSecret.text, key.isEmpty {
+            appDelegate.xChat.requestKey(name, maxHops: 10)
+        }else{
+            //appDelegate.xChat.requestNewContact(name, maxHops: hops, secret1: <#T##String!#>, optionalSecret2: <#T##String!#>, keyExchange: <#T##KeyExchangeUIViewController!#>)
+        }
+        self.performSegue(withIdentifier: "showKeyExchange", sender: name)
     }
 }
 

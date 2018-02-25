@@ -513,6 +513,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <state key="normal" title="Request contact"/>
+                                        <connections>
+                                            <action selector="requestContact:" destination="uuB-wW-XWa" eventType="touchUpInside" id="2XN-65-uzi"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Incomplete key exchanges" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ntz-dO-dUG">
                                         <rect key="frame" x="0.0" y="412" width="375" height="20"/>
@@ -593,11 +596,31 @@
                         <outlet property="tableView" destination="rxT-ey-swp" id="aYZ-uj-Cum"/>
                         <outlet property="textFieldName" destination="u0p-it-lNs" id="5Ja-O8-e1g"/>
                         <outlet property="textFieldSecret" destination="4rC-KQ-ZBE" id="EQg-J2-gNt"/>
+                        <segue destination="1HH-bE-JTQ" kind="show" identifier="showKeyExchange" id="nWM-BO-gDV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khZ-7F-qyF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1876" y="-1024.1379310344828"/>
+        </scene>
+        <!--Key Exchange-->
+        <scene sceneID="dZQ-6T-eJh">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="1HH-bE-JTQ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Jqm-Cx-WBJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Wo1-1o-77P"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dq7-NK-Syx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Key Exchange" id="WlV-te-VJS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gWf-IQ-5au" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2766" y="-1024"/>
         </scene>
         <!--Settings-->
         <scene sceneID="M3h-Un-MdR">

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2925D0572043161B003A9E2E /* ContactNewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2925D0562043161B003A9E2E /* ContactNewVC.swift */; };
 		2925D05920431D1B003A9E2E /* KeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2925D05820431D1B003A9E2E /* KeyViewModel.swift */; };
+		2925D05B20433D75003A9E2E /* KeyExchangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2925D05A20433D75003A9E2E /* KeyExchangeVC.swift */; };
 		29313F24203B5BB7000EBAD3 /* DeleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29313F23203B5BB7000EBAD3 /* DeleteCell.swift */; };
 		29952BF32034D976009054D4 /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF22034D976009054D4 /* ContactListVC.swift */; };
 		29952BF720354E4C009054D4 /* CHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF620354E4C009054D4 /* CHelper.m */; };
@@ -81,6 +82,7 @@
 /* Begin PBXFileReference section */
 		2925D0562043161B003A9E2E /* ContactNewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactNewVC.swift; sourceTree = "<group>"; };
 		2925D05820431D1B003A9E2E /* KeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyViewModel.swift; sourceTree = "<group>"; };
+		2925D05A20433D75003A9E2E /* KeyExchangeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExchangeVC.swift; sourceTree = "<group>"; };
 		29313F23203B5BB7000EBAD3 /* DeleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCell.swift; sourceTree = "<group>"; };
 		29952BF22034D976009054D4 /* ContactListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListVC.swift; sourceTree = "<group>"; };
 		29952BF620354E4C009054D4 /* CHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHelper.m; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				2925D0562043161B003A9E2E /* ContactNewVC.swift */,
 				29EB67F820374DD300D9647F /* MessageVC.swift */,
 				29B0E13520396C1700F38A3E /* SettingsVC.swift */,
+				2925D05A20433D75003A9E2E /* KeyExchangeVC.swift */,
 				29A69CEA2039232F00929B53 /* NewDelegate.swift */,
 			);
 			path = Controller;
@@ -627,6 +630,7 @@
 				29B44907203350CC0050B64D /* KeyExchangeUIView.m in Sources */,
 				29B4496A2033668B0050B64D /* retransmit.c in Sources */,
 				29EB67F42036A85600D9647F /* ContactCell.swift in Sources */,
+				2925D05B20433D75003A9E2E /* KeyExchangeVC.swift in Sources */,
 				29B449A620336E3A0050B64D /* ad.c in Sources */,
 				29B449AE20336EBF0050B64D /* table.c in Sources */,
 				425A7D981AEC898C00C74E12 /* AppDelegate.m in Sources */,
