@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2925D0572043161B003A9E2E /* ContactNewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2925D0562043161B003A9E2E /* ContactNewVC.swift */; };
+		2925D05920431D1B003A9E2E /* KeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2925D05820431D1B003A9E2E /* KeyViewModel.swift */; };
 		29313F24203B5BB7000EBAD3 /* DeleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29313F23203B5BB7000EBAD3 /* DeleteCell.swift */; };
 		29952BF32034D976009054D4 /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF22034D976009054D4 /* ContactListVC.swift */; };
 		29952BF720354E4C009054D4 /* CHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF620354E4C009054D4 /* CHelper.m */; };
@@ -79,6 +80,7 @@
 
 /* Begin PBXFileReference section */
 		2925D0562043161B003A9E2E /* ContactNewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactNewVC.swift; sourceTree = "<group>"; };
+		2925D05820431D1B003A9E2E /* KeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyViewModel.swift; sourceTree = "<group>"; };
 		29313F23203B5BB7000EBAD3 /* DeleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCell.swift; sourceTree = "<group>"; };
 		29952BF22034D976009054D4 /* ContactListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListVC.swift; sourceTree = "<group>"; };
 		29952BF620354E4C009054D4 /* CHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHelper.m; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				29EB67F62036B0AB00D9647F /* ContactViewModel.swift */,
 				29EB6800203769CC00D9647F /* MessageViewModel.swift */,
 				29B0E13920396D3C00F38A3E /* SettingViewModel.swift */,
+				2925D05820431D1B003A9E2E /* KeyViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 				29B449A220336DA70050B64D /* acache.c in Sources */,
 				29B449B920336F920050B64D /* adht.c in Sources */,
 				29B449B120336EE50050B64D /* record.c in Sources */,
+				2925D05920431D1B003A9E2E /* KeyViewModel.swift in Sources */,
 				29B0E13A20396D3C00F38A3E /* SettingViewModel.swift in Sources */,
 				29B449BF203370000050B64D /* trace_util.c in Sources */,
 				29B4498F2033688D0050B64D /* pipemsg.c in Sources */,

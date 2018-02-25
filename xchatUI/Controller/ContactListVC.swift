@@ -62,6 +62,10 @@ import UIKit
         }
     }
     
+    @IBAction func addnewContact(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "showNewContact", sender: nil)
+    }
+    
     @IBAction func showHidden(_ sender: UIBarButtonItem) {
         displaySettings = !displaySettings
         var button: UIBarButtonItem!
@@ -72,7 +76,7 @@ import UIKit
             sectionsCount = 1
             button = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(showHidden))
         }
-        navigationItem.setRightBarButton(button, animated: true)
+        navigationItem.setLeftBarButton(button, animated: true)
     
         tableView.reloadData()
     }

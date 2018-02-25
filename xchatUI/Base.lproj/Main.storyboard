@@ -132,14 +132,18 @@
                                 <action selector="showHidden:" destination="iF2-6w-Lc0" id="Wo9-PT-z67"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="bOz-oP-4At"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="bOz-oP-4At">
+                            <connections>
+                                <action selector="addnewContact:" destination="iF2-6w-Lc0" id="HIj-Hj-9MG"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="buttonEdit" destination="cdk-Xa-UIl" id="ikC-Fq-Hr4"/>
                         <outlet property="tableView" destination="tuf-Ie-K8T" id="Fg4-uu-Czu"/>
                         <segue destination="nSK-gP-DyR" kind="show" identifier="showMessage" id="lCQ-8c-5Or"/>
                         <segue destination="u19-eZ-UYV" kind="show" identifier="showSettings" id="fAi-92-4e2"/>
-                        <segue destination="uuB-wW-XWa" kind="show" id="SEQ-Ns-qj6"/>
+                        <segue destination="uuB-wW-XWa" kind="show" identifier="showNewContact" id="SEQ-Ns-qj6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Ya-Yb-69a" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -347,7 +351,7 @@
             </objects>
             <point key="canvasLocation" x="1876" y="-1799"/>
         </scene>
-        <!--Contact NewVC-->
+        <!--New Contact-->
         <scene sceneID="lFL-1q-W4L">
             <objects>
                 <viewController hidesBottomBarWhenPushed="YES" id="uuB-wW-XWa" customClass="ContactNewVC" customModule="allnet_xchat" customModuleProvider="target" sceneMemberID="viewController">
@@ -359,7 +363,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aMn-MT-lXg">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aMn-MT-lXg">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3U2-ng-s7t">
@@ -523,7 +527,7 @@
                                         </constraints>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="5X1-kc-p07" style="IBUITableViewCellStyleDefault" id="Giv-i3-ti7">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="KeyCell" textLabel="5X1-kc-p07" style="IBUITableViewCellStyleDefault" id="Giv-i3-ti7">
                                                 <rect key="frame" x="0.0" y="28" width="359" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Giv-i3-ti7" id="dvd-Vh-v5b">
@@ -541,6 +545,10 @@
                                                 </tableViewCellContentView>
                                             </tableViewCell>
                                         </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="uuB-wW-XWa" id="lNL-8h-x0o"/>
+                                            <outlet property="delegate" destination="uuB-wW-XWa" id="VgY-R4-6eD"/>
+                                        </connections>
                                     </tableView>
                                 </subviews>
                                 <constraints>
@@ -574,6 +582,7 @@
                             <constraint firstItem="g8J-he-06v" firstAttribute="top" secondItem="aMn-MT-lXg" secondAttribute="bottom" id="zwE-qL-cP6"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="New Contact" id="ZkY-mM-zkP"/>
                     <connections>
                         <outlet property="pickerViewConnection" destination="AWe-vc-c79" id="27D-mn-5Gx"/>
                         <outlet property="tableView" destination="rxT-ey-swp" id="aYZ-uj-Cum"/>
@@ -1208,7 +1217,7 @@ Waiting for key from:
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cXz-6M-scY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="contacts" id="hOe-9O-kpR"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bIL-qe-qLh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="bIL-qe-qLh">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
