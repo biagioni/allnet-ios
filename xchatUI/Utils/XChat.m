@@ -131,8 +131,7 @@ static void * request_key (void * arg_void) {
 }
 
 - (void) requestNewContact:(NSString *)contact maxHops: (NSUInteger) hops
-                   secret1:(NSString *) s1 optionalSecret2:(NSString *) s2
-               keyExchange: (KeyExchangeUIViewController *) kev {
+                   secret1:(NSString *) s1 optionalSecret2:(NSString *) s2 {
   pthread_mutex_lock(&key_generated_mutex);
   struct request_key_arg * arg =
   (struct request_key_arg *)malloc_or_fail(sizeof (struct request_key_arg), "request_key thread");
@@ -150,7 +149,6 @@ static void * request_key (void * arg_void) {
     normalize_secret(arg->secret2);
   }
   arg->hops = (int)hops;
-  self.keyExchange = kev;
   //create_contact_send_key(self.sock, keyContact, keySecret, keySecret2, (int)hops);
   pthread_t thread;
   pthread_create(&thread, NULL, request_key, (void *) arg);

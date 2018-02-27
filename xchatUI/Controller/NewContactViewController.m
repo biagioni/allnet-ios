@@ -210,8 +210,7 @@ static int num_incompletes = 0;
     [socket requestNewContact:self.contactName.text
                       maxHops:hops
                       secret1:self.contactGeneratedSecret
-              optionalSecret2:self.contactSecret.text
-                  keyExchange:destination];
+              optionalSecret2:self.contactSecret.text];
   } else if (self.selected == 2) {  // create group
     NSLog(@"should create group %@\n", self.contactName.text);
   } else {  // request key

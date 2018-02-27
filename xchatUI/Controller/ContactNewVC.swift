@@ -16,7 +16,7 @@ class ContactNewVC: UIViewController {
     
     var keyVM: KeyViewModel!
     var connectionValues: [String]!
-    var appDelegate: AppDelegate!
+    var info: (name: String, key: String?, hops: Int)!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +24,18 @@ class ContactNewVC: UIViewController {
         keyVM = KeyViewModel(contact: "")
         keyVM.fetchIncompletedKeys()
         connectionValues = ["regular internet contact", "nearby wireless contact","new group"]
-        appDelegate = UIApplication.shared.delegate as! AppDelegate
         
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         tableView.removeObserver(self, forKeyPath: "contentSize")
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showKeyExchange" {
+            let destination = segue.destination as! KeyExchangeVC
+            destination.info = info
+            destination.isGroup = sender as! Bool
+        }
     }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if let obj = object as? UITableView {
@@ -44,17 +50,17 @@ class ContactNewVC: UIViewController {
             ///TODO message
             return
         }
-        if pickerViewConnection.selectedRow(inComponent: 0) == 0 {
-            hops = 6
-        } else if pickerViewConnection.selectedRow(inComponent: 0) == 1 {
-            hops = 1
-        }
-        if let key = textFieldSecret.text, key.isEmpty {
-            appDelegate.xChat.requestKey(name, maxHops: 10)
+        if pickerViewConnection.selectedRow(inComponent: 0) == 2 {
+            self.performSegue(withIdentifier: "showKeyExchange", sender: true)
         }else{
-            //appDelegate.xChat.requestNewContact(name, maxHops: hops, secret1: <#T##String!#>, optionalSecret2: <#T##String!#>, keyExchange: <#T##KeyExchangeUIViewController!#>)
+            if pickerViewConnection.selectedRow(inComponent: 0) == 0 {
+                hops = 6
+            } else if pickerViewConnection.selectedRow(inComponent: 0) == 1 {
+                hops = 1
+            }
+            info = (name, textFieldSecret.text, hops)
+            self.performSegue(withIdentifier: "showKeyExchange", sender: false)
         }
-        self.performSegue(withIdentifier: "showKeyExchange", sender: name)
     }
 }
 

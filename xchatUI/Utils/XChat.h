@@ -25,8 +25,7 @@
 - (void) requestNewContact:(NSString *)contact
                    maxHops:(NSUInteger) hops
                    secret1:(NSString *) s1
-           optionalSecret2:(NSString *) s2
-               keyExchange:(KeyExchangeUIViewController *) kev;
+           optionalSecret2:(NSString *) s2;
 
 - (void) requestKey:(NSString *)contact maxHops: (NSUInteger) hops;
 
