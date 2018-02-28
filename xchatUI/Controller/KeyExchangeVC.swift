@@ -47,7 +47,7 @@ class KeyExchangeVC: UIViewController {
         super.willMove(toParentViewController: parent)
         if parent == nil {
             appDelegate.xChat.completeExchange(info.name)
-            self.navigationController?.popViewController(animated: false)
+            self.tabBarController?.selectedIndex = 0
         }
     }
     

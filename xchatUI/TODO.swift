@@ -16,11 +16,14 @@
     export conversations
  
  keyviewmodel
-    incomplete_key_exchange is fetching keys that were succesfully exchanged
     confirmation of the exchange keys
  
  morevc
     update textview in real time
+ 
+ C PROBLEMS
+    incomplete_key_exchange is fetching keys that were succesfully exchanged
+    when you add someone in a group it loads all the private conversation
  
 */
 
