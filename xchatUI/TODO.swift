@@ -18,7 +18,8 @@
     export conversations
  
  keyviewmodel
-    incomplete_key_exchange is fetching keys that were succesfully exchanged 
+    incomplete_key_exchange is fetching keys that were succesfully exchanged
+    confirmation of the exchange keys
  
 */
 

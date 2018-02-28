@@ -17,6 +17,7 @@
 - (void) initialize: (int) sock : (NSString *) contact;
 - (MessageModel*)sendMessage:(NSString*) message;
 - (NSString *) getMessagesSize;
++ (NSString *) generateRandoKey;
 @end
 
 

@@ -26,10 +26,10 @@ class ContactNewVC: UIViewController {
         connectionValues = ["regular internet contact", "nearby wireless contact","new group"]
         
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    deinit {
         tableView.removeObserver(self, forKeyPath: "contentSize")
     }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showKeyExchange" {
             let destination = segue.destination as! KeyExchangeVC
@@ -51,6 +51,7 @@ class ContactNewVC: UIViewController {
             return
         }
         if pickerViewConnection.selectedRow(inComponent: 0) == 2 {
+            info = (name, textFieldSecret.text, 10)
             self.performSegue(withIdentifier: "showKeyExchange", sender: true)
         }else{
             if pickerViewConnection.selectedRow(inComponent: 0) == 0 {
@@ -88,5 +89,17 @@ extension ContactNewVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "KeyCell", for: indexPath)
         cell.textLabel?.text = keyVM.incompleteKeysExchanges[indexPath.row]
         return cell
+    }
+}
+
+extension ContactNewVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == textFieldName {
+            textField.resignFirstResponder()
+            textFieldSecret.becomeFirstResponder()
+        }else{
+            textField.resignFirstResponder()
+        }
+        return true
     }
 }

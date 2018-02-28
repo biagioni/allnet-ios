@@ -21,6 +21,7 @@
 #include "message.h"
 #include "keys.h"
 #include "xcommon.h"
+#include "cutil.h"
 
 
 @interface CHelper()
@@ -32,7 +33,7 @@
 @implementation CHelper : NSObject
 
 //clean
--(NSString *) getMessagesSize {
+- (NSString *) getMessagesSize {
     int64_t sizeInBytes = conversation_size (self.xcontact);
     int64_t sizeInMegabytes = sizeInBytes / (1000 * 1000);
     char sizeBuf [100];
@@ -42,6 +43,15 @@
         snprintf (sizeBuf, sizeof (sizeBuf), "%" PRId64 ".%02" PRId64 "", sizeInMegabytes, (sizeInBytes / 10000) % 100);
     NSString * actualSize = [[NSString alloc] initWithUTF8String:sizeBuf];
     return actualSize;
+}
+
+//clean
++ (NSString *) generateRandoKey {
+#define MAX_RANDOM  15   // 14 characters plus a null character
+    char randomString [MAX_RANDOM];
+    random_string(randomString, MAX_RANDOM);
+    normalize_secret(randomString);
+    return [[NSString alloc] initWithUTF8String:randomString];
 }
 
 //clean

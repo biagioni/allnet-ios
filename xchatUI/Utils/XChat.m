@@ -19,7 +19,6 @@
 
 #import "XChat.h"
 #import "KeyExchangeUIViewController.h"
-#import "NewContactViewController.h"
 #import "MoreUIViewController.h"
 #import "allnet_xchat-Swift.h"
 
@@ -40,7 +39,6 @@
 @property MessageViewModel * conversation;
 @property ContactViewModel * contacts;
 @property KeyExchangeUIViewController * keyExchange;
-@property NewContactViewController * ncvcForNewContact;
 @property MoreUIViewController * more;
 @property CFRunLoopSourceRef runLoop;
 
@@ -246,10 +244,6 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
   } else if (mlen == -1) {        // successfully exchanged keys
     NSLog(@"key exchange successfully completed for peer %s\n", keyContact);
     NSString * contact = [[NSString alloc] initWithUTF8String:keyContact];
-    if ((mySelf.ncvcForNewContact != nil) && (mySelf.ncvcForNewContact.kev != nil))
-      [mySelf.ncvcForNewContact.kev notificationOfCompletedKeyExchange:contact];
-    else
-      NSLog(@"XChat.m receivePacket, unable to notify null key exchange\n");
     pthread_mutex_lock(&key_generated_mutex);  // changing globals, forbid access for others that may also change them
     mySelf.keyExchange = nil;
     pthread_mutex_unlock(&key_generated_mutex);

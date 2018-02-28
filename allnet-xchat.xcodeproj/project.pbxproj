@@ -11,6 +11,8 @@
 		2925D05920431D1B003A9E2E /* KeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2925D05820431D1B003A9E2E /* KeyViewModel.swift */; };
 		2925D05B20433D75003A9E2E /* KeyExchangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2925D05A20433D75003A9E2E /* KeyExchangeVC.swift */; };
 		29313F24203B5BB7000EBAD3 /* DeleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29313F23203B5BB7000EBAD3 /* DeleteCell.swift */; };
+		2943946B20461BB8006E1AFF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2943946A20461BB7006E1AFF /* main.m */; };
+		2943946D20462EA6006E1AFF /* UINavigationController+Pop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943946C20462EA6006E1AFF /* UINavigationController+Pop.swift */; };
 		29952BF32034D976009054D4 /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF22034D976009054D4 /* ContactListVC.swift */; };
 		29952BF720354E4C009054D4 /* CHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF620354E4C009054D4 /* CHelper.m */; };
 		29952BF920357564009054D4 /* MoreUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CC5D7B1BF04B5B00437C67 /* MoreUIViewController.m */; };
@@ -71,9 +73,7 @@
 		29EB67FF203764E000D9647F /* TODO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB67FE203764E000D9647F /* TODO.swift */; };
 		29EB6801203769CC00D9647F /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB6800203769CC00D9647F /* MessageViewModel.swift */; };
 		29EB680C20379D7300D9647F /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 29EB680B20379D7300D9647F /* MessageModel.m */; };
-		425A7D951AEC898C00C74E12 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 425A7D941AEC898C00C74E12 /* main.m */; };
 		425A7D981AEC898C00C74E12 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 425A7D971AEC898C00C74E12 /* AppDelegate.m */; };
-		425A7D9E1AEC898C00C74E12 /* NewContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 425A7D9D1AEC898C00C74E12 /* NewContactViewController.m */; };
 		425A7DA11AEC898C00C74E12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 425A7D9F1AEC898C00C74E12 /* Main.storyboard */; };
 		425A7DA61AEC898C00C74E12 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 425A7DA41AEC898C00C74E12 /* LaunchScreen.xib */; };
 		429067421B539F1B002EA3C1 /* KeyExchangeUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 429067411B539F1B002EA3C1 /* KeyExchangeUIViewController.m */; };
@@ -84,6 +84,8 @@
 		2925D05820431D1B003A9E2E /* KeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyViewModel.swift; sourceTree = "<group>"; };
 		2925D05A20433D75003A9E2E /* KeyExchangeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExchangeVC.swift; sourceTree = "<group>"; };
 		29313F23203B5BB7000EBAD3 /* DeleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCell.swift; sourceTree = "<group>"; };
+		2943946A20461BB7006E1AFF /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2943946C20462EA6006E1AFF /* UINavigationController+Pop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Pop.swift"; sourceTree = "<group>"; };
 		29952BF22034D976009054D4 /* ContactListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListVC.swift; sourceTree = "<group>"; };
 		29952BF620354E4C009054D4 /* CHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHelper.m; sourceTree = "<group>"; };
 		29952BF820355093009054D4 /* CHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHelper.h; sourceTree = "<group>"; };
@@ -187,11 +189,8 @@
 		422B56221E9E9B890072212E /* allnet-xchat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "allnet-xchat.entitlements"; sourceTree = "<group>"; };
 		425A7D8F1AEC898C00C74E12 /* allnet-xchat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "allnet-xchat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		425A7D931AEC898C00C74E12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		425A7D941AEC898C00C74E12 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		425A7D961AEC898C00C74E12 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		425A7D971AEC898C00C74E12 /* AppDelegate.m */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		425A7D9C1AEC898C00C74E12 /* NewContactViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewContactViewController.h; sourceTree = "<group>"; };
-		425A7D9D1AEC898C00C74E12 /* NewContactViewController.m */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = NewContactViewController.m; sourceTree = "<group>"; };
 		425A7DA01AEC898C00C74E12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		425A7DA51AEC898C00C74E12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		428DEE961B0FB9D000163976 /* XChat.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = XChat.m; sourceTree = "<group>"; };
@@ -309,8 +308,6 @@
 				29B44904203350CC0050B64D /* FirstViewController.m */,
 				42CC5D7A1BF04B5B00437C67 /* MoreUIViewController.h */,
 				42CC5D7B1BF04B5B00437C67 /* MoreUIViewController.m */,
-				425A7D9C1AEC898C00C74E12 /* NewContactViewController.h */,
-				425A7D9D1AEC898C00C74E12 /* NewContactViewController.m */,
 				29952BF22034D976009054D4 /* ContactListVC.swift */,
 				2925D0562043161B003A9E2E /* ContactNewVC.swift */,
 				29EB67F820374DD300D9647F /* MessageVC.swift */,
@@ -349,6 +346,7 @@
 				29A69CED203925D500929B53 /* AppDelegateCHelper.m */,
 				29B449AB20336E9C0050B64D /* OALAudioTrack.h */,
 				29B0E13D20396F5300F38A3E /* UIColor+Hex.swift */,
+				2943946C20462EA6006E1AFF /* UINavigationController+Pop.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -418,12 +416,12 @@
 		425A7D921AEC898C00C74E12 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2943946A20461BB7006E1AFF /* main.m */,
 				29B44929203358400050B64D /* allnet-xchat-Bridging-Header.h */,
 				29B449CB20337A2B0050B64D /* Images.xcassets */,
 				425A7DA41AEC898C00C74E12 /* LaunchScreen.xib */,
 				425A7D9F1AEC898C00C74E12 /* Main.storyboard */,
 				425A7D931AEC898C00C74E12 /* Info.plist */,
-				425A7D941AEC898C00C74E12 /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -579,6 +577,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2943946B20461BB8006E1AFF /* main.m in Sources */,
 				29A69CEB2039232F00929B53 /* NewDelegate.swift in Sources */,
 				29952BF920357564009054D4 /* MoreUIViewController.m in Sources */,
 				29313F24203B5BB7000EBAD3 /* DeleteCell.swift in Sources */,
@@ -606,7 +605,6 @@
 				29952BF32034D976009054D4 /* ContactListVC.swift in Sources */,
 				29B44954203365900050B64D /* ai.c in Sources */,
 				29B44947203363E70050B64D /* keys.c in Sources */,
-				425A7D9E1AEC898C00C74E12 /* NewContactViewController.m in Sources */,
 				29EB6801203769CC00D9647F /* MessageViewModel.swift in Sources */,
 				29B4493B203363490050B64D /* configfiles.c in Sources */,
 				29EB67FF203764E000D9647F /* TODO.swift in Sources */,
@@ -627,6 +625,7 @@
 				29B44932203362950050B64D /* cutil.c in Sources */,
 				29B44957203365A80050B64D /* stream.c in Sources */,
 				29B44944203363CA0050B64D /* sha.c in Sources */,
+				2943946D20462EA6006E1AFF /* UINavigationController+Pop.swift in Sources */,
 				29B44907203350CC0050B64D /* KeyExchangeUIView.m in Sources */,
 				29B4496A2033668B0050B64D /* retransmit.c in Sources */,
 				29EB67F42036A85600D9647F /* ContactCell.swift in Sources */,
@@ -643,7 +642,6 @@
 				29B449BD20336FD20050B64D /* traced.c in Sources */,
 				2925D0572043161B003A9E2E /* ContactNewVC.swift in Sources */,
 				29B44938203363290050B64D /* allnet_log.c in Sources */,
-				425A7D951AEC898C00C74E12 /* main.m in Sources */,
 				29B4495A203365BF0050B64D /* wp_aes.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
