@@ -24,8 +24,6 @@
 		29B0E13A20396D3C00F38A3E /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B0E13920396D3C00F38A3E /* SettingViewModel.swift */; };
 		29B0E13E20396F5300F38A3E /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B0E13D20396F5300F38A3E /* UIColor+Hex.swift */; };
 		29B0E1402039709400F38A3E /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B0E13F2039709400F38A3E /* SettingCell.swift */; };
-		29B44907203350CC0050B64D /* KeyExchangeUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B44903203350CC0050B64D /* KeyExchangeUIView.m */; };
-		29B44908203350CC0050B64D /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B44904203350CC0050B64D /* FirstViewController.m */; };
 		29B44932203362950050B64D /* cutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44931203362950050B64D /* cutil.c */; };
 		29B44938203363290050B64D /* allnet_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44936203363290050B64D /* allnet_log.c */; };
 		29B4493B203363490050B64D /* configfiles.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44939203363490050B64D /* configfiles.c */; };
@@ -76,7 +74,6 @@
 		425A7D981AEC898C00C74E12 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 425A7D971AEC898C00C74E12 /* AppDelegate.m */; };
 		425A7DA11AEC898C00C74E12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 425A7D9F1AEC898C00C74E12 /* Main.storyboard */; };
 		425A7DA61AEC898C00C74E12 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 425A7DA41AEC898C00C74E12 /* LaunchScreen.xib */; };
-		429067421B539F1B002EA3C1 /* KeyExchangeUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 429067411B539F1B002EA3C1 /* KeyExchangeUIViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,10 +95,6 @@
 		29B0E13920396D3C00F38A3E /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		29B0E13D20396F5300F38A3E /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		29B0E13F2039709400F38A3E /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
-		29B44903203350CC0050B64D /* KeyExchangeUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyExchangeUIView.m; sourceTree = "<group>"; };
-		29B44904203350CC0050B64D /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		29B44905203350CC0050B64D /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		29B44906203350CC0050B64D /* KeyExchangeUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyExchangeUIView.h; sourceTree = "<group>"; };
 		29B44929203358400050B64D /* allnet-xchat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "allnet-xchat-Bridging-Header.h"; sourceTree = "<group>"; };
 		29B44930203362950050B64D /* cutil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cutil.h; sourceTree = "<group>"; };
 		29B44931203362950050B64D /* cutil.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cutil.c; sourceTree = "<group>"; };
@@ -162,7 +155,6 @@
 		29B449A720336E650050B64D /* social.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = social.h; sourceTree = "<group>"; };
 		29B449A820336E650050B64D /* social.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = social.c; sourceTree = "<group>"; };
 		29B449AA20336E9B0050B64D /* track.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = track.h; sourceTree = "<group>"; };
-		29B449AB20336E9C0050B64D /* OALAudioTrack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OALAudioTrack.h; sourceTree = "<group>"; };
 		29B449AC20336EBF0050B64D /* table.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = table.c; sourceTree = "<group>"; };
 		29B449AD20336EBF0050B64D /* table.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = table.h; sourceTree = "<group>"; };
 		29B449AF20336EE50050B64D /* record.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = record.c; sourceTree = "<group>"; };
@@ -195,10 +187,6 @@
 		425A7DA51AEC898C00C74E12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		428DEE961B0FB9D000163976 /* XChat.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = XChat.m; sourceTree = "<group>"; };
 		428DEE981B0FC34F00163976 /* XChat.h */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = XChat.h; sourceTree = "<group>"; };
-		429067401B539F1B002EA3C1 /* KeyExchangeUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyExchangeUIViewController.h; sourceTree = "<group>"; };
-		429067411B539F1B002EA3C1 /* KeyExchangeUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = KeyExchangeUIViewController.m; sourceTree = "<group>"; };
-		42B59FB81BC0D73000D710A8 /* iOSKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSKeys.h; sourceTree = "<group>"; };
-		42B59FB91BC0D73000D710A8 /* iOSKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = iOSKeys.m; sourceTree = "<group>"; };
 		42CC5D7A1BF04B5B00437C67 /* MoreUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreUIViewController.h; sourceTree = "<group>"; };
 		42CC5D7B1BF04B5B00437C67 /* MoreUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = MoreUIViewController.m; sourceTree = "<group>"; };
 		42CC5D7E1BF06F9800437C67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
@@ -300,12 +288,8 @@
 		29B449DD20337B160050B64D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				429067401B539F1B002EA3C1 /* KeyExchangeUIViewController.h */,
-				429067411B539F1B002EA3C1 /* KeyExchangeUIViewController.m */,
 				425A7D961AEC898C00C74E12 /* AppDelegate.h */,
 				425A7D971AEC898C00C74E12 /* AppDelegate.m */,
-				29B44905203350CC0050B64D /* FirstViewController.h */,
-				29B44904203350CC0050B64D /* FirstViewController.m */,
 				42CC5D7A1BF04B5B00437C67 /* MoreUIViewController.h */,
 				42CC5D7B1BF04B5B00437C67 /* MoreUIViewController.m */,
 				29952BF22034D976009054D4 /* ContactListVC.swift */,
@@ -321,10 +305,6 @@
 		29B449DE20337B4F0050B64D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				42B59FB81BC0D73000D710A8 /* iOSKeys.h */,
-				42B59FB91BC0D73000D710A8 /* iOSKeys.m */,
-				29B44906203350CC0050B64D /* KeyExchangeUIView.h */,
-				29B44903203350CC0050B64D /* KeyExchangeUIView.m */,
 				29EB67F32036A85600D9647F /* ContactCell.swift */,
 				29EB67FA20374E8300D9647F /* MessageCell.swift */,
 				29B0E13F2039709400F38A3E /* SettingCell.swift */,
@@ -344,7 +324,6 @@
 				29952BF820355093009054D4 /* CHelper.h */,
 				29A69CEC203925D500929B53 /* AppDelegateCHelper.h */,
 				29A69CED203925D500929B53 /* AppDelegateCHelper.m */,
-				29B449AB20336E9C0050B64D /* OALAudioTrack.h */,
 				29B0E13D20396F5300F38A3E /* UIColor+Hex.swift */,
 				2943946C20462EA6006E1AFF /* UINavigationController+Pop.swift */,
 			);
@@ -609,7 +588,6 @@
 				29B4493B203363490050B64D /* configfiles.c in Sources */,
 				29EB67FF203764E000D9647F /* TODO.swift in Sources */,
 				29B449DC20337AFC0050B64D /* XChat.m in Sources */,
-				29B44908203350CC0050B64D /* FirstViewController.m in Sources */,
 				29B44975203367300050B64D /* mapchar.c in Sources */,
 				29B449A920336E660050B64D /* social.c in Sources */,
 				29B44950203365630050B64D /* cipher.c in Sources */,
@@ -620,13 +598,11 @@
 				29B449B520336F590050B64D /* aip.c in Sources */,
 				29B449B320336F220050B64D /* track.c in Sources */,
 				29B449C7203377020050B64D /* crypt_sel.c in Sources */,
-				429067421B539F1B002EA3C1 /* KeyExchangeUIViewController.m in Sources */,
 				29B0E13E20396F5300F38A3E /* UIColor+Hex.swift in Sources */,
 				29B44932203362950050B64D /* cutil.c in Sources */,
 				29B44957203365A80050B64D /* stream.c in Sources */,
 				29B44944203363CA0050B64D /* sha.c in Sources */,
 				2943946D20462EA6006E1AFF /* UINavigationController+Pop.swift in Sources */,
-				29B44907203350CC0050B64D /* KeyExchangeUIView.m in Sources */,
 				29B4496A2033668B0050B64D /* retransmit.c in Sources */,
 				29EB67F42036A85600D9647F /* ContactCell.swift in Sources */,
 				2925D05B20433D75003A9E2E /* KeyExchangeVC.swift in Sources */,

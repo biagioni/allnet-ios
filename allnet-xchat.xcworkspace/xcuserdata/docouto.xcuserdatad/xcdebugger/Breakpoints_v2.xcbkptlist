@@ -2,4 +2,54 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "xchatUI/Controller/KeyExchangeVC.swift"
+            timestampString = "541471996.2080801"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "allnet_xchat.KeyExchangeVC.viewDidLoad() -&gt; ()"
+                  moduleName = "allnet-xchat"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/docouto/Desktop/Projects/allnet-ios/xchatUI/Controller/KeyExchangeVC.swift"
+                  timestampString = "541471923.9705369"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "8586">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "allnet_xchat.KeyExchangeVC.viewDidLoad() -&gt; ()"
+                  moduleName = "allnet-xchat"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/docouto/Desktop/Projects/allnet-ios/xchatUI/Controller/KeyExchangeVC.swift"
+                  timestampString = "541471923.975679"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "11360">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

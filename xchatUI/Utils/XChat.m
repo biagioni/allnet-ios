@@ -18,7 +18,6 @@
 #include <dirent.h>
 
 #import "XChat.h"
-#import "KeyExchangeUIViewController.h"
 #import "MoreUIViewController.h"
 #import "allnet_xchat-Swift.h"
 
@@ -38,7 +37,6 @@
 ///TODO convert to delegate in the 
 @property MessageViewModel * conversation;
 @property ContactViewModel * contacts;
-@property KeyExchangeUIViewController * keyExchange;
 @property MoreUIViewController * more;
 @property CFRunLoopSourceRef runLoop;
 
@@ -223,10 +221,11 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
   struct allnet_mgmt_trace_reply * trace = NULL;
   time_t mtime = 0;
   pthread_mutex_lock(&key_generated_mutex);  // don't allow changes to keyContact until a key has been generated
-  if ((! waiting_for_key) && (mySelf.keyExchange != nil)) {
-    [mySelf.keyExchange notificationOfGeneratedKey:[[NSString alloc] initWithUTF8String:keyContact]];
-    mySelf.keyExchange = nil;
-  }
+  ///TODO NOTIFY KEYEXCHANGED
+//  if ((! waiting_for_key) && (mySelf.keyExchange != nil)) {
+//    [mySelf.keyExchange notificationOfGeneratedKey:[[NSString alloc] initWithUTF8String:keyContact]];
+//    mySelf.keyExchange = nil;
+//  }
   int mlen = handle_packet(sock, (char *)data, dlen, priority, &peer, &kset, &message, &desc,
                            &verified, &seq, &mtime, &duplicate, &broadcast, &acks, &trace);
   pthread_mutex_unlock(&key_generated_mutex);
@@ -245,14 +244,13 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
     NSLog(@"key exchange successfully completed for peer %s\n", keyContact);
     NSString * contact = [[NSString alloc] initWithUTF8String:keyContact];
     pthread_mutex_lock(&key_generated_mutex);  // changing globals, forbid access for others that may also change them
-    mySelf.keyExchange = nil;
     pthread_mutex_unlock(&key_generated_mutex);
   } else if (mlen == -2) {  // confirm successful subscription
       NSLog(@"got subscription %s\n", peer);
   }
   for (int i = 0; i < acks.num_acks; i++) {
     printf ("displaying ack sequence number %lld for peer %s\n", acks.acks[i], acks.peers[i]);
-    //[mySelf.conversation markAsAcked:acks.peers[i] ackNumber:acks.acks[i]];
+    ///TODO [mySelf.conversation markAsAcked:acks.peers[i] ackNumber:acks.acks[i]];
   }
 }
 

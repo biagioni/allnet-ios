@@ -17,7 +17,6 @@
 #include "app_util.h"
 #include "priority.h"
 #include "allnet_log.h"
-#import "iOSKeys.h"
 #import "pipemsg.h"
 #import "AppDelegateCHelper.h"
 

@@ -22,20 +22,23 @@ class KeyExchangeVC: UIViewController {
         super.viewDidLoad()
         
         appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let randomString = CHelper.generateRandoKey()
+        var randomString = CHelper.generateRandoKey()
         if isGroup {
+            appDelegate.xChat.requestKey(info.name, maxHops: UInt(info.hops))
             labelGeneratedKey.text = "None"
             labelInformedKey.text =  "None"
             textViewInformation.textColor = UIColor(hex: "19BB7B")
             textViewInformation.text = "Created group \(info.name) with success!"
-            appDelegate.xChat.requestKey(info.name, maxHops: 10)
         }else{
+            if info.hops == 1 {
+                randomString = randomString?.substring(to: (randomString?.index((randomString?.startIndex)!, offsetBy: 6))!)
+            }
+            appDelegate.xChat.requestNewContact(info.name, maxHops: UInt(info.hops), secret1: randomString, optionalSecret2: info.key)
             labelGeneratedKey.text = randomString
             info.key = info.key ?? ""
             labelInformedKey.text = !(info.key?.isEmpty)! ? info.key! : "None"
             textViewInformation.textColor = UIColor(hex: "A85363")
             textViewInformation.text = "Key exchange in progress\nKey was sent\nWaiting for key from:\n\(info.name)"
-            appDelegate.xChat.requestNewContact(info.name, maxHops: UInt(info.hops), secret1: randomString, optionalSecret2: info.key)
         }
     }
     
