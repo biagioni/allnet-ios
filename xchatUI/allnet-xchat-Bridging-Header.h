@@ -4,7 +4,6 @@
 
 #import "AppDelegate.h"
 #import "XChat.h"
-#import "MoreUIViewController.h"
 #import "CHelper.h"
 #import "MessageModel.h"
 #import "AppDelegateCHelper.h"

@@ -7,8 +7,6 @@
 //
 
 /*
- contactlistvc
-    contacts settings
  
  messavc
     validate acked messages and new
@@ -20,6 +18,9 @@
  keyviewmodel
     incomplete_key_exchange is fetching keys that were succesfully exchanged
     confirmation of the exchange keys
+ 
+ morevc
+    update textview in real time
  
 */
 

@@ -23,6 +23,7 @@ class KeyExchangeVC: UIViewController {
         
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         var randomString = CHelper.generateRandoKey()
+        
         if isGroup {
             appDelegate.xChat.requestKey(info.name, maxHops: UInt(info.hops))
             labelGeneratedKey.text = "None"

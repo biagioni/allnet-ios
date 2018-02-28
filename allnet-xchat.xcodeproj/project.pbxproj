@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2908613320466B0400C4B50F /* MoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2908613220466B0400C4B50F /* MoreVC.swift */; };
 		2925D0572043161B003A9E2E /* ContactNewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2925D0562043161B003A9E2E /* ContactNewVC.swift */; };
 		2925D05920431D1B003A9E2E /* KeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2925D05820431D1B003A9E2E /* KeyViewModel.swift */; };
 		2925D05B20433D75003A9E2E /* KeyExchangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2925D05A20433D75003A9E2E /* KeyExchangeVC.swift */; };
@@ -15,7 +16,6 @@
 		2943946D20462EA6006E1AFF /* UINavigationController+Pop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943946C20462EA6006E1AFF /* UINavigationController+Pop.swift */; };
 		29952BF32034D976009054D4 /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF22034D976009054D4 /* ContactListVC.swift */; };
 		29952BF720354E4C009054D4 /* CHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF620354E4C009054D4 /* CHelper.m */; };
-		29952BF920357564009054D4 /* MoreUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CC5D7B1BF04B5B00437C67 /* MoreUIViewController.m */; };
 		299C6A24203B82E7008A659E /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299C6A23203B82E7008A659E /* TextFieldCell.swift */; };
 		29A69CEB2039232F00929B53 /* NewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A69CEA2039232F00929B53 /* NewDelegate.swift */; };
 		29A69CEE203925D500929B53 /* AppDelegateCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A69CED203925D500929B53 /* AppDelegateCHelper.m */; };
@@ -77,6 +77,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2908613220466B0400C4B50F /* MoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreVC.swift; sourceTree = "<group>"; };
 		2925D0562043161B003A9E2E /* ContactNewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactNewVC.swift; sourceTree = "<group>"; };
 		2925D05820431D1B003A9E2E /* KeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyViewModel.swift; sourceTree = "<group>"; };
 		2925D05A20433D75003A9E2E /* KeyExchangeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExchangeVC.swift; sourceTree = "<group>"; };
@@ -187,8 +188,6 @@
 		425A7DA51AEC898C00C74E12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		428DEE961B0FB9D000163976 /* XChat.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = XChat.m; sourceTree = "<group>"; };
 		428DEE981B0FC34F00163976 /* XChat.h */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = XChat.h; sourceTree = "<group>"; };
-		42CC5D7A1BF04B5B00437C67 /* MoreUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreUIViewController.h; sourceTree = "<group>"; };
-		42CC5D7B1BF04B5B00437C67 /* MoreUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = MoreUIViewController.m; sourceTree = "<group>"; };
 		42CC5D7E1BF06F9800437C67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		6124C4CC7071F14CBE49FE1C /* Pods-allnet-xchat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-allnet-xchat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-allnet-xchat/Pods-allnet-xchat.debug.xcconfig"; sourceTree = "<group>"; };
 		AFB2BF2A72ED41B94BA16D5D /* Pods-allnet-xchat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-allnet-xchat.release.xcconfig"; path = "Pods/Target Support Files/Pods-allnet-xchat/Pods-allnet-xchat.release.xcconfig"; sourceTree = "<group>"; };
@@ -290,13 +289,12 @@
 			children = (
 				425A7D961AEC898C00C74E12 /* AppDelegate.h */,
 				425A7D971AEC898C00C74E12 /* AppDelegate.m */,
-				42CC5D7A1BF04B5B00437C67 /* MoreUIViewController.h */,
-				42CC5D7B1BF04B5B00437C67 /* MoreUIViewController.m */,
 				29952BF22034D976009054D4 /* ContactListVC.swift */,
 				2925D0562043161B003A9E2E /* ContactNewVC.swift */,
 				29EB67F820374DD300D9647F /* MessageVC.swift */,
 				29B0E13520396C1700F38A3E /* SettingsVC.swift */,
 				2925D05A20433D75003A9E2E /* KeyExchangeVC.swift */,
+				2908613220466B0400C4B50F /* MoreVC.swift */,
 				29A69CEA2039232F00929B53 /* NewDelegate.swift */,
 			);
 			path = Controller;
@@ -558,7 +556,6 @@
 			files = (
 				2943946B20461BB8006E1AFF /* main.m in Sources */,
 				29A69CEB2039232F00929B53 /* NewDelegate.swift in Sources */,
-				29952BF920357564009054D4 /* MoreUIViewController.m in Sources */,
 				29313F24203B5BB7000EBAD3 /* DeleteCell.swift in Sources */,
 				29B0E13620396C1700F38A3E /* SettingsVC.swift in Sources */,
 				29B449BA20336F920050B64D /* routing.c in Sources */,
@@ -575,6 +572,7 @@
 				29B449BF203370000050B64D /* trace_util.c in Sources */,
 				29B4498F2033688D0050B64D /* pipemsg.c in Sources */,
 				29B449A020336D730050B64D /* app_util.c in Sources */,
+				2908613320466B0400C4B50F /* MoreVC.swift in Sources */,
 				29B44998203369790050B64D /* listen.c in Sources */,
 				29B449C1203370290050B64D /* keyd.c in Sources */,
 				29B44999203369790050B64D /* alocal.c in Sources */,
