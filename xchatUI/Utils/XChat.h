@@ -9,7 +9,6 @@
 #ifndef xchat_UI_XChat_h
 #define xchat_UI_XChat_h
 
-#import "MoreUIViewController.h"
 
 @interface XChat : NSObject
 
@@ -33,7 +32,7 @@
 - (void) removeNewContact: (NSString *) contact;
 - (void) resendKeyForNewContact: (NSString *) contact;
 - (NSString *) trace: (BOOL)wide maxHops: (NSUInteger) hops;
-- (void) startTrace: (void (*) (const char *)) rcvFunction wide: (int) wide_enough maxHops: (NSUInteger) hops showDetails: (BOOL) details;
+- (void) startTrace: (BOOL) wide_enough maxHops: (NSUInteger) hops showDetails: (BOOL) details;
 
 - (void) completeExchange: (NSString *) contact;
 // returns the contents of the exchange file, if any: hops\nsecret1\n[secret2\n]

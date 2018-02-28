@@ -18,7 +18,6 @@
 #include <dirent.h>
 
 #import "XChat.h"
-#import "MoreUIViewController.h"
 #import "allnet_xchat-Swift.h"
 
 #include "xcommon.h"
@@ -37,7 +36,6 @@
 ///TODO convert to delegate in the 
 @property MessageViewModel * conversation;
 @property ContactViewModel * contacts;
-@property MoreUIViewController * more;
 @property CFRunLoopSourceRef runLoop;
 
 @end
@@ -359,8 +357,9 @@ static void traceResult (CFSocketRef s, CFSocketCallBackType callbackType, CFDat
 }
 
 // used as an alternative to trace.  result lines are given to the function as they arrive
-- (void) startTrace: (void (*) (const char *)) rcvFunction wide: (int) wide_enough maxHops: (NSUInteger) hops showDetails: (BOOL) details {
-  global_receive_function = rcvFunction;
+- (void) startTrace: (BOOL) wide_enough maxHops: (NSUInteger) hops showDetails: (BOOL) details {
+  //global_receive_function = rcvFunction;
+  ///TODO create the function to update view dinamically
   int pipes [2];
   if (socketpair(AF_LOCAL, SOCK_STREAM, 0, pipes) != 0) {
     perror ("socketpair");
