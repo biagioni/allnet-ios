@@ -164,7 +164,7 @@
             </objects>
             <point key="canvasLocation" x="1044" y="-958"/>
         </scene>
-        <!--SettingsVC-->
+        <!--Settings-->
         <scene sceneID="sJ0-YW-vgZ">
             <objects>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="7By-zB-7ck" customClass="SettingsVC" customModule="allnet_xchat" customModuleProvider="target" sceneMemberID="viewController">
@@ -239,10 +239,6 @@
                                                 <constraint firstAttribute="trailing" secondItem="1Oa-pP-7u8" secondAttribute="trailing" id="vpa-g9-c0u"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="labelName" destination="9aY-iR-4bI" id="H7R-UE-wLV"/>
-                                            <outlet property="textFieldName" destination="r49-Qp-L5P" id="Jb3-YT-mMe"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -316,12 +312,6 @@
                                                 <constraint firstItem="cXu-Nn-Pdo" firstAttribute="leading" secondItem="qLo-ZY-yCX" secondAttribute="trailing" constant="8" id="zOV-sU-0Is"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="imageViewIcon" destination="uA4-Yx-5yQ" id="g19-Qq-fLZ"/>
-                                            <outlet property="labelName" destination="cXu-Nn-Pdo" id="icI-9d-7v0"/>
-                                            <outlet property="switchValue" destination="RhM-RC-1ne" id="aby-In-iwP"/>
-                                            <outlet property="viewBackground" destination="qLo-ZY-yCX" id="HOO-W1-cn6"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingCell" rowHeight="54" id="QvX-X6-QEf">
                                         <rect key="frame" x="0.0" y="108" width="375" height="54"/>
@@ -391,12 +381,6 @@
                                                 <constraint firstItem="sil-Ua-kTy" firstAttribute="centerY" secondItem="KIh-4D-Uti" secondAttribute="centerY" id="yaO-Yz-OMT"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="imageViewIcon" destination="lKN-zu-GLJ" id="G4b-Vl-eRS"/>
-                                            <outlet property="labelName" destination="KIh-4D-Uti" id="SGW-Xi-qeE"/>
-                                            <outlet property="switchValue" destination="sil-Ua-kTy" id="7kG-u0-3zA"/>
-                                            <outlet property="viewBackground" destination="Q6x-sA-mk5" id="Xt0-g4-fOf"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingCell" rowHeight="54" id="jaP-FU-1Ya">
                                         <rect key="frame" x="0.0" y="162" width="375" height="54"/>
@@ -440,38 +424,19 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UXm-sn-XUE">
-                                                    <rect key="frame" x="61" y="53" width="314" height="1"/>
-                                                    <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="lsk-HQ-9be"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="DHr-B4-41q" secondAttribute="trailing" constant="15" id="00K-Qd-g2D"/>
                                                 <constraint firstItem="DHr-B4-41q" firstAttribute="leading" secondItem="gea-gb-EY4" secondAttribute="trailing" constant="8" id="9tv-PV-den"/>
                                                 <constraint firstItem="a64-0t-Xfx" firstAttribute="leading" secondItem="2ar-oB-sdI" secondAttribute="leading" constant="15" id="DnQ-66-KJ3"/>
                                                 <constraint firstAttribute="bottom" secondItem="a64-0t-Xfx" secondAttribute="bottom" constant="8" id="FLd-l3-RdN"/>
-                                                <constraint firstAttribute="trailing" secondItem="UXm-sn-XUE" secondAttribute="trailing" id="Nyv-Ti-RRH"/>
                                                 <constraint firstItem="gea-gb-EY4" firstAttribute="centerY" secondItem="a64-0t-Xfx" secondAttribute="centerY" id="RYU-fw-d7d"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="gea-gb-EY4" secondAttribute="bottom" constant="1" id="efS-WX-2vZ"/>
                                                 <constraint firstItem="a64-0t-Xfx" firstAttribute="top" secondItem="2ar-oB-sdI" secondAttribute="top" constant="8" id="jAG-wh-Lk3"/>
-                                                <constraint firstItem="UXm-sn-XUE" firstAttribute="leading" secondItem="a64-0t-Xfx" secondAttribute="trailing" constant="8" id="lbX-SP-plm"/>
                                                 <constraint firstItem="gea-gb-EY4" firstAttribute="leading" secondItem="a64-0t-Xfx" secondAttribute="trailing" constant="8" id="nv3-NE-m6R"/>
-                                                <constraint firstAttribute="bottom" secondItem="UXm-sn-XUE" secondAttribute="bottom" id="tfJ-ip-lue"/>
                                                 <constraint firstItem="DHr-B4-41q" firstAttribute="centerY" secondItem="gea-gb-EY4" secondAttribute="centerY" id="ual-HV-DEc"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="imageViewIcon" destination="eih-8G-rca" id="LAf-BL-5W2"/>
-                                            <outlet property="labelName" destination="gea-gb-EY4" id="Qyr-d7-GLq"/>
-                                            <outlet property="switchValue" destination="DHr-B4-41q" id="VG4-tR-Xhb"/>
-                                            <outlet property="viewBackground" destination="a64-0t-Xfx" id="SOg-3W-uy5"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -543,9 +508,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="lJ0-vv-MNu" secondAttribute="bottom" id="z54-hv-7Wa"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="labelInfo" destination="e95-b5-Vbr" id="roK-TY-gnQ"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DeleteCell" rowHeight="54" id="jHO-Fv-s9e">
                                         <rect key="frame" x="0.0" y="270" width="375" height="54"/>
@@ -609,6 +571,7 @@
                             <outlet property="delegate" destination="7By-zB-7ck" id="htF-5C-awx"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="U36-Vk-oiv"/>
                     <connections>
                         <outlet property="switchNotification" destination="sil-Ua-kTy" id="7k3-rs-KSm"/>
                         <outlet property="switchSaveMessages" destination="DHr-B4-41q" id="zZX-ei-8Fj"/>
@@ -1320,10 +1283,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="Nri-99-63d" secondAttribute="bottom" id="roB-Wq-8gl"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="labelName" destination="Fnd-JL-Mej" id="19R-dV-FVq"/>
-                                            <outlet property="textFieldName" destination="MdH-gd-Ope" id="vJy-Rj-xy5"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingCell" rowHeight="54" id="i8F-d3-zYJ">
                                         <rect key="frame" x="0.0" y="54" width="375" height="54"/>
@@ -1393,12 +1352,6 @@
                                                 <constraint firstItem="Lmm-B9-GP7" firstAttribute="top" secondItem="Lfp-te-jyM" secondAttribute="top" constant="8" id="wu1-v0-TzE"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="imageViewIcon" destination="DOQ-iN-Pdz" id="GzT-cf-NZo"/>
-                                            <outlet property="labelName" destination="1uA-fH-v2F" id="Auh-gq-jhw"/>
-                                            <outlet property="switchValue" destination="Uq8-xM-F4I" id="xUe-L2-ceJ"/>
-                                            <outlet property="viewBackground" destination="Lmm-B9-GP7" id="ojE-HJ-VqV"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DeleteCell" rowHeight="54" id="CB4-Mh-HJZ">
                                         <rect key="frame" x="0.0" y="108" width="375" height="54"/>
