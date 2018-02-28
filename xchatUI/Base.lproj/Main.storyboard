@@ -218,7 +218,7 @@
                                                     </constraints>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="7By-zB-7ck" id="BQT-N7-PpD"/>
                                                     </connections>
@@ -571,8 +571,15 @@
                             <outlet property="delegate" destination="7By-zB-7ck" id="htF-5C-awx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="U36-Vk-oiv"/>
+                    <navigationItem key="navigationItem" title="Settings" id="U36-Vk-oiv">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="GKI-Yu-ojW">
+                            <connections>
+                                <action selector="save:" destination="7By-zB-7ck" id="hXP-u2-FS6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="labelConversationSize" destination="e95-b5-Vbr" id="BA2-W1-acI"/>
                         <outlet property="switchNotification" destination="sil-Ua-kTy" id="7k3-rs-KSm"/>
                         <outlet property="switchSaveMessages" destination="DHr-B4-41q" id="zZX-ei-8Fj"/>
                         <outlet property="switchVisible" destination="RhM-RC-1ne" id="fcZ-Xf-EZC"/>

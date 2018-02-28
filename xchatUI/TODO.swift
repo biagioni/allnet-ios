@@ -12,8 +12,9 @@
     validate acked messages and new
  
  settingsvc
-    manage groups
+    manage groups /edit / delete / add / remove
     export conversations
+    switch for notifications and save messages?
  
  keyviewmodel
     confirmation of the exchange keys
