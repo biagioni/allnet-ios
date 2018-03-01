@@ -10,7 +10,6 @@
 #import <UIKit/UIKit.h>
 #import "CHelper.h"
 #import "allnet_xchat-Swift.h"
-#import "AppDelegate.h"
 #import "MessageModel.h"
 
 #include <sys/stat.h>

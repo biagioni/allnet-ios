@@ -9,10 +9,10 @@
 #ifndef xchat_UI_XChat_h
 #define xchat_UI_XChat_h
 
+#import <Foundation/Foundation.h>
 
 @interface XChat : NSObject
 
-// - (void) initialize: (ConversationUITextView *) conversation contacts: (ContactsUITableViewController *) contacts vc: (NewContactViewController *) vcForNewContact;
 - (void) initialize;
 - (void) disconnect;
 - (void) reconnect;

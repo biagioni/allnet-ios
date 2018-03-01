@@ -23,7 +23,6 @@ import UIKit
     override func viewDidLoad() {
         super.viewDidLoad()
         appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.setXChatValue(XChat())
         appDelegate.xChat.initialize()
         
         messageVM = MessageViewModel()

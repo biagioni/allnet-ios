@@ -1,8 +1,6 @@
 //
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
-
-#import "AppDelegate.h"
 #import "XChat.h"
 #import "CHelper.h"
 #import "MessageModel.h"
@@ -16,3 +14,4 @@
 #include "keys.h"
 #include "store.h"
 #include "cutil.h"
+#include "app_util.h"

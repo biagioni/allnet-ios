@@ -12,11 +12,11 @@
 		2925D0572043161B003A9E2E /* ContactNewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2925D0562043161B003A9E2E /* ContactNewVC.swift */; };
 		2925D05920431D1B003A9E2E /* KeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2925D05820431D1B003A9E2E /* KeyViewModel.swift */; };
 		2925D05B20433D75003A9E2E /* KeyExchangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2925D05A20433D75003A9E2E /* KeyExchangeVC.swift */; };
-		2943946B20461BB8006E1AFF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2943946A20461BB7006E1AFF /* main.m */; };
 		2943946D20462EA6006E1AFF /* UINavigationController+Pop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943946C20462EA6006E1AFF /* UINavigationController+Pop.swift */; };
+		2993BB6220487F8300337230 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2993BB6020487BC900337230 /* AppDelegate.swift */; };
+		2993BB6320487FE300337230 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 425A7D931AEC898C00C74E12 /* Info.plist */; };
 		29952BF32034D976009054D4 /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF22034D976009054D4 /* ContactListVC.swift */; };
 		29952BF720354E4C009054D4 /* CHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF620354E4C009054D4 /* CHelper.m */; };
-		29A69CEB2039232F00929B53 /* NewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A69CEA2039232F00929B53 /* NewDelegate.swift */; };
 		29A69CEE203925D500929B53 /* AppDelegateCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A69CED203925D500929B53 /* AppDelegateCHelper.m */; };
 		29B0E13620396C1700F38A3E /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B0E13520396C1700F38A3E /* SettingsVC.swift */; };
 		29B0E13E20396F5300F38A3E /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B0E13D20396F5300F38A3E /* UIColor+Hex.swift */; };
@@ -66,7 +66,6 @@
 		29EB67FF203764E000D9647F /* TODO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB67FE203764E000D9647F /* TODO.swift */; };
 		29EB6801203769CC00D9647F /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB6800203769CC00D9647F /* MessageViewModel.swift */; };
 		29EB680C20379D7300D9647F /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 29EB680B20379D7300D9647F /* MessageModel.m */; };
-		425A7D981AEC898C00C74E12 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 425A7D971AEC898C00C74E12 /* AppDelegate.m */; };
 		425A7DA11AEC898C00C74E12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 425A7D9F1AEC898C00C74E12 /* Main.storyboard */; };
 		425A7DA61AEC898C00C74E12 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 425A7DA41AEC898C00C74E12 /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
@@ -77,12 +76,11 @@
 		2925D0562043161B003A9E2E /* ContactNewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactNewVC.swift; sourceTree = "<group>"; };
 		2925D05820431D1B003A9E2E /* KeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyViewModel.swift; sourceTree = "<group>"; };
 		2925D05A20433D75003A9E2E /* KeyExchangeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExchangeVC.swift; sourceTree = "<group>"; };
-		2943946A20461BB7006E1AFF /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2943946C20462EA6006E1AFF /* UINavigationController+Pop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Pop.swift"; sourceTree = "<group>"; };
+		2993BB6020487BC900337230 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29952BF22034D976009054D4 /* ContactListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListVC.swift; sourceTree = "<group>"; };
 		29952BF620354E4C009054D4 /* CHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHelper.m; sourceTree = "<group>"; };
 		29952BF820355093009054D4 /* CHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHelper.h; sourceTree = "<group>"; };
-		29A69CEA2039232F00929B53 /* NewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDelegate.swift; sourceTree = "<group>"; };
 		29A69CEC203925D500929B53 /* AppDelegateCHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegateCHelper.h; sourceTree = "<group>"; };
 		29A69CED203925D500929B53 /* AppDelegateCHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegateCHelper.m; sourceTree = "<group>"; };
 		29B0E13520396C1700F38A3E /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
@@ -172,8 +170,6 @@
 		422B56221E9E9B890072212E /* allnet-xchat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "allnet-xchat.entitlements"; sourceTree = "<group>"; };
 		425A7D8F1AEC898C00C74E12 /* allnet-xchat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "allnet-xchat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		425A7D931AEC898C00C74E12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		425A7D961AEC898C00C74E12 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		425A7D971AEC898C00C74E12 /* AppDelegate.m */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		425A7DA01AEC898C00C74E12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		425A7DA51AEC898C00C74E12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		428DEE961B0FB9D000163976 /* XChat.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = XChat.m; sourceTree = "<group>"; };
@@ -277,15 +273,13 @@
 		29B449DD20337B160050B64D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				425A7D961AEC898C00C74E12 /* AppDelegate.h */,
-				425A7D971AEC898C00C74E12 /* AppDelegate.m */,
 				29952BF22034D976009054D4 /* ContactListVC.swift */,
 				2925D0562043161B003A9E2E /* ContactNewVC.swift */,
 				29EB67F820374DD300D9647F /* MessageVC.swift */,
 				29B0E13520396C1700F38A3E /* SettingsVC.swift */,
 				2925D05A20433D75003A9E2E /* KeyExchangeVC.swift */,
 				2908613220466B0400C4B50F /* MoreVC.swift */,
-				29A69CEA2039232F00929B53 /* NewDelegate.swift */,
+				2993BB6020487BC900337230 /* AppDelegate.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -378,7 +372,6 @@
 		425A7D921AEC898C00C74E12 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2943946A20461BB7006E1AFF /* main.m */,
 				29B44929203358400050B64D /* allnet-xchat-Bridging-Header.h */,
 				29B449CB20337A2B0050B64D /* Images.xcassets */,
 				425A7DA41AEC898C00C74E12 /* LaunchScreen.xib */,
@@ -475,6 +468,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2993BB6320487FE300337230 /* Info.plist in Resources */,
 				29B449D620337A2B0050B64D /* Images.xcassets in Resources */,
 				425A7DA11AEC898C00C74E12 /* Main.storyboard in Resources */,
 				425A7DA61AEC898C00C74E12 /* LaunchScreen.xib in Resources */,
@@ -539,8 +533,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2943946B20461BB8006E1AFF /* main.m in Sources */,
-				29A69CEB2039232F00929B53 /* NewDelegate.swift in Sources */,
 				29B0E13620396C1700F38A3E /* SettingsVC.swift in Sources */,
 				29B449BA20336F920050B64D /* routing.c in Sources */,
 				29EB67F920374DD300D9647F /* MessageVC.swift in Sources */,
@@ -573,6 +565,7 @@
 				29952BF720354E4C009054D4 /* CHelper.m in Sources */,
 				29B44970203366CF0050B64D /* store.c in Sources */,
 				29B4494D2033654B0050B64D /* util.c in Sources */,
+				2993BB6220487F8300337230 /* AppDelegate.swift in Sources */,
 				29B44979203367820050B64D /* message.c in Sources */,
 				29B449B520336F590050B64D /* aip.c in Sources */,
 				29B449B320336F220050B64D /* track.c in Sources */,
@@ -588,7 +581,6 @@
 				2925D05B20433D75003A9E2E /* KeyExchangeVC.swift in Sources */,
 				29B449A620336E3A0050B64D /* ad.c in Sources */,
 				29B449AE20336EBF0050B64D /* table.c in Sources */,
-				425A7D981AEC898C00C74E12 /* AppDelegate.m in Sources */,
 				29B449BB20336F920050B64D /* xcommon.c in Sources */,
 				29A69CEE203925D500929B53 /* AppDelegateCHelper.m in Sources */,
 				29B44941203363790050B64D /* priority.c in Sources */,
@@ -672,7 +664,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
@@ -722,7 +714,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
@@ -762,7 +754,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/xchatUI/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -819,7 +811,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/xchatUI/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
