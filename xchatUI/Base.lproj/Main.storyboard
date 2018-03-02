@@ -794,7 +794,7 @@
         <!--New Contact-->
         <scene sceneID="lFL-1q-W4L">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="uuB-wW-XWa" customClass="ContactNewVC" customModule="allnet_xchat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="uuB-wW-XWa" customClass="ContactNewVC" customModule="allnet_xchat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qoW-Ny-yNM"/>
                         <viewControllerLayoutGuide type="bottom" id="g8J-he-06v"/>

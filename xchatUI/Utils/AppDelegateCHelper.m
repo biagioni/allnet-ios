@@ -29,15 +29,12 @@
 
 @implementation AppDelegateCHelper
 
-extern void acache_save_data ();
+extern void acache_save_data (void);
 static int isSuspended = NO;
-static int isInForeground = NO;  // initial state
-static int authorizations_granted = 0;
 static int multipeer_read_queue_index = 0;
 static int multipeer_write_queue_index = 0;
 static int multipeer_queues_initialized = 0;
 static struct allnet_log * allnet_log = NULL;
-
 
 #ifdef USE_ABLE_TO_CONNECT
 static int able_to_connect ()

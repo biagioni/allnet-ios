@@ -21,9 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         self.xChat = XChat()
-        
         appCHelper = AppDelegateCHelper()
-        appCHelper.createAllNetDir()
+        createAllNetDir()
         appCHelper.start_allnet(application, start_everything: true)
         sleep(1)
         
@@ -77,5 +76,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         appCHelper.acacheSaveData()
         set_speculative_computation(0);
     }
+    
+    func createAllNetDir() {
+        do {
+            let applicationSupportDirectory = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            var allnetDir = applicationSupportDirectory.appendingPathComponent("allnet", isDirectory: true)
+            try FileManager.default.createDirectory(atPath: allnetDir.path, withIntermediateDirectories: true, attributes: nil)
+            allnetDir.setTemporaryResourceValue(true, forKey: URLResourceKey.isExcludedFromBackupKey)
+            let newPath =  allnetDir.path.replacingOccurrences(of: "/Library/Application Support/allnet", with: "")
+            //chdir change folder in system
+            chdir(newPath)
+        }catch(let error){
+            print(error)
+        }
+    }
 }
-
