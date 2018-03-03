@@ -79,11 +79,18 @@ extension MessageVC: UITableViewDataSource {
             }else{
                 identifier = "MessageCellReceived"
             }
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MessageCell
+            cell.labelMessage.text = item.message
+            cell.labelDate.text = item.dated
+            if item.message_has_been_acked == 0 {
+                cell.imageViewAck.isHidden = true
+            }else{
+                cell.imageViewAck.isHidden = false
+            }
+            return cell
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MessageCell
-        cell.labelMessage.text = messageVM[indexPath.row]?.message
-        cell.labelDate.text = messageVM[indexPath.row]?.dated
-        return cell
+        
+        return UITableViewCell()
     }
 }
 

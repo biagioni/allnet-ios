@@ -61,6 +61,12 @@ class MessageViewModel : NSObject {
         }
     }
     
+    func ackMessage(forContact contact: String){
+        if contact == _contact {
+            fetchData()
+        }
+    }
+    
     func sendMessage(message: String){
         _messages.append(_cHelper.sendMessage(message))
     }

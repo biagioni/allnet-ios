@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     var appCHelper: AppDelegateCHelper!
     var authorizationGranted = false
     var xChat: XChat!
+    var firstCall =  true
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         

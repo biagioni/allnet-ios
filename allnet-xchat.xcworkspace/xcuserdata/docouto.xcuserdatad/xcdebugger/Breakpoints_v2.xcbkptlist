@@ -9,61 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "xchatUI/Controller/KeyExchangeVC.swift"
-            timestampString = "541496278.1262029"
+            filePath = "xchatUI/Controller/MessageVC.swift"
+            timestampString = "541745472.659211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "allnet_xchat.KeyExchangeVC.viewDidLoad() -&gt; ()"
-                  moduleName = "allnet-xchat"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/docouto/Desktop/Projects/allnet-ios/xchatUI/Controller/KeyExchangeVC.swift"
-                  timestampString = "541471923.9705369"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "8586">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "allnet_xchat.KeyExchangeVC.viewDidLoad() -&gt; ()"
-                  moduleName = "allnet-xchat"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/docouto/Desktop/Projects/allnet-ios/xchatUI/Controller/KeyExchangeVC.swift"
-                  timestampString = "541471923.975679"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "11360">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "xchatUI/Controller/AppDelegate.swift"
-            timestampString = "541723798.539804"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "createAllNetDir()"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

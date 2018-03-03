@@ -57,12 +57,14 @@
 - (void) initialize: (int) sock : (NSString *) contact {
     self.sock = sock;
     self.xcontact = strcpy_malloc (contact.UTF8String, "ConversationUITextView initialize contact");
+    ///TODO
     self.newMessagesFrom = last_time_read (self.xcontact);
     update_time_read (contact.UTF8String);
 }
 
 //clean
 - (NSMutableArray *)getMessages {
+    update_time_read(self.xcontact);
   NSMutableArray * result_messages = [[NSMutableArray alloc] initWithCapacity:1000];
     keyset * k;
     int nk = all_keys (self.xcontact, &k);

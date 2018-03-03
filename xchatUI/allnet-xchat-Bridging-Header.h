@@ -8,6 +8,11 @@
 
 #include <sys/stat.h>
 #include <pthread.h>
+#include <unistd.h>
+#include <sys/param.h>
+#include <signal.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 #include "packet.h"
 #include "util.h"

@@ -12,10 +12,5 @@ class MessageCell: UITableViewCell {
     
     @IBOutlet weak var labelMessage: UILabel!
     @IBOutlet weak var labelDate: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
+    @IBOutlet weak var imageViewAck: UIImageView!
 }
