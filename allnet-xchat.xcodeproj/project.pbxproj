@@ -770,7 +770,7 @@
 				OTHER_CFLAGS = "-DHAVE_OPENSSL";
 				OTHER_LDFLAGS = "$(inherited)";
 				"OTHER_LDFLAGS[arch=*]" = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.alnt.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.alnt.allnet-xchat";
 				PRODUCT_NAME = "allnet-xchat";
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -826,7 +826,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DHAVE_OPENSSL";
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.alnt.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.alnt.allnet-xchat";
 				PRODUCT_NAME = "allnet-xchat";
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;

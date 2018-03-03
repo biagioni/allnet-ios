@@ -8,6 +8,9 @@
 
 /*
  
+ newcontact
+    makethe contact hidden
+ 
  settingsvc
     manage groups /edit / delete / add / remove
     export conversations

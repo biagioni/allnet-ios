@@ -13,6 +13,9 @@ class ContactNewVC: UIViewController {
     @IBOutlet weak var pickerViewConnection: UIPickerView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var heightTableView: NSLayoutConstraint!
+    @IBOutlet weak var labelImcomplete: UILabel!
+    @IBOutlet weak var heightPicker: NSLayoutConstraint!
+    @IBOutlet weak var buttonSelection: UIButton!
     
     var keyVM: KeyViewModel!
     var connectionValues: [String]!
@@ -20,11 +23,16 @@ class ContactNewVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        heightPicker.constant = 0
         tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         keyVM = KeyViewModel(contact: "")
         keyVM.fetchIncompletedKeys()
         connectionValues = ["regular internet contact", "nearby wireless contact","new group"]
-        
+        if keyVM.incompleteKeysExchanges.count > 0 {
+            labelImcomplete.isHidden = false
+        }else{
+            labelImcomplete.isHidden = true
+        }
     }
     deinit {
         tableView.removeObserver(self, forKeyPath: "contentSize")
@@ -44,6 +52,24 @@ class ContactNewVC: UIViewController {
             }
         }
     }
+    
+
+    @IBAction func openPicker(_ sender: Any) {
+        if heightPicker.constant == 0 {
+            UIView.animate(withDuration: 0.5,
+                           animations: {
+                            self.heightPicker.constant = 162
+                })
+            
+        }else{
+            UIView.animate(withDuration: 0.5,
+                           animations: {
+                            self.heightPicker.constant = 0
+                })
+        }
+    }
+    
+    
     @IBAction func requestContact(_ sender: UIButton) {
         var hops = 0
         guard let name = textFieldName.text, !name.isEmpty else {
@@ -78,6 +104,9 @@ extension ContactNewVC: UIPickerViewDataSource {
 extension ContactNewVC: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return connectionValues[row]
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        buttonSelection.setTitle(connectionValues[row], for: .normal)
     }
 }
 
