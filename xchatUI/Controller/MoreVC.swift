@@ -15,22 +15,35 @@ class MoreVC: UITableViewController {
     @IBOutlet weak var textViewTraceOutput: UITextView!
     
     var appDelegate: AppDelegate!
+    var moreVM: MoreViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         appDelegate = UIApplication.shared.delegate as! AppDelegate
+        moreVM = MoreViewModel()
+        moreVM.delegate = self
+        appDelegate.xChat.setMoreVM(moreVM)
     }
     
+    @IBAction func clearData(_ sender: UIBarButtonItem) {
+        textViewTraceOutput.text = ""
+    }
     @IBAction func startTracing(_ sender: UIButton) {
         guard let hops = textFieldHops.text, !hops.isEmpty else {
             ///TODO MESSAGE
             return
         }
         appDelegate.xChat.startTrace(true, maxHops: UInt(Int(hops)!), showDetails: switchDetails.isOn)
-        
-        ///TODO run in a different thread
-        let text = appDelegate.xChat.trace(true, maxHops: UInt(Int(hops)!))
-        textViewTraceOutput.text = text
+    }
+}
+
+extension MoreVC: MoreDelegate {
+    func tracing(message: String) {
+        let text = textViewTraceOutput.text
+        textViewTraceOutput.text = text!  + message
+        if textViewTraceOutput.contentSize.height > 200 {
+            let bottomOffset = CGPoint(x: 0, y: textViewTraceOutput.contentSize.height - textViewTraceOutput.bounds.size.height)
+            textViewTraceOutput.setContentOffset(bottomOffset, animated: true)
+        }
     }
 }

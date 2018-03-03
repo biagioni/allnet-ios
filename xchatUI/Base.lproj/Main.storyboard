@@ -1449,6 +1449,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="7aD-2i-ttF" id="fV5-lz-IZ9"/>
+                                                    </connections>
                                                 </textView>
                                             </subviews>
                                             <constraints>
@@ -1467,7 +1470,13 @@
                             <outlet property="delegate" destination="7aD-2i-ttF" id="BkN-lT-b1f"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="More" id="zeP-Xl-Emc"/>
+                    <navigationItem key="navigationItem" title="More" id="zeP-Xl-Emc">
+                        <barButtonItem key="rightBarButtonItem" title="Clear" id="q8x-5c-edp">
+                            <connections>
+                                <action selector="clearData:" destination="7aD-2i-ttF" id="XvG-IB-77A"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="switchDetails" destination="Uq8-xM-F4I" id="CVq-I6-uZa"/>
                         <outlet property="textFieldHops" destination="MdH-gd-Ope" id="Jfa-HO-1f3"/>

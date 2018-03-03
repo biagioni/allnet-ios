@@ -13,9 +13,6 @@
     export conversations
     switch for notifications and save messages?
  
- morevc
-    update textview in real time
- 
  C PROBLEMS
     incomplete_key_exchange is fetching keys that were succesfully exchanged
     when you add someone in a group it loads all the private conversation

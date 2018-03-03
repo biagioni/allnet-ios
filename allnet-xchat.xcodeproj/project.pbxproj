@@ -13,6 +13,7 @@
 		2925D05920431D1B003A9E2E /* KeyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2925D05820431D1B003A9E2E /* KeyViewModel.swift */; };
 		2925D05B20433D75003A9E2E /* KeyExchangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2925D05A20433D75003A9E2E /* KeyExchangeVC.swift */; };
 		2943946D20462EA6006E1AFF /* UINavigationController+Pop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943946C20462EA6006E1AFF /* UINavigationController+Pop.swift */; };
+		2946A569204A63FD00AC37A7 /* MoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2946A568204A63FD00AC37A7 /* MoreViewModel.swift */; };
 		2993BB6220487F8300337230 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2993BB6020487BC900337230 /* AppDelegate.swift */; };
 		2993BB6320487FE300337230 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 425A7D931AEC898C00C74E12 /* Info.plist */; };
 		29952BF32034D976009054D4 /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF22034D976009054D4 /* ContactListVC.swift */; };
@@ -77,6 +78,7 @@
 		2925D05820431D1B003A9E2E /* KeyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyViewModel.swift; sourceTree = "<group>"; };
 		2925D05A20433D75003A9E2E /* KeyExchangeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExchangeVC.swift; sourceTree = "<group>"; };
 		2943946C20462EA6006E1AFF /* UINavigationController+Pop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Pop.swift"; sourceTree = "<group>"; };
+		2946A568204A63FD00AC37A7 /* MoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewModel.swift; sourceTree = "<group>"; };
 		2993BB6020487BC900337230 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29952BF22034D976009054D4 /* ContactListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListVC.swift; sourceTree = "<group>"; };
 		29952BF620354E4C009054D4 /* CHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHelper.m; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				29EB67F62036B0AB00D9647F /* ContactViewModel.swift */,
 				29EB6800203769CC00D9647F /* MessageViewModel.swift */,
 				2925D05820431D1B003A9E2E /* KeyViewModel.swift */,
+				2946A568204A63FD00AC37A7 /* MoreViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				29B449C1203370290050B64D /* keyd.c in Sources */,
 				29B44999203369790050B64D /* alocal.c in Sources */,
 				29EB680C20379D7300D9647F /* MessageModel.m in Sources */,
+				2946A569204A63FD00AC37A7 /* MoreViewModel.swift in Sources */,
 				29B44960203365E80050B64D /* wp_arith.c in Sources */,
 				29952BF32034D976009054D4 /* ContactListVC.swift in Sources */,
 				29B44954203365900050B64D /* ai.c in Sources */,

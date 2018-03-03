@@ -35,6 +35,7 @@
 ///TODO convert to delegate in the 
 @property MessageViewModel * conversation;
 @property ContactViewModel * contacts;
+@property MoreViewModel * more;
 @property CFRunLoopSourceRef runLoop;
 
 @end
@@ -242,6 +243,11 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
 - (void) setMessageVM:(NSObject *)object {
   mySelf.conversation = (MessageViewModel*)object;
 }
+
+- (void) setMoreVM:(NSObject *)object {
+  mySelf.more = (MoreViewModel*)object;
+}
+
 - (void) setContactVM:(NSObject *)object{
   mySelf.contacts = (ContactViewModel*)object;
 }
@@ -342,11 +348,15 @@ static void traceResult (CFSocketRef s, CFSocketCallBackType callbackType, CFDat
     }
   }
 }
+void rcvTrace (const char * trace)
+{
+  NSString * msg = [[NSString alloc] initWithUTF8String:trace];
+  [mySelf.more receiveTraceWithMessage:msg];
+}
 
 // used as an alternative to trace.  result lines are given to the function as they arrive
 - (void) startTrace: (BOOL) wide_enough maxHops: (NSUInteger) hops showDetails: (BOOL) details {
-  //global_receive_function = rcvFunction;
-  ///TODO create the function to update view dinamically
+  global_receive_function = rcvTrace;
   int pipes [2];
   if (socketpair(AF_LOCAL, SOCK_STREAM, 0, pipes) != 0) {
     perror ("socketpair");
