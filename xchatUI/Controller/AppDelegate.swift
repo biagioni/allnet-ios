@@ -68,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
             let request = UNNotificationRequest(identifier: "testRequest", content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
-                
+                UIApplication.shared.applicationIconBadgeNumber += 1
             })
         }
     }

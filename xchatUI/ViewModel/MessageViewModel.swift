@@ -37,7 +37,10 @@ class MessageViewModel : NSObject {
     var selectedContact: String? {
         return _contact
     }
-
+    
+    func isGroup() -> Bool {
+       return  is_group(_contact) == 1
+    }
     
     var messageSize: String {
         return _cHelper.getMessagesSize()

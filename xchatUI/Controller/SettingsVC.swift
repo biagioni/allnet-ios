@@ -16,11 +16,18 @@ class SettingsVC: UITableViewController {
     @IBOutlet weak var switchNotification: UISwitch!
     @IBOutlet weak var switchSaveMessages: UISwitch!
     @IBOutlet weak var labelConversationSize: UILabel!
+    @IBOutlet weak var buttonGroup: UIButton!
+    
     
     var messageVM: MessageViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if messageVM.isGroup() {
+            buttonGroup.setTitle("    Manage participants", for: .normal)
+        }else{
+            buttonGroup.setTitle("    Manage groups", for: .normal)
+        }
         updateUI()
     }
 
@@ -39,6 +46,10 @@ class SettingsVC: UITableViewController {
             rename_contact(contact, textFieldName.text)
         }
     }
+    @IBAction func manageParticipants(_ sender: Any) {
+    }
+    @IBAction func copyConversation(_ sender: Any) {
+    }
     
     @IBAction func deleteConversation(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: "Are you sure you want to delete the conversation?", preferredStyle: .alert)
@@ -51,6 +62,7 @@ class SettingsVC: UITableViewController {
         alert.addAction(delete)
         self.present(alert, animated: true)
     }
+    
     @IBAction func deleteUser(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: "Are you sure you want to delete the contact?", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
