@@ -882,7 +882,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JaD-BB-SJC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1876" y="-1793.2533733133434"/>
+            <point key="canvasLocation" x="1876" y="-1743"/>
         </scene>
         <!--New Contact-->
         <scene sceneID="lFL-1q-W4L">
@@ -1202,7 +1202,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khZ-7F-qyF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1044" y="-150"/>
+            <point key="canvasLocation" x="1044" y="-151"/>
         </scene>
         <!--Key Exchange-->
         <scene sceneID="dZQ-6T-eJh">
@@ -1625,7 +1625,7 @@
         <scene sceneID="mGo-kj-l54">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mez-QA-17I" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="New Contact" id="taD-JN-nWw"/>
+                    <tabBarItem key="tabBarItem" title="New Contact" image="newTab" selectedImage="newTab" id="taD-JN-nWw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="oq1-Ua-ykH">
                         <autoresizingMask key="autoresizingMask"/>
@@ -1643,6 +1643,7 @@
     <resources>
         <image name="detail" width="512" height="512"/>
         <image name="eye" width="512" height="512"/>
+        <image name="newTab" width="25" height="25"/>
         <image name="notification" width="512" height="512"/>
         <image name="save" width="512" height="512"/>
         <image name="settings" width="512" height="512"/>
