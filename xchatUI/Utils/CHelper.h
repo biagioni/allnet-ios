@@ -18,6 +18,7 @@
 - (MessageModel*)sendMessage:(NSString*) message;
 - (NSString *) getMessagesSize;
 + (NSString *) generateRandoKey;
++ (NSString *) getKeyFor: (const char *) contact;
 @end
 
 

@@ -154,6 +154,37 @@
     return converted_messages;
 }
 
++ (NSString *) getKeyFor: (const char *) contact {
+     char * s1 = NULL;
+    keyset * keys = NULL;
+    int nk = all_keys (contact, &keys);
+    for (int ki = 0; ki < nk; ki++) {
+        char * s2 = NULL;
+        char * content = NULL;
+        incomplete_exchange_file(contact, keys [ki], &content, NULL);
+        NSLog (@"incomplete content for %s %d (%d/%d) is '%s'\n", contact, keys [ki], ki, nk, content);
+        if (content != NULL) {
+            char * first = index (content, '\n');
+            if (first != NULL) {
+                *first = '\0';  // null terminate hops count
+                s1 = first + 1;
+                char * second = index (s1, '\n');
+                if (second != NULL) {
+                    *second = '\0';  // null terminate first secret
+                    s2 = second + 1;
+                    char * third = index (s2, '\n');
+                    if (third != NULL) // null terminate second secret
+                        *third = '\0';
+                    if (*s2 == '\0')
+                        s2 = NULL;
+                    NSLog (@"first %s, second %s, third %s, s1 %s, s2 %s\n", first, second, third, s1, s2);
+                }
+            }
+        }
+    }
+    return [[NSString alloc] initWithUTF8String:s1];
+}
+
 //clean
 static NSString * basicDate (uint64_t time, int tzMin) {
     // objective C time begins on January 1st, 2001.  allnet time begins on January 1st, 2000.

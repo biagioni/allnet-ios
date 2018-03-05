@@ -37,6 +37,12 @@ class ContactNewVC: UIViewController {
     deinit {
         tableView.removeObserver(self, forKeyPath: "contentSize")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        keyVM.fetchIncompletedKeys()
+        tableView.reloadData()
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showKeyExchange" {
@@ -122,6 +128,17 @@ extension ContactNewVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "KeyCell", for: indexPath)
         cell.textLabel?.text = keyVM.incompleteKeysExchanges[indexPath.row]
         return cell
+    }
+}
+
+extension ContactNewVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let contact = keyVM.incompleteKeysExchanges[indexPath.row]
+        let key = keyVM.getKeyFor(contact: contact)
+        
+        textFieldSecret.text = key
+        textFieldName.text = contact
     }
 }
 

@@ -211,6 +211,10 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
   struct allnet_mgmt_trace_reply * trace = NULL;
   time_t mtime = 0;
   pthread_mutex_lock(&key_generated_mutex);  // don't allow changes to keyContact until a key has been generated
+//  if ((! waiting_for_key) && (mySelf.keyExchange != nil)) {
+//    [mySelf.keyExchange notificationOfGeneratedKey:[[NSString alloc] initWithUTF8String:keyContact]];
+//    mySelf.keyExchange = nil;
+//  }
   int mlen = handle_packet(sock, (char *)data, dlen, priority, &peer, &kset, &message, &desc,
                            &verified, &seq, &mtime, &duplicate, &broadcast, &acks, &trace);
   pthread_mutex_unlock(&key_generated_mutex);
@@ -227,7 +231,11 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
     // NSLog(@"XChat.m: refreshed the conversation UI text view and the contacts UI table view\n");
   } else if (mlen == -1) {        // successfully exchanged keys
     NSLog(@"key exchange successfully completed for peer %s\n", keyContact);
-    NSString * contact = [[NSString alloc] initWithUTF8String:keyContact];
+//    NSString * contact = [[NSString alloc] initWithUTF8String:keyContact];
+//    if ((mySelf.ncvcForNewContact != nil) && (mySelf.ncvcForNewContact.kev != nil))
+//      [mySelf.ncvcForNewContact.kev notificationOfCompletedKeyExchange:contact];
+//    else
+//      NSLog(@"XChat.m receivePacket, unable to notify null key exchange\n");
     pthread_mutex_lock(&key_generated_mutex);  // changing globals, forbid access for others that may also change them
     pthread_mutex_unlock(&key_generated_mutex);
   } else if (mlen == -2) {  // confirm successful subscription

@@ -24,4 +24,8 @@ class KeyViewModel {
             incompleteKeysExchanges.append(String(NSString(utf8String: _pointer![Int(i)]!)!))
         }
     }
+    
+    func getKeyFor(contact: String) -> String{
+        return CHelper.getKeyFor(contact)
+    }
 }
