@@ -19,16 +19,24 @@ class SettingsVC: UITableViewController {
     @IBOutlet weak var buttonGroup: UIButton!
     
     
-    var messageVM: MessageViewModel!
+    var contactVM: ContactViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if messageVM.isGroup() {
+        if contactVM.isGroup(nil) {
             buttonGroup.setTitle("    Manage participants", for: .normal)
         }else{
             buttonGroup.setTitle("    Manage groups", for: .normal)
         }
         updateUI()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showGroups" {
+            let destination = segue.destination as! GroupVC
+            destination.contactVM = contactVM
+            destination.isGroup = sender as! Bool
+        }
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -36,7 +44,7 @@ class SettingsVC: UITableViewController {
     }
     
     @IBAction func save(_ sender: UIBarButtonItem) {
-        let contact = messageVM.selectedContact
+        let contact = contactVM.selectedContact
         if switchVisible.isOn {
             make_visible(contact)
         }else{
@@ -47,8 +55,11 @@ class SettingsVC: UITableViewController {
         }
     }
     @IBAction func manageParticipants(_ sender: Any) {
-    }
-    @IBAction func copyConversation(_ sender: Any) {
+        if contactVM.isGroup(nil) {
+            self.performSegue(withIdentifier: "showGroups", sender: true)
+        }else{
+            self.performSegue(withIdentifier: "showGroups", sender: false)
+        }
     }
     
     @IBAction func deleteConversation(_ sender: UIButton) {
@@ -56,7 +67,7 @@ class SettingsVC: UITableViewController {
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let delete = UIAlertAction(title: "Delete", style: .destructive){
             [weak self] action in
-            delete_conversation(self?.messageVM.selectedContact!)
+            delete_conversation(self?.contactVM.selectedContact!)
         }
         alert.addAction(cancel)
         alert.addAction(delete)
@@ -68,7 +79,7 @@ class SettingsVC: UITableViewController {
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let delete = UIAlertAction(title: "Delete", style: .destructive){
            [weak self] action in
-            delete_contact(self?.messageVM.selectedContact!)
+            delete_contact(self?.contactVM.selectedContact!)
             self?.navigationController?.popViewController(animated: true)
         }
         alert.addAction(cancel)
@@ -77,9 +88,9 @@ class SettingsVC: UITableViewController {
     }
     
     func updateUI(){
-        textFieldName.text = messageVM.selectedContact
-        labelConversationSize.text = messageVM.messageSize+" MB"
-        switchVisible.isOn = is_invisible(messageVM.selectedContact!) == 0
+        textFieldName.text = contactVM.selectedContact
+        labelConversationSize.text = contactVM.messageSize+" MB"
+        switchVisible.isOn = is_invisible(contactVM.selectedContact!) == 0
         switchSaveMessages.isOn = switchVisible.isOn
         switchNotification.isOn = switchVisible.isOn
     }
@@ -88,7 +99,7 @@ class SettingsVC: UITableViewController {
 extension SettingsVC: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.text!.isEmpty {
-            textField.text = messageVM.selectedContact
+            textField.text = contactVM.selectedContact
         }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

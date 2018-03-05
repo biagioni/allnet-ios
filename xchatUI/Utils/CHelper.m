@@ -25,7 +25,6 @@
 
 @interface CHelper()
 @property int sock;
-@property uint64_t newMessagesFrom;
 
 @end
 
@@ -57,8 +56,6 @@
 - (void) initialize: (int) sock : (NSString *) contact {
     self.sock = sock;
     self.xcontact = strcpy_malloc (contact.UTF8String, "ConversationUITextView initialize contact");
-    ///TODO
-    self.newMessagesFrom = last_time_read (self.xcontact);
     update_time_read (contact.UTF8String);
 }
 
@@ -142,14 +139,12 @@
         struct message_store_info mi;
         [obj getValue:&mi];
         @try {   // initWithUTF8String will fail if the string is not valid UTF8
-            BOOL is_new = mi.rcvd_ackd_time + (24 * 60 * 60) >= self.newMessagesFrom;
             MessageModel *model = [[MessageModel alloc] init];
             model.message = [[NSString alloc] initWithUTF8String:mi.message];
             model.msg_type = mi.msg_type;
             model.dated = basicDate(mi.time, mi.tz_min);
             model.message_has_been_acked = mi.message_has_been_acked;
             [converted_messages addObject:model];
-            //[self drawBubble:[[NSString alloc] initWithUTF8String:mi.message] msg_type:mi.msg_type is_acked:mi.message_has_been_acked is_new:is_new context:context time:mi.time tzMin: mi.tz_min];
         } @catch (NSException *e) {
             NSLog(@"message %s is not valid UTF8, ignoring\n", mi.message);
         }

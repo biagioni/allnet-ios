@@ -56,8 +56,8 @@ import UIKit
             
             let selectedContact = sender as! String
             let destination = segue.destination as! SettingsVC
-            messageVM.setContact(contact: selectedContact, sock: appDelegate.xChat.getSocket())
-            destination.messageVM = messageVM
+            contactVM.setContact(contact: selectedContact, sock: appDelegate.xChat.getSocket())
+            destination.contactVM = contactVM
         }
     }
     

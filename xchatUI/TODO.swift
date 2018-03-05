@@ -10,6 +10,11 @@
  
  settingsvc
     manage groups /edit / delete / add / remove
+    remove from group before delete
+ 
+ newcontact
+    confirmation for new key
+ 
  
 */
 

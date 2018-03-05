@@ -614,7 +614,7 @@
                         <outlet property="switchSaveMessages" destination="DHr-B4-41q" id="zZX-ei-8Fj"/>
                         <outlet property="switchVisible" destination="RhM-RC-1ne" id="fcZ-Xf-EZC"/>
                         <outlet property="textFieldName" destination="r49-Qp-L5P" id="yVC-8f-tAU"/>
-                        <segue destination="ELZ-mS-gw6" kind="show" id="U3R-8t-fGa"/>
+                        <segue destination="ELZ-mS-gw6" kind="show" identifier="showGroups" id="U3R-8t-fGa"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pm1-47-dlj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -624,7 +624,7 @@
         <!--Groups-->
         <scene sceneID="tDa-E5-uIi">
             <objects>
-                <tableViewController id="ELZ-mS-gw6" sceneMemberID="viewController">
+                <tableViewController id="ELZ-mS-gw6" customClass="GroupVC" customModule="allnet_xchat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1y6-sx-IqA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -632,7 +632,7 @@
                         <color key="separatorColor" red="0.90980392160000001" green="0.90196078430000004" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="I8l-Se-IKi" style="IBUITableViewCellStyleDefault" id="01G-mj-jbN">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroupCell" textLabel="I8l-Se-IKi" style="IBUITableViewCellStyleDefault" id="01G-mj-jbN">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="01G-mj-jbN" id="Wdf-Qd-Ki4">

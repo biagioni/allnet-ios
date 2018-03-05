@@ -61,6 +61,7 @@
 		29B449C8203379FF0050B64D /* libPods-allnet-xchat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B449C9203379FF0050B64D /* libPods-allnet-xchat.a */; };
 		29B449D620337A2B0050B64D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29B449CB20337A2B0050B64D /* Images.xcassets */; };
 		29B449DC20337AFC0050B64D /* XChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 428DEE961B0FB9D000163976 /* XChat.m */; };
+		29C48C0C204CB86700B0FDC7 /* GroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C48C0B204CB86700B0FDC7 /* GroupVC.swift */; };
 		29EB67F42036A85600D9647F /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB67F32036A85600D9647F /* ContactCell.swift */; };
 		29EB67F72036B0AB00D9647F /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB67F62036B0AB00D9647F /* ContactViewModel.swift */; };
 		29EB67F920374DD300D9647F /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB67F820374DD300D9647F /* MessageVC.swift */; };
@@ -162,6 +163,7 @@
 		29B449C6203377020050B64D /* crypt_sel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = crypt_sel.c; sourceTree = "<group>"; };
 		29B449C9203379FF0050B64D /* libPods-allnet-xchat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-allnet-xchat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B449CB20337A2B0050B64D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		29C48C0B204CB86700B0FDC7 /* GroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupVC.swift; sourceTree = "<group>"; };
 		29EB67F32036A85600D9647F /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		29EB67F62036B0AB00D9647F /* ContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
 		29EB67F820374DD300D9647F /* MessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVC.swift; sourceTree = "<group>"; };
@@ -275,13 +277,14 @@
 		29B449DD20337B160050B64D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2993BB6020487BC900337230 /* AppDelegate.swift */,
 				29952BF22034D976009054D4 /* ContactListVC.swift */,
 				2925D0562043161B003A9E2E /* ContactNewVC.swift */,
 				29EB67F820374DD300D9647F /* MessageVC.swift */,
 				29B0E13520396C1700F38A3E /* SettingsVC.swift */,
 				2925D05A20433D75003A9E2E /* KeyExchangeVC.swift */,
 				2908613220466B0400C4B50F /* MoreVC.swift */,
-				2993BB6020487BC900337230 /* AppDelegate.swift */,
+				29C48C0B204CB86700B0FDC7 /* GroupVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				29B449A420336DEE0050B64D /* astart.c in Sources */,
 				29B4498A203368530050B64D /* dcache.c in Sources */,
 				29B449912033688D0050B64D /* allnet_queue.c in Sources */,
+				29C48C0C204CB86700B0FDC7 /* GroupVC.swift in Sources */,
 				29B449A220336DA70050B64D /* acache.c in Sources */,
 				29B449B920336F920050B64D /* adht.c in Sources */,
 				29B449B120336EE50050B64D /* record.c in Sources */,

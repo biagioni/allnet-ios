@@ -16,6 +16,9 @@ protocol ContactDelegate {
 class ContactViewModel: NSObject {
     var delegate: ContactDelegate?
     private var _contacts: [(String, String)]
+    private var _groups: [(String, Bool)]
+    private var _contact: String?
+    private var _cHelper: CHelper!
     private var _hiddenContacts: [(String, String)]{
         didSet{
             delegate?.contactUpdated()
@@ -25,6 +28,7 @@ class ContactViewModel: NSObject {
     override init() {
         _contacts = [(String, String)]()
         _hiddenContacts = [(String, String)]()
+        _groups = [(String, Bool)]()
     }
     
     subscript(index: Int) -> (String, String)? {
@@ -35,13 +39,66 @@ class ContactViewModel: NSObject {
         return _hiddenContacts.count > 0 ? _hiddenContacts[index] : nil
     }
     
+    func groups(index: Int) -> (String, Bool)? {
+        return _groups.count > 0 ? _groups[index] : nil
+    }
+    
+    func loadMembers(){
+        _groups.removeAll()
+        fetchData()
+        var allMembers = [String]()
+        var pointer: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>?
+        let n = group_membership(_contact, &pointer)
+        for i in 0..<n {
+            allMembers.append(String(cString: pointer![Int(i)]!))
+        }
+        _groups = _contacts.map{($0.0, allMembers.contains($0.0))}
+    }
+    func loadGroups(){
+        _groups.removeAll()
+        fetchData()
+        var allGroups = [String]()
+        var pointer: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>?
+        let n = member_of_groups(_contact, &pointer)
+        for i in 0..<n {
+            allGroups.append(String(cString: pointer![Int(i)]!))
+        }
+        let groups = _contacts.filter{isGroup($0.0)}
+        _groups = groups.map{($0.0, allGroups.contains($0.0))}
+    }
+    
+    var groupsCount: Int {
+        return _groups.count
+    }
+    
     var hiddenCount: Int {
         return _hiddenContacts.count
     }
     
+    var messageSize: String {
+        return _cHelper.getMessagesSize()
+    }
+    
+    var selectedContact: String? {
+        return _contact
+    }
     
     var count: Int {
         return _contacts.count
+    }
+    
+    func isGroup(_ contact: String?) -> Bool {
+        if contact != nil {
+            return  is_group(contact!) == 1
+        }else{
+           return  is_group(_contact) == 1
+        }
+    }
+    
+    func setContact(contact: String, sock: Int32) {
+        _cHelper = CHelper()
+        _contact = contact
+        _cHelper.initialize(sock, _contact)
     }
     
     func indexOf(contact: String) -> Int? {

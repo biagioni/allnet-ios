@@ -38,14 +38,6 @@ class MessageViewModel : NSObject {
         return _contact
     }
     
-    func isGroup() -> Bool {
-       return  is_group(_contact) == 1
-    }
-    
-    var messageSize: String {
-        return _cHelper.getMessagesSize()
-    }
-    
     func setContact(contact: String, sock: Int32) {
         _messages.removeAll()
         _cHelper = CHelper()
