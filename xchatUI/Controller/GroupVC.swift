@@ -17,8 +17,10 @@ class GroupVC: UITableViewController {
         super.viewDidLoad()
         if isGroup {
             contactVM.loadMembers()
+            navigationItem.title = "Participants"
         }else{
             contactVM.loadGroups()
+            navigationItem.title = "Groups"
         }
     }
     
@@ -36,5 +38,28 @@ class GroupVC: UITableViewController {
 
         }
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        if isGroup {
+            if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
+                remove_from_group(contactVM.selectedContact, contactVM.groups(index: indexPath.row)?.0)
+            }else{
+                add_to_group(contactVM.selectedContact, contactVM.groups(index: indexPath.row)?.0)
+            }
+        }else{
+            if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
+                remove_from_group(contactVM.groups(index: indexPath.row)?.0, contactVM.selectedContact)
+            }else{
+                add_to_group(contactVM.groups(index: indexPath.row)?.0, contactVM.selectedContact)
+            }
+        }
+        if isGroup {
+            contactVM.loadMembers()
+        }else{
+            contactVM.loadGroups()
+        }
+        tableView.reloadData()
     }
 }

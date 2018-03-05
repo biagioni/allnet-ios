@@ -608,6 +608,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="buttonDelete" destination="gd5-8F-kWE" id="ey3-SG-EsJ"/>
                         <outlet property="buttonGroup" destination="CXY-Pi-u1d" id="Ycw-om-WyI"/>
                         <outlet property="labelConversationSize" destination="e95-b5-Vbr" id="BA2-W1-acI"/>
                         <outlet property="switchNotification" destination="sil-Ua-kTy" id="7k3-rs-KSm"/>

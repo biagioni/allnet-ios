@@ -17,6 +17,7 @@ class SettingsVC: UITableViewController {
     @IBOutlet weak var switchSaveMessages: UISwitch!
     @IBOutlet weak var labelConversationSize: UILabel!
     @IBOutlet weak var buttonGroup: UIButton!
+    @IBOutlet weak var buttonDelete: UIButton!
     
     
     var contactVM: ContactViewModel!
@@ -25,8 +26,10 @@ class SettingsVC: UITableViewController {
         super.viewDidLoad()
         if contactVM.isGroup(nil) {
             buttonGroup.setTitle("    Manage participants", for: .normal)
+            buttonDelete.setTitle("    Delete group", for: .normal)
         }else{
             buttonGroup.setTitle("    Manage groups", for: .normal)
+            buttonDelete.setTitle("    Delete user", for: .normal)
         }
         updateUI()
     }

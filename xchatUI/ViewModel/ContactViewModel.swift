@@ -52,7 +52,7 @@ class ContactViewModel: NSObject {
         for i in 0..<n {
             allMembers.append(String(cString: pointer![Int(i)]!))
         }
-        _groups = _contacts.map{($0.0, allMembers.contains($0.0))}
+        _groups = _contacts.map{($0.0, allMembers.contains($0.0))}.filter{$0.0 != _contact!}
     }
     func loadGroups(){
         _groups.removeAll()
