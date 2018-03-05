@@ -8,13 +8,8 @@
 
 /*
  
- settingsvc
-    remove from group before delete
- delete group
- 
  newcontact
     confirmation for new key
-    create groups
     resend key for incomplete contacts
 */
 

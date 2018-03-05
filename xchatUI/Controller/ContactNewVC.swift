@@ -88,6 +88,10 @@ class ContactNewVC: UIViewController {
             info = (name, textFieldSecret.text, hops)
             self.performSegue(withIdentifier: "showKeyExchange", sender: false)
         }
+        textFieldName.text = ""
+        textFieldSecret.text = ""
+        pickerViewConnection.selectRow(0, inComponent: 0, animated: true)
+        buttonSelection.setTitle(connectionValues[0], for: .normal)
     }
 }
 

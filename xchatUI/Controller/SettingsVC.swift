@@ -56,6 +56,7 @@ class SettingsVC: UITableViewController {
         if contact != textFieldName.text {
             rename_contact(contact, textFieldName.text)
         }
+        self.navigationController?.popViewController(animated: true)
     }
     @IBAction func manageParticipants(_ sender: Any) {
         if contactVM.isGroup(nil) {
@@ -69,8 +70,9 @@ class SettingsVC: UITableViewController {
         let alert = UIAlertController(title: nil, message: "Are you sure you want to delete the conversation?", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let delete = UIAlertAction(title: "Delete", style: .destructive){
-            [weak self] action in
-            delete_conversation(self?.contactVM.selectedContact!)
+            action in
+            delete_conversation(self.contactVM.selectedContact!)
+            self.labelConversationSize.text = self.contactVM.messageSize+" MB"
         }
         alert.addAction(cancel)
         alert.addAction(delete)
@@ -81,9 +83,11 @@ class SettingsVC: UITableViewController {
         let alert = UIAlertController(title: nil, message: "Are you sure you want to delete the contact?", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let delete = UIAlertAction(title: "Delete", style: .destructive){
-           [weak self] action in
-            delete_contact(self?.contactVM.selectedContact!)
-            self?.navigationController?.popViewController(animated: true)
+            action in
+            make_invisible(self.contactVM.selectedContact!)
+            delete_conversation(self.contactVM.selectedContact!)
+            delete_contact(self.contactVM.selectedContact!)
+            self.navigationController?.popViewController(animated: true)
         }
         alert.addAction(cancel)
         alert.addAction(delete)

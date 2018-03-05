@@ -25,11 +25,15 @@ class KeyExchangeVC: UIViewController {
         var randomString = CHelper.generateRandoKey()
         
         if isGroup {
-            appDelegate.xChat.requestKey(info.name, maxHops: UInt(info.hops))
-            labelGeneratedKey.text = "None"
-            labelInformedKey.text =  "None"
-            textViewInformation.textColor = UIColor(hex: "19BB7B")
-            textViewInformation.text = "Created group \(info.name) with success!"
+            if create_group(info.name) == 1 {
+                labelGeneratedKey.text = "None"
+                labelInformedKey.text =  "None"
+                textViewInformation.textColor = UIColor(hex: "19BB7B")
+                textViewInformation.text = "Created group \(info.name) with success!"
+            }else{
+                textViewInformation.textColor = UIColor(hex: "A85363")
+                textViewInformation.text = "It was not possible to create the group \(info.name)."
+            }
         }else{
             if info.hops == 1 {
                 randomString = randomString?.substring(to: (randomString?.index((randomString?.startIndex)!, offsetBy: 6))!)
@@ -54,6 +58,7 @@ class KeyExchangeVC: UIViewController {
     @IBAction func cancelRequest(_ sender: UIBarButtonItem) {
         ///TODO if request was not completed
         appDelegate.xChat.removeNewContact(info.name)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func resendRequest(_ sender: UIButton) {
