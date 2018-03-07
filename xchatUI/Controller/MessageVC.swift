@@ -21,7 +21,7 @@ class MessageVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.view.backgroundColor = UIColor.white
         navigationItem.title = messageVM.selectedContact
         
         tableView.rowHeight = UITableViewAutomaticDimension

@@ -19,6 +19,7 @@ class MoreVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.view.backgroundColor = UIColor.white
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         moreVM = MoreViewModel()
         moreVM.delegate = self

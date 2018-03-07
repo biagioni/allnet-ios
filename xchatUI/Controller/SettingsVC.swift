@@ -24,6 +24,7 @@ class SettingsVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.view.backgroundColor = UIColor.white
         if contactVM.isGroup(nil) {
             buttonGroup.setTitle("    Manage participants", for: .normal)
             buttonDelete.setTitle("    Delete group", for: .normal)

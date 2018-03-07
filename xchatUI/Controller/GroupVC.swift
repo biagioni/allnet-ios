@@ -15,6 +15,7 @@ class GroupVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.view.backgroundColor = UIColor.white
         if isGroup {
             contactVM.loadMembers()
             navigationItem.title = "Participants"
