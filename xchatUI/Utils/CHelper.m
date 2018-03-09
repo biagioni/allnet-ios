@@ -155,10 +155,12 @@
 }
 
 + (NSString *) getKeyFor: (const char *) contact {
-     char * s1 = NULL;
+    NSString * randomSecret = nil;
+    NSString * enteredSecret = nil;
     keyset * keys = NULL;
     int nk = all_keys (contact, &keys);
     for (int ki = 0; ki < nk; ki++) {
+        char * s1 = NULL;
         char * s2 = NULL;
         char * content = NULL;
         incomplete_exchange_file(contact, keys [ki], &content, NULL);
@@ -179,13 +181,17 @@
                         s2 = NULL;
                     NSLog (@"first %s, second %s, third %s, s1 %s, s2 %s\n", first, second, third, s1, s2);
                 }
+                if (s1 != NULL)
+                    randomSecret = [[NSString alloc] initWithUTF8String:s1];
+                if (s2 != NULL)
+                    enteredSecret = [[NSString alloc] initWithUTF8String:s2];
+                free (content);
             }
         }
+        if (keys != NULL)
+            free (keys);
     }
-    if (s1 != NULL)
-        return [[NSString alloc] initWithUTF8String:s1];
-    else
-        return NULL;
+    return randomSecret;
 }
 
 //clean

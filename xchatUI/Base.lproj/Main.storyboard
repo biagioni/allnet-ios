@@ -1252,7 +1252,7 @@
                                 <color key="textColor" red="0.096729697190000005" green="0.73332705090000005" blue="0.48234629020000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="sdasdas sadasdsadas" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iIq-iX-tEE">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iIq-iX-tEE">
                                 <rect key="frame" x="16" y="268" width="343" height="128"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>

@@ -72,11 +72,16 @@ class KeyExchangeVC: UIViewController {
 
 extension KeyExchangeVC: KeyExchangeDelegate {
     func notificationOfGeneratedKey(forContact contact: String) {
-        textViewInformation.text = "Key was sent\nWaiting for key from:\n\(contact)"
+        DispatchQueue.main.async {
+            self.textViewInformation.textColor = UIColor(hex: "A85363")
+            self.textViewInformation.text = "Key was sent\nWaiting for key from:\n\(contact)"
+        }
     }
     
     func notificationkeyExchangeCompleted(forContact contact: String) {
-        textViewInformation.textColor = UIColor(hex: "19BB7B")
-        textViewInformation.text = "Key was exchanged with SUCCESS!!!\nWaiting for key from:\n\(contact)"
+        DispatchQueue.main.async {
+            self.textViewInformation.textColor = UIColor(hex: "19BB7B")
+            self.textViewInformation.text = "Key was exchanged with SUCCESS!!!"
+        }
     }
 }

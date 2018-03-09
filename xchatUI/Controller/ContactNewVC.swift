@@ -85,7 +85,7 @@ class ContactNewVC: UIViewController {
             return
         }
         if pickerViewConnection.selectedRow(inComponent: 0) == 2 {
-            info = (name, textFieldSecret.text, 10)
+            info = (name, textFieldSecret.text, 0)
             self.performSegue(withIdentifier: "showKeyExchange", sender: true)
         }else{
             if pickerViewConnection.selectedRow(inComponent: 0) == 0 {
@@ -138,9 +138,9 @@ extension ContactNewVC: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let contact = keyVM.incompleteKeysExchanges[indexPath.row]
         if let key = keyVM.getKeyFor(contact: contact) {
-            textFieldSecret.text = key
+            info = (contact, key, 10)
+            self.performSegue(withIdentifier: "showKeyExchange", sender: false)
         }
-        textFieldName.text = contact
     }
 }
 

@@ -150,8 +150,7 @@ static void * request_key (void * arg_void) {
 }
 
 - (void)requestKey:(NSString *)contact maxHops: (NSUInteger) hops {
-  if (! subscribe_broadcast(self.sock, (char *) (contact.UTF8String)))
-    printf ("subscription to %s failed\n", contact.UTF8String);
+  subscribe_broadcast(self.sock, (char *) (contact.UTF8String));
 }
 
 static void dataAvailable (CFSocketRef s, CFSocketCallBackType callbackType, CFDataRef address,
@@ -230,6 +229,7 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
     }
     // NSLog(@"XChat.m: refreshed the conversation UI text view and the contacts UI table view\n");
   } else if (mlen == -1) {        // successfully exchanged keys
+    waiting_for_key = 0;
     NSLog(@"key exchange successfully completed for peer %s\n", keyContact);
     NSString * contact = [[NSString alloc] initWithUTF8String:keyContact];
     [mySelf.key notificationkeyExchangeCompletedForContact:contact];
