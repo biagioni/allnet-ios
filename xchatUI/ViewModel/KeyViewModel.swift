@@ -25,7 +25,7 @@ class KeyViewModel {
         }
     }
     
-    func getKeyFor(contact: String) -> String{
+    func getKeyFor(contact: String) -> String? {
         return CHelper.getKeyFor(contact)
     }
 }

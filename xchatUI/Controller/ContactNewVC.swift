@@ -136,9 +136,9 @@ extension ContactNewVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let contact = keyVM.incompleteKeysExchanges[indexPath.row]
-        let key = keyVM.getKeyFor(contact: contact)
-        
-        textFieldSecret.text = key
+        if let key = keyVM.getKeyFor(contact: contact) {
+            textFieldSecret.text = key
+        }
         textFieldName.text = contact
     }
 }

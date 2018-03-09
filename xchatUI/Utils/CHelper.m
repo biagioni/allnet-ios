@@ -182,7 +182,10 @@
             }
         }
     }
-    return [[NSString alloc] initWithUTF8String:s1];
+    if (s1 != NULL)
+        return [[NSString alloc] initWithUTF8String:s1];
+    else
+        return NULL;
 }
 
 //clean
