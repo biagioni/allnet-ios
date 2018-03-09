@@ -276,10 +276,10 @@
 			isa = PBXGroup;
 			children = (
 				2993BB6020487BC900337230 /* AppDelegate.swift */,
-				29952BF22034D976009054D4 /* ContactListVC.swift */,
-				2925D0562043161B003A9E2E /* ContactNewVC.swift */,
-				29EB67F820374DD300D9647F /* MessageVC.swift */,
 				29B0E13520396C1700F38A3E /* SettingsVC.swift */,
+				29952BF22034D976009054D4 /* ContactListVC.swift */,
+				29EB67F820374DD300D9647F /* MessageVC.swift */,
+				2925D0562043161B003A9E2E /* ContactNewVC.swift */,
 				2925D05A20433D75003A9E2E /* KeyExchangeVC.swift */,
 				2908613220466B0400C4B50F /* MoreVC.swift */,
 				29C48C0B204CB86700B0FDC7 /* GroupVC.swift */,

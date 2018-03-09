@@ -6,14 +6,17 @@
 //  Copyright © 2018 allnet. All rights reserved.
 //
 
+protocol KeyExchangeDelegate {
+    func notificationOfGeneratedKey(forContact contact: String)
+    func notificationkeyExchangeCompleted(forContact contact: String)
+}
 
-class KeyViewModel {
-    private var _contact: String
+class KeyViewModel: NSObject {
+    var delegate: KeyExchangeDelegate?
     private var _pointer: UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>?
     var incompleteKeysExchanges: [String]
     
-    init(contact: String) {
-        _contact = contact
+    override init() {
         incompleteKeysExchanges = [String]()
     }
     
@@ -23,6 +26,14 @@ class KeyViewModel {
         for i in 0..<keyArray {
             incompleteKeysExchanges.append(String(NSString(utf8String: _pointer![Int(i)]!)!))
         }
+    }
+    
+    func notificationOfGeneratedKey(forContact contact: String){
+        delegate?.notificationOfGeneratedKey(forContact: contact)
+    }
+    
+    func notificationkeyExchangeCompleted(forContact contact: String){
+        delegate?.notificationkeyExchangeCompleted(forContact: contact)
     }
     
     func getKeyFor(contact: String) -> String? {

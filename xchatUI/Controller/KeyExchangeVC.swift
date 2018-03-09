@@ -17,11 +17,15 @@ class KeyExchangeVC: UIViewController {
     var info: (name: String, key: String?, hops: Int)!
     var isGroup: Bool!
     var appDelegate: AppDelegate!
+    var keyVM: KeyViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.view.backgroundColor = UIColor.white
         appDelegate = UIApplication.shared.delegate as! AppDelegate
+        keyVM.delegate = self
+        appDelegate.xChat.setKeyVM(keyVM)
+        
         var randomString = CHelper.generateRandoKey()
         
         if isGroup {
@@ -43,7 +47,7 @@ class KeyExchangeVC: UIViewController {
             info.key = info.key ?? ""
             labelInformedKey.text = !(info.key?.isEmpty)! ? info.key! : "None"
             textViewInformation.textColor = UIColor(hex: "A85363")
-            textViewInformation.text = "Key exchange in progress\nKey was sent\nWaiting for key from:\n\(info.name)"
+            textViewInformation.text = "Key exchange in progress\nWaiting for key from:\n\(info.name)"
         }
     }
     
@@ -63,5 +67,16 @@ class KeyExchangeVC: UIViewController {
     
     @IBAction func resendRequest(_ sender: UIButton) {
         appDelegate.xChat.resendKey(forNewContact: info.name)
+    }
+}
+
+extension KeyExchangeVC: KeyExchangeDelegate {
+    func notificationOfGeneratedKey(forContact contact: String) {
+        textViewInformation.text = "Key was sent\nWaiting for key from:\n\(contact)"
+    }
+    
+    func notificationkeyExchangeCompleted(forContact contact: String) {
+        textViewInformation.textColor = UIColor(hex: "19BB7B")
+        textViewInformation.text = "Key was exchanged with SUCCESS!!!\nWaiting for key from:\n\(contact)"
     }
 }

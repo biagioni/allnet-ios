@@ -20,6 +20,7 @@
 - (void) setMessageVM:(NSObject *)object;
 - (void) setContactVM:(NSObject *)object;
 - (void) setMoreVM:(NSObject *)object;
+- (void) setKeyVM:(NSObject *)object;
 
 - (void) requestNewContact:(NSString *)contact
                    maxHops:(NSUInteger) hops

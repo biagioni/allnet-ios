@@ -26,7 +26,7 @@ class ContactNewVC: UIViewController {
         self.navigationController?.view.backgroundColor = UIColor.white
         heightPicker.constant = 0
         tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
-        keyVM = KeyViewModel(contact: "")
+        keyVM = KeyViewModel()
         keyVM.fetchIncompletedKeys()
         connectionValues = ["regular internet contact", "nearby wireless contact","new group"]
         if keyVM.incompleteKeysExchanges.count > 0 {
@@ -50,6 +50,7 @@ class ContactNewVC: UIViewController {
             let destination = segue.destination as! KeyExchangeVC
             destination.info = info
             destination.isGroup = sender as! Bool
+            destination.keyVM = keyVM
         }
     }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
