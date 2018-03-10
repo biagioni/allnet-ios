@@ -26,14 +26,7 @@ class ContactNewVC: UIViewController {
         self.navigationController?.view.backgroundColor = UIColor.white
         heightPicker.constant = 0
         tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
-        keyVM = KeyViewModel()
-        keyVM.fetchIncompletedKeys()
         connectionValues = ["regular internet contact", "nearby wireless contact","new group"]
-        if keyVM.incompleteKeysExchanges.count > 0 {
-            labelImcomplete.isHidden = false
-        }else{
-            labelImcomplete.isHidden = true
-        }
     }
     deinit {
         tableView.removeObserver(self, forKeyPath: "contentSize")
@@ -41,8 +34,14 @@ class ContactNewVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        keyVM = KeyViewModel()
         keyVM.fetchIncompletedKeys()
         tableView.reloadData()
+        if keyVM.incompleteKeysExchanges.count > 0 {
+            labelImcomplete.isHidden = false
+        }else{
+            labelImcomplete.isHidden = true
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

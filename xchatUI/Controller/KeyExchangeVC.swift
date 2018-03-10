@@ -18,6 +18,7 @@ class KeyExchangeVC: UIViewController {
     var isGroup: Bool!
     var appDelegate: AppDelegate!
     var keyVM: KeyViewModel!
+    var isExchanged = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,13 +74,16 @@ class KeyExchangeVC: UIViewController {
 extension KeyExchangeVC: KeyExchangeDelegate {
     func notificationOfGeneratedKey(forContact contact: String) {
         DispatchQueue.main.async {
-            self.textViewInformation.textColor = UIColor(hex: "A85363")
-            self.textViewInformation.text = "Key was sent\nWaiting for key from:\n\(contact)"
+            if !self.isExchanged {
+                self.textViewInformation.textColor = UIColor(hex: "A85363")
+                self.textViewInformation.text = "Key was sent\nWaiting for key from:\n\(contact)"
+            }
         }
     }
     
     func notificationkeyExchangeCompleted(forContact contact: String) {
         DispatchQueue.main.async {
+            self.isExchanged = true
             self.textViewInformation.textColor = UIColor(hex: "19BB7B")
             self.textViewInformation.text = "Key was exchanged with SUCCESS!!!"
         }
