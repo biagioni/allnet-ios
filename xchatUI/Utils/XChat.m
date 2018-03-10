@@ -224,9 +224,12 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
     NSString * contact = [[NSString alloc] initWithUTF8String:peer];
     if (! duplicate) {
       NSString * msg = [[NSString alloc] initWithUTF8String:message];
-      [mySelf.conversation receivedNewMessageForContact:contact];
-      AppDelegate * appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-      [appDelegate notifyMessageReceivedWithContact:contact message:msg];
+      if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
+        [mySelf.conversation receivedNewMessageForContact:contact];
+      }else{
+        AppDelegate * appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+        [appDelegate notifyMessageReceivedWithContact:contact message:msg];
+      }
     }
     // NSLog(@"XChat.m: refreshed the conversation UI text view and the contacts UI table view\n");
   } else if (mlen == -1) {        // successfully exchanged keys
