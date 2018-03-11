@@ -20,3 +20,7 @@
 #include "store.h"
 #include "cutil.h"
 #include "app_util.h"
+#include "priority.h"
+#include "allnet_log.h"
+
+extern void multipeer_queue_indices (int * rpipe, int * wpipe);

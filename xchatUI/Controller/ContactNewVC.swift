@@ -139,6 +139,8 @@ extension ContactNewVC: UITableViewDelegate {
         if let key = keyVM.getKeyFor(contact: contact) {
             info = (contact, key, 10)
             self.performSegue(withIdentifier: "showKeyExchange", sender: false)
+        }else{
+            textFieldName.text = contact
         }
     }
 }

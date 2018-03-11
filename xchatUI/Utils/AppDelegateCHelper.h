@@ -12,16 +12,14 @@
 #import "MultipeerConnectivity/MultipeerConnectivity.h"
 #define AppDelegateCHelper_h
 
-@interface AppDelegateCHelper : UIResponder <MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate, MCSessionDelegate>
+@interface AppDelegateCHelper : NSObject 
 @property (nonatomic, strong) XChat * xChat;
 @property (nonatomic, strong) MCPeerID * peerID;
 @property (nonatomic, strong) MCNearbyServiceAdvertiser * advertiser;
 @property (nonatomic, strong) MCNearbyServiceBrowser * browser;
 @property (nonatomic, strong) NSMutableArray * sessions;
-- (void) createAllNetDir;
 -(void) acacheSaveData;
 
 - (void) start_allnet:(UIApplication *) application start_everything:(BOOL)first_call;
-- (void) setPeer;
 @end
 #endif /* AppDelegateCHelper_h */
