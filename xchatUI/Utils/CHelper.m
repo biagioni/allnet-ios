@@ -59,122 +59,6 @@
     update_time_read (contact.UTF8String);
 }
 
-static char * string_replace (char * original, char * pattern, char * repl)
-{
-    char * p = strstr (original, pattern);
-    if (p == NULL) {
-        printf ("error: string %s does not contain '%s'\n", original, pattern);
-        /* this is a serious error -- need to figure out what is going on */
-        exit (1);
-    }
-    size_t olen = strlen (original);
-    size_t plen = strlen (pattern);
-    size_t rlen = strlen (repl);
-    size_t size = olen + 1 + rlen - plen;
-    char * result = malloc_or_fail (size, "string_replace");
-    size_t prelen = p - original;
-    memcpy (result, original, prelen);
-    memcpy (result + prelen, repl, rlen);
-    char * postpos = p + plen;
-    size_t postlen = olen - (postpos - original);
-    memcpy (result + prelen + rlen, postpos, postlen);
-    result [size - 1] = '\0';
-    /*  printf ("replacing %s with %s in %s gives %s\n",
-     pattern, repl, original, result); */
-    return result;
-}
-static void update_time_read (const char * contact)
-{
-    keyset *k;
-    int nkeys = all_keys(contact, &k);
-    for (int ikey = 0; ikey < nkeys; ikey++) {
-        char * path = contact_last_read_path(contact, k [ikey]);
-        if (path != NULL) {
-            NSLog(@"update_time_read path is %s\n", path);
-            int fd = open(path, O_CREAT | O_TRUNC | O_WRONLY, S_IRUSR | S_IWUSR);
-            write(fd, " ", 1);
-            close (fd);   /* all we are doing is setting the modification time */
-            free (path);
-        }
-    }
-    free (k);
-}
-
-static char * contact_last_read_path (const char * contact, keyset k)
-{
-    char * directory = key_dir (k);
-    if (directory != NULL) {
-        directory = string_replace(directory, "contacts", "xchat");
-        char * path = strcat3_malloc(directory, "/", "last_read", "contact_last_read_path");
-        free (directory);
-        return path;
-    }
-    return NULL;
-}
-//clean
-static NSString * basicDate (uint64_t time, int tzMin) {
-    // objective C time begins on January 1st, 2001.  allnet time begins on January 1st, 2000.
-    uint64_t unixTime = time + ALLNET_Y2K_SECONDS_IN_UNIX;
-    NSDate * date = [[NSDate alloc] initWithTimeIntervalSince1970:unixTime];
-    // date formatter code from https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/DataFormatting/Articles/dfDateFormatting10_4.html#//apple_ref/doc/uid/TP40002369-SW1
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-    NSString * dateString = [dateFormatter stringFromDate:date];
-    if (local_time_offset() != tzMin) {
-        // some of this code from cutil.c
-        int delta = tzMin - local_time_offset();
-        while (delta < 0)
-            delta += 0x10000;  // 16-bit value
-        if (delta >= 0x8000)
-            delta = 0x10000 - delta;
-        NSString * offset = [[NSString alloc] initWithFormat:@" (%+d:%d)", delta / 60, delta % 60];
-        [dateString stringByAppendingString:offset];
-    }
-    dateString = [dateString stringByAppendingString:@"\n"];
-    return dateString;
-}
-
-//clean
-static int local_time_offset ()
-{
-    time_t now = time (NULL);
-    
-    struct tm now_ltime_tm;
-    localtime_r (&now, &now_ltime_tm);
-    struct tm gtime_tm;
-    gmtime_r (&now, &gtime_tm);
-    return (delta_minutes (&now_ltime_tm, &gtime_tm));
-}
-
-//clean
-static int delta_minutes (struct tm * local, struct tm * gm)
-{
-    int delta_hour = local->tm_hour - gm->tm_hour;
-    if (local->tm_wday == ((gm->tm_wday + 8) % 7)) {
-        delta_hour += 24;
-    } else if (local->tm_wday == ((gm->tm_wday + 6) % 7)) {
-        delta_hour -= 24;
-    } else if (local->tm_wday != gm->tm_wday) {
-        printf ("assertion error: weekday %d != %d +- 1\n",
-                local->tm_wday, gm->tm_wday);
-        exit (1);
-    }
-    int delta_min = local->tm_min - gm->tm_min;
-    if (delta_min < 0) {
-        delta_hour -= 1;
-        delta_min += 60;
-    }
-    int result = delta_hour * 60 + delta_min;
-    /*
-     printf ("delta minutes is %02d:%02d = %d\n", delta_hour, delta_min, result);
-     */
-    return result;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 //clean
 - (NSMutableArray *)getMessages {
     update_time_read(self.xcontact);
@@ -311,6 +195,67 @@ static int delta_minutes (struct tm * local, struct tm * gm)
 }
 
 //clean
+static NSString * basicDate (uint64_t time, int tzMin) {
+    // objective C time begins on January 1st, 2001.  allnet time begins on January 1st, 2000.
+    uint64_t unixTime = time + ALLNET_Y2K_SECONDS_IN_UNIX;
+    NSDate * date = [[NSDate alloc] initWithTimeIntervalSince1970:unixTime];
+    // date formatter code from https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/DataFormatting/Articles/dfDateFormatting10_4.html#//apple_ref/doc/uid/TP40002369-SW1
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+    NSString * dateString = [dateFormatter stringFromDate:date];
+    if (local_time_offset() != tzMin) {
+        // some of this code from cutil.c
+        int delta = tzMin - local_time_offset();
+        while (delta < 0)
+            delta += 0x10000;  // 16-bit value
+        if (delta >= 0x8000)
+            delta = 0x10000 - delta;
+        NSString * offset = [[NSString alloc] initWithFormat:@" (%+d:%d)", delta / 60, delta % 60];
+        [dateString stringByAppendingString:offset];
+    }
+    dateString = [dateString stringByAppendingString:@"\n"];
+    return dateString;
+}
+
+//clean
+static int local_time_offset ()
+{
+    time_t now = time (NULL);
+    
+    struct tm now_ltime_tm;
+    localtime_r (&now, &now_ltime_tm);
+    struct tm gtime_tm;
+    gmtime_r (&now, &gtime_tm);
+    return (delta_minutes (&now_ltime_tm, &gtime_tm));
+}
+
+//clean
+static int delta_minutes (struct tm * local, struct tm * gm)
+{
+    int delta_hour = local->tm_hour - gm->tm_hour;
+    if (local->tm_wday == ((gm->tm_wday + 8) % 7)) {
+        delta_hour += 24;
+    } else if (local->tm_wday == ((gm->tm_wday + 6) % 7)) {
+        delta_hour -= 24;
+    } else if (local->tm_wday != gm->tm_wday) {
+        printf ("assertion error: weekday %d != %d +- 1\n",
+                local->tm_wday, gm->tm_wday);
+        exit (1);
+    }
+    int delta_min = local->tm_min - gm->tm_min;
+    if (delta_min < 0) {
+        delta_hour -= 1;
+        delta_min += 60;
+    }
+    int result = delta_hour * 60 + delta_min;
+    /*
+     printf ("delta minutes is %02d:%02d = %d\n", delta_hour, delta_min, result);
+     */
+    return result;
+}
+
+//clean
 static void send_message_in_separate_thread (int sock, char * contact, char * message, size_t mlen)
 {
     struct data_to_send * d = malloc_or_fail(sizeof (struct data_to_send), "send_message_with_delay");
@@ -412,7 +357,59 @@ struct data_to_send {
     }
 }
 
+//clean
+static char * string_replace (char * original, char * pattern, char * repl)
+{
+    char * p = strstr (original, pattern);
+    if (p == NULL) {
+        printf ("error: string %s does not contain '%s'\n", original, pattern);
+        /* this is a serious error -- need to figure out what is going on */
+        exit (1);
+    }
+    size_t olen = strlen (original);
+    size_t plen = strlen (pattern);
+    size_t rlen = strlen (repl);
+    size_t size = olen + 1 + rlen - plen;
+    char * result = malloc_or_fail (size, "string_replace");
+    size_t prelen = p - original;
+    memcpy (result, original, prelen);
+    memcpy (result + prelen, repl, rlen);
+    char * postpos = p + plen;
+    size_t postlen = olen - (postpos - original);
+    memcpy (result + prelen + rlen, postpos, postlen);
+    result [size - 1] = '\0';
+    /*  printf ("replacing %s with %s in %s gives %s\n",
+     pattern, repl, original, result); */
+    return result;
+}
+static void update_time_read (const char * contact)
+{
+    keyset *k;
+    int nkeys = all_keys(contact, &k);
+    for (int ikey = 0; ikey < nkeys; ikey++) {
+        char * path = contact_last_read_path(contact, k [ikey]);
+        if (path != NULL) {
+            NSLog(@"update_time_read path is %s\n", path);
+            int fd = open(path, O_CREAT | O_TRUNC | O_WRONLY, S_IRUSR | S_IWUSR);
+            write(fd, " ", 1);
+            close (fd);   /* all we are doing is setting the modification time */
+            free (path);
+        }
+    }
+    free (k);
+}
 
+static char * contact_last_read_path (const char * contact, keyset k)
+{
+    char * directory = key_dir (k);
+    if (directory != NULL) {
+        directory = string_replace(directory, "contacts", "xchat");
+        char * path = strcat3_malloc(directory, "/", "last_read", "contact_last_read_path");
+        free (directory);
+        return path;
+    }
+    return NULL;
+}
 
 static uint64_t last_time_read (const char * contact)
 {
