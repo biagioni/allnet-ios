@@ -23,6 +23,7 @@
 #include "allnet_log.h"
 #include "message.h"
 #include "xcommon.h"
+#include "time.h"
 
 extern void multipeer_queue_indices (int * rpipe, int * wpipe);
 extern void stop_allnet_threads (void);

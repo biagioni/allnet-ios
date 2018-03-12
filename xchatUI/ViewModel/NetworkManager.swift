@@ -80,14 +80,13 @@ class NetworkManager {
                 var next = prev_message(iter, &seq, &time, &tz_min, &rcvd_time, &ack, &message, &msize)
                 while (next != MSG_TYPE_DONE) {
                     if ((next == MSG_TYPE_RCVD) || (next == MSG_TYPE_SENT)) {  // ignore acks
-                        
-//                        if message != nil {
-//                            var mi = MsgModel(message: String(cString: message!), msg_type: Int(next), dated: basicDate(mi.time, mi.tz_min), message_has_been_acked: 0, msize: Int(msize), seq: seq, prev_missing: 0)
-//                            if (next == MSG_TYPE_SENT) && (is_acked_one(contact, k![Int(ik)], seq, nil)) == 1 {
-//                                mi.message_has_been_acked = 1
-//                            }
-//                            result_messages.append(mi)
-//                        }
+                        if message != nil {
+                            var model = MsgModel(message: String(cString: message!), msg_type: Int(next), dated: basicDate(time: Int(time), tzMin: Int(tz_min)), message_has_been_acked: 0, msize: Int(msize), seq: Int(seq), prev_missing: 0)
+                            if (next == MSG_TYPE_SENT) && (is_acked_one(contact, k![Int(ik)], seq, nil)) == 1 {
+                                model.message_has_been_acked = 1
+                            }
+                            result_messages.append(model)
+                        }
                     }
                     free(message)
                     message = nil
@@ -102,5 +101,55 @@ class NetworkManager {
         result_messages = result_messages.sorted(by: {$0.dated < $1.dated})
         return result_messages
     }
-
+    
+    func basicDate(time: Int, tzMin: Int) -> String {
+        let unixTime: TimeInterval = Double(time) + Double(ALLNET_Y2K_SECONDS_IN_UNIX)
+        let date = Date(timeIntervalSince1970: unixTime)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .medium
+        var dateString = dateFormatter.string(from: date)
+        if localTimeOffset() != tzMin {
+            // some of this code from cutil.c
+            var delta = tzMin - localTimeOffset()
+            while (delta < 0){
+                delta += 0x10000 // 16-bit value
+            }
+            if (delta >= 0x8000){
+                delta = 0x10000 - delta
+            }
+            let offset =  String(format: " (%+d:%d)", delta / 60, delta % 60)
+            dateString = dateString.appending(offset)
+        }
+        dateString = dateString.appending("\n")
+        return dateString
+    }
+    
+    func localTimeOffset() -> Int {
+        var now = time(nil)
+        var now_ltime_tm = tm()
+        localtime_r (&now, &now_ltime_tm);
+        var gtime_tm = tm()
+        gmtime_r (&now, &gtime_tm);
+        return (deltaMinutes(local: now_ltime_tm, gm: gtime_tm));
+    }
+    
+    func deltaMinutes(local: tm, gm: tm) -> Int {
+        var delta_hour = local.tm_hour - gm.tm_hour
+        if local.tm_wday == ((gm.tm_wday + 8) % 7) {
+            delta_hour += 24
+        } else if (local.tm_wday == ((gm.tm_wday + 6) % 7)) {
+            delta_hour -= 24
+        } else if (local.tm_wday != gm.tm_wday) {
+            NSLog("assertion error: weekday %d != %d +- 1\n", local.tm_wday, gm.tm_wday)
+            exit (1)
+        }
+        var delta_min = local.tm_min - gm.tm_min
+        if (delta_min < 0) {
+            delta_hour -= 1
+            delta_min += 60
+        }
+        let result = delta_hour * 60 + delta_min
+        return Int(result)
+    }
 }
