@@ -14,6 +14,9 @@
 		2925D05B20433D75003A9E2E /* KeyExchangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2925D05A20433D75003A9E2E /* KeyExchangeVC.swift */; };
 		2943946D20462EA6006E1AFF /* UINavigationController+Pop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2943946C20462EA6006E1AFF /* UINavigationController+Pop.swift */; };
 		2946A569204A63FD00AC37A7 /* MoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2946A568204A63FD00AC37A7 /* MoreViewModel.swift */; };
+		296D283220562B690030B003 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296D283120562B690030B003 /* NetworkManager.swift */; };
+		296D28342056337F0030B003 /* Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296D28332056337F0030B003 /* Alias.swift */; };
+		296D2836205647360030B003 /* MsgModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296D2835205647360030B003 /* MsgModel.swift */; };
 		2993BB6220487F8300337230 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2993BB6020487BC900337230 /* AppDelegate.swift */; };
 		2993BB6320487FE300337230 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 425A7D931AEC898C00C74E12 /* Info.plist */; };
 		29952BF32034D976009054D4 /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF22034D976009054D4 /* ContactListVC.swift */; };
@@ -78,6 +81,9 @@
 		2925D05A20433D75003A9E2E /* KeyExchangeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExchangeVC.swift; sourceTree = "<group>"; };
 		2943946C20462EA6006E1AFF /* UINavigationController+Pop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Pop.swift"; sourceTree = "<group>"; };
 		2946A568204A63FD00AC37A7 /* MoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewModel.swift; sourceTree = "<group>"; };
+		296D283120562B690030B003 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		296D28332056337F0030B003 /* Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alias.swift; sourceTree = "<group>"; };
+		296D2835205647360030B003 /* MsgModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MsgModel.swift; sourceTree = "<group>"; };
 		2993BB6020487BC900337230 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29952BF22034D976009054D4 /* ContactListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListVC.swift; sourceTree = "<group>"; };
 		29952BF620354E4C009054D4 /* CHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHelper.m; sourceTree = "<group>"; };
@@ -303,6 +309,7 @@
 				29952BF820355093009054D4 /* CHelper.h */,
 				29B0E13D20396F5300F38A3E /* UIColor+Hex.swift */,
 				2943946C20462EA6006E1AFF /* UINavigationController+Pop.swift */,
+				296D28332056337F0030B003 /* Alias.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -314,6 +321,7 @@
 				29EB6800203769CC00D9647F /* MessageViewModel.swift */,
 				2925D05820431D1B003A9E2E /* KeyViewModel.swift */,
 				2946A568204A63FD00AC37A7 /* MoreViewModel.swift */,
+				296D283120562B690030B003 /* NetworkManager.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -323,6 +331,7 @@
 			children = (
 				29EB680B20379D7300D9647F /* MessageModel.m */,
 				29EB680D20379DBB00D9647F /* MessageModel.h */,
+				296D2835205647360030B003 /* MsgModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -531,7 +540,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				296D283220562B690030B003 /* NetworkManager.swift in Sources */,
 				29B0E13620396C1700F38A3E /* SettingsVC.swift in Sources */,
+				296D28342056337F0030B003 /* Alias.swift in Sources */,
 				29B449BA20336F920050B64D /* routing.c in Sources */,
 				29EB67F920374DD300D9647F /* MessageVC.swift in Sources */,
 				29B449A420336DEE0050B64D /* astart.c in Sources */,
@@ -573,6 +584,7 @@
 				290861352046899700C4B50F /* MessageCell.swift in Sources */,
 				29B44932203362950050B64D /* cutil.c in Sources */,
 				29B44957203365A80050B64D /* stream.c in Sources */,
+				296D2836205647360030B003 /* MsgModel.swift in Sources */,
 				29B44944203363CA0050B64D /* sha.c in Sources */,
 				2943946D20462EA6006E1AFF /* UINavigationController+Pop.swift in Sources */,
 				29B4496A2033668B0050B64D /* retransmit.c in Sources */,

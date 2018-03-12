@@ -150,7 +150,7 @@ class ContactViewModel: NSObject {
     }
     
     func lastTime(objCContact: String, msgType: Int) -> Double {
-        var k: UnsafeMutablePointer<keyset>?
+        var k: Keyset
         let contactPointer = (objCContact as NSString).utf8String//objCContact.utf8CString
         let nk = all_keys(contactPointer, &k)
         var latest_time: UInt64 = 0
@@ -158,8 +158,8 @@ class ContactViewModel: NSObject {
             var seq: UInt64 = 0
             var time: UInt64 = 0
             var tz_min: Int32 = 0
-            var ack: UnsafeMutablePointer<CChar>!
-            let mtype = highest_seq_record(contactPointer, k! [Int(ik)], Int32(msgType), &seq, &time, &tz_min, nil, ack, nil, nil);
+            var ack: Int8 = 0
+            let mtype = highest_seq_record(contactPointer, k! [Int(ik)], Int32(msgType), &seq, &time, &tz_min, nil, &ack, nil, nil);
             if mtype != MSG_TYPE_DONE && time > latest_time {
                 latest_time = time
             }

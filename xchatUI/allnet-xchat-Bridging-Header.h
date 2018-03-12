@@ -21,9 +21,11 @@
 #include "app_util.h"
 #include "priority.h"
 #include "allnet_log.h"
+#include "message.h"
+#include "xcommon.h"
 
 extern void multipeer_queue_indices (int * rpipe, int * wpipe);
-extern void stop_allnet_threads ();
+extern void stop_allnet_threads (void);
 extern void acache_save_data (void);
 extern int astart_main (int argc, char ** argv);
 extern void multipeer_queue_indices (int * rpipe, int * wpipe);
