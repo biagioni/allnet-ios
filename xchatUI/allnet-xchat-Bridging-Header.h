@@ -4,7 +4,6 @@
 #import "XChat.h"
 #import "CHelper.h"
 #import "MessageModel.h"
-#import "AppDelegateCHelper.h"
 
 #include <sys/stat.h>
 #include <pthread.h>
@@ -23,4 +22,8 @@
 #include "priority.h"
 #include "allnet_log.h"
 
+extern void multipeer_queue_indices (int * rpipe, int * wpipe);
+extern void stop_allnet_threads ();
+extern void acache_save_data (void);
+extern int astart_main (int argc, char ** argv);
 extern void multipeer_queue_indices (int * rpipe, int * wpipe);

@@ -6,6 +6,8 @@
 //  Copyright © 2018 allnet. All rights reserved.
 //
 
+import UIKit
+
 class ContactNewVC: UIViewController {
     
     @IBOutlet weak var textFieldName: UITextField!

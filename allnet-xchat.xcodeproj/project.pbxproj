@@ -18,7 +18,6 @@
 		2993BB6320487FE300337230 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 425A7D931AEC898C00C74E12 /* Info.plist */; };
 		29952BF32034D976009054D4 /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF22034D976009054D4 /* ContactListVC.swift */; };
 		29952BF720354E4C009054D4 /* CHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF620354E4C009054D4 /* CHelper.m */; };
-		29A69CEE203925D500929B53 /* AppDelegateCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A69CED203925D500929B53 /* AppDelegateCHelper.m */; };
 		29B0E13620396C1700F38A3E /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B0E13520396C1700F38A3E /* SettingsVC.swift */; };
 		29B0E13E20396F5300F38A3E /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B0E13D20396F5300F38A3E /* UIColor+Hex.swift */; };
 		29B44932203362950050B64D /* cutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 29B44931203362950050B64D /* cutil.c */; };
@@ -83,8 +82,6 @@
 		29952BF22034D976009054D4 /* ContactListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListVC.swift; sourceTree = "<group>"; };
 		29952BF620354E4C009054D4 /* CHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHelper.m; sourceTree = "<group>"; };
 		29952BF820355093009054D4 /* CHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHelper.h; sourceTree = "<group>"; };
-		29A69CEC203925D500929B53 /* AppDelegateCHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegateCHelper.h; sourceTree = "<group>"; };
-		29A69CED203925D500929B53 /* AppDelegateCHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegateCHelper.m; sourceTree = "<group>"; };
 		29B0E13520396C1700F38A3E /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		29B0E13D20396F5300F38A3E /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		29B44929203358400050B64D /* allnet-xchat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "allnet-xchat-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -304,8 +301,6 @@
 				428DEE961B0FB9D000163976 /* XChat.m */,
 				29952BF620354E4C009054D4 /* CHelper.m */,
 				29952BF820355093009054D4 /* CHelper.h */,
-				29A69CEC203925D500929B53 /* AppDelegateCHelper.h */,
-				29A69CED203925D500929B53 /* AppDelegateCHelper.m */,
 				29B0E13D20396F5300F38A3E /* UIColor+Hex.swift */,
 				2943946C20462EA6006E1AFF /* UINavigationController+Pop.swift */,
 			);
@@ -586,7 +581,6 @@
 				29B449A620336E3A0050B64D /* ad.c in Sources */,
 				29B449AE20336EBF0050B64D /* table.c in Sources */,
 				29B449BB20336F920050B64D /* xcommon.c in Sources */,
-				29A69CEE203925D500929B53 /* AppDelegateCHelper.m in Sources */,
 				29B44941203363790050B64D /* priority.c in Sources */,
 				29EB67F72036B0AB00D9647F /* ContactViewModel.swift in Sources */,
 				29B449BD20336FD20050B64D /* traced.c in Sources */,

@@ -15,7 +15,6 @@ import MultipeerConnectivity
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var appCHelper: AppDelegateCHelper!
     var authorizationGranted = false
     var xChat: XChat!
     var firstCall =  true
@@ -29,13 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var browser: MCNearbyServiceBrowser!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        allnet_log = init_log ("AppDelegate.m")
         
         sessions = [MCSession]()
         self.xChat = XChat()
-        appCHelper = AppDelegateCHelper()
         createAllNetDir()
-        appCHelper.start_allnet(application, start_everything: true)
+        startAllnet(application: application, firstCall: true)
         sleep(1)
         
         if #available(iOS 10.0, *) {
@@ -67,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        appCHelper.start_allnet(application, start_everything: false)
+        startAllnet(application: application, firstCall: false)
         set_speculative_computation (UIDevice.current.batteryState != UIDeviceBatteryState.unplugged ? 0 : 1)
     }
     
@@ -85,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func enterBackground(){
-        appCHelper.acacheSaveData()
+        acache_save_data()
         set_speculative_computation(0);
     }
     
@@ -100,6 +97,90 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             chdir(newPath)
         }catch(let error){
             print(error)
+        }
+    }
+    
+    #if USE_ABLE_TO_CONNECT
+        func ableToConnect() -> Bool {
+            let sock = socket (AF_INET, SOCK_STREAM, IPPROTO_TCP)
+            let sin = sockaddr_in()
+            sin.sin_family = AF_INET
+            sin.sin_addr.s_addr = inet_addr ("127.0.0.1")
+            sin.sin_port = ALLNET_LOCAL_PORT
+            if (connect (sock, &sin, sizeof (sin)) == 0) {
+                close (sock)
+                NSLog("allnet task still running, will not restart\n")
+                return 1
+            }
+            NSLog("allnet task is not running\n")
+            return 0
+        }
+    #endif /* USE_ABLE_TO_CONNECT */
+    
+    func startAllnet(application: UIApplication, firstCall: Bool) {
+        if !firstCall {
+            sleep (1)
+            #if USE_ABLE_TO_CONNECT
+                if ableToConnect() {
+                    return
+                }
+                stop_allnet_threads()
+                NSLog("calling stop_allnet_threads\n")
+                sleep (1)
+            #endif /* USE_ABLE_TO_CONNECT */
+            NSLog("reconnecting xcommon to alocal\n")
+            xChat.reconnect()
+            sleep (1)
+        }
+        application.beginBackgroundTask {
+             NSLog("allnet task ending background task (started by calling astart_main)\n")
+            acache_save_data()
+            self.xChat.disconnect()
+        }
+        if firstCall {
+            allnet_log = init_log ("AppDelegate.m")
+            NSLog("calling astart_main\n")
+            DispatchQueue.global(qos: .userInitiated).async {
+                let args = ["allnet", "-v", "default", nil]
+                var pointer = args.map{UnsafeMutablePointer<Int8>(mutating: (($0 ?? "") as NSString).utf8String)}
+                astart_main(3, &pointer)
+                NSLog("astart_main has completed, starting multipeer thread\n")
+                multipeer_queue_indices(&self.self.multipeer_read_queue_index, &self.multipeer_write_queue_index)
+                self.multipeer_queues_initialized = 1
+                // the rest of this is the multipeer thread that reads from ad and forwards to the peers
+                let p = init_pipe_descriptor (self.allnet_log)
+                add_pipe(p, self.multipeer_read_queue_index, "AppDelegate multipeer read pipe from ad")
+                while (true) {  // read the ad queue, forward messages to the peers
+                    var buffer: UnsafeMutablePointer<Int8>?
+                    var from_pipe: Int32 = 0
+                    var priority: UInt32 = 0
+                    let n = receive_pipe_message_any(p, PIPE_MESSAGE_WAIT_FOREVER, &buffer, &from_pipe, &priority)
+                    var debug_peers = 0;
+                    for q in 0..<self.sessions.count {
+                        let s = self.sessions[q]
+                        debug_peers += s.connectedPeers.count
+                    }
+                    if debug_peers > 0{
+                         NSLog("multipeer thread got %d-byte message from ad, forwarding to %d peers\n", n, debug_peers)
+                    }
+                    if from_pipe == self.multipeer_read_queue_index && n > 0 {
+                        self.sendSession(buffer: buffer!, length: n)
+                    }
+                    if n > 0 && buffer != nil {
+                        free(buffer)
+                    }
+                }
+            }
+            NSLog("astart_main has been started\n")
+        }
+    }
+    func sendSession(buffer: UnsafeRawPointer, length: Int32) {
+        let send = Data(bytes: buffer, count: Int(length))
+        for i in 0..<self.sessions.count {
+            let session = sessions[i]
+            if (session.connectedPeers.count > 0) {
+                try? session.send(send, toPeers: session.connectedPeers, with: .unreliable)
+            }
         }
     }
     

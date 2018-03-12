@@ -6,7 +6,7 @@
 //  Copyright © 2018 allnet. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension UIColor {
     convenience init(hex: String) {
