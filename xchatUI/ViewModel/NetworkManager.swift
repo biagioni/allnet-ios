@@ -76,7 +76,7 @@ class NetworkManager {
                 var tz_min:Int32 = 0
                 var ack: Int8 = 0
                 var msize: Int32 = 0
-                var message: UnsafeMutablePointer<Int8>? = nil
+                var message: Pointer? = nil
                 var next = prev_message(iter, &seq, &time, &tz_min, &rcvd_time, &ack, &message, &msize)
                 while (next != MSG_TYPE_DONE) {
                     if ((next == MSG_TYPE_RCVD) || (next == MSG_TYPE_SENT)) {  // ignore acks
@@ -151,5 +151,49 @@ class NetworkManager {
         }
         let result = delta_hour * 60 + delta_min
         return Int(result)
+    }
+    
+    func getKeyFor(contact: String) -> String? {
+        var randomSecret:String? = nil
+        var enteredSecret:String? = nil
+        var keys: Keyset
+        let nk = all_keys (contact, &keys);
+        for ki in 0..<nk {
+            var s1: Pointer?
+            var s2: Pointer?
+            var content: Pointer?
+            incomplete_exchange_file(contact, keys![Int(ki)], &content, nil)
+            if (content != nil) {
+                var first = index(content, Int32("\n")!)
+                if (first != nil) {
+                    first = Pointer(mutating: (("\0") as NSString).utf8String)  // null terminate hops count
+                    s1 = first! + 1
+                    var second = index (s1, Int32("\n")!)
+                    if (second != nil) {
+                        second = Pointer(mutating: (("\0") as NSString).utf8String)   // null terminate first secret
+                        s2 = second! + 1
+                        var third = index (s2, Int32("\n")!)
+                        if (third != nil){
+                            third = Pointer(mutating: (("\0") as NSString).utf8String)
+                        }
+                        if (s2 == Pointer(mutating: (("\0") as NSString).utf8String) ){
+                            s2 = nil
+                        }
+                    }
+                    if (s1 != nil){
+                        randomSecret = String(cString: s1!)
+                    }
+                    if (s2 != nil){
+                        enteredSecret = String(cString: s2!)
+                    }
+                    free(content)
+                }
+            }
+            if (keys != nil) {
+                free(keys)
+            }
+        }
+        print(enteredSecret ?? "")
+        return randomSecret
     }
 }

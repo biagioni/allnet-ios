@@ -144,7 +144,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSLog("calling astart_main\n")
             DispatchQueue.global(qos: .userInitiated).async {
                 let args = ["allnet", "-v", "default", nil]
-                var pointer = args.map{UnsafeMutablePointer<Int8>(mutating: (($0 ?? "") as NSString).utf8String)}
+                var pointer = args.map{Pointer(mutating: (($0 ?? "") as NSString).utf8String)}
                 astart_main(3, &pointer)
                 NSLog("astart_main has completed, starting multipeer thread\n")
                 multipeer_queue_indices(&self.self.multipeer_read_queue_index, &self.multipeer_write_queue_index)
@@ -153,7 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let p = init_pipe_descriptor (self.allnet_log)
                 add_pipe(p, self.multipeer_read_queue_index, "AppDelegate multipeer read pipe from ad")
                 while (true) {  // read the ad queue, forward messages to the peers
-                    var buffer: UnsafeMutablePointer<Int8>?
+                    var buffer: Pointer?
                     var from_pipe: Int32 = 0
                     var priority: UInt32 = 0
                     let n = receive_pipe_message_any(p, PIPE_MESSAGE_WAIT_FOREVER, &buffer, &from_pipe, &priority)

@@ -13,7 +13,7 @@ protocol KeyExchangeDelegate {
 
 class KeyViewModel: NSObject {
     var delegate: KeyExchangeDelegate?
-    private var _pointer: UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>?
+    private var _pointer: PointerMz
     var incompleteKeysExchanges: [String]
     
     override init() {

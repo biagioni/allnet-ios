@@ -7,3 +7,5 @@
 //
 
 typealias Keyset = UnsafeMutablePointer<keyset>?
+typealias Pointer = UnsafeMutablePointer<Int8>
+typealias PointerMz =  UnsafeMutablePointer<Pointer?>?

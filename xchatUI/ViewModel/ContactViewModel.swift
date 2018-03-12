@@ -47,7 +47,7 @@ class ContactViewModel: NSObject {
         _groups.removeAll()
         fetchData()
         var allMembers = [String]()
-        var pointer: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>?
+        var pointer: PointerMz
         let n = group_membership(_contact, &pointer)
         for i in 0..<n {
             allMembers.append(String(cString: pointer![Int(i)]!))
@@ -58,7 +58,7 @@ class ContactViewModel: NSObject {
         _groups.removeAll()
         fetchData()
         var allGroups = [String]()
-        var pointer: UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>?
+        var pointer: PointerMz
         let n = member_of_groups(_contact, &pointer)
         for i in 0..<n {
             allGroups.append(String(cString: pointer![Int(i)]!))
@@ -112,7 +112,7 @@ class ContactViewModel: NSObject {
     func fetchData(){
         _contacts.removeAll()
         _hiddenContacts.removeAll()
-        var c:UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>?
+        var c:PointerMz
         var nc = all_contacts(&c)
         for i  in 0..<nc {
             if let title = String(utf8String: c![Int(i)]!) {
