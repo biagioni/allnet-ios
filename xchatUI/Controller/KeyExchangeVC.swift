@@ -55,7 +55,6 @@ class KeyExchangeVC: UIViewController {
     override func willMove(toParentViewController parent: UIViewController?) {
         super.willMove(toParentViewController: parent)
         if parent == nil {
-            appDelegate.xChat.completeExchange(info.name)
             self.tabBarController?.selectedIndex = 0
         }
     }
@@ -82,6 +81,7 @@ extension KeyExchangeVC: KeyExchangeDelegate {
     }
     
     func notificationkeyExchangeCompleted(forContact contact: String) {
+        appDelegate.xChat.completeExchange(contact)
         DispatchQueue.main.async {
             self.isExchanged = true
             self.textViewInformation.textColor = UIColor(hex: "19BB7B")
