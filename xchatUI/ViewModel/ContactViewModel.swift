@@ -119,7 +119,7 @@ class ContactViewModel: NSObject {
                 _contacts.append(title, lastReceived(contact: title))
             }
         }
-        _contacts.sort(by: {lastTime(objCContact: $0.0, msgType: Int(MSG_TYPE_RCVD)) < lastTime(objCContact: $1.0, msgType: Int(MSG_TYPE_RCVD))})
+        _contacts.sort(by: {lastTime(objCContact: $0.0, msgType: Int(MSG_TYPE_RCVD)) > lastTime(objCContact: $1.0, msgType: Int(MSG_TYPE_RCVD))})
         if c != nil {
             free(c)
         }
