@@ -706,7 +706,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.0" green="0.85098039215686272" blue="1" alpha="0.055760343309859156" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="uYu-KE-nPt" firstAttribute="leading" secondItem="EBT-yr-5Iw" secondAttribute="leading" constant="8" id="3OQ-XM-ca1"/>
                                                         <constraint firstItem="rIV-gp-Bbj" firstAttribute="top" secondItem="uYu-KE-nPt" secondAttribute="bottom" constant="4" id="8Zt-5s-Dpq"/>
@@ -765,7 +765,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" red="1" green="0.84705882352941175" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="fwE-wH-zQL" secondAttribute="trailing" constant="16" id="Aj2-k9-YJb"/>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="240" id="GBk-y1-opp"/>

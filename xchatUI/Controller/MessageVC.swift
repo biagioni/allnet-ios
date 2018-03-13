@@ -97,7 +97,7 @@ extension MessageVC: UITableViewDataSource {
             cell.labelDate.text = item.dated
             if item.message_has_been_acked == 0 {
                 if item.msg_type != MSG_TYPE_RCVD {
-                    cell.viewMessage.backgroundColor = UIColor.white
+                    cell.viewMessage.backgroundColor = UIColor(hex: "FFD8E5")
                 }
             }else{
                 cell.viewMessage.backgroundColor = UIColor(hex: "E2F9CB")
