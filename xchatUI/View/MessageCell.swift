@@ -12,5 +12,6 @@ class MessageCell: UITableViewCell {
     
     @IBOutlet weak var labelMessage: UILabel!
     @IBOutlet weak var labelDate: UILabel!
-    @IBOutlet weak var imageViewAck: UIImageView!
+    @IBOutlet weak var viewMessage: UIView!
+    
 }
