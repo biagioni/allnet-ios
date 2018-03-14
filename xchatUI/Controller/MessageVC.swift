@@ -41,6 +41,7 @@ class MessageVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         messageVM.removeContact()
+        self.view.endEditing(true)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardDidShow, object: nil)
@@ -60,7 +61,9 @@ class MessageVC: UIViewController {
     
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            messageHeight.constant += keyboardSize.height
+            UIView.animate(withDuration: 2, delay: 2, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                self.messageHeight.constant += keyboardSize.height
+                }, completion: nil)
         }
     }
     func keyboardDidShow(notification: NSNotification) {
@@ -72,7 +75,9 @@ class MessageVC: UIViewController {
     
     func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            messageHeight.constant -= keyboardSize.height
+            UIView.animate(withDuration: 1, animations: {
+                self.messageHeight.constant -= keyboardSize.height
+            })
         }
     }
 }
