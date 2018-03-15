@@ -117,12 +117,24 @@ extension MessageVC: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MessageCell
             cell.labelMessage.text = item.message
             cell.labelDate.text = item.dated
-            if item.message_has_been_acked == 0 {
-                if item.msg_type != MSG_TYPE_RCVD {
-                    cell.viewMessage.backgroundColor = UIColor(hex: "FFD8E5")
+            if item.msg_type == MSG_TYPE_RCVD {
+                var fractionOfDay:Double = 1
+                let SECONDS_PER_DAY: Double = 24 * 60 * 60
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateStyle = .medium
+                dateFormatter.timeStyle = .medium
+                let dateMessage = dateFormatter.date(from: item.dated)
+                let elapsed = Date().timeIntervalSince(dateMessage!)
+                if elapsed < SECONDS_PER_DAY {
+                    fractionOfDay = elapsed / SECONDS_PER_DAY
                 }
+                cell.viewMessage.backgroundColor = UIColor(red: CGFloat(fractionOfDay), green: 1, blue: 1, alpha: 1)
             }else{
-                cell.viewMessage.backgroundColor = UIColor(hex: "E2F9CB")
+                if item.message_has_been_acked == 0 {
+                    cell.viewMessage.backgroundColor = UIColor(hex: "FFD8E5")
+                }else{
+                    cell.viewMessage.backgroundColor = UIColor(hex: "E2F9CB")
+                }
             }
             return cell
         }

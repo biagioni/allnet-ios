@@ -19,6 +19,7 @@
 - (NSString *) getMessagesSize;
 + (NSString *) generateRandoKey;
 + (NSString *) getKeyFor: (const char *) contact;
+- (uint64_t) last_time_read: (const char *) contact;
 @end
 
 

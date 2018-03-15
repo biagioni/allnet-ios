@@ -47,6 +47,11 @@ class MessageViewModel : NSObject {
     func removeContact(){
         _contact = nil
     }
+    
+    func lastTimeRead() -> UInt64 {
+        return _cHelper.last_time_read(_contact)
+    }
+    
     func receivedNewMessage(forContact contact: String){
         if contact == _contact {
             let messages = _cHelper.getMessages() as! [MessageModel]

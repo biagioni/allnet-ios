@@ -144,6 +144,7 @@
             model.msg_type = mi.msg_type;
             model.dated = basicDate(mi.time, mi.tz_min);
             model.message_has_been_acked = mi.message_has_been_acked;
+            model.rcvd_ackd_time = mi.rcvd_ackd_time;
             [converted_messages addObject:model];
         } @catch (NSException *e) {
             NSLog(@"message %s is not valid UTF8, ignoring\n", mi.message);
@@ -204,17 +205,17 @@ static NSString * basicDate (uint64_t time, int tzMin) {
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
     NSString * dateString = [dateFormatter stringFromDate:date];
-    if (local_time_offset() != tzMin) {
-        // some of this code from cutil.c
-        int delta = tzMin - local_time_offset();
-        while (delta < 0)
-            delta += 0x10000;  // 16-bit value
-        if (delta >= 0x8000)
-            delta = 0x10000 - delta;
-        NSString * offset = [[NSString alloc] initWithFormat:@" (%+d:%d)", delta / 60, delta % 60];
-        [dateString stringByAppendingString:offset];
-    }
-    dateString = [dateString stringByAppendingString:@"\n"];
+//    if (local_time_offset() != tzMin) {
+//        // some of this code from cutil.c
+//        int delta = tzMin - local_time_offset();
+//        while (delta < 0)
+//            delta += 0x10000;  // 16-bit value
+//        if (delta >= 0x8000)
+//            delta = 0x10000 - delta;
+//        NSString * offset = [[NSString alloc] initWithFormat:@" (%+d:%d)", delta / 60, delta % 60];
+//        [dateString stringByAppendingString:offset];
+//    }
+//    dateString = [dateString stringByAppendingString:@"\n"];
     return dateString;
 }
 
@@ -411,7 +412,7 @@ static char * contact_last_read_path (const char * contact, keyset k)
     return NULL;
 }
 
-static uint64_t last_time_read (const char * contact)
+- (uint64_t) last_time_read: (const char *) contact
 {
     keyset *k = NULL;
     uint64_t last_read = 0;

@@ -18,5 +18,6 @@
 @property int *seq;
 @property int *next;
 @property uint *prev_missing;
+@property uint64_t rcvd_ackd_time;
 @end
 #endif /* MessageModel_h */
