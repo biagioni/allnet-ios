@@ -14,11 +14,15 @@ protocol MessageViewDelegate {
 
 class MessageVC: UIViewController {
 
-    @IBOutlet weak var textFieldMessage: UITextField!
+    @IBOutlet weak var textViewMessage: UITextView!
+    @IBOutlet weak var heightMessage: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageHeight: NSLayoutConstraint!
     
     var messageVM: MessageViewModel!
+    let MESSAGE_INITIAL_SIZE: CGFloat = 44
+    let MESSAGING_PADDING: CGFloat = 16
+    var keyboardHeight:CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,11 +52,13 @@ class MessageVC: UIViewController {
     }
     
     @IBAction func sendMessage(_ sender: UIButton) {
-        guard let message = textFieldMessage.text, message.count > 0 else {
+        guard let message = textViewMessage.text, message.count > 0 else {
             return
         }
         messageVM.sendMessage(message: message)
-        textFieldMessage.text = ""
+        textViewMessage.text = ""
+        heightMessage.constant = MESSAGE_INITIAL_SIZE
+        messageHeight.constant = keyboardHeight + MESSAGING_PADDING + MESSAGE_INITIAL_SIZE
     }
     
     func closeKeyboard(){
@@ -62,7 +68,8 @@ class MessageVC: UIViewController {
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 2, delay: 2, options: UIViewAnimationOptions.curveEaseIn, animations: {
-                self.messageHeight.constant += keyboardSize.height
+                self.keyboardHeight = keyboardSize.height
+                self.checkKeyboard(textView: self.textViewMessage)
                 }, completion: nil)
         }
     }
@@ -76,8 +83,18 @@ class MessageVC: UIViewController {
     func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 1, animations: {
-                self.messageHeight.constant -= keyboardSize.height
+                self.keyboardHeight = keyboardSize.height
+                self.checkKeyboard(textView: self.textViewMessage)
             })
+        }
+    }
+    func checkKeyboard(textView: UITextView){
+        if textView.contentSize.height > MESSAGE_INITIAL_SIZE {
+            heightMessage.constant = textView.contentSize.height
+            messageHeight.constant = keyboardHeight + MESSAGING_PADDING + textView.contentSize.height
+        }else{
+            heightMessage.constant = MESSAGE_INITIAL_SIZE
+            messageHeight.constant = keyboardHeight + MESSAGING_PADDING + MESSAGE_INITIAL_SIZE
         }
     }
 }
@@ -114,10 +131,9 @@ extension MessageVC: UITableViewDataSource {
     }
 }
 
-extension MessageVC: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+extension MessageVC: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        checkKeyboard(textView: textView)
     }
 }
 

@@ -674,7 +674,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xtJ-Xf-bed">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xtJ-Xf-bed">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -821,26 +821,31 @@
                                             <action selector="sendMessage:" destination="nSK-gP-DyR" eventType="touchUpInside" id="1Mg-9y-86a"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PSP-Cm-60D">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WQr-5S-Kto">
                                         <rect key="frame" x="8" y="8" width="274" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="5rD-Ty-3KX"/>
+                                            <constraint firstAttribute="height" constant="44" id="oK5-be-rdM"/>
                                         </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <outlet property="delegate" destination="nSK-gP-DyR" id="GlJ-1X-M17"/>
+                                            <outlet property="delegate" destination="nSK-gP-DyR" id="zUa-1K-gc3"/>
                                         </connections>
-                                    </textField>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="w22-ct-Uyd" firstAttribute="top" secondItem="ah6-OC-SWf" secondAttribute="top" constant="8" id="37y-Kz-Uok"/>
                                     <constraint firstAttribute="height" constant="60" id="3h4-oY-EDQ"/>
-                                    <constraint firstItem="w22-ct-Uyd" firstAttribute="leading" secondItem="PSP-Cm-60D" secondAttribute="trailing" constant="8" id="Pwu-Qc-I3n"/>
-                                    <constraint firstItem="PSP-Cm-60D" firstAttribute="leading" secondItem="ah6-OC-SWf" secondAttribute="leading" constant="8" id="dOo-P0-7BD"/>
-                                    <constraint firstItem="PSP-Cm-60D" firstAttribute="top" secondItem="ah6-OC-SWf" secondAttribute="top" constant="8" id="myv-pN-XSe"/>
+                                    <constraint firstItem="WQr-5S-Kto" firstAttribute="leading" secondItem="ah6-OC-SWf" secondAttribute="leading" constant="8" id="9DF-Gf-fgp"/>
+                                    <constraint firstItem="w22-ct-Uyd" firstAttribute="leading" secondItem="WQr-5S-Kto" secondAttribute="trailing" constant="8" id="9Dk-mo-8AO"/>
+                                    <constraint firstItem="w22-ct-Uyd" firstAttribute="bottom" secondItem="WQr-5S-Kto" secondAttribute="bottom" id="hUa-pM-BK6"/>
+                                    <constraint firstItem="WQr-5S-Kto" firstAttribute="top" secondItem="ah6-OC-SWf" secondAttribute="top" constant="8" id="vr4-xf-dpB"/>
                                     <constraint firstAttribute="trailing" secondItem="w22-ct-Uyd" secondAttribute="trailing" constant="8" id="wxz-pL-bWE"/>
                                 </constraints>
                             </view>
@@ -860,14 +865,15 @@
                         <barButtonItem key="backBarButtonItem" title="Contacts" id="2Fm-NO-Axy"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="heightMessage" destination="oK5-be-rdM" id="n4m-gB-GV6"/>
                         <outlet property="messageHeight" destination="3h4-oY-EDQ" id="bu9-vr-IQo"/>
                         <outlet property="tableView" destination="xtJ-Xf-bed" id="KNB-Wg-zk7"/>
-                        <outlet property="textFieldMessage" destination="PSP-Cm-60D" id="kws-r5-kaB"/>
+                        <outlet property="textViewMessage" destination="WQr-5S-Kto" id="kFy-fb-kVf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JaD-BB-SJC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1876" y="-1743"/>
+            <point key="canvasLocation" x="1876" y="-1743.778110944528"/>
         </scene>
         <!--New Contact-->
         <scene sceneID="lFL-1q-W4L">
