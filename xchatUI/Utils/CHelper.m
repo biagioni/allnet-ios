@@ -14,13 +14,13 @@
 
 #include <sys/stat.h>
 #include <pthread.h>
-#include "packet.h"
-#include "util.h"
-#include "store.h"
-#include "message.h"
-#include "keys.h"
-#include "xcommon.h"
-#include "cutil.h"
+#include "lib/packet.h"
+#include "lib/util.h"
+#include "xchat/store.h"
+#include "xchat/message.h"
+#include "lib/keys.h"
+#include "xchat/xcommon.h"
+#include "xchat/cutil.h"
 
 
 @interface CHelper()

@@ -19,15 +19,15 @@
 #import "XChat.h"
 #import "allnet_xchat-Swift.h"
 
-#include "xcommon.h"
+#include "xchat/xcommon.h"
 #include "limits.h"
-#include "util.h"
-#include "pipemsg.h"
-#include "cutil.h"
-#include "app_util.h"
-#include "allnet_log.h"
-#include "trace_util.h"
-#include "configfiles.h"
+#include "lib/util.h"
+#include "lib/pipemsg.h"
+#include "xchat/cutil.h"
+#include "lib/app_util.h"
+#include "lib/allnet_log.h"
+#include "lib/trace_util.h"
+#include "lib/configfiles.h"
 
 @interface XChat ()
 

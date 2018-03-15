@@ -13,16 +13,16 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-#include "packet.h"
-#include "util.h"
-#include "keys.h"
-#include "store.h"
-#include "cutil.h"
-#include "app_util.h"
-#include "priority.h"
-#include "allnet_log.h"
-#include "message.h"
-#include "xcommon.h"
+#include "lib/packet.h"
+#include "lib/util.h"
+#include "lib/keys.h"
+#include "xchat/store.h"
+#include "xchat/cutil.h"
+#include "lib/app_util.h"
+#include "lib/priority.h"
+#include "lib/allnet_log.h"
+#include "xchat/message.h"
+#include "xchat/xcommon.h"
 #include "time.h"
 
 extern void multipeer_queue_indices (int * rpipe, int * wpipe);
