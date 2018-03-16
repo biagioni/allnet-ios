@@ -34,9 +34,10 @@ class MessageVC: UIViewController {
         
         let tap  = UITapGestureRecognizer(target: self, action: #selector(closeKeyboard))
         tableView.addGestureRecognizer(tap)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -46,9 +47,6 @@ class MessageVC: UIViewController {
         super.viewWillDisappear(animated)
         messageVM.removeContact()
         self.view.endEditing(true)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardDidShow, object: nil)
     }
     
     @IBAction func sendMessage(_ sender: UIButton) {
@@ -63,31 +61,28 @@ class MessageVC: UIViewController {
     
     func closeKeyboard(){
         self.view.endEditing(true)
+        UIView.animate(withDuration: 0.4, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.keyboardHeight = 0
+            self.checkKeyboard(textView: self.textViewMessage)
+        }, completion: nil)
     }
     
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            UIView.animate(withDuration: 2, delay: 2, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            UIView.animate(withDuration: 0.4, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
                 self.keyboardHeight = keyboardSize.height
                 self.checkKeyboard(textView: self.textViewMessage)
-                }, completion: nil)
-        }
-    }
-    func keyboardDidShow(notification: NSNotification) {
-        if self.messageVM.count > 0 {
-            let indexPath = IndexPath(row: self.messageVM.count-1, section: 0)
-            self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
-        }
-    }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            UIView.animate(withDuration: 1, animations: {
-                self.keyboardHeight = keyboardSize.height
-                self.checkKeyboard(textView: self.textViewMessage)
+                }, completion: {_ in
+                    if self.keyboardHeight > 0 {
+                        if self.messageVM.count > 0 {
+                            let indexPath = IndexPath(row: self.messageVM.count-1, section: 0)
+                            self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                        }
+                    }
             })
         }
     }
+    
     func checkKeyboard(textView: UITextView){
         if textView.contentSize.height > MESSAGE_INITIAL_SIZE {
             heightMessage.constant = textView.contentSize.height
