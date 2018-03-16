@@ -651,7 +651,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xtJ-Xf-bed">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -814,61 +814,13 @@
                                     <outlet property="delegate" destination="nSK-gP-DyR" id="hNm-jP-B2h"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ah6-OC-SWf">
-                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w22-ct-Uyd">
-                                        <rect key="frame" x="290" y="8" width="77" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="77" id="DeB-S1-md5"/>
-                                            <constraint firstAttribute="height" constant="44" id="tE5-kA-egv"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                        <state key="normal" title="SEND">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="sendMessage:" destination="nSK-gP-DyR" eventType="touchUpInside" id="1Mg-9y-86a"/>
-                                        </connections>
-                                    </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WQr-5S-Kto">
-                                        <rect key="frame" x="8" y="8" width="274" height="44"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="oK5-be-rdM"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outlet property="delegate" destination="nSK-gP-DyR" id="zUa-1K-gc3"/>
-                                        </connections>
-                                    </textView>
-                                </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="3h4-oY-EDQ"/>
-                                    <constraint firstItem="WQr-5S-Kto" firstAttribute="leading" secondItem="ah6-OC-SWf" secondAttribute="leading" constant="8" id="9DF-Gf-fgp"/>
-                                    <constraint firstItem="w22-ct-Uyd" firstAttribute="leading" secondItem="WQr-5S-Kto" secondAttribute="trailing" constant="8" id="9Dk-mo-8AO"/>
-                                    <constraint firstItem="w22-ct-Uyd" firstAttribute="bottom" secondItem="WQr-5S-Kto" secondAttribute="bottom" id="hUa-pM-BK6"/>
-                                    <constraint firstItem="WQr-5S-Kto" firstAttribute="top" secondItem="ah6-OC-SWf" secondAttribute="top" constant="8" id="vr4-xf-dpB"/>
-                                    <constraint firstAttribute="trailing" secondItem="w22-ct-Uyd" secondAttribute="trailing" constant="8" id="wxz-pL-bWE"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="xtJ-Xf-bed" secondAttribute="trailing" id="C6W-UE-8JC"/>
-                            <constraint firstItem="ah6-OC-SWf" firstAttribute="leading" secondItem="PWQ-df-WET" secondAttribute="leading" id="MPa-I4-beZ"/>
-                            <constraint firstAttribute="trailing" secondItem="ah6-OC-SWf" secondAttribute="trailing" id="PxE-6o-613"/>
                             <constraint firstItem="xtJ-Xf-bed" firstAttribute="leading" secondItem="PWQ-df-WET" secondAttribute="leading" id="Tc2-HW-Jch"/>
                             <constraint firstItem="xtJ-Xf-bed" firstAttribute="top" secondItem="PWQ-df-WET" secondAttribute="top" id="dre-r1-Glm"/>
-                            <constraint firstItem="dQu-1T-GXK" firstAttribute="top" secondItem="ah6-OC-SWf" secondAttribute="bottom" id="kcq-65-46M"/>
-                            <constraint firstItem="ah6-OC-SWf" firstAttribute="top" secondItem="xtJ-Xf-bed" secondAttribute="bottom" constant="8" id="so5-BQ-IeP"/>
+                            <constraint firstItem="dQu-1T-GXK" firstAttribute="top" secondItem="xtJ-Xf-bed" secondAttribute="bottom" id="hOV-Uv-y6Q"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="2o8-pQ-5Dd">
@@ -876,12 +828,57 @@
                     </navigationItem>
                     <connections>
                         <outlet property="heightMessage" destination="oK5-be-rdM" id="n4m-gB-GV6"/>
-                        <outlet property="messageHeight" destination="3h4-oY-EDQ" id="bu9-vr-IQo"/>
                         <outlet property="tableView" destination="xtJ-Xf-bed" id="KNB-Wg-zk7"/>
                         <outlet property="textViewMessage" destination="WQr-5S-Kto" id="kFy-fb-kVf"/>
+                        <outlet property="viewMessage" destination="ah6-OC-SWf" id="F9u-M1-MWe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JaD-BB-SJC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ah6-OC-SWf">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w22-ct-Uyd">
+                            <rect key="frame" x="290" y="8" width="77" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="77" id="DeB-S1-md5"/>
+                                <constraint firstAttribute="height" constant="44" id="tE5-kA-egv"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                            <state key="normal" title="SEND">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="sendMessage:" destination="nSK-gP-DyR" eventType="touchUpInside" id="1Mg-9y-86a"/>
+                            </connections>
+                        </button>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WQr-5S-Kto">
+                            <rect key="frame" x="8" y="8" width="274" height="44"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="oK5-be-rdM"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="10"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <outlet property="delegate" destination="nSK-gP-DyR" id="zUa-1K-gc3"/>
+                            </connections>
+                        </textView>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="WQr-5S-Kto" firstAttribute="leading" secondItem="ah6-OC-SWf" secondAttribute="leading" constant="8" id="9DF-Gf-fgp"/>
+                        <constraint firstItem="w22-ct-Uyd" firstAttribute="leading" secondItem="WQr-5S-Kto" secondAttribute="trailing" constant="8" id="9Dk-mo-8AO"/>
+                        <constraint firstAttribute="bottom" secondItem="WQr-5S-Kto" secondAttribute="bottom" constant="8" id="amI-vO-gh9"/>
+                        <constraint firstItem="w22-ct-Uyd" firstAttribute="bottom" secondItem="WQr-5S-Kto" secondAttribute="bottom" id="hUa-pM-BK6"/>
+                        <constraint firstItem="WQr-5S-Kto" firstAttribute="top" secondItem="ah6-OC-SWf" secondAttribute="top" constant="8" id="vr4-xf-dpB"/>
+                        <constraint firstAttribute="trailing" secondItem="w22-ct-Uyd" secondAttribute="trailing" constant="8" id="wxz-pL-bWE"/>
+                    </constraints>
+                </view>
             </objects>
             <point key="canvasLocation" x="1876" y="-1743.778110944528"/>
         </scene>

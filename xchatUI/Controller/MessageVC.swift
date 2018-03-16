@@ -17,24 +17,32 @@ class MessageVC: UIViewController {
     @IBOutlet weak var textViewMessage: UITextView!
     @IBOutlet weak var heightMessage: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var messageHeight: NSLayoutConstraint!
+    @IBOutlet var viewMessage: UIView!
     
     var messageVM: MessageViewModel!
     let MESSAGE_INITIAL_SIZE: CGFloat = 44
     let MESSAGING_PADDING: CGFloat = 16
     var keyboardHeight:CGFloat = 0
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationController?.view.backgroundColor = UIColor.white
         navigationItem.title = messageVM.selectedContact
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 52
-        
-        let tap  = UITapGestureRecognizer(target: self, action: #selector(closeKeyboard))
-        tableView.addGestureRecognizer(tap)
+
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+    
+    override var inputAccessoryView: UIView? {
+        return viewMessage
+    }
+
+    override var canBecomeFirstResponder: Bool {
+        return true
     }
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
@@ -54,17 +62,10 @@ class MessageVC: UIViewController {
             return
         }
         messageVM.sendMessage(message: message)
+        let valueIncreasedOnTextView = textViewMessage.frame.height - MESSAGE_INITIAL_SIZE
         textViewMessage.text = ""
-        heightMessage.constant = MESSAGE_INITIAL_SIZE
-        messageHeight.constant = keyboardHeight + MESSAGING_PADDING + MESSAGE_INITIAL_SIZE
-    }
-    
-    func closeKeyboard(){
-        self.view.endEditing(true)
-        UIView.animate(withDuration: 0.4, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-            self.keyboardHeight = 0
-            self.checkKeyboard(textView: self.textViewMessage)
-        }, completion: nil)
+        self.keyboardHeight -= valueIncreasedOnTextView
+        checkKeyboard(textView: textViewMessage)
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -73,7 +74,7 @@ class MessageVC: UIViewController {
                 self.keyboardHeight = keyboardSize.height
                 self.checkKeyboard(textView: self.textViewMessage)
                 }, completion: {_ in
-                    if self.keyboardHeight > 0 {
+                    if self.keyboardHeight > 60 {
                         if self.messageVM.count > 0 {
                             let indexPath = IndexPath(row: self.messageVM.count-1, section: 0)
                             self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
@@ -86,18 +87,25 @@ class MessageVC: UIViewController {
     func checkKeyboard(textView: UITextView){
         if textView.contentSize.height > MESSAGE_INITIAL_SIZE {
             heightMessage.constant = textView.contentSize.height
-            messageHeight.constant = keyboardHeight + MESSAGING_PADDING + textView.contentSize.height
+            for constraint in (inputAccessoryView?.constraints)! {
+                if constraint.constant == viewMessage.frame.height {
+                    constraint.constant = MESSAGING_PADDING + textView.contentSize.height
+                    tableView.contentInset.bottom = keyboardHeight
+                }
+            }
         }else{
             heightMessage.constant = MESSAGE_INITIAL_SIZE
-            messageHeight.constant = keyboardHeight + MESSAGING_PADDING + MESSAGE_INITIAL_SIZE
+            for constraint in (inputAccessoryView?.constraints)! {
+                if constraint.constant == viewMessage.frame.height {
+                    constraint.constant = MESSAGING_PADDING + MESSAGE_INITIAL_SIZE
+                    tableView.contentInset.bottom = keyboardHeight
+                }
+            }
         }
     }
 }
 
 extension MessageVC: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messageVM.count
     }
@@ -145,7 +153,6 @@ extension MessageVC: UITextViewDelegate {
 }
 
 extension MessageVC: MessageDelegate {
-    
     func ackMessages(forIndexes indexes: [Int]) {
         if tableView != nil {
             DispatchQueue.main.async {
