@@ -58,8 +58,8 @@
 		2986CAA7205A73ED0024325F /* track.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986C9DA205A71F40024325F /* track.c */; };
 		2986CAA8205A74020024325F /* social.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986C9EE205A71F40024325F /* social.c */; };
 		2986CAA9205A741F0024325F /* record.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA73205A71F40024325F /* record.c */; };
+		2986CAAB205B55BC0024325F /* TODO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2986CAAA205B55BC0024325F /* TODO.swift */; };
 		2993BB6220487F8300337230 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2993BB6020487BC900337230 /* AppDelegate.swift */; };
-		2993BB6320487FE300337230 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 425A7D931AEC898C00C74E12 /* Info.plist */; };
 		29952BF32034D976009054D4 /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF22034D976009054D4 /* ContactListVC.swift */; };
 		29952BF720354E4C009054D4 /* CHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF620354E4C009054D4 /* CHelper.m */; };
 		29B0E13620396C1700F38A3E /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B0E13520396C1700F38A3E /* SettingsVC.swift */; };
@@ -257,6 +257,7 @@
 		2986CA7A205A71F40024325F /* Makefile.am */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
 		2986CA7B205A71F40024325F /* broadcast.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = broadcast.c; sourceTree = "<group>"; };
 		2986CA7C205A71F40024325F /* hash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
+		2986CAAA205B55BC0024325F /* TODO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODO.swift; sourceTree = "<group>"; };
 		2993BB6020487BC900337230 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29952BF22034D976009054D4 /* ContactListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListVC.swift; sourceTree = "<group>"; };
 		29952BF620354E4C009054D4 /* CHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHelper.m; sourceTree = "<group>"; };
@@ -677,6 +678,7 @@
 				29B44929203358400050B64D /* allnet-xchat-Bridging-Header.h */,
 				29B449CB20337A2B0050B64D /* Images.xcassets */,
 				425A7DA41AEC898C00C74E12 /* LaunchScreen.xib */,
+				2986CAAA205B55BC0024325F /* TODO.swift */,
 				425A7D9F1AEC898C00C74E12 /* Main.storyboard */,
 				425A7D931AEC898C00C74E12 /* Info.plist */,
 			);
@@ -770,7 +772,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2993BB6320487FE300337230 /* Info.plist in Resources */,
 				29B449D620337A2B0050B64D /* Images.xcassets in Resources */,
 				425A7DA11AEC898C00C74E12 /* Main.storyboard in Resources */,
 				425A7DA61AEC898C00C74E12 /* LaunchScreen.xib in Resources */,
@@ -862,6 +863,7 @@
 				2986CA80205A72450024325F /* table.c in Sources */,
 				2986CA81205A72450024325F /* util.c in Sources */,
 				2986CA82205A72450024325F /* trace_util.c in Sources */,
+				2986CAAB205B55BC0024325F /* TODO.swift in Sources */,
 				2986CA83205A72450024325F /* ai.c in Sources */,
 				2986CA84205A72450024325F /* routing.c in Sources */,
 				2986CA85205A72450024325F /* pqueue.c in Sources */,

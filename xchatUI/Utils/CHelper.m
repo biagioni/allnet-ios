@@ -151,7 +151,7 @@
         }
         free ((void *)mi.message);
     }
-    converted_messages = [[converted_messages reverseObjectEnumerator] allObjects];
+    converted_messages = (NSMutableArray *)[[converted_messages reverseObjectEnumerator] allObjects];
     return converted_messages;
 }
 
@@ -313,7 +313,7 @@ struct data_to_send {
         model.message = [[NSString alloc] initWithUTF8String:message_to_send];
         model.msg_type = MSG_TYPE_SENT;
         model.dated = basicDate(allnet_time(), local_time_offset());
-        model.msize = length_to_send;
+        model.msize = (int *)length_to_send;
         return model;
     }
     return NULL;
