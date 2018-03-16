@@ -52,13 +52,13 @@ class MessageViewModel : NSObject {
         return _cHelper.last_time_read(_contact)
     }
     
-    func receivedNewMessage(forContact contact: String){
+    func receivedNewMessage(forContact contact: String, message: String){
         if contact == _contact {
             let messages = _cHelper.getMessages() as! [MessageModel]
             _messages = messages
             delegate?.addedNewMessage(index: count-1)
         }else{
-            contactDelegate?.newMessageReceived(fromContact: contact)
+            contactDelegate?.newMessageReceived(fromContact: contact, message: message)
         }
     }
     

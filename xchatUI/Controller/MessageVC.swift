@@ -28,6 +28,8 @@ class MessageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
         self.navigationController?.view.backgroundColor = UIColor.white
         navigationItem.title = messageVM.selectedContact
         

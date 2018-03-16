@@ -10,7 +10,7 @@ import UIKit
 
 protocol ContactDelegate {
     func contactUpdated()
-    func newMessageReceived(fromContact contact: String)
+    func newMessageReceived(fromContact contact: String, message: String)
 }
 
 class ContactViewModel: NSObject {

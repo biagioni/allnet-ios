@@ -225,7 +225,7 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
     if (! duplicate) {
       NSString * msg = [[NSString alloc] initWithUTF8String:message];
       if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
-        [mySelf.conversation receivedNewMessageForContact:contact];
+        [mySelf.conversation receivedNewMessageForContact:contact message:msg];
       }else{
         AppDelegate * appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
         [appDelegate notifyMessageReceivedWithContact:contact message:msg];

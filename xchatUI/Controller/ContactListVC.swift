@@ -159,13 +159,14 @@ extension ContactListVC: UITableViewDelegate {
 }
 
 extension ContactListVC: ContactDelegate {
-    func newMessageReceived(fromContact contact: String) {
+    func newMessageReceived(fromContact contact: String, message: String) {
         unreadMessages.append(contact)
         if let index = contactVM.indexOf(contact: contact) {
             contactVM.setTimeForNewMessage(index: index)
             let indexPath = IndexPath(row: index, section: 0)
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }
+        appDelegate.notifyMessageReceived(contact: contact, message: message)
     }
     
     func contactUpdated() {

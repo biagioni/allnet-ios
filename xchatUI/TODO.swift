@@ -8,8 +8,6 @@
 
 
 /*
- *messagevc
-    notification from another user (the one you are not talking to)
 
 *CHelper
     convert to swift
