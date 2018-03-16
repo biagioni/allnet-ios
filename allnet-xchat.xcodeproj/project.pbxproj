@@ -59,6 +59,7 @@
 		2986CAA8205A74020024325F /* social.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986C9EE205A71F40024325F /* social.c */; };
 		2986CAA9205A741F0024325F /* record.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA73205A71F40024325F /* record.c */; };
 		2986CAAB205B55BC0024325F /* TODO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2986CAAA205B55BC0024325F /* TODO.swift */; };
+		2990E476205C29B80021F2A0 /* LabelIteractive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2990E475205C29B80021F2A0 /* LabelIteractive.swift */; };
 		2993BB6220487F8300337230 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2993BB6020487BC900337230 /* AppDelegate.swift */; };
 		29952BF32034D976009054D4 /* ContactListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF22034D976009054D4 /* ContactListVC.swift */; };
 		29952BF720354E4C009054D4 /* CHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 29952BF620354E4C009054D4 /* CHelper.m */; };
@@ -258,6 +259,7 @@
 		2986CA7B205A71F40024325F /* broadcast.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = broadcast.c; sourceTree = "<group>"; };
 		2986CA7C205A71F40024325F /* hash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
 		2986CAAA205B55BC0024325F /* TODO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODO.swift; sourceTree = "<group>"; };
+		2990E475205C29B80021F2A0 /* LabelIteractive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelIteractive.swift; sourceTree = "<group>"; };
 		2993BB6020487BC900337230 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29952BF22034D976009054D4 /* ContactListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListVC.swift; sourceTree = "<group>"; };
 		29952BF620354E4C009054D4 /* CHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHelper.m; sourceTree = "<group>"; };
@@ -591,6 +593,7 @@
 			children = (
 				290861342046899700C4B50F /* MessageCell.swift */,
 				29EB67F32036A85600D9647F /* ContactCell.swift */,
+				2990E475205C29B80021F2A0 /* LabelIteractive.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -896,6 +899,7 @@
 				290861352046899700C4B50F /* MessageCell.swift in Sources */,
 				296D2836205647360030B003 /* MsgModel.swift in Sources */,
 				2943946D20462EA6006E1AFF /* UINavigationController+Pop.swift in Sources */,
+				2990E476205C29B80021F2A0 /* LabelIteractive.swift in Sources */,
 				29EB67F42036A85600D9647F /* ContactCell.swift in Sources */,
 				2925D05B20433D75003A9E2E /* KeyExchangeVC.swift in Sources */,
 				29EB67F72036B0AB00D9647F /* ContactViewModel.swift in Sources */,

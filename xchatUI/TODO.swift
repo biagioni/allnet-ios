@@ -9,7 +9,6 @@
 
 /*
  *messagevc
-    copy paste messages
     notification from another user (the one you are not talking to)
 
 *CHelper

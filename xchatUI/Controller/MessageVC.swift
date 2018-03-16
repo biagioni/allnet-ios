@@ -146,6 +146,7 @@ extension MessageVC: UITableViewDataSource {
     }
 }
 
+
 extension MessageVC: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         checkKeyboard(textView: textView)
