@@ -41,6 +41,7 @@ import UIKit
         super.viewWillAppear(animated)
         contactVM.fetchData()
         navigationItem.title = "\(contactVM.count) Contact(s)"
+        UIApplication.shared.applicationIconBadgeNumber = 0
         tableView.reloadData()
     }
     

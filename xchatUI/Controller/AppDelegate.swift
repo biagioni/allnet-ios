@@ -39,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
                 self.authorizationGranted = granted
             }
+            UNUserNotificationCenter.current().delegate = self
             UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         }
         application.applicationIconBadgeNumber = 0
@@ -68,6 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         set_speculative_computation (UIDevice.current.batteryState != UIDeviceBatteryState.unplugged ? 0 : 1)
     }
     
+    
     func notifyMessageReceived(contact: String, message: String){
         if #available(iOS 10.0, *) {
             let content = UNMutableNotificationContent()
@@ -77,7 +79,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let request = UNNotificationRequest(identifier: "testRequest", content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
                 DispatchQueue.main.async {
-                    UIApplication.shared.applicationIconBadgeNumber += 1
+                    if UIApplication.shared.applicationState != .active {
+                        UIApplication.shared.applicationIconBadgeNumber += 1
+                    }
                 }
             })
         }
@@ -222,6 +226,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             defaults.synchronize()
         }
         return result!
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
     }
 }
 
