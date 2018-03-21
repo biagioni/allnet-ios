@@ -33,7 +33,6 @@
 
 - (void) removeNewContact: (NSString *) contact;
 - (void) resendKeyForNewContact: (NSString *) contact;
-- (NSString *) trace: (BOOL)wide maxHops: (NSUInteger) hops;
 - (void) startTrace: (BOOL) wide_enough maxHops: (NSUInteger) hops showDetails: (BOOL) details;
 
 - (void) completeExchange: (NSString *) contact;

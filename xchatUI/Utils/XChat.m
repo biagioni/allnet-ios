@@ -49,6 +49,11 @@ static int waiting_for_key = 0;
 static char * keyContact = NULL;
 static pd p;
 
+// variables for tracing
+static int trace_count = 0;
+static unsigned long long int trace_start_time = 0;
+static char expecting_trace [MESSAGE_ID_SIZE];
+
 // hack to make self object available to C code -- should only be one Xchat object anyway
 static XChat * mySelf = NULL;
 static void * splitPacketBuffer = NULL;
@@ -241,6 +246,13 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
     pthread_mutex_unlock(&key_generated_mutex);
   } else if (mlen == -2) {  // confirm successful subscription
       NSLog(@"got subscription %s\n", peer);
+  } else if ((mlen == -4) && (trace != NULL) &&
+             (memcmp (trace->trace_id, expecting_trace, MESSAGE_ID_SIZE) == 0)) {  // got trace result
+    NSLog(@"got trace result with %d entries\n", trace->num_entries);
+    char string [10000];
+    trace_to_string(string, sizeof (string), trace, trace_count, trace_start_time);
+    NSString * msg = [[NSString alloc] initWithUTF8String:string];
+    [mySelf.more receiveTraceWithMessage:msg];
   }
   for (int i = 0; i < acks.num_acks; i++) {
     printf ("displaying ack sequence number %lld for peer %s\n", acks.acks[i], acks.peers[i]);
@@ -311,97 +323,15 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
   return nil;
 }
 
-- (NSString *) trace: (BOOL)wide maxHops: (NSUInteger) hops {
-  extern char * trace_string (const char * tmp_dir, int sleep, const char * dest, int nhops, int no_intermediates, int match_only, int wide);
-  int cWide = 0;   // a C boolean is an int
-  if (wide)
-    cWide = 1;
-  // NSLog(@"wide is %hhd %d\n", wide, cWide);
-  NSString * tmpDir = NSTemporaryDirectory();
-  char * string = trace_string(tmpDir.UTF8String, 5, NULL, (int)hops, 1, 0, cWide);
-  NSString * result = [[NSString alloc] initWithUTF8String:string];
-  free (string);
-  return result;
-}
-
-struct trace_thread_args {
-  int sock;
-  int wide;
-  int hops;
-  int no_intermediates;
-};
-
-static void * async_trace (void * arg)
-{
-  struct trace_thread_args a = *(struct trace_thread_args *) arg;
-  free (arg);
-  trace_pipe (a.sock, NULL, -1, NULL, a.hops, a.no_intermediates, 0, a.wide);
-  return NULL;
-}
-
-static void (* global_receive_function) (const char *) = NULL;
-
-static void traceResult (CFSocketRef s, CFSocketCallBackType callbackType, CFDataRef address, const void * dataVoid, void * info) {
-  CFDataRef data = (CFDataRef) ((char *)dataVoid);
-  int psize = (int)CFDataGetLength(data);
-  char * dataChar = (char *)(CFDataGetBytePtr(data));
-  int last = 0;
-  if (psize > 0)
-    print_buffer(dataChar, psize, "trace result", 100, 1);
-  for (int i = 0; i < psize; i++) {
-    if (dataChar [i] == '\0') {
-      NSLog(@"traceResult received %d-byte data\n", i);
-      if (i > last)
-        printf ("traceResult got %s\n", dataChar + last);
-      if (global_receive_function != NULL)  // data is null-terminated
-        global_receive_function (dataChar + last);
-      else if (i > last)
-        NSLog(@"traceResult received %d-byte unterminated data\n", psize);
-      last = i + 1;
-      
-    }
-  }
-}
-void rcvTrace (const char * trace)
-{
-  NSString * msg = [[NSString alloc] initWithUTF8String:trace];
-  [mySelf.more receiveTraceWithMessage:msg];
-}
-
-// used as an alternative to trace.  result lines are given to the function as they arrive
 - (void) startTrace: (BOOL) wide_enough maxHops: (NSUInteger) hops showDetails: (BOOL) details {
-  global_receive_function = rcvTrace;
-  int pipes [2];
-  if (socketpair(AF_LOCAL, SOCK_STREAM, 0, pipes) != 0) {
-    perror ("socketpair");
-    NSLog (@"startTrace unable to open socket pair\n");
-    return;
+
+  unsigned char addr [MESSAGE_ID_SIZE];
+  memset (addr, 0, MESSAGE_ID_SIZE);
+  trace_count++;
+  trace_start_time = allnet_time_ms();
+  if (! start_trace(self.sock, addr , 0, (int)hops, 0, expecting_trace)) {
+    NSLog(@"unable to start trace\n");
   }
-#ifdef SETSOCKOPT_SUPPORTED_BY_IOS
-  int option = 1;  /* disable Nagle algorithm */
-  if (setsockopt (pipes [0], IPPROTO_TCP, TCP_NODELAY,
-                  &option, sizeof (option)) != 0) {
-    perror ("setsockopt");
-    printf ("unable to set nodelay TCP socket option for trace pipe 0\n");
-  }
-  if (setsockopt (pipes [1], IPPROTO_TCP, TCP_NODELAY,
-                  &option, sizeof (option)) != 0)
-    printf ("unable to set nodelay TCP socket option for trace pipe 1\n");
-#endif /* SETSOCKOPT_SUPPORTED_BY_IOS */
-  
-  CFSocketRef iOSSock = CFSocketCreateWithNative(NULL, pipes [0], kCFSocketDataCallBack,
-                                                 (CFSocketCallBack)&traceResult, NULL);
-  CFRunLoopSourceRef runLoop = CFSocketCreateRunLoopSource(NULL, iOSSock, 100);
-  CFRunLoopRef currentRunLoop = CFRunLoopGetCurrent();
-  CFRunLoopAddSource(currentRunLoop, runLoop, kCFRunLoopCommonModes);
-  pthread_t tid;
-  struct trace_thread_args * arg = malloc_or_fail(sizeof (struct trace_thread_args), "startTrace");
-  arg->sock = pipes [1];
-  arg->wide = wide_enough;
-  arg->hops = (int)hops;
-  arg->no_intermediates = ((details) ? 0 : 1);
-  pthread_create (&tid, NULL, async_trace, arg);
-  /* pthread_join(tid, NULL); */
 }
 
 @end
