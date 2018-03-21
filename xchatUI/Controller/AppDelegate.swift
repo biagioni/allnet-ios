@@ -180,6 +180,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSLog("astart_main has been started\n")
         }
     }
+    
     func sendSession(buffer: UnsafeRawPointer, length: Int32) {
         let send = Data(bytes: buffer, count: Int(length))
         for i in 0..<self.sessions.count {

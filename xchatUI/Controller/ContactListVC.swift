@@ -21,7 +21,7 @@ import UIKit
     var appDelegate: AppDelegate!
     
     func setNavigationTitle() {
-        var result = "\(contactVM.count) Contacts";
+        var result = "\(contactVM.count) Contacts"
         var showEditButton = true
         if contactVM.count == 1 {
             result = "1 Contact"
@@ -32,7 +32,7 @@ import UIKit
                 showEditButton = false
             }
         }
-        navigationItem.title = result;
+        navigationItem.title = result
         if buttonEdit != nil {
             buttonEdit.isEnabled = showEditButton
         }
