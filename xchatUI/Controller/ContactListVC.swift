@@ -20,6 +20,24 @@ import UIKit
     var unreadMessages: [String]!
     var appDelegate: AppDelegate!
     
+    func setNavigationTitle() {
+        var result = "\(contactVM.count) Contacts";
+        var showEditButton = true
+        if contactVM.count == 1 {
+            result = "1 Contact"
+        }
+        if contactVM.count == 0 {
+            result = ""
+            if invisible_contacts(nil) == 0 {
+                showEditButton = false
+            }
+        }
+        navigationItem.title = result;
+        if buttonEdit != nil {
+            buttonEdit.isEnabled = showEditButton
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.view.backgroundColor = UIColor.white
@@ -34,13 +52,13 @@ import UIKit
         contactVM.delegate = self
         
         unreadMessages = [String]()
-        navigationItem.title = "\(contactVM.count) Contact(s)"
+        setNavigationTitle()
         displaySettings = false
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         contactVM.fetchData()
-        navigationItem.title = "\(contactVM.count) Contact(s)"
+        setNavigationTitle()
         UIApplication.shared.applicationIconBadgeNumber = 0
         tableView.reloadData()
     }
@@ -81,7 +99,7 @@ import UIKit
     
     func loadData(){
         contactVM.fetchData()
-        self.navigationItem.title = "\(contactVM.count) Contact(s)"
+        setNavigationTitle()
     }
     func updateNotification(contact: String, cell: ContactCell){
         if unreadMessages.contains(contact){
