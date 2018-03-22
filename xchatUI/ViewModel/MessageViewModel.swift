@@ -16,6 +16,7 @@ protocol MessageDelegate {
 class MessageViewModel : NSObject {
     var delegate: MessageDelegate?
     var contactDelegate: ContactDelegate?
+    var missingCount = 0
     private var _contact: String?
     private var _cHelper: CHelper!
     private var _messages: [MessageModel]
@@ -55,6 +56,7 @@ class MessageViewModel : NSObject {
     func receivedNewMessage(forContact contact: String, message: String){
         if contact == _contact {
             let messages = _cHelper.getMessages() as! [MessageModel]
+            missingCount = Int(messages.reduce(0){$0.1.prev_missing + $0.0})
             _messages = messages
             delegate?.addedNewMessage(index: count-1)
         }else{
@@ -65,6 +67,7 @@ class MessageViewModel : NSObject {
     func ackMessage(forContact contact: String){
         if contact == _contact {
             let messages = _cHelper.getMessages() as! [MessageModel]
+            missingCount = Int(messages.reduce(0){$0.1.prev_missing + $0.0})
             var modifiedMessagesIndexes = messages.enumerated().map{$0.element.message_has_been_acked == _messages[$0.offset].message_has_been_acked ? nil :  $0.offset}
             _messages = messages
             modifiedMessagesIndexes = modifiedMessagesIndexes.filter{$0 != nil}
@@ -79,6 +82,7 @@ class MessageViewModel : NSObject {
     
     func fetchData(){
         _messages = _cHelper.getMessages() as! [MessageModel]
+        missingCount = Int(_messages.reduce(0){$0.1.prev_missing + $0.0})
         delegate?.messagesUpdated()
     }
 }
