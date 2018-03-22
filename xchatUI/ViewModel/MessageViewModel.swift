@@ -88,7 +88,7 @@ class MessageViewModel : NSObject {
     }
     
     func checkMissingMessages(){
-        let missingMessages = _messages.enumerated().filter{ index, element in element.prev_missing > 0}.map{($0)}
+        let missingMessages = _messages.enumerated().filter{ index, element in element.prev_missing > 0}
         for msg in missingMessages {
             let msgModel = MessageModel()
             msgModel.message_has_been_acked = msg.element.message_has_been_acked

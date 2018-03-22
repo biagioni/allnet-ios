@@ -168,13 +168,9 @@ extension MessageVC: MessageDelegate {
     
     func addedNewMessage(index: Int) {
         if tableView != nil {
-            DispatchQueue.main.async {
-                let indexPath = IndexPath(item: index, section: 0)
-                self.tableView.beginUpdates()
-                self.tableView.insertRows(at: [indexPath], with: .automatic)
-                self.tableView.endUpdates()
-                self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
-            }
+            let indexPath = IndexPath(item: index, section: 0)
+            self.tableView.reloadData()
+            self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
         }
     }
     
