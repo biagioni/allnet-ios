@@ -6,6 +6,8 @@
 //  Copyright © 2018 allnet. All rights reserved.
 //
 
+let MSG_MISSED = 1212
+
 protocol MessageDelegate {
     func messagesUpdated()
     func addedNewMessage(index: Int)
@@ -16,7 +18,6 @@ protocol MessageDelegate {
 class MessageViewModel : NSObject {
     var delegate: MessageDelegate?
     var contactDelegate: ContactDelegate?
-    var missingCount = 0
     private var _contact: String?
     private var _cHelper: CHelper!
     private var _messages: [MessageModel]
@@ -56,8 +57,8 @@ class MessageViewModel : NSObject {
     func receivedNewMessage(forContact contact: String, message: String){
         if contact == _contact {
             let messages = _cHelper.getMessages() as! [MessageModel]
-            missingCount = Int(messages.reduce(0){$0.1.prev_missing + $0.0})
             _messages = messages
+            checkMissingMessages()
             delegate?.addedNewMessage(index: count-1)
         }else{
             contactDelegate?.newMessageReceived(fromContact: contact, message: message)
@@ -67,9 +68,9 @@ class MessageViewModel : NSObject {
     func ackMessage(forContact contact: String){
         if contact == _contact {
             let messages = _cHelper.getMessages() as! [MessageModel]
-            missingCount = Int(messages.reduce(0){$0.1.prev_missing + $0.0})
             var modifiedMessagesIndexes = messages.enumerated().map{$0.element.message_has_been_acked == _messages[$0.offset].message_has_been_acked ? nil :  $0.offset}
             _messages = messages
+            checkMissingMessages()
             modifiedMessagesIndexes = modifiedMessagesIndexes.filter{$0 != nil}
             delegate?.ackMessages(forIndexes: modifiedMessagesIndexes as! [Int])
         }
@@ -82,7 +83,18 @@ class MessageViewModel : NSObject {
     
     func fetchData(){
         _messages = _cHelper.getMessages() as! [MessageModel]
-        missingCount = Int(_messages.reduce(0){$0.1.prev_missing + $0.0})
+        checkMissingMessages()
         delegate?.messagesUpdated()
+    }
+    
+    func checkMissingMessages(){
+        let missingMessages = _messages.enumerated().filter{ index, element in element.prev_missing > 0}.map{($0)}
+        for msg in missingMessages {
+            let msgModel = MessageModel()
+            msgModel.message_has_been_acked = msg.element.message_has_been_acked
+            msgModel.message = "\(msg.element.prev_missing) message\(msg.element.prev_missing == 1 ? "" : "s") missing"
+            msgModel.msg_type = Int32(MSG_MISSED)
+            _messages.insert(msgModel, at: msg.offset + 1)
+        }
     }
 }

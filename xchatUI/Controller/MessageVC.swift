@@ -132,6 +132,8 @@ extension MessageVC: UITableViewDataSource {
                     fractionOfDay = elapsed / SECONDS_PER_DAY
                 }
                 cell.viewMessage.backgroundColor = UIColor(red: CGFloat(fractionOfDay), green: 1, blue: 1, alpha: 1)
+            }else if item.msg_type == MSG_MISSED {
+                cell.viewMessage.backgroundColor = UIColor.red
             }else{
                 if item.message_has_been_acked == 0 {
                     cell.viewMessage.backgroundColor = UIColor(hex: "FFD8E5")
@@ -145,26 +147,6 @@ extension MessageVC: UITableViewDataSource {
         return UITableViewCell()
     }
 }
-
-extension MessageVC: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if messageVM.missingCount > 0 {
-            let label = UILabel()
-            label.text = " \(messageVM.missingCount) message\(messageVM.missingCount == 1 ? "" : "s") missing"
-            label.textColor = UIColor.red
-            label.backgroundColor = UIColor.white
-            return label
-        }
-        return nil
-    }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if messageVM.missingCount > 0 {
-            return 30
-        }
-        return 0
-    }
-}
-
 
 extension MessageVC: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
