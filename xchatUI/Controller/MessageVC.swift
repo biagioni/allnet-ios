@@ -24,6 +24,8 @@ class MessageVC: UIViewController {
     let MESSAGING_PADDING: CGFloat = 16
     var keyboardHeight:CGFloat = 0
     
+    var missingCount = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,6 +123,7 @@ extension MessageVC: UITableViewDataSource {
             cell.labelMessage.text = item.message
             cell.labelDate.text = item.dated
             if item.msg_type == MSG_TYPE_RCVD {
+                missingCount += Int(item.prev_missing)
                 var fractionOfDay:Double = 1
                 let SECONDS_PER_DAY: Double = 24 * 60 * 60
                 let dateFormatter = DateFormatter()
@@ -143,6 +146,25 @@ extension MessageVC: UITableViewDataSource {
         }
         
         return UITableViewCell()
+    }
+}
+
+extension MessageVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if missingCount > 0 {
+            let label = UILabel()
+            label.text = " \(missingCount) messages missing"
+            label.textColor = UIColor.red
+            label.backgroundColor = UIColor.white
+            return label
+        }
+        return nil
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if missingCount > 0 {
+            return 30
+        }
+        return 0
     }
 }
 

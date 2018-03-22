@@ -120,20 +120,6 @@
         free (k);
     uint64_t last_seq = 0;
     NSValue * last_received = NULL;
-    for (NSValue * obj in result_messages) {  // add information about missing messages
-        struct message_store_info mi;
-        [obj getValue:&mi];
-        if (mi.msg_type == MSG_TYPE_RCVD) {
-            if ((last_seq != 0) && (last_received != NULL) &&
-                (mi.seq + 1 < last_seq)) {
-                struct message_store_info last_struct;
-                [last_received getValue:&last_struct];
-                last_struct.prev_missing = (last_seq - mi.seq - 1);
-            }
-            last_received = obj;
-            last_seq = mi.seq;
-        }
-    }
     NSMutableArray * converted_messages = [[NSMutableArray alloc] initWithCapacity:[result_messages count]];
     for (NSValue * obj in result_messages) {  // create a bubble for each message
         struct message_store_info mi;
@@ -145,6 +131,14 @@
             model.dated = basicDate(mi.time, mi.tz_min);
             model.message_has_been_acked = mi.message_has_been_acked;
             model.rcvd_ackd_time = mi.rcvd_ackd_time;
+            if (mi.msg_type == MSG_TYPE_RCVD) {
+                if ((last_seq != 0) && (last_received != NULL) &&
+                    (mi.seq + 1 < last_seq)) {
+                    model.prev_missing = (int)(last_seq - mi.seq - 1);
+                }
+                last_received = obj;
+                last_seq = mi.seq;
+            }
             [converted_messages addObject:model];
         } @catch (NSException *e) {
             NSLog(@"message %s is not valid UTF8, ignoring\n", mi.message);
@@ -152,6 +146,30 @@
         free ((void *)mi.message);
     }
     converted_messages = (NSMutableArray *)[[converted_messages reverseObjectEnumerator] allObjects];
+    return converted_messages;
+}
+
+- (NSMutableArray *) allMessages{
+    struct message_store_info * messages = NULL;
+    int messages_used = 0;
+    int messages_allocated = 0;
+    list_all_messages (self.xcontact, &messages, &messages_allocated, &messages_used);
+    NSMutableArray * converted_messages = [[NSMutableArray alloc] initWithCapacity:messages_used];
+    if (messages_used > 0) {
+        for (int i = 0; i < messages_used; i++) {
+            struct message_store_info mi = *(messages + (messages_used - i - 1));
+            MessageModel *model = [[MessageModel alloc] init];
+            model.message = [[NSString alloc] initWithUTF8String:mi.message];
+            model.msg_type = mi.msg_type;
+            model.dated = basicDate(mi.time, mi.tz_min);
+            model.message_has_been_acked = mi.message_has_been_acked;
+            model.rcvd_ackd_time = mi.rcvd_ackd_time;
+            model.prev_missing = (int)mi.prev_missing;
+            [converted_messages addObject:model];
+        }
+    }
+    if (messages != NULL)
+        free_all_messages(messages, messages_used);
     return converted_messages;
 }
 

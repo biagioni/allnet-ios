@@ -14,6 +14,7 @@
 @property char * xcontact;
 
 - (NSMutableArray *)getMessages;
+- (NSMutableArray *)allMessages;
 - (void) initialize: (int) sock : (NSString *) contact;
 - (MessageModel*)sendMessage:(NSString*) message;
 - (NSString *) getMessagesSize;
