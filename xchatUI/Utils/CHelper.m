@@ -62,7 +62,7 @@
 //clean
 - (NSMutableArray *)getMessages {
     update_time_read(self.xcontact);
-  NSMutableArray * result_messages = [[NSMutableArray alloc] initWithCapacity:1000];
+    NSMutableArray * result_messages = [[NSMutableArray alloc] initWithCapacity:1000];
     keyset * k;
     int nk = all_keys (self.xcontact, &k);
     for (int ik = 0; ik < nk; ik++) {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-/*class NetworkManager {
+class NetworkManager {
     private var _sock: Int
     private var _contact: String
     
@@ -196,4 +196,4 @@ import Foundation
         print(enteredSecret ?? "")
         return randomSecret
     }
-}*/
+}

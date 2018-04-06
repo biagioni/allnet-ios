@@ -27,7 +27,7 @@ import UIKit
             result = "1 Contact"
         }
         if contactVM.count == 0 {
-            result = ""
+            result = "Contacts"
             if invisible_contacts(nil) == 0 {
                 showEditButton = false
             }
