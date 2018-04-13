@@ -216,7 +216,7 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
   struct allnet_mgmt_trace_reply * trace = NULL;
   time_t mtime = 0;
   pthread_mutex_lock(&key_generated_mutex);  // don't allow changes to keyContact until a key has been generated
-  if ((! waiting_for_key) && (mySelf.key != nil)) {
+  if ((! waiting_for_key) && (mySelf.key != nil)  && (keyContact != nil)) {
     waiting_for_key = !waiting_for_key;
     [mySelf.key notificationOfGeneratedKeyForContact:[[NSString alloc] initWithUTF8String:keyContact]];
   }
