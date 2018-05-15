@@ -47,13 +47,8 @@
 		2986CA9C205A72670024325F /* message.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA07205A71F40024325F /* message.c */; };
 		2986CA9D205A72750024325F /* keyd.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986C9DF205A71F40024325F /* keyd.c */; };
 		2986CA9E205A72890024325F /* trace.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986C9DC205A71F40024325F /* trace.c */; };
-		2986CA9F205A72C40024325F /* acache.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986C9C8205A71F40024325F /* acache.c */; };
 		2986CAA0205A72E40024325F /* astart.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986C9EB205A71F40024325F /* astart.c */; };
-		2986CAA1205A73480024325F /* alocal.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA0E205A71F40024325F /* alocal.c */; };
-		2986CAA2205A73670024325F /* aip.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA76205A71F40024325F /* aip.c */; };
-		2986CAA3205A73810024325F /* listen.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA08205A71F40024325F /* listen.c */; };
 		2986CAA4205A739A0024325F /* ad.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA0B205A71F40024325F /* ad.c */; };
-		2986CAA5205A73A80024325F /* adht.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986C9EC205A71F40024325F /* adht.c */; };
 		2986CAA6205A73CC0024325F /* traced.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986C9DE205A71F40024325F /* traced.c */; };
 		2986CAA7205A73ED0024325F /* track.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986C9DA205A71F40024325F /* track.c */; };
 		2986CAA8205A74020024325F /* social.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986C9EE205A71F40024325F /* social.c */; };
@@ -69,6 +64,11 @@
 		29B449D620337A2B0050B64D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29B449CB20337A2B0050B64D /* Images.xcassets */; };
 		29B449DC20337AFC0050B64D /* XChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 428DEE961B0FB9D000163976 /* XChat.m */; };
 		29C48C0C204CB86700B0FDC7 /* GroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C48C0B204CB86700B0FDC7 /* GroupVC.swift */; };
+		29CA7ABD20AB6D2C002194D2 /* abc.c in Sources */ = {isa = PBXBuildFile; fileRef = 29CA7AB420AB6D2B002194D2 /* abc.c */; };
+		29CA7ABE20AB6D2C002194D2 /* pid_bloom.c in Sources */ = {isa = PBXBuildFile; fileRef = 29CA7AB520AB6D2B002194D2 /* pid_bloom.c */; };
+		29CA7ABF20AB6D2C002194D2 /* adht.c in Sources */ = {isa = PBXBuildFile; fileRef = 29CA7AB720AB6D2B002194D2 /* adht.c */; };
+		29CA7AC020AB6D2C002194D2 /* pcache.c in Sources */ = {isa = PBXBuildFile; fileRef = 29CA7AB820AB6D2C002194D2 /* pcache.c */; };
+		29CA7AC120AB6D2C002194D2 /* sockets.c in Sources */ = {isa = PBXBuildFile; fileRef = 29CA7ABB20AB6D2C002194D2 /* sockets.c */; };
 		29EB67F42036A85600D9647F /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB67F32036A85600D9647F /* ContactCell.swift */; };
 		29EB67F72036B0AB00D9647F /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB67F62036B0AB00D9647F /* ContactViewModel.swift */; };
 		29EB67F920374DD300D9647F /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB67F820374DD300D9647F /* MessageVC.swift */; };
@@ -89,7 +89,6 @@
 		296D283120562B690030B003 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		296D28332056337F0030B003 /* Alias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alias.swift; sourceTree = "<group>"; };
 		296D2835205647360030B003 /* MsgModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MsgModel.swift; sourceTree = "<group>"; };
-		2986C9C8205A71F40024325F /* acache.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = acache.c; sourceTree = "<group>"; };
 		2986C9CA205A71F40024325F /* voa.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = voa.c; sourceTree = "<group>"; };
 		2986C9CB205A71F40024325F /* Makefile.am */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
 		2986C9CC205A71F40024325F /* voa.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = voa.h; sourceTree = "<group>"; };
@@ -121,7 +120,6 @@
 		2986C9E9205A71F40024325F /* pre-list.en */ = {isa = PBXFileReference; lastKnownFileType = text; path = "pre-list.en"; sourceTree = "<group>"; };
 		2986C9EA205A71F40024325F /* post-list32 */ = {isa = PBXFileReference; lastKnownFileType = text; path = "post-list32"; sourceTree = "<group>"; };
 		2986C9EB205A71F40024325F /* astart.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = astart.c; sourceTree = "<group>"; };
-		2986C9EC205A71F40024325F /* adht.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = adht.c; sourceTree = "<group>"; };
 		2986C9ED205A71F40024325F /* payload.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = payload.h; sourceTree = "<group>"; };
 		2986C9EE205A71F40024325F /* social.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = social.c; sourceTree = "<group>"; };
 		2986C9F0205A71F40024325F /* show_console.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = show_console.c; sourceTree = "<group>"; };
@@ -145,16 +143,13 @@
 		2986CA02205A71F40024325F /* retransmit.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = retransmit.c; sourceTree = "<group>"; };
 		2986CA03205A71F40024325F /* xchat.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = xchat.py; sourceTree = "<group>"; };
 		2986CA04205A71F40024325F /* xchatr.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = xchatr.c; sourceTree = "<group>"; };
-		2986CA05205A71F40024325F /* xchat_test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = xchat_test.c; sourceTree = "<group>"; };
 		2986CA06205A71F40024325F /* store.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = store.h; sourceTree = "<group>"; };
 		2986CA07205A71F40024325F /* message.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = message.c; sourceTree = "<group>"; };
-		2986CA08205A71F40024325F /* listen.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = listen.c; sourceTree = "<group>"; };
 		2986CA09205A71F40024325F /* record.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = record.h; sourceTree = "<group>"; };
 		2986CA0A205A71F40024325F /* print_caches.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = print_caches.c; sourceTree = "<group>"; };
 		2986CA0B205A71F40024325F /* ad.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ad.c; sourceTree = "<group>"; };
 		2986CA0C205A71F40024325F /* hash.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = hash.c; sourceTree = "<group>"; };
 		2986CA0D205A71F40024325F /* Makefile.am */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
-		2986CA0E205A71F40024325F /* alocal.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = alocal.c; sourceTree = "<group>"; };
 		2986CA0F205A71F40024325F /* track.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = track.h; sourceTree = "<group>"; };
 		2986CA12205A71F40024325F /* Message.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; path = Message.java; sourceTree = "<group>"; };
 		2986CA13205A71F40024325F /* CoreDebug.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; path = CoreDebug.java; sourceTree = "<group>"; };
@@ -250,9 +245,7 @@
 		2986CA71205A71F40024325F /* wp_aes.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wp_aes.c; sourceTree = "<group>"; };
 		2986CA72205A71F40024325F /* dcache.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dcache.c; sourceTree = "<group>"; };
 		2986CA73205A71F40024325F /* record.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = record.c; sourceTree = "<group>"; };
-		2986CA74205A71F40024325F /* listen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = listen.h; sourceTree = "<group>"; };
 		2986CA75205A71F40024325F /* social.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = social.h; sourceTree = "<group>"; };
-		2986CA76205A71F40024325F /* aip.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = aip.c; sourceTree = "<group>"; };
 		2986CA78205A71F40024325F /* xtime.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = xtime.c; sourceTree = "<group>"; };
 		2986CA79205A71F40024325F /* allnet_radio.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = allnet_radio.c; sourceTree = "<group>"; };
 		2986CA7A205A71F40024325F /* Makefile.am */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
@@ -270,6 +263,17 @@
 		29B449C9203379FF0050B64D /* libPods-allnet-xchat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-allnet-xchat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B449CB20337A2B0050B64D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		29C48C0B204CB86700B0FDC7 /* GroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupVC.swift; sourceTree = "<group>"; };
+		29CA7AB120AB6CDF002194D2 /* test_xchat.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = test_xchat.c; sourceTree = "<group>"; };
+		29CA7AB320AB6D2B002194D2 /* sockets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sockets.h; sourceTree = "<group>"; };
+		29CA7AB420AB6D2B002194D2 /* abc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = abc.c; sourceTree = "<group>"; };
+		29CA7AB520AB6D2B002194D2 /* pid_bloom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pid_bloom.c; sourceTree = "<group>"; };
+		29CA7AB620AB6D2B002194D2 /* pid_bloom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pid_bloom.h; sourceTree = "<group>"; };
+		29CA7AB720AB6D2B002194D2 /* adht.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = adht.c; sourceTree = "<group>"; };
+		29CA7AB820AB6D2C002194D2 /* pcache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pcache.c; sourceTree = "<group>"; };
+		29CA7AB920AB6D2C002194D2 /* pcache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pcache.h; sourceTree = "<group>"; };
+		29CA7ABA20AB6D2C002194D2 /* adht.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adht.h; sourceTree = "<group>"; };
+		29CA7ABB20AB6D2C002194D2 /* sockets.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sockets.c; sourceTree = "<group>"; };
+		29CA7ABC20AB6D2C002194D2 /* abc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = abc.h; sourceTree = "<group>"; };
 		29EB67F32036A85600D9647F /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		29EB67F62036B0AB00D9647F /* ContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
 		29EB67F820374DD300D9647F /* MessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVC.swift; sourceTree = "<group>"; };
@@ -303,36 +307,30 @@
 		2986C9C7205A71F40024325F /* src */ = {
 			isa = PBXGroup;
 			children = (
-				2986C9C8205A71F40024325F /* acache.c */,
 				2986C9C9205A71F40024325F /* voa */,
 				2986C9CD205A71F40024325F /* abc */,
 				2986C9DA205A71F40024325F /* track.c */,
 				2986C9DB205A71F40024325F /* mgmt */,
 				2986C9E2205A71F40024325F /* ahra */,
 				2986C9EB205A71F40024325F /* astart.c */,
-				2986C9EC205A71F40024325F /* adht.c */,
 				2986C9ED205A71F40024325F /* payload.h */,
 				2986C9EE205A71F40024325F /* social.c */,
 				2986C9EF205A71F40024325F /* xchat */,
-				2986CA08205A71F40024325F /* listen.c */,
 				2986CA09205A71F40024325F /* record.h */,
 				2986CA0A205A71F40024325F /* print_caches.c */,
 				2986CA0B205A71F40024325F /* ad.c */,
 				2986CA0C205A71F40024325F /* hash.c */,
 				2986CA0D205A71F40024325F /* Makefile.am */,
-				2986CA0E205A71F40024325F /* alocal.c */,
 				2986CA0F205A71F40024325F /* track.h */,
 				2986CA10205A71F40024325F /* gui */,
 				2986CA40205A71F40024325F /* lib */,
 				2986CA73205A71F40024325F /* record.c */,
-				2986CA74205A71F40024325F /* listen.h */,
 				2986CA75205A71F40024325F /* social.h */,
-				2986CA76205A71F40024325F /* aip.c */,
 				2986CA77205A71F40024325F /* xtime */,
 				2986CA7C205A71F40024325F /* hash.h */,
 			);
 			name = src;
-			path = ../../../AllNet/src;
+			path = ../../../../Android/AllNet/src;
 			sourceTree = "<group>";
 		};
 		2986C9C9205A71F40024325F /* voa */ = {
@@ -395,6 +393,7 @@
 		2986C9EF205A71F40024325F /* xchat */ = {
 			isa = PBXGroup;
 			children = (
+				29CA7AB120AB6CDF002194D2 /* test_xchat.c */,
 				2986C9F0205A71F40024325F /* show_console.c */,
 				2986C9F1205A71F40024325F /* xcommon.c */,
 				2986C9F2205A71F40024325F /* design */,
@@ -416,7 +415,6 @@
 				2986CA02205A71F40024325F /* retransmit.c */,
 				2986CA03205A71F40024325F /* xchat.py */,
 				2986CA04205A71F40024325F /* xchatr.c */,
-				2986CA05205A71F40024325F /* xchat_test.c */,
 				2986CA06205A71F40024325F /* store.h */,
 				2986CA07205A71F40024325F /* message.c */,
 			);
@@ -508,6 +506,16 @@
 		2986CA40205A71F40024325F /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				29CA7AB420AB6D2B002194D2 /* abc.c */,
+				29CA7ABC20AB6D2C002194D2 /* abc.h */,
+				29CA7AB720AB6D2B002194D2 /* adht.c */,
+				29CA7ABA20AB6D2C002194D2 /* adht.h */,
+				29CA7AB820AB6D2C002194D2 /* pcache.c */,
+				29CA7AB920AB6D2C002194D2 /* pcache.h */,
+				29CA7AB520AB6D2B002194D2 /* pid_bloom.c */,
+				29CA7AB620AB6D2B002194D2 /* pid_bloom.h */,
+				29CA7ABB20AB6D2C002194D2 /* sockets.c */,
+				29CA7AB320AB6D2B002194D2 /* sockets.h */,
 				2986CA41205A71F40024325F /* keys.h */,
 				2986CA42205A71F40024325F /* priority.c */,
 				2986CA43205A71F40024325F /* pipemsg.h */,
@@ -726,7 +734,7 @@
 		425A7D871AEC898C00C74E12 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = allnet;
 				TargetAttributes = {
 					425A7D8E1AEC898C00C74E12 = {
@@ -840,12 +848,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				296D283220562B690030B003 /* NetworkManager.swift in Sources */,
-				2986CAA1205A73480024325F /* alocal.c in Sources */,
-				2986CAA5205A73A80024325F /* adht.c in Sources */,
-				2986CA9F205A72C40024325F /* acache.c in Sources */,
+				29CA7ABD20AB6D2C002194D2 /* abc.c in Sources */,
 				29B0E13620396C1700F38A3E /* SettingsVC.swift in Sources */,
 				2986CAA7205A73ED0024325F /* track.c in Sources */,
-				2986CAA3205A73810024325F /* listen.c in Sources */,
 				2986CAA6205A73CC0024325F /* traced.c in Sources */,
 				2986CAA9205A741F0024325F /* record.c in Sources */,
 				2986CAA4205A739A0024325F /* ad.c in Sources */,
@@ -853,7 +858,6 @@
 				296D28342056337F0030B003 /* Alias.swift in Sources */,
 				29EB67F920374DD300D9647F /* MessageVC.swift in Sources */,
 				2986CAA0205A72E40024325F /* astart.c in Sources */,
-				2986CAA2205A73670024325F /* aip.c in Sources */,
 				2986CA96205A72670024325F /* xcommon.c in Sources */,
 				2986CA9D205A72750024325F /* keyd.c in Sources */,
 				2986CA9E205A72890024325F /* trace.c in Sources */,
@@ -862,6 +866,8 @@
 				2986CA9A205A72670024325F /* retransmit.c in Sources */,
 				2986CA9C205A72670024325F /* message.c in Sources */,
 				2986CA7E205A72450024325F /* priority.c in Sources */,
+				29CA7ABF20AB6D2C002194D2 /* adht.c in Sources */,
+				29CA7ABE20AB6D2C002194D2 /* pid_bloom.c in Sources */,
 				2986CA7F205A72450024325F /* allnet_queue.c in Sources */,
 				2986CA80205A72450024325F /* table.c in Sources */,
 				2986CA81205A72450024325F /* util.c in Sources */,
@@ -876,6 +882,7 @@
 				2986CA89205A72450024325F /* keys.c in Sources */,
 				2986CA8A205A72450024325F /* pipemsg.c in Sources */,
 				2986CA8B205A72450024325F /* sha.c in Sources */,
+				29CA7AC120AB6D2C002194D2 /* sockets.c in Sources */,
 				2986CA8C205A72450024325F /* asn1.c in Sources */,
 				2986CA8D205A72450024325F /* wp_rsa.c in Sources */,
 				2986CA8E205A72450024325F /* allnet_log.c in Sources */,
@@ -902,6 +909,7 @@
 				2990E476205C29B80021F2A0 /* LabelIteractive.swift in Sources */,
 				29EB67F42036A85600D9647F /* ContactCell.swift in Sources */,
 				2925D05B20433D75003A9E2E /* KeyExchangeVC.swift in Sources */,
+				29CA7AC020AB6D2C002194D2 /* pcache.c in Sources */,
 				29EB67F72036B0AB00D9647F /* ContactViewModel.swift in Sources */,
 				2925D0572043161B003A9E2E /* ContactNewVC.swift in Sources */,
 			);
@@ -943,12 +951,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1001,12 +1011,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1034,6 +1046,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};

@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func enterBackground(){
-        acache_save_data()
+        //acache_save_data()
         set_speculative_computation(0);
     }
     
@@ -140,7 +140,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         application.beginBackgroundTask {
              NSLog("allnet task ending background task (started by calling astart_main)\n")
-            acache_save_data()
+            //acache_save_data()
             self.xChat.disconnect()
         }
         if firstCall {
@@ -148,10 +148,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSLog("calling astart_main\n")
             DispatchQueue.global(qos: .userInitiated).async {
                 let args = ["allnet", "-v", "default", nil]
-                var pointer = args.map{Pointer(mutating: (($0 ?? "") as NSString).utf8String)}
-                astart_main(3, &pointer)
+                //var pointer = args.map{Pointer(mutating: (($0 ?? "") as NSString).utf8String)}
+                //astart_main(3, &pointer)
+
+                allnet_daemon_main()
+                
+                
                 NSLog("astart_main has completed, starting multipeer thread\n")
-                multipeer_queue_indices(&self.self.multipeer_read_queue_index, &self.multipeer_write_queue_index)
+               // multipeer_queue_indices(&self.self.multipeer_read_queue_index, &self.multipeer_write_queue_index)
                 self.multipeer_queues_initialized = 1
                 // the rest of this is the multipeer thread that reads from ad and forwards to the peers
                 let p = init_pipe_descriptor (self.allnet_log)
@@ -200,7 +204,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         browser.delegate = self
         NSLog("self.peerID %@, advertiser %@, browser %@\n", currentPeerID.displayName, advertiser.description, browser.description)
         browser.startBrowsingForPeers()
-        multipeer_queue_indices(&multipeer_read_queue_index, &multipeer_write_queue_index);
+       // multipeer_queue_indices(&multipeer_read_queue_index, &multipeer_write_queue_index);
         NSLog("didFinishLaunching complete\n");
     }
     

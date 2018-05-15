@@ -63,7 +63,7 @@ static void * splitPacketBuffer = NULL;
   struct allnet_log * alog = init_log ("ios xchat");
   p = init_pipe_descriptor(alog);
   splitPacketBuffer = NULL;
-  self.sock = xchat_init ("xchat", NULL, p);
+  self.sock = xchat_init ("xchat", NULL);
   NSLog(@"self.sock is %d\n", self.sock);
   CFSocketRef iOSSock = CFSocketCreateWithNative(NULL, self.sock, kCFSocketDataCallBack,
                                                  (CFSocketCallBack)&dataAvailable, NULL);
@@ -88,7 +88,7 @@ static void * splitPacketBuffer = NULL;
 - (void)reconnect {
   struct allnet_log * alog = init_log ("ios xchat reconnect");
   p = init_pipe_descriptor(alog);
-  self.sock = xchat_init ("xchat reconnect", NULL, p);
+  self.sock = xchat_init ("xchat reconnect", NULL);
   CFSocketRef iOSSock = CFSocketCreateWithNative(NULL, self.sock, kCFSocketDataCallBack,
                                                  (CFSocketCallBack)&dataAvailable, NULL);
   // if you ever need to bind, use CFSocketSetAddress -- but not needed here
