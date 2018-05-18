@@ -20,9 +20,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var firstCall =  true
     var currentPeerID: MCPeerID!
     var sessions: [MCSession]!
-    var multipeer_read_queue_index: Int32 = 0
-    var multipeer_write_queue_index: Int32 = 0
-    var multipeer_queues_initialized: Int32 = 0
+    // this socket and address are used to forward packets received from multipeer to ad and back
+    var mp_socket: Int32 = -1
+    let mp_sin: sockaddr_in = sockaddr_in (
+        sin_len: __uint8_t (16),
+        sin_family: sa_family_t (AF_INET),
+        sin_port: UInt16(allnet_htons (Int32(ALLNET_PORT))),
+        sin_addr: in_addr(s_addr: 0x7f000001),
+        sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
+    var last_sent: UInt64 = 0
     var allnet_log: UnsafeMutablePointer<allnet_log>? = nil
     var advertiser: MCNearbyServiceAdvertiser!
     var browser: MCNearbyServiceBrowser!
@@ -88,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func enterBackground(){
-        //acache_save_data()
+        pcache_write()
         set_speculative_computation(0);
     }
     
@@ -122,7 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return 0
         }
     #endif /* USE_ABLE_TO_CONNECT */
-    
+
     func startAllnet(application: UIApplication, firstCall: Bool) {
         if !firstCall {
             sleep (1)
@@ -140,7 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         application.beginBackgroundTask {
              NSLog("allnet task ending background task (started by calling astart_main)\n")
-            //acache_save_data()
+            pcache_write()
             self.xChat.disconnect()
         }
         if firstCall {
@@ -148,50 +154,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSLog("calling astart_main\n")
             DispatchQueue.global(qos: .userInitiated).async {
                 let args = ["allnet", "-v", "default", nil]
-                //var pointer = args.map{Pointer(mutating: (($0 ?? "") as NSString).utf8String)}
-                //astart_main(3, &pointer)
-
-                allnet_daemon_main()
-                
-                
-                NSLog("astart_main has completed, starting multipeer thread\n")
-               // multipeer_queue_indices(&self.self.multipeer_read_queue_index, &self.multipeer_write_queue_index)
-                self.multipeer_queues_initialized = 1
-                // the rest of this is the multipeer thread that reads from ad and forwards to the peers
-                let p = init_pipe_descriptor (self.allnet_log)
-                add_pipe(p, self.multipeer_read_queue_index, "AppDelegate multipeer read pipe from ad")
-                while (true) {  // read the ad queue, forward messages to the peers
-                    var buffer: Pointer?
-                    var from_pipe: Int32 = 0
-                    var priority: UInt32 = 0
-                    let n = receive_pipe_message_any(p, PIPE_MESSAGE_WAIT_FOREVER, &buffer, &from_pipe, &priority)
-                    var debug_peers = 0;
-                    for q in 0..<self.sessions.count {
-                        let s = self.sessions[q]
-                        debug_peers += s.connectedPeers.count
+                var pointer = args.map{Pointer(mutating: (($0 ?? "") as NSString).utf8String)}
+                astart_main(3, &pointer)
+                // set up a connection to the allnet daemon that we can use to send and receive multipeer packets
+                NSLog("astart_main has completed, starting multipeer connection\n")
+                self.mp_socket = socket (AF_INET, SOCK_DGRAM, IPPROTO_UDP)
+                while (true) {  // read the socket, forward messages to the peers
+                    var sa = sockaddr ()
+                    var sal = socklen_t(16)
+                    var buffer: [CChar] = Array(repeating: CChar(0), count: Int(ALLNET_MTU))
+                    let n = recvfrom (self.mp_socket, &buffer, Int(ALLNET_MTU), MSG_DONTWAIT, &sa, &sal)
+                    if (n <= 0) {
+                        usleep(1000)
+                    } else {
+                        self.sendSession(buffer: buffer, length: n)
                     }
-                    if debug_peers > 0{
-                         NSLog("multipeer thread got %d-byte message from ad, forwarding to %d peers\n", n, debug_peers)
-                    }
-                    if from_pipe == self.multipeer_read_queue_index && n > 0 {
-                        self.sendSession(buffer: buffer!, length: n)
-                    }
-                    if n > 0 && buffer != nil {
-                        free(buffer)
-                    }
+                    self.sendKeepalive ()
                 }
             }
             NSLog("astart_main has been started\n")
         }
     }
-    func sendSession(buffer: UnsafeRawPointer, length: Int32) {
-        let send = Data(bytes: buffer, count: Int(length))
+    func sendSession(buffer: [CChar], length: Int) {
+        let send = Data(bytes: buffer, count: length)
         for i in 0..<self.sessions.count {
             let session = sessions[i]
             if (session.connectedPeers.count > 0) {
                 try? session.send(send, toPeers: session.connectedPeers, with: .unreliable)
             }
         }
+    }
+    
+    func send_udp(buffer: UnsafeRawPointer, size: Int) {
+        let slen = socklen_t(MemoryLayout<sockaddr_in>.size)
+        var addr = self.mp_sin
+        let sent = withUnsafePointer(to: &addr) {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
+                sendto (self.mp_socket, buffer, Int(size), MSG_DONTWAIT, $0, slen)
+            }
+        }
+        if (sent != size) {
+            NSLog("sent ", sent, " instead of ", size, "\n")
+        }
+    }
+    
+    func sendKeepalive() {
+        if allnet_time () <= self.last_sent + 5 {
+            return;
+        }
+        self.last_sent = allnet_time()
+        var size: UInt32 = 0;
+        let buffer: UnsafeRawPointer = UnsafeRawPointer(keepalive_packet(&size))
+        send_udp (buffer:buffer, size:Int(size))
     }
     
     func setPeer(){
@@ -204,7 +218,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         browser.delegate = self
         NSLog("self.peerID %@, advertiser %@, browser %@\n", currentPeerID.displayName, advertiser.description, browser.description)
         browser.startBrowsingForPeers()
-       // multipeer_queue_indices(&multipeer_read_queue_index, &multipeer_write_queue_index);
         NSLog("didFinishLaunching complete\n");
     }
     
@@ -220,8 +233,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let deviceName = UIDevice.current.name
             var buffer = [Int8](repeating:0, count: 10)
             random_string(&buffer, 11)
-            let randonValue = String(utf8String: &buffer)
-            let displayName = deviceName + ", unique " + randonValue!
+            let randomValue = String(utf8String: &buffer)
+            let displayName = deviceName + ", unique " + randomValue!
             result = MCPeerID(displayName: displayName)
             NSLog("created peer ID %@\n", result!.description)
             let peerID = NSKeyedArchiver.archivedData(withRootObject: result!)
@@ -292,14 +305,10 @@ extension AppDelegate: MCSessionDelegate {
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         let length = data.count
-        if (multipeer_queues_initialized == 1) {
-            var values: UInt8? = nil
-            data.copyBytes(to: &values!, count: length)
-            var val: Int8 = Int8(values!)
-            send_pipe_message_free (Int32(multipeer_write_queue_index), &val, UInt32(length), UInt32(ALLNET_PRIORITY_EPSILON), allnet_log)
-        } else {
-            NSLog("multipeer didReceiveData unable to forward packet, queue not initialized\n")
-        }
+        var values: UInt8? = nil
+        data.copyBytes(to: &values!, count: length)
+        var val: Int8 = Int8(values!)
+        send_udp(buffer: &val, size: Int(length))
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
