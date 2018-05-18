@@ -22,7 +22,6 @@
 #include "xchat/xcommon.h"
 #include "limits.h"
 #include "lib/util.h"
-#include "lib/pipemsg.h"
 #include "xchat/cutil.h"
 #include "lib/app_util.h"
 #include "lib/allnet_log.h"
@@ -47,7 +46,6 @@
 static pthread_mutex_t key_generated_mutex;
 static int waiting_for_key = 0;
 static char * keyContact = NULL;
-static pd p;
 
 // variables for tracing
 static int trace_count = 0;
@@ -56,14 +54,10 @@ static char expecting_trace [MESSAGE_ID_SIZE];
 
 // hack to make self object available to C code -- should only be one Xchat object anyway
 static XChat * mySelf = NULL;
-static void * splitPacketBuffer = NULL;
 
 - (void) initialize {
   NSLog(@"calling xchat_init\n");
-  struct allnet_log * alog = init_log ("ios xchat");
-  p = init_pipe_descriptor(alog);
-  splitPacketBuffer = NULL;
-  self.sock = xchat_init ("xchat", NULL, p);
+  self.sock = xchat_init ("xchat", NULL);
   NSLog(@"self.sock is %d\n", self.sock);
   CFSocketRef iOSSock = CFSocketCreateWithNative(NULL, self.sock, kCFSocketDataCallBack,
                                                  (CFSocketCallBack)&dataAvailable, NULL);
@@ -80,15 +74,10 @@ static void * splitPacketBuffer = NULL;
   xchat_end (self.sock);   // close the socket, and do any other cleanup needed
   CFRunLoopRef currentRunLoop = CFRunLoopGetCurrent();
   CFRunLoopRemoveSource(currentRunLoop, self.runLoop, kCFRunLoopCommonModes);
-  if (splitPacketBuffer != NULL)
-    free (splitPacketBuffer);
-  splitPacketBuffer = NULL;
 }
 
 - (void)reconnect {
-  struct allnet_log * alog = init_log ("ios xchat reconnect");
-  p = init_pipe_descriptor(alog);
-  self.sock = xchat_init ("xchat reconnect", NULL, p);
+  self.sock = xchat_init ("xchat reconnect", NULL);
   CFSocketRef iOSSock = CFSocketCreateWithNative(NULL, self.sock, kCFSocketDataCallBack,
                                                  (CFSocketCallBack)&dataAvailable, NULL);
   // if you ever need to bind, use CFSocketSetAddress -- but not needed here
@@ -171,10 +160,12 @@ static void dataAvailable (CFSocketRef s, CFSocketCallBackType callbackType, CFD
   char * dataChar = (char *)(CFDataGetBytePtr(data));
   // pthread_mutex_lock (&packet_mutex);
   int sock = CFSocketGetNative(s);
-  splitPacket(sock, dataChar, psize);  /* does all the packet processing */
+  // splitPacket(sock, dataChar, psize);  /* does all the packet processing */
   // pthread_mutex_unlock (&packet_mutex);
+  receivePacket(sock, dataChar, psize, ALLNET_PRIORITY_EPSILON);
 }
 
+#if 0
 static void splitPacket (int sock, char * data, unsigned int dlen)
 {
   // NSLog(@"got packet of size %d\n", dlen);
@@ -196,6 +187,7 @@ static void splitPacket (int sock, char * data, unsigned int dlen)
   if (priorities != NULL)
     free (priorities);
 }
+#endif // 0
 
 // main function to call handle_packet and process the results
 static void receivePacket (int sock, char * data, unsigned int dlen, unsigned int priority)
