@@ -29,7 +29,6 @@
 		2986CA87205A72450024325F /* mapchar.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA59205A71F40024325F /* mapchar.c */; };
 		2986CA88205A72450024325F /* configfiles.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA5A205A71F40024325F /* configfiles.c */; };
 		2986CA89205A72450024325F /* keys.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA5D205A71F40024325F /* keys.c */; };
-		2986CA8A205A72450024325F /* pipemsg.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA5F205A71F40024325F /* pipemsg.c */; };
 		2986CA8B205A72450024325F /* sha.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA63205A71F40024325F /* sha.c */; };
 		2986CA8C205A72450024325F /* asn1.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA64205A71F40024325F /* asn1.c */; };
 		2986CA8D205A72450024325F /* wp_rsa.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA66205A71F40024325F /* wp_rsa.c */; };
@@ -49,7 +48,6 @@
 		2986CA9E205A72890024325F /* trace.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986C9DC205A71F40024325F /* trace.c */; };
 		2986CAA0205A72E40024325F /* astart.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986C9EB205A71F40024325F /* astart.c */; };
 		2986CAA4205A739A0024325F /* ad.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA0B205A71F40024325F /* ad.c */; };
-		2986CAA6205A73CC0024325F /* traced.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986C9DE205A71F40024325F /* traced.c */; };
 		2986CAA7205A73ED0024325F /* track.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986C9DA205A71F40024325F /* track.c */; };
 		2986CAA8205A74020024325F /* social.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986C9EE205A71F40024325F /* social.c */; };
 		2986CAA9205A741F0024325F /* record.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA73205A71F40024325F /* record.c */; };
@@ -64,11 +62,6 @@
 		29B449D620337A2B0050B64D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29B449CB20337A2B0050B64D /* Images.xcassets */; };
 		29B449DC20337AFC0050B64D /* XChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 428DEE961B0FB9D000163976 /* XChat.m */; };
 		29C48C0C204CB86700B0FDC7 /* GroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C48C0B204CB86700B0FDC7 /* GroupVC.swift */; };
-		29CA7ABD20AB6D2C002194D2 /* abc.c in Sources */ = {isa = PBXBuildFile; fileRef = 29CA7AB420AB6D2B002194D2 /* abc.c */; };
-		29CA7ABE20AB6D2C002194D2 /* pid_bloom.c in Sources */ = {isa = PBXBuildFile; fileRef = 29CA7AB520AB6D2B002194D2 /* pid_bloom.c */; };
-		29CA7ABF20AB6D2C002194D2 /* adht.c in Sources */ = {isa = PBXBuildFile; fileRef = 29CA7AB720AB6D2B002194D2 /* adht.c */; };
-		29CA7AC020AB6D2C002194D2 /* pcache.c in Sources */ = {isa = PBXBuildFile; fileRef = 29CA7AB820AB6D2C002194D2 /* pcache.c */; };
-		29CA7AC120AB6D2C002194D2 /* sockets.c in Sources */ = {isa = PBXBuildFile; fileRef = 29CA7ABB20AB6D2C002194D2 /* sockets.c */; };
 		29EB67F42036A85600D9647F /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB67F32036A85600D9647F /* ContactCell.swift */; };
 		29EB67F72036B0AB00D9647F /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB67F62036B0AB00D9647F /* ContactViewModel.swift */; };
 		29EB67F920374DD300D9647F /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB67F820374DD300D9647F /* MessageVC.swift */; };
@@ -76,6 +69,11 @@
 		29EB680C20379D7300D9647F /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 29EB680B20379D7300D9647F /* MessageModel.m */; };
 		425A7DA11AEC898C00C74E12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 425A7D9F1AEC898C00C74E12 /* Main.storyboard */; };
 		425A7DA61AEC898C00C74E12 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 425A7DA41AEC898C00C74E12 /* LaunchScreen.xib */; };
+		426CFD7B20AB573B00231854 /* abc.c in Sources */ = {isa = PBXBuildFile; fileRef = 426CFD7920AB573A00231854 /* abc.c */; };
+		42CC391120AA76F7006BABB7 /* sockets.c in Sources */ = {isa = PBXBuildFile; fileRef = 42CC391020AA76F7006BABB7 /* sockets.c */; };
+		42CC391420AA770C006BABB7 /* adht.c in Sources */ = {isa = PBXBuildFile; fileRef = 42CC391220AA770C006BABB7 /* adht.c */; };
+		42CC391720AA7722006BABB7 /* pcache.c in Sources */ = {isa = PBXBuildFile; fileRef = 42CC391520AA7721006BABB7 /* pcache.c */; };
+		42CC391A20AA772E006BABB7 /* pid_bloom.c in Sources */ = {isa = PBXBuildFile; fileRef = 42CC391820AA772E006BABB7 /* pid_bloom.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,22 +90,9 @@
 		2986C9CA205A71F40024325F /* voa.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = voa.c; sourceTree = "<group>"; };
 		2986C9CB205A71F40024325F /* Makefile.am */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
 		2986C9CC205A71F40024325F /* voa.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = voa.h; sourceTree = "<group>"; };
-		2986C9CE205A71F40024325F /* abc-networkmanager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "abc-networkmanager.h"; sourceTree = "<group>"; };
-		2986C9CF205A71F40024325F /* abc-wifi.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "abc-wifi.c"; sourceTree = "<group>"; };
-		2986C9D0205A71F40024325F /* abc-ip.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "abc-ip.c"; sourceTree = "<group>"; };
-		2986C9D1205A71F40024325F /* abc-iface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "abc-iface.h"; sourceTree = "<group>"; };
-		2986C9D2205A71F40024325F /* abc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = abc.c; sourceTree = "<group>"; };
-		2986C9D3205A71F40024325F /* abc-iw.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "abc-iw.c"; sourceTree = "<group>"; };
-		2986C9D4205A71F40024325F /* abc-networkmanager.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "abc-networkmanager.c"; sourceTree = "<group>"; };
-		2986C9D5205A71F40024325F /* Makefile.am */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
-		2986C9D6205A71F40024325F /* abc-ip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "abc-ip.h"; sourceTree = "<group>"; };
-		2986C9D7205A71F40024325F /* abc-wifi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "abc-wifi.h"; sourceTree = "<group>"; };
-		2986C9D8205A71F40024325F /* abc-iface.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "abc-iface.c"; sourceTree = "<group>"; };
-		2986C9D9205A71F40024325F /* abc-iw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "abc-iw.h"; sourceTree = "<group>"; };
 		2986C9DA205A71F40024325F /* track.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = track.c; sourceTree = "<group>"; };
 		2986C9DC205A71F40024325F /* trace.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = trace.c; sourceTree = "<group>"; };
 		2986C9DD205A71F40024325F /* sniffer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sniffer.c; sourceTree = "<group>"; };
-		2986C9DE205A71F40024325F /* traced.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = traced.c; sourceTree = "<group>"; };
 		2986C9DF205A71F40024325F /* keyd.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = keyd.c; sourceTree = "<group>"; };
 		2986C9E0205A71F40024325F /* Makefile.am */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
 		2986C9E1205A71F40024325F /* init-script */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "init-script"; sourceTree = "<group>"; };
@@ -196,7 +181,6 @@
 		2986CA3F205A71F40024325F /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		2986CA41205A71F40024325F /* keys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keys.h; sourceTree = "<group>"; };
 		2986CA42205A71F40024325F /* priority.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = priority.c; sourceTree = "<group>"; };
-		2986CA43205A71F40024325F /* pipemsg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pipemsg.h; sourceTree = "<group>"; };
 		2986CA44205A71F40024325F /* allnet_queue.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = allnet_queue.c; sourceTree = "<group>"; };
 		2986CA45205A71F40024325F /* configfiles.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = configfiles.h; sourceTree = "<group>"; };
 		2986CA46205A71F40024325F /* mapchar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mapchar.h; sourceTree = "<group>"; };
@@ -224,7 +208,6 @@
 		2986CA5C205A71F40024325F /* allnet_queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = allnet_queue.h; sourceTree = "<group>"; };
 		2986CA5D205A71F40024325F /* keys.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = keys.c; sourceTree = "<group>"; };
 		2986CA5E205A71F40024325F /* priority.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = priority.h; sourceTree = "<group>"; };
-		2986CA5F205A71F40024325F /* pipemsg.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pipemsg.c; sourceTree = "<group>"; };
 		2986CA60205A71F40024325F /* trace_util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = trace_util.h; sourceTree = "<group>"; };
 		2986CA61205A71F40024325F /* packet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = packet.h; sourceTree = "<group>"; };
 		2986CA62205A71F40024325F /* ai.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ai.h; sourceTree = "<group>"; };
@@ -263,17 +246,6 @@
 		29B449C9203379FF0050B64D /* libPods-allnet-xchat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-allnet-xchat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B449CB20337A2B0050B64D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		29C48C0B204CB86700B0FDC7 /* GroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupVC.swift; sourceTree = "<group>"; };
-		29CA7AB120AB6CDF002194D2 /* test_xchat.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = test_xchat.c; sourceTree = "<group>"; };
-		29CA7AB320AB6D2B002194D2 /* sockets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sockets.h; sourceTree = "<group>"; };
-		29CA7AB420AB6D2B002194D2 /* abc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = abc.c; sourceTree = "<group>"; };
-		29CA7AB520AB6D2B002194D2 /* pid_bloom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pid_bloom.c; sourceTree = "<group>"; };
-		29CA7AB620AB6D2B002194D2 /* pid_bloom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pid_bloom.h; sourceTree = "<group>"; };
-		29CA7AB720AB6D2B002194D2 /* adht.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = adht.c; sourceTree = "<group>"; };
-		29CA7AB820AB6D2C002194D2 /* pcache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pcache.c; sourceTree = "<group>"; };
-		29CA7AB920AB6D2C002194D2 /* pcache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pcache.h; sourceTree = "<group>"; };
-		29CA7ABA20AB6D2C002194D2 /* adht.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = adht.h; sourceTree = "<group>"; };
-		29CA7ABB20AB6D2C002194D2 /* sockets.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sockets.c; sourceTree = "<group>"; };
-		29CA7ABC20AB6D2C002194D2 /* abc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = abc.h; sourceTree = "<group>"; };
 		29EB67F32036A85600D9647F /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		29EB67F62036B0AB00D9647F /* ContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
 		29EB67F820374DD300D9647F /* MessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVC.swift; sourceTree = "<group>"; };
@@ -285,8 +257,18 @@
 		425A7D931AEC898C00C74E12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		425A7DA01AEC898C00C74E12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		425A7DA51AEC898C00C74E12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		426CFD7920AB573A00231854 /* abc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = abc.c; path = ../../../v3/src/lib/abc.c; sourceTree = "<group>"; };
+		426CFD7A20AB573B00231854 /* abc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = abc.h; path = ../../../v3/src/lib/abc.h; sourceTree = "<group>"; };
 		428DEE961B0FB9D000163976 /* XChat.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = XChat.m; sourceTree = "<group>"; };
 		428DEE981B0FC34F00163976 /* XChat.h */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = XChat.h; sourceTree = "<group>"; };
+		42CC390F20AA76F7006BABB7 /* sockets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sockets.h; path = ../../../v3/src/lib/sockets.h; sourceTree = "<group>"; };
+		42CC391020AA76F7006BABB7 /* sockets.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sockets.c; path = ../../../v3/src/lib/sockets.c; sourceTree = "<group>"; };
+		42CC391220AA770C006BABB7 /* adht.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = adht.c; path = ../../../v3/src/lib/adht.c; sourceTree = "<group>"; };
+		42CC391320AA770C006BABB7 /* adht.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = adht.h; path = ../../../v3/src/lib/adht.h; sourceTree = "<group>"; };
+		42CC391520AA7721006BABB7 /* pcache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pcache.c; path = ../../../v3/src/lib/pcache.c; sourceTree = "<group>"; };
+		42CC391620AA7722006BABB7 /* pcache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pcache.h; path = ../../../v3/src/lib/pcache.h; sourceTree = "<group>"; };
+		42CC391820AA772E006BABB7 /* pid_bloom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pid_bloom.c; path = ../../../v3/src/lib/pid_bloom.c; sourceTree = "<group>"; };
+		42CC391920AA772E006BABB7 /* pid_bloom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pid_bloom.h; path = ../../../v3/src/lib/pid_bloom.h; sourceTree = "<group>"; };
 		42CC5D7E1BF06F9800437C67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		6124C4CC7071F14CBE49FE1C /* Pods-allnet-xchat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-allnet-xchat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-allnet-xchat/Pods-allnet-xchat.debug.xcconfig"; sourceTree = "<group>"; };
 		AFB2BF2A72ED41B94BA16D5D /* Pods-allnet-xchat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-allnet-xchat.release.xcconfig"; path = "Pods/Target Support Files/Pods-allnet-xchat/Pods-allnet-xchat.release.xcconfig"; sourceTree = "<group>"; };
@@ -308,7 +290,6 @@
 			isa = PBXGroup;
 			children = (
 				2986C9C9205A71F40024325F /* voa */,
-				2986C9CD205A71F40024325F /* abc */,
 				2986C9DA205A71F40024325F /* track.c */,
 				2986C9DB205A71F40024325F /* mgmt */,
 				2986C9E2205A71F40024325F /* ahra */,
@@ -343,32 +324,12 @@
 			path = voa;
 			sourceTree = "<group>";
 		};
-		2986C9CD205A71F40024325F /* abc */ = {
-			isa = PBXGroup;
-			children = (
-				2986C9CE205A71F40024325F /* abc-networkmanager.h */,
-				2986C9CF205A71F40024325F /* abc-wifi.c */,
-				2986C9D0205A71F40024325F /* abc-ip.c */,
-				2986C9D1205A71F40024325F /* abc-iface.h */,
-				2986C9D2205A71F40024325F /* abc.c */,
-				2986C9D3205A71F40024325F /* abc-iw.c */,
-				2986C9D4205A71F40024325F /* abc-networkmanager.c */,
-				2986C9D5205A71F40024325F /* Makefile.am */,
-				2986C9D6205A71F40024325F /* abc-ip.h */,
-				2986C9D7205A71F40024325F /* abc-wifi.h */,
-				2986C9D8205A71F40024325F /* abc-iface.c */,
-				2986C9D9205A71F40024325F /* abc-iw.h */,
-			);
-			path = abc;
-			sourceTree = "<group>";
-		};
 		2986C9DB205A71F40024325F /* mgmt */ = {
 			isa = PBXGroup;
 			children = (
 				2986C9DC205A71F40024325F /* trace.c */,
 				2986C9DF205A71F40024325F /* keyd.c */,
 				2986C9DD205A71F40024325F /* sniffer.c */,
-				2986C9DE205A71F40024325F /* traced.c */,
 				2986C9E0205A71F40024325F /* Makefile.am */,
 				2986C9E1205A71F40024325F /* init-script */,
 			);
@@ -393,7 +354,6 @@
 		2986C9EF205A71F40024325F /* xchat */ = {
 			isa = PBXGroup;
 			children = (
-				29CA7AB120AB6CDF002194D2 /* test_xchat.c */,
 				2986C9F0205A71F40024325F /* show_console.c */,
 				2986C9F1205A71F40024325F /* xcommon.c */,
 				2986C9F2205A71F40024325F /* design */,
@@ -506,19 +466,18 @@
 		2986CA40205A71F40024325F /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				29CA7AB420AB6D2B002194D2 /* abc.c */,
-				29CA7ABC20AB6D2C002194D2 /* abc.h */,
-				29CA7AB720AB6D2B002194D2 /* adht.c */,
-				29CA7ABA20AB6D2C002194D2 /* adht.h */,
-				29CA7AB820AB6D2C002194D2 /* pcache.c */,
-				29CA7AB920AB6D2C002194D2 /* pcache.h */,
-				29CA7AB520AB6D2B002194D2 /* pid_bloom.c */,
-				29CA7AB620AB6D2B002194D2 /* pid_bloom.h */,
-				29CA7ABB20AB6D2C002194D2 /* sockets.c */,
-				29CA7AB320AB6D2B002194D2 /* sockets.h */,
+				426CFD7920AB573A00231854 /* abc.c */,
+				426CFD7A20AB573B00231854 /* abc.h */,
+				42CC391820AA772E006BABB7 /* pid_bloom.c */,
+				42CC391920AA772E006BABB7 /* pid_bloom.h */,
+				42CC391520AA7721006BABB7 /* pcache.c */,
+				42CC391620AA7722006BABB7 /* pcache.h */,
+				42CC391220AA770C006BABB7 /* adht.c */,
+				42CC391320AA770C006BABB7 /* adht.h */,
+				42CC391020AA76F7006BABB7 /* sockets.c */,
+				42CC390F20AA76F7006BABB7 /* sockets.h */,
 				2986CA41205A71F40024325F /* keys.h */,
 				2986CA42205A71F40024325F /* priority.c */,
-				2986CA43205A71F40024325F /* pipemsg.h */,
 				2986CA44205A71F40024325F /* allnet_queue.c */,
 				2986CA45205A71F40024325F /* configfiles.h */,
 				2986CA46205A71F40024325F /* mapchar.h */,
@@ -546,7 +505,6 @@
 				2986CA5C205A71F40024325F /* allnet_queue.h */,
 				2986CA5D205A71F40024325F /* keys.c */,
 				2986CA5E205A71F40024325F /* priority.h */,
-				2986CA5F205A71F40024325F /* pipemsg.c */,
 				2986CA60205A71F40024325F /* trace_util.h */,
 				2986CA61205A71F40024325F /* packet.h */,
 				2986CA62205A71F40024325F /* ai.h */,
@@ -734,12 +692,12 @@
 		425A7D871AEC898C00C74E12 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = allnet;
 				TargetAttributes = {
 					425A7D8E1AEC898C00C74E12 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 7TW6282C6A;
+						DevelopmentTeam = 96W3QVVZ52;
 						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -848,10 +806,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				296D283220562B690030B003 /* NetworkManager.swift in Sources */,
-				29CA7ABD20AB6D2C002194D2 /* abc.c in Sources */,
 				29B0E13620396C1700F38A3E /* SettingsVC.swift in Sources */,
 				2986CAA7205A73ED0024325F /* track.c in Sources */,
-				2986CAA6205A73CC0024325F /* traced.c in Sources */,
 				2986CAA9205A741F0024325F /* record.c in Sources */,
 				2986CAA4205A739A0024325F /* ad.c in Sources */,
 				2986CAA8205A74020024325F /* social.c in Sources */,
@@ -863,15 +819,15 @@
 				2986CA9E205A72890024325F /* trace.c in Sources */,
 				2986CA98205A72670024325F /* store.c in Sources */,
 				2986CA99205A72670024325F /* cutil.c in Sources */,
+				42CC391720AA7722006BABB7 /* pcache.c in Sources */,
 				2986CA9A205A72670024325F /* retransmit.c in Sources */,
 				2986CA9C205A72670024325F /* message.c in Sources */,
 				2986CA7E205A72450024325F /* priority.c in Sources */,
-				29CA7ABF20AB6D2C002194D2 /* adht.c in Sources */,
-				29CA7ABE20AB6D2C002194D2 /* pid_bloom.c in Sources */,
 				2986CA7F205A72450024325F /* allnet_queue.c in Sources */,
 				2986CA80205A72450024325F /* table.c in Sources */,
 				2986CA81205A72450024325F /* util.c in Sources */,
 				2986CA82205A72450024325F /* trace_util.c in Sources */,
+				42CC391120AA76F7006BABB7 /* sockets.c in Sources */,
 				2986CAAB205B55BC0024325F /* TODO.swift in Sources */,
 				2986CA83205A72450024325F /* ai.c in Sources */,
 				2986CA84205A72450024325F /* routing.c in Sources */,
@@ -880,13 +836,13 @@
 				2986CA87205A72450024325F /* mapchar.c in Sources */,
 				2986CA88205A72450024325F /* configfiles.c in Sources */,
 				2986CA89205A72450024325F /* keys.c in Sources */,
-				2986CA8A205A72450024325F /* pipemsg.c in Sources */,
 				2986CA8B205A72450024325F /* sha.c in Sources */,
-				29CA7AC120AB6D2C002194D2 /* sockets.c in Sources */,
 				2986CA8C205A72450024325F /* asn1.c in Sources */,
+				426CFD7B20AB573B00231854 /* abc.c in Sources */,
 				2986CA8D205A72450024325F /* wp_rsa.c in Sources */,
 				2986CA8E205A72450024325F /* allnet_log.c in Sources */,
 				2986CA8F205A72450024325F /* wp_arith.c in Sources */,
+				42CC391420AA770C006BABB7 /* adht.c in Sources */,
 				2986CA91205A72450024325F /* crypt_sel.c in Sources */,
 				2986CA92205A72450024325F /* cipher.c in Sources */,
 				2986CA93205A72450024325F /* stream.c in Sources */,
@@ -894,6 +850,7 @@
 				2986CA95205A72450024325F /* dcache.c in Sources */,
 				29C48C0C204CB86700B0FDC7 /* GroupVC.swift in Sources */,
 				2925D05920431D1B003A9E2E /* KeyViewModel.swift in Sources */,
+				42CC391A20AA772E006BABB7 /* pid_bloom.c in Sources */,
 				2908613320466B0400C4B50F /* MoreVC.swift in Sources */,
 				29EB680C20379D7300D9647F /* MessageModel.m in Sources */,
 				2946A569204A63FD00AC37A7 /* MoreViewModel.swift in Sources */,
@@ -909,7 +866,6 @@
 				2990E476205C29B80021F2A0 /* LabelIteractive.swift in Sources */,
 				29EB67F42036A85600D9647F /* ContactCell.swift in Sources */,
 				2925D05B20433D75003A9E2E /* KeyExchangeVC.swift in Sources */,
-				29CA7AC020AB6D2C002194D2 /* pcache.c in Sources */,
 				29EB67F72036B0AB00D9647F /* ContactViewModel.swift in Sources */,
 				2925D0572043161B003A9E2E /* ContactNewVC.swift in Sources */,
 			);
@@ -951,14 +907,12 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1011,14 +965,12 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1046,7 +998,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1070,7 +1021,7 @@
 				CURRENT_PROJECT_VERSION = 0.001;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 7TW6282C6A;
+				DEVELOPMENT_TEAM = 96W3QVVZ52;
 				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1082,6 +1033,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/Users/docouto/Desktop/Projects/AllNet/src,
+					/Users/esb/src/allnet/v3/src,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/xchatUI/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3.5;
@@ -1105,7 +1057,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1129,7 +1081,7 @@
 				CURRENT_PROJECT_VERSION = 0.001;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 7TW6282C6A;
+				DEVELOPMENT_TEAM = 96W3QVVZ52;
 				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1141,6 +1093,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/Users/docouto/Desktop/Projects/AllNet/src,
+					/Users/esb/src/allnet/v3/src,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/xchatUI/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3.5;
@@ -1162,7 +1115,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "xchatUI/allnet-xchat-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
