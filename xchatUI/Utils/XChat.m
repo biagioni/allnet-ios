@@ -162,6 +162,12 @@ static void dataAvailable (CFSocketRef s, CFSocketCallBackType callbackType, CFD
   int sock = CFSocketGetNative(s);
   // splitPacket(sock, dataChar, psize);  /* does all the packet processing */
   // pthread_mutex_unlock (&packet_mutex);
+  int priority = ALLNET_PRIORITY_EPSILON;
+  if (psize > 2) {
+    psize -= 2;
+    priority = readb16 (dataChar + psize);
+  }
+  local_send_keepalive(1);
   receivePacket(sock, dataChar, psize, ALLNET_PRIORITY_EPSILON);
 }
 
