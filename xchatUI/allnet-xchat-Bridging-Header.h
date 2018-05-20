@@ -13,7 +13,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-#include "lib/pipemsg.h"
 #include "lib/packet.h"
 #include "lib/util.h"
 #include "lib/keys.h"
@@ -26,9 +25,7 @@
 #include "xchat/xcommon.h"
 #include "time.h"
 
-
-//extern void multipeer_queue_indices (int * rpipe, int * wpipe);
 extern void stop_allnet_threads (void);
-//extern void acache_save_data (void);
-extern int allnet_daemon_main (void);
-//extern void multipeer_queue_indices (int * rpipe, int * wpipe);
+extern void pcache_write (void);
+extern int astart_main (int argc, char ** argv);
+extern void multipeer_queue_indices (int * rpipe, int * wpipe);
