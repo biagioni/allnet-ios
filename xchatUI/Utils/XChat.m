@@ -61,7 +61,7 @@ static XChat * mySelf = NULL;
   NSLog(@"self.sock is %d\n", self.sock);
   CFSocketRef iOSSock = CFSocketCreateWithNative(NULL, self.sock, kCFSocketDataCallBack,
                                                  (CFSocketCallBack)&dataAvailable, NULL);
-  self.runLoop = CFSocketCreateRunLoopSource(NULL, iOSSock, 100);
+  self.runLoop = CFSocketCreateRunLoopSource(NULL, iOSSock, 0);
   CFRunLoopRef currentRunLoop = CFRunLoopGetCurrent();
   CFRunLoopAddSource(currentRunLoop, self.runLoop, kCFRunLoopCommonModes);
   mySelf = self;
@@ -81,7 +81,7 @@ static XChat * mySelf = NULL;
   CFSocketRef iOSSock = CFSocketCreateWithNative(NULL, self.sock, kCFSocketDataCallBack,
                                                  (CFSocketCallBack)&dataAvailable, NULL);
   // if you ever need to bind, use CFSocketSetAddress -- but not needed here
-  self.runLoop = CFSocketCreateRunLoopSource(NULL, iOSSock, 100);
+  self.runLoop = CFSocketCreateRunLoopSource(NULL, iOSSock, 0);
   CFRunLoopRef currentRunLoop = CFRunLoopGetCurrent();
   CFRunLoopAddSource(currentRunLoop, self.runLoop, kCFRunLoopCommonModes);
   NSLog (@"Xchat reconnect set socket to %d\n", self.sock);
@@ -158,42 +158,20 @@ static void dataAvailable (CFSocketRef s, CFSocketCallBackType callbackType, CFD
     return;
   unsigned int psize = (unsigned int)signed_size;
   char * dataChar = (char *)(CFDataGetBytePtr(data));
-  // pthread_mutex_lock (&packet_mutex);
   int sock = CFSocketGetNative(s);
-  // splitPacket(sock, dataChar, psize);  /* does all the packet processing */
-  // pthread_mutex_unlock (&packet_mutex);
   int priority = ALLNET_PRIORITY_EPSILON;
   if (psize > 2) {
     psize -= 2;
     priority = readb16 (dataChar + psize);
   }
-  local_send_keepalive(1);
+  static int one_in_five = 1;
+  if (++one_in_five >= 5) {
+    one_in_five = 1;
+    local_send_keepalive(1);
+    // printf ("dataAvailable sending keepalive, packet size %d\n", psize);
+  }
   receivePacket(sock, dataChar, psize, ALLNET_PRIORITY_EPSILON);
 }
-
-#if 0
-static void splitPacket (int sock, char * data, unsigned int dlen)
-{
-  // NSLog(@"got packet of size %d\n", dlen);
-  char ** messages = NULL;
-  unsigned int * lengths = NULL;
-  unsigned int * priorities = NULL;
-  // NSLog(@"splitPacket calling split_messages (%p, %d, %p, %p, NULL, %p)\n", data, dlen, &messages, &lengths, &buffer);
-  int n = split_messages (data, dlen, &messages, &lengths, &priorities, &splitPacketBuffer);
-  // NSLog(@"splitPacket done calling split_messages\n");
-  int ni;
-  for (ni = 0; ni < n; ni++) {
-    // NSLog(@"processing packet %d of size %d\n", ni, lengths [ni]);
-    receivePacket(sock, messages [ni], lengths [ni], priorities [ni]);
-  }
-  if (messages != NULL)
-    free (messages);
-  if (lengths != NULL)
-    free (lengths);
-  if (priorities != NULL)
-    free (priorities);
-}
-#endif // 0
 
 // main function to call handle_packet and process the results
 static void receivePacket (int sock, char * data, unsigned int dlen, unsigned int priority)
