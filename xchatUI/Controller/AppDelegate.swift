@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var authorizationGranted = false
     var xChat: XChat!
+    var connected = false
     var firstCall =  true
     var currentPeerID: MCPeerID!
     var sessions: [MCSession]!
@@ -32,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var allnet_log: UnsafeMutablePointer<allnet_log>? = nil
     var advertiser: MCNearbyServiceAdvertiser!
     var browser: MCNearbyServiceBrowser!
+    var printedSendError = false
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -111,51 +113,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(error)
         }
     }
-    
-    #if USE_ABLE_TO_CONNECT
-        func ableToConnect() -> Bool {
-            let sock = socket (AF_INET, SOCK_STREAM, IPPROTO_TCP)
-            let sin = sockaddr_in()
-            sin.sin_family = AF_INET
-            sin.sin_addr.s_addr = inet_addr ("127.0.0.1")
-            sin.sin_port = ALLNET_LOCAL_PORT
-            if (connect (sock, &sin, sizeof (sin)) == 0) {
-                close (sock)
-                NSLog("allnet task still running, will not restart\n")
-                return 1
-            }
-            NSLog("allnet task is not running\n")
-            return 0
-        }
-    #endif /* USE_ABLE_TO_CONNECT */
 
     func startAllnet(application: UIApplication, firstCall: Bool) {
         if !firstCall {
-            sleep (1)
-            #if USE_ABLE_TO_CONNECT
-                if ableToConnect() {
-                    return
-                }
-                stop_allnet_threads()
-                NSLog("calling stop_allnet_threads\n")
-                sleep (1)
-            #endif /* USE_ABLE_TO_CONNECT */
             NSLog("reconnecting xcommon to alocal\n")
-            xChat.reconnect()
-            sleep (1)
+            if (self.connected) {
+                self.xChat.disconnect()
+                stop_allnet_threads()
+            }
+            self.xChat.reconnect()
+            self.connected = true
         }
         application.beginBackgroundTask {
              NSLog("allnet task ending background task (started by calling astart_main)\n")
             pcache_write()
             self.xChat.disconnect()
+            stop_allnet_threads()
+            self.connected = false;
         }
         if firstCall {
             allnet_log = init_log ("AppDelegate.m")
             NSLog("calling astart_main\n")
             DispatchQueue.global(qos: .userInitiated).async {
-                let args = ["allnet", "-v", "default", nil]
+                let args = ["allnet", nil]
                 var pointer = args.map{Pointer(mutating: (($0 ?? "") as NSString).utf8String)}
-                astart_main(3, &pointer)
+                astart_main(1, &pointer)
                 // set up a connection to the allnet daemon that we can use to send and receive multipeer packets
                 NSLog("astart_main has completed, starting multipeer connection\n")
                 self.mp_socket = socket (AF_INET, SOCK_DGRAM, IPPROTO_UDP)
@@ -193,8 +175,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 sendto (self.mp_socket, buffer, Int(size), MSG_DONTWAIT, $0, slen)
             }
         }
-        if (sent != size) {
-            NSLog("sent ", sent, " instead of ", size, "\n")
+        if (sent != size) {  // if returned -1, only print once
+            if ((sent != -1) || (self.printedSendError == false)) {
+                perror("AppDelegate.swift send_udp for multipeer socket")
+                NSLog("sent %d instead of %d\n", sent, size)
+                if (sent == -1) {
+                    self.printedSendError = true;
+                }
+            }
         }
     }
     

@@ -56,12 +56,12 @@ static char expecting_trace [MESSAGE_ID_SIZE];
 static XChat * mySelf = NULL;
 
 - (void) initialize {
-  NSLog(@"calling xchat_init\n");
+  // NSLog(@"calling xchat_init\n");
   self.sock = xchat_init ("xchat", NULL);
-  NSLog(@"self.sock is %d\n", self.sock);
+  NSLog(@"Xchat.m result of calling xchat_init is %d\n", self.sock);
   CFSocketRef iOSSock = CFSocketCreateWithNative(NULL, self.sock, kCFSocketDataCallBack,
                                                  (CFSocketCallBack)&dataAvailable, NULL);
-  self.runLoop = CFSocketCreateRunLoopSource(NULL, iOSSock, 0);
+  self.runLoop = CFSocketCreateRunLoopSource(NULL, iOSSock, 100);
   CFRunLoopRef currentRunLoop = CFRunLoopGetCurrent();
   CFRunLoopAddSource(currentRunLoop, self.runLoop, kCFRunLoopCommonModes);
   mySelf = self;
@@ -78,12 +78,18 @@ static XChat * mySelf = NULL;
 
 - (void)reconnect {
   self.sock = xchat_init ("xchat reconnect", NULL);
-  CFSocketRef iOSSock = CFSocketCreateWithNative(NULL, self.sock, kCFSocketDataCallBack,
-                                                 (CFSocketCallBack)&dataAvailable, NULL);
-  // if you ever need to bind, use CFSocketSetAddress -- but not needed here
-  self.runLoop = CFSocketCreateRunLoopSource(NULL, iOSSock, 0);
-  CFRunLoopRef currentRunLoop = CFRunLoopGetCurrent();
-  CFRunLoopAddSource(currentRunLoop, self.runLoop, kCFRunLoopCommonModes);
+  NSLog(@"Xchat.m reconnect result of calling xchat_init is %d\n", self.sock);
+  if (self.sock >= 0) {
+    CFSocketRef iOSSock = CFSocketCreateWithNative(NULL, self.sock, kCFSocketDataCallBack,
+                                                   (CFSocketCallBack)&dataAvailable, NULL);
+    // if you ever need to bind, use CFSocketSetAddress -- but not needed here
+    self.runLoop = CFSocketCreateRunLoopSource(NULL, iOSSock, 100);
+    CFRunLoopRef currentRunLoop = CFRunLoopGetCurrent();
+    CFRunLoopAddSource(currentRunLoop, self.runLoop, kCFRunLoopCommonModes);
+  } else {
+    char * crash = NULL;
+    printf ("crashing %d\n", *crash);
+  }
   NSLog (@"Xchat reconnect set socket to %d\n", self.sock);
 }
 
@@ -153,24 +159,30 @@ static void dataAvailable (CFSocketRef s, CFSocketCallBackType callbackType, CFD
   if (dataVoid == NULL)
     return;
   CFDataRef data = (CFDataRef) ((char *)dataVoid);
-  long signed_size =CFDataGetLength(data);
+  long signed_size = CFDataGetLength(data);
   if ((signed_size <= 0) || (signed_size >= UINT_MAX))
     return;
   unsigned int psize = (unsigned int)signed_size;
   char * dataChar = (char *)(CFDataGetBytePtr(data));
+  // pthread_mutex_lock (&packet_mutex);
   int sock = CFSocketGetNative(s);
+  // splitPacket(sock, dataChar, psize);  /* does all the packet processing */
+  // pthread_mutex_unlock (&packet_mutex);
   int priority = ALLNET_PRIORITY_EPSILON;
   if (psize > 2) {
     psize -= 2;
     priority = readb16 (dataChar + psize);
   }
-  static int one_in_five = 1;
-  if (++one_in_five >= 5) {
-    one_in_five = 1;
-    local_send_keepalive(1);
-    // printf ("dataAvailable sending keepalive, packet size %d\n", psize);
+  if (psize < ALLNET_HEADER_SIZE)
+    return;
+  local_send_keepalive(1);
+  struct allnet_header * hp = (struct allnet_header *) dataChar;
+  if (hp->message_type == ALLNET_TYPE_KEY_REQ) { // special handling for key requests
+    extern void keyd_handle_packet (const char * message, int msize); // from keyd.c
+    keyd_handle_packet (dataChar, psize);
+  } else {   // any other kind of packet
+    receivePacket(sock, dataChar, psize, ALLNET_PRIORITY_EPSILON);
   }
-  receivePacket(sock, dataChar, psize, ALLNET_PRIORITY_EPSILON);
 }
 
 // main function to call handle_packet and process the results
@@ -178,7 +190,6 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
 {
   static int last_length = 0;
   if (dlen != last_length) {
-
     last_length = dlen;
   }
   int verified, duplicate, broadcast;
@@ -224,7 +235,7 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
       NSLog(@"got subscription %s\n", peer);
   } else if ((mlen == -4) && (trace != NULL) &&
              (memcmp (trace->trace_id, expecting_trace, MESSAGE_ID_SIZE) == 0)) {  // got trace result
-    NSLog(@"got trace result with %d entries\n", trace->num_entries);
+    // NSLog(@"got trace result with %d entries\n", trace->num_entries);
     char string [10000];
     trace_to_string(string, sizeof (string), trace, trace_count, trace_start_time);
     NSString * msg = [[NSString alloc] initWithUTF8String:string];
