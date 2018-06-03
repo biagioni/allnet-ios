@@ -180,7 +180,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 perror("AppDelegate.swift send_udp for multipeer socket")
                 NSLog("sent %d instead of %d\n", sent, size)
                 if (sent == -1) {
-                    self.printedSendError = true;
+                    self.printedSendError = true
                 }
             }
         }
