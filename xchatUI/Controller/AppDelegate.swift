@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         sin_len: __uint8_t (16),
         sin_family: sa_family_t (AF_INET),
         sin_port: UInt16(allnet_htons (Int32(ALLNET_PORT))),
-        sin_addr: in_addr(s_addr: 0x7f000001),
+        sin_addr: in_addr(s_addr: UInt32(allnet_htonl(0x7f000001))),
         sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
     var last_sent: UInt64 = 0
     var allnet_log: UnsafeMutablePointer<allnet_log>? = nil
@@ -160,7 +160,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func sendSession(buffer: [CChar], length: Int) {
         let send = Data(bytes: buffer, count: length)
         for i in 0..<self.sessions.count {
-            let session = sessions[i]
+            let session = self.sessions[i]
             if (session.connectedPeers.count > 0) {
                 try? session.send(send, toPeers: session.connectedPeers, with: .unreliable)
             }
@@ -243,28 +243,27 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 extension AppDelegate: MCNearbyServiceBrowserDelegate {
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        if peerID.displayName.localizedCompare(currentPeerID.displayName) == ComparisonResult.orderedAscending {
-            let session = MCSession(peer: currentPeerID, securityIdentity: nil, encryptionPreference: .none)
-            session.delegate = self
-            sessions.append(session)
-            let timeoutTime: TimeInterval = 100
-            browser.invitePeer(currentPeerID, to: session, withContext: nil, timeout: timeoutTime)
-            NSLog("invited multipeer session %@, names are %@ < %@\n", session, peerID.displayName, currentPeerID.displayName)
-        }else{
-            NSLog("did not invite multipeer session, names are %@ >= %@\n", currentPeerID.displayName, currentPeerID.displayName)
-        }
+        let session = MCSession(peer: currentPeerID, securityIdentity: nil, encryptionPreference: .none)
+        session.delegate = self
+        sessions.append(session)
+        let timeoutTime: TimeInterval = 100
+        browser.invitePeer(peerID, to: session, withContext: nil, timeout: timeoutTime)
+        NSLog("invited multipeer session %@, names are %@ < %@\n", session, peerID.displayName, currentPeerID.displayName)
     }
-    
+
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        if let index = sessions.index(where: { $0.myPeerID == peerID}) {
+        if let index = sessions.index(where: { $0.connectedPeers.contains(peerID)}) {
             sessions.remove(at: index)
+            NSLog("multipeer browser %@ removed lost peer %@\n", browser, peerID)
+        } else {
+            NSLog("multipeer browser %@ did not remove lost peer %@\n", browser, peerID)
         }
-        NSLog("multipeer browser %@ lost peer %@\n", browser, peerID)
     }
 }
 
 extension AppDelegate: MCNearbyServiceAdvertiserDelegate {
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        NSLog("got multipeer invitation from %@\n", peerID)
         let session = MCSession(peer: currentPeerID, securityIdentity: nil, encryptionPreference: .none)
         session.delegate = self
         sessions.append(session)
@@ -288,15 +287,16 @@ extension AppDelegate: MCSessionDelegate {
         case .connecting:
             message = "connecting"
         }
-        NSLog("multipeer session %@ peer %@ changed state to %ld (%s)\n", session, peerID, state.rawValue, message)
+        NSLog("multipeer session %@ peer %@ changed state to %ld (%@)\n", session, peerID, state.rawValue, message)
     }
-    
+
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         let length = data.count
-        var values: UInt8? = nil
-        data.copyBytes(to: &values!, count: length)
-        var val: Int8 = Int8(values!)
-        send_udp(buffer: &val, size: Int(length))
+        // NSLog("received %d bytes\n", length)
+        let values = UnsafeMutablePointer<UInt8>.allocate(capacity: length)
+        let vptr = UnsafeMutableBufferPointer(start: values, count: length)
+        let send_size = data.copyBytes(to: vptr)
+        send_udp(buffer: values, size: send_size)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
