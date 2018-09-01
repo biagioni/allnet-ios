@@ -18,13 +18,11 @@
 		296D28342056337F0030B003 /* Alias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296D28332056337F0030B003 /* Alias.swift */; };
 		296D2836205647360030B003 /* MsgModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296D2835205647360030B003 /* MsgModel.swift */; };
 		2986CA7E205A72450024325F /* priority.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA42205A71F40024325F /* priority.c */; };
-		2986CA7F205A72450024325F /* allnet_queue.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA44205A71F40024325F /* allnet_queue.c */; };
 		2986CA80205A72450024325F /* table.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA4A205A71F40024325F /* table.c */; };
 		2986CA81205A72450024325F /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA4B205A71F40024325F /* util.c */; };
 		2986CA82205A72450024325F /* trace_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA4D205A71F40024325F /* trace_util.c */; };
 		2986CA83205A72450024325F /* ai.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA4E205A71F40024325F /* ai.c */; };
 		2986CA84205A72450024325F /* routing.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA4F205A71F40024325F /* routing.c */; };
-		2986CA85205A72450024325F /* pqueue.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA52205A71F40024325F /* pqueue.c */; };
 		2986CA86205A72450024325F /* app_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA56205A71F40024325F /* app_util.c */; };
 		2986CA87205A72450024325F /* mapchar.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA59205A71F40024325F /* mapchar.c */; };
 		2986CA88205A72450024325F /* configfiles.c in Sources */ = {isa = PBXBuildFile; fileRef = 2986CA5A205A71F40024325F /* configfiles.c */; };
@@ -133,7 +131,6 @@
 		2986CA09205A71F40024325F /* record.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = record.h; sourceTree = "<group>"; };
 		2986CA0A205A71F40024325F /* print_caches.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = print_caches.c; sourceTree = "<group>"; };
 		2986CA0B205A71F40024325F /* ad.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ad.c; sourceTree = "<group>"; };
-		2986CA0C205A71F40024325F /* hash.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = hash.c; sourceTree = "<group>"; };
 		2986CA0D205A71F40024325F /* Makefile.am */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
 		2986CA0F205A71F40024325F /* track.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = track.h; sourceTree = "<group>"; };
 		2986CA12205A71F40024325F /* Message.java */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.java; path = Message.java; sourceTree = "<group>"; };
@@ -181,7 +178,6 @@
 		2986CA3F205A71F40024325F /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		2986CA41205A71F40024325F /* keys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keys.h; sourceTree = "<group>"; };
 		2986CA42205A71F40024325F /* priority.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = priority.c; sourceTree = "<group>"; };
-		2986CA44205A71F40024325F /* allnet_queue.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = allnet_queue.c; sourceTree = "<group>"; };
 		2986CA45205A71F40024325F /* configfiles.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = configfiles.h; sourceTree = "<group>"; };
 		2986CA46205A71F40024325F /* mapchar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mapchar.h; sourceTree = "<group>"; };
 		2986CA47205A71F40024325F /* allnet_log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = allnet_log.h; sourceTree = "<group>"; };
@@ -195,7 +191,6 @@
 		2986CA4F205A71F40024325F /* routing.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = routing.c; sourceTree = "<group>"; };
 		2986CA50205A71F40024325F /* crypt_sel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = crypt_sel.h; sourceTree = "<group>"; };
 		2986CA51205A71F40024325F /* wp_arith.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wp_arith.h; sourceTree = "<group>"; };
-		2986CA52205A71F40024325F /* pqueue.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pqueue.c; sourceTree = "<group>"; };
 		2986CA53205A71F40024325F /* dcache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dcache.h; sourceTree = "<group>"; };
 		2986CA54205A71F40024325F /* wp_aes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wp_aes.h; sourceTree = "<group>"; };
 		2986CA55205A71F40024325F /* stream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stream.h; sourceTree = "<group>"; };
@@ -205,7 +200,6 @@
 		2986CA59205A71F40024325F /* mapchar.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mapchar.c; sourceTree = "<group>"; };
 		2986CA5A205A71F40024325F /* configfiles.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = configfiles.c; sourceTree = "<group>"; };
 		2986CA5B205A71F40024325F /* mgmt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mgmt.h; sourceTree = "<group>"; };
-		2986CA5C205A71F40024325F /* allnet_queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = allnet_queue.h; sourceTree = "<group>"; };
 		2986CA5D205A71F40024325F /* keys.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = keys.c; sourceTree = "<group>"; };
 		2986CA5E205A71F40024325F /* priority.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = priority.h; sourceTree = "<group>"; };
 		2986CA60205A71F40024325F /* trace_util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = trace_util.h; sourceTree = "<group>"; };
@@ -217,7 +211,6 @@
 		2986CA66205A71F40024325F /* wp_rsa.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wp_rsa.c; sourceTree = "<group>"; };
 		2986CA67205A71F40024325F /* allnet_log.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = allnet_log.c; sourceTree = "<group>"; };
 		2986CA68205A71F40024325F /* table.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = table.h; sourceTree = "<group>"; };
-		2986CA69205A71F40024325F /* pqueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pqueue.h; sourceTree = "<group>"; };
 		2986CA6A205A71F40024325F /* wp_arith.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wp_arith.c; sourceTree = "<group>"; };
 		2986CA6B205A71F40024325F /* test_saved_keys.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test_saved_keys.c; sourceTree = "<group>"; };
 		2986CA6C205A71F40024325F /* crypt_sel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = crypt_sel.c; sourceTree = "<group>"; };
@@ -233,7 +226,6 @@
 		2986CA79205A71F40024325F /* allnet_radio.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = allnet_radio.c; sourceTree = "<group>"; };
 		2986CA7A205A71F40024325F /* Makefile.am */ = {isa = PBXFileReference; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
 		2986CA7B205A71F40024325F /* broadcast.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = broadcast.c; sourceTree = "<group>"; };
-		2986CA7C205A71F40024325F /* hash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
 		2986CAAA205B55BC0024325F /* TODO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODO.swift; sourceTree = "<group>"; };
 		2990E475205C29B80021F2A0 /* LabelIteractive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelIteractive.swift; sourceTree = "<group>"; };
 		2993BB6020487BC900337230 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -300,7 +292,6 @@
 				2986CA09205A71F40024325F /* record.h */,
 				2986CA0A205A71F40024325F /* print_caches.c */,
 				2986CA0B205A71F40024325F /* ad.c */,
-				2986CA0C205A71F40024325F /* hash.c */,
 				2986CA0D205A71F40024325F /* Makefile.am */,
 				2986CA0F205A71F40024325F /* track.h */,
 				2986CA10205A71F40024325F /* gui */,
@@ -308,7 +299,6 @@
 				2986CA73205A71F40024325F /* record.c */,
 				2986CA75205A71F40024325F /* social.h */,
 				2986CA77205A71F40024325F /* xtime */,
-				2986CA7C205A71F40024325F /* hash.h */,
 			);
 			name = src;
 			path = ../../../../Android/AllNet/src;
@@ -478,7 +468,6 @@
 				42CC390F20AA76F7006BABB7 /* sockets.h */,
 				2986CA41205A71F40024325F /* keys.h */,
 				2986CA42205A71F40024325F /* priority.c */,
-				2986CA44205A71F40024325F /* allnet_queue.c */,
 				2986CA45205A71F40024325F /* configfiles.h */,
 				2986CA46205A71F40024325F /* mapchar.h */,
 				2986CA47205A71F40024325F /* allnet_log.h */,
@@ -492,7 +481,6 @@
 				2986CA4F205A71F40024325F /* routing.c */,
 				2986CA50205A71F40024325F /* crypt_sel.h */,
 				2986CA51205A71F40024325F /* wp_arith.h */,
-				2986CA52205A71F40024325F /* pqueue.c */,
 				2986CA53205A71F40024325F /* dcache.h */,
 				2986CA54205A71F40024325F /* wp_aes.h */,
 				2986CA55205A71F40024325F /* stream.h */,
@@ -502,7 +490,6 @@
 				2986CA59205A71F40024325F /* mapchar.c */,
 				2986CA5A205A71F40024325F /* configfiles.c */,
 				2986CA5B205A71F40024325F /* mgmt.h */,
-				2986CA5C205A71F40024325F /* allnet_queue.h */,
 				2986CA5D205A71F40024325F /* keys.c */,
 				2986CA5E205A71F40024325F /* priority.h */,
 				2986CA60205A71F40024325F /* trace_util.h */,
@@ -514,7 +501,6 @@
 				2986CA66205A71F40024325F /* wp_rsa.c */,
 				2986CA67205A71F40024325F /* allnet_log.c */,
 				2986CA68205A71F40024325F /* table.h */,
-				2986CA69205A71F40024325F /* pqueue.h */,
 				2986CA6A205A71F40024325F /* wp_arith.c */,
 				2986CA6B205A71F40024325F /* test_saved_keys.c */,
 				2986CA6C205A71F40024325F /* crypt_sel.c */,
@@ -823,7 +809,6 @@
 				2986CA9A205A72670024325F /* retransmit.c in Sources */,
 				2986CA9C205A72670024325F /* message.c in Sources */,
 				2986CA7E205A72450024325F /* priority.c in Sources */,
-				2986CA7F205A72450024325F /* allnet_queue.c in Sources */,
 				2986CA80205A72450024325F /* table.c in Sources */,
 				2986CA81205A72450024325F /* util.c in Sources */,
 				2986CA82205A72450024325F /* trace_util.c in Sources */,
@@ -831,7 +816,6 @@
 				2986CAAB205B55BC0024325F /* TODO.swift in Sources */,
 				2986CA83205A72450024325F /* ai.c in Sources */,
 				2986CA84205A72450024325F /* routing.c in Sources */,
-				2986CA85205A72450024325F /* pqueue.c in Sources */,
 				2986CA86205A72450024325F /* app_util.c in Sources */,
 				2986CA87205A72450024325F /* mapchar.c in Sources */,
 				2986CA88205A72450024325F /* configfiles.c in Sources */,
