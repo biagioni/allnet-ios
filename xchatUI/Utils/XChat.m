@@ -316,7 +316,7 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
   memset (addr, 0, MESSAGE_ID_SIZE);
   trace_count++;
   trace_start_time = allnet_time_ms();
-  if (! start_trace(self.sock, addr , 0, (int)hops, 0, expecting_trace)) {
+  if (! start_trace(self.sock, addr , 0, (int)hops, 0, expecting_trace, 0)) {
     NSLog(@"unable to start trace\n");
   }
 }
