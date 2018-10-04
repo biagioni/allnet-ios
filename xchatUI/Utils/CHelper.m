@@ -207,9 +207,9 @@
                 free (content);
             }
         }
-        if (keys != NULL)
-            free (keys);
     }
+    if (keys != NULL)
+        free (keys);
     return randomSecret;
 }
 
