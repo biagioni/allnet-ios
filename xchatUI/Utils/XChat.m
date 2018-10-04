@@ -168,10 +168,10 @@ static void dataAvailable (CFSocketRef s, CFSocketCallBackType callbackType, CFD
   int sock = CFSocketGetNative(s);
   // splitPacket(sock, dataChar, psize);  /* does all the packet processing */
   // pthread_mutex_unlock (&packet_mutex);
-  int priority = ALLNET_PRIORITY_EPSILON;
+  // int priority = ALLNET_PRIORITY_EPSILON;
   if (psize > 2) {
     psize -= 2;
-    priority = readb16 (dataChar + psize);
+    // priority = readb16 (dataChar + psize);
   }
   if (psize < ALLNET_HEADER_SIZE)
     return;
@@ -316,7 +316,7 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
   memset (addr, 0, MESSAGE_ID_SIZE);
   trace_count++;
   trace_start_time = allnet_time_ms();
-  if (! start_trace(self.sock, addr , 0, (int)hops, 0, expecting_trace)) {
+  if (! start_trace(self.sock, addr , 0, (int)hops, 0, expecting_trace, 1000)) {
     NSLog(@"unable to start trace\n");
   }
 }
