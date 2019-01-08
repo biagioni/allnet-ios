@@ -27,6 +27,7 @@
 #include "lib/allnet_log.h"
 #include "lib/trace_util.h"
 #include "lib/configfiles.h"
+#include "lib/priority.h"
 
 @interface XChat ()
 
@@ -169,9 +170,9 @@ static void dataAvailable (CFSocketRef s, CFSocketCallBackType callbackType, CFD
   // splitPacket(sock, dataChar, psize);  /* does all the packet processing */
   // pthread_mutex_unlock (&packet_mutex);
   // int priority = ALLNET_PRIORITY_EPSILON;
-  if (psize > 2) {
-    psize -= 2;
-    // priority = readb16 (dataChar + psize);
+  if (psize > 4) {
+    psize -= 4;
+    // priority = readb32 (dataChar + psize);
   }
   if (psize < ALLNET_HEADER_SIZE)
     return;
@@ -204,7 +205,7 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
   time_t mtime = 0;
   pthread_mutex_lock(&key_generated_mutex);  // don't allow changes to keyContact until a key has been generated
   if ((! waiting_for_key) && (mySelf.key != nil)  && (keyContact != nil)) {
-    waiting_for_key = !waiting_for_key;
+    // waiting_for_key = !waiting_for_key;
     [mySelf.key notificationOfGeneratedKeyForContact:[[NSString alloc] initWithUTF8String:keyContact]];
   }
   int mlen = handle_packet(sock, (char *)data, dlen, priority, &peer, &kset, &message, &desc,
@@ -225,7 +226,7 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
     }
     // NSLog(@"XChat.m: refreshed the conversation UI text view and the contacts UI table view\n");
   } else if (mlen == -1) {        // successfully exchanged keys
-    waiting_for_key = !waiting_for_key;
+    waiting_for_key = 0;
     NSLog(@"key exchange successfully completed for peer %s\n", keyContact);
     NSString * contact = [[NSString alloc] initWithUTF8String:keyContact];
     [mySelf.key notificationkeyExchangeCompletedForContact:contact];
