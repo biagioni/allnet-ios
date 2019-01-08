@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var sessions: [MCSession]!
     // this socket and address are used to forward packets received from multipeer to ad and back
     var mp_socket: Int32 = -1
+    var socket_counter: Int64 = 0    // incremented every time we re-open the socket
     let mp_sin: sockaddr_in = sockaddr_in (
         sin_len: __uint8_t (16),
         sin_family: sa_family_t (AF_INET),
@@ -35,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var browser: MCNearbyServiceBrowser!
     var printedSendError = false
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         sessions = [MCSession]()
         self.xChat = XChat()
@@ -55,13 +56,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setPeer()
         
         UIDevice.current.isBatteryMonitoringEnabled = true
-        NotificationCenter.default.addObserver(self, selector: #selector(batteryChanged), name: .UIDeviceBatteryStateDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(batteryChanged), name: UIDevice.batteryStateDidChangeNotification, object: nil)
         
         return true
     }
     
     @objc func batteryChanged(){
-        set_speculative_computation (UIDevice.current.batteryState != UIDeviceBatteryState.unplugged ? 0 : 1)
+        set_speculative_computation (UIDevice.current.batteryState != UIDevice.BatteryState.unplugged ? 0 : 1)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -74,11 +75,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         startAllnet(application: application, firstCall: false)
-        set_speculative_computation (UIDevice.current.batteryState != UIDeviceBatteryState.unplugged ? 0 : 1)
+        set_speculative_computation (UIDevice.current.batteryState != UIDevice.BatteryState.unplugged ? 0 : 1)
     }
     
     
-    func notifyMessageReceived(contact: String, message: String){
+    @objc func notifyMessageReceived(contact: String, message: String){
         if #available(iOS 10.0, *) {
             let content = UNMutableNotificationContent()
             content.title = contact
@@ -116,10 +117,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func startAllnet(application: UIApplication, firstCall: Bool) {
         if !firstCall {
-            NSLog("reconnecting xcommon to alocal\n")
+            NSLog("reconnecting to ad\n")
             if (self.connected) {
                 self.xChat.disconnect()
                 stop_allnet_threads()
+                close (self.mp_socket)
+                self.socket_counter = self.socket_counter + 1  // terminate loop, if any
             }
             self.xChat.reconnect()
             self.connected = true
@@ -133,29 +136,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         if firstCall {
             allnet_log = init_log ("AppDelegate.m")
-            NSLog("calling astart_main\n")
-            DispatchQueue.global(qos: .userInitiated).async {
+        }
+        NSLog("calling astart_main\n")
+        DispatchQueue.global(qos: .userInitiated).async {
+            if firstCall {
                 let args = ["allnet", nil]
                 var pointer = args.map{Pointer(mutating: (($0 ?? "") as NSString).utf8String)}
                 astart_main(1, &pointer)
-                // set up a connection to the allnet daemon that we can use to send and receive multipeer packets
-                NSLog("astart_main has completed, starting multipeer connection\n")
-                self.mp_socket = socket (AF_INET, SOCK_DGRAM, IPPROTO_UDP)
-                while (true) {  // read the socket, forward messages to the peers
-                    var sa = sockaddr ()
-                    var sal = socklen_t(16)
-                    var buffer: [CChar] = Array(repeating: CChar(0), count: Int(ALLNET_MTU))
-                    let n = recvfrom (self.mp_socket, &buffer, Int(ALLNET_MTU), MSG_DONTWAIT, &sa, &sal)
-                    if (n <= 0) {
-                        usleep(1000)
-                    } else {
-                        self.sendSession(buffer: buffer, length: n)
-                    }
-                    self.sendKeepalive ()
-                }
+                NSLog("astart_main has completed\n")
             }
-            NSLog("astart_main has been started\n")
+            // set up a connection to the allnet daemon that we can use to send and receive multipeer packets
+            NSLog("(re)starting multipeer connection %d\n", self.socket_counter + 1)
+            self.mp_socket = socket (AF_INET, SOCK_DGRAM, IPPROTO_UDP)
+            self.socket_counter = self.socket_counter + 1
+            let initial_socket_counter = self.socket_counter
+            while (initial_socket_counter == self.socket_counter) {  // read the socket, forward messages to the peers
+                var sa = sockaddr ()
+                var sal = socklen_t(16)
+                var buffer: [CChar] = Array(repeating: CChar(0), count: Int(ALLNET_MTU))
+                let n = recvfrom (self.mp_socket, &buffer, Int(ALLNET_MTU), MSG_DONTWAIT, &sa, &sal)
+                if (n <= 0) {
+                    usleep(1000)
+                } else {
+                    self.sendSession(buffer: buffer, length: n)
+                }
+                self.sendKeepalive ()
+            }
+            NSLog("finished multipeer forwarding %d != %d\n", initial_socket_counter, self.socket_counter)
         }
+        NSLog("astart_main has been started\n")
     }
     func sendSession(buffer: [CChar], length: Int) {
         let send = Data(bytes: buffer, count: length)
