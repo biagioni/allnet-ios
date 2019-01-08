@@ -14,7 +14,7 @@ protocol MoreDelegate {
 class MoreViewModel: NSObject {
     var delegate: MoreDelegate?
     
-    func receiveTrace(message: String){
+    @objc func receiveTrace(message: String){
         delegate?.tracing(message: message)
     }
 }

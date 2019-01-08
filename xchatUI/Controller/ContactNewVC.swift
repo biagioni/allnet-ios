@@ -50,7 +50,7 @@ class ContactNewVC: UIViewController {
         if segue.identifier == "showKeyExchange" {
             let destination = segue.destination as! KeyExchangeVC
             destination.info = info
-            destination.isGroup = sender as! Bool
+            destination.isGroup = (sender as! Bool)
             destination.keyVM = keyVM
         }
     }

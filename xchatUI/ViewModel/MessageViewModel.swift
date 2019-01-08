@@ -54,7 +54,7 @@ class MessageViewModel : NSObject {
         return _cHelper.last_time_read(_contact)
     }
     
-    func receivedNewMessage(forContact contact: String, message: String){
+    @objc func receivedNewMessage(forContact contact: String, message: String){
         if contact == _contact {
             let messages = _cHelper.getMessages() as! [MessageModel]
             _messages = messages
@@ -65,7 +65,7 @@ class MessageViewModel : NSObject {
         }
     }
     
-    func ackMessage(forContact contact: String){
+    @objc func ackMessage(forContact contact: String){
         if contact == _contact {
             let messages = _cHelper.getMessages() as! [MessageModel]
             var modifiedMessagesIndexes = messages.enumerated().map{$0.element.message_has_been_acked == _messages[$0.offset].message_has_been_acked ? nil :  $0.offset}

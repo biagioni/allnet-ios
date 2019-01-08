@@ -23,7 +23,7 @@ class KeyExchangeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.view.backgroundColor = UIColor.white
-        appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate = (UIApplication.shared.delegate as! AppDelegate)
         keyVM.delegate = self
         appDelegate.xChat.setKeyVM(keyVM)
         
@@ -41,7 +41,12 @@ class KeyExchangeVC: UIViewController {
             }
         }else{
             if info.hops == 1 {
-                randomString = randomString?.substring(to: (randomString?.index((randomString?.startIndex)!, offsetBy: 6))!)
+                // randomString = randomString?.substring(to: (randomString?.index((randomString?.startIndex)!, offsetBy: 6))!)
+                let offset = (randomString?.index((randomString?.startIndex)!, offsetBy: 6))!
+                let newString: String = String(randomString![..<offset])
+                // let prtRandom: String = randomString!
+                // NSLog("random string %@, newString %@\n", prtRandom, newString);
+                randomString = newString
             }
             appDelegate.xChat.requestNewContact(info.name, maxHops: UInt(info.hops), secret1: randomString, optionalSecret2: info.key)
             labelGeneratedKey.text = randomString
@@ -52,8 +57,8 @@ class KeyExchangeVC: UIViewController {
         }
     }
     
-    override func willMove(toParentViewController parent: UIViewController?) {
-        super.willMove(toParentViewController: parent)
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
         if parent == nil {
             self.tabBarController?.selectedIndex = 0
         }

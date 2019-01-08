@@ -28,11 +28,11 @@ class KeyViewModel: NSObject {
         }
     }
     
-    func notificationOfGeneratedKey(forContact contact: String){
+    @objc func notificationOfGeneratedKey(forContact contact: String){
         delegate?.notificationOfGeneratedKey(forContact: contact)
     }
     
-    func notificationkeyExchangeCompleted(forContact contact: String){
+    @objc func notificationkeyExchangeCompleted(forContact contact: String){
         delegate?.notificationkeyExchangeCompleted(forContact: contact)
     }
     

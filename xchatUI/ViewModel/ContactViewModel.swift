@@ -116,7 +116,7 @@ class ContactViewModel: NSObject {
         var nc = all_contacts(&c)
         for i  in 0..<nc {
             if let title = String(utf8String: c![Int(i)]!) {
-                _contacts.append(title, lastReceived(contact: title))
+                _contacts.append((title, lastReceived(contact: title)))
             }
         }
         _contacts.sort(by: {lastTime(objCContact: $0.0, msgType: Int(MSG_TYPE_RCVD)) > lastTime(objCContact: $1.0, msgType: Int(MSG_TYPE_RCVD))})
@@ -126,7 +126,7 @@ class ContactViewModel: NSObject {
         nc = invisible_contacts(&c)
         for i  in 0..<nc {
             if let title = String(utf8String: c![Int(i)]!) {
-                _hiddenContacts.append(title, lastReceived(contact: title))
+                _hiddenContacts.append((title, lastReceived(contact: title)))
             }
         }
         _hiddenContacts.sort(by: {lastTime(objCContact: $0.0, msgType: Int(MSG_TYPE_RCVD)) > lastTime(objCContact: $1.0, msgType: Int(MSG_TYPE_RCVD))})

@@ -31,10 +31,10 @@ class MessageVC: UIViewController {
         self.navigationController?.view.backgroundColor = UIColor.white
         navigationItem.title = messageVM.selectedContact
         
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 52
 
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
     override var inputAccessoryView: UIView? {
@@ -45,7 +45,7 @@ class MessageVC: UIViewController {
         return true
     }
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -68,16 +68,16 @@ class MessageVC: UIViewController {
         checkKeyboard(textView: textViewMessage)
     }
     
-    func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            UIView.animate(withDuration: 0.4, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.4, delay: 0, options: UIView.AnimationOptions.curveEaseIn, animations: {
                 self.keyboardHeight = keyboardSize.height
                 self.checkKeyboard(textView: self.textViewMessage)
                 }, completion: {_ in
                     if self.keyboardHeight > 60 {
                         if self.messageVM.count > 0 {
                             let indexPath = IndexPath(row: self.messageVM.count-1, section: 0)
-                            self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                            self.tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: true)
                         }
                     }
             })
@@ -170,7 +170,7 @@ extension MessageVC: MessageDelegate {
         if tableView != nil {
             let indexPath = IndexPath(item: index, section: 0)
             self.tableView.reloadData()
-            self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+            self.tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: true)
         }
     }
     
@@ -180,7 +180,7 @@ extension MessageVC: MessageDelegate {
                 self.tableView.reloadData()
                 if self.messageVM.count > 0 {
                     let indexPath = IndexPath(row: self.messageVM.count-1, section: 0)
-                    self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+                    self.tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: true)
                 }
             }
         }

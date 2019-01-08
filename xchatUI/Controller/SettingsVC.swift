@@ -39,7 +39,7 @@ class SettingsVC: UITableViewController {
         if segue.identifier == "showGroups" {
             let destination = segue.destination as! GroupVC
             destination.contactVM = contactVM
-            destination.isGroup = sender as! Bool
+            destination.isGroup = (sender as! Bool)
         }
     }
 

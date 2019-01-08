@@ -41,7 +41,7 @@ import UIKit
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.view.backgroundColor = UIColor.white
-        appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate = (UIApplication.shared.delegate as! AppDelegate)
         appDelegate.xChat.initialize()
         
         messageVM = MessageViewModel()

@@ -18,7 +18,7 @@ class MessageCell: UITableViewCell {
         let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture))
         labelMessage.addGestureRecognizer(gestureRecognizer)
     }
-    func handleLongPressGesture(recognizer: UIGestureRecognizer) {
+    @objc func handleLongPressGesture(recognizer: UIGestureRecognizer) {
         guard recognizer.state == .recognized else { return }
         
         if let recognizerView = recognizer.view,
