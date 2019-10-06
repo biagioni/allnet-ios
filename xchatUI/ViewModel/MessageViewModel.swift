@@ -66,6 +66,8 @@ class MessageViewModel : NSObject {
     }
     
     @objc func ackMessage(forContact contact: String){
+        objc_sync_enter(self)  // only one thread at a time
+        defer{  objc_sync_exit(self)  }  // called when we exit the function
         if contact == _contact {
             let messages = _cHelper.getMessages() as! [MessageModel]
             var modifiedMessagesIndexes = messages.enumerated().map{$0.element.message_has_been_acked == _messages[$0.offset].message_has_been_acked ? nil :  $0.offset}

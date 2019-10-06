@@ -27,9 +27,10 @@
                    secret1:(NSString *) s1
            optionalSecret2:(NSString *) s2;
 
-- (void) requestKey:(NSString *)contact maxHops: (NSUInteger) hops;
+- (void) requestBroadcastKey:(NSString *)contact maxHops: (NSUInteger) hops;
 
 - (int) getSocket;
++ (int) userMessagesReceived;
 
 - (void) removeNewContact: (NSString *) contact;
 - (void) resendKeyForNewContact: (NSString *) contact;
@@ -39,6 +40,9 @@
 // returns the contents of the exchange file, if any: hops\nsecret1\n[secret2\n]
 - (NSString *) incompleteExchangeData: (NSString *) contact;
 - (void) unhideContact: (NSString *) contact;
+
+// internal method(s), do not use outside
+- (void)initSocket: (NSString *)debugInfo;
 
 @end
 

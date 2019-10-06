@@ -13,12 +13,13 @@ protocol KeyExchangeDelegate {
 
 class KeyViewModel: NSObject {
     var delegate: KeyExchangeDelegate?
-    private var _pointer: PointerMz
+    private var _pointer: PointerMz = nil
     var incompleteKeysExchanges: [String]
     
     override init() {
         incompleteKeysExchanges = [String]()
     }
+
     
     func fetchIncompletedKeys(){
         incompleteKeysExchanges.removeAll()

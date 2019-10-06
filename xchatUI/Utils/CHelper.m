@@ -21,6 +21,7 @@
 #include "lib/keys.h"
 #include "xchat/xcommon.h"
 #include "xchat/cutil.h"
+#include "lib/app_util.h"
 
 
 @interface CHelper()
@@ -44,7 +45,7 @@
 }
 
 //clean
-+ (NSString *) generateRandoKey {
++ (NSString *) generateRandomKey {
 #define MAX_RANDOM  15   // 14 characters plus a null character
     char randomString [MAX_RANDOM];
     random_string(randomString, MAX_RANDOM);
@@ -300,12 +301,8 @@ static void * send_message_thread (void * arg)
     pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
     pthread_mutex_lock (&lock);
     NSLog(@"sending message to %s, socket %d\n", contact, sock);
-    while (1) {    // repeat until the message is sent
-        seq = send_data_message(sock, contact, message, mlen);
-        if (seq != 0)
-            break;   // message sent
-        NSLog (@"result of send_data_message is 0, socket is %d\n", sock);
-    }
+    seq = send_data_message(sock, contact, message, mlen);
+    NSLog (@"result of send_data_message is 0, socket is %d\n", sock);
     NSLog(@"message sent, result %" PRIu64 ", socket %d\n", seq, sock);
     pthread_mutex_unlock (&lock);
     free (contact);
@@ -430,6 +427,23 @@ static char * contact_last_read_path (const char * contact, keyset k)
     return NULL;
 }
 
++ (BOOL) exchange_is_complete: (const char *) contact
+{
+    char ** contacts = NULL;
+    keyset * keys = NULL;
+    int * status = NULL;
+    int nk = incomplete_key_exchanges(&contacts, &keys, &status);
+    if ((nk <= 0) || (contacts == NULL) || (keys == NULL) || (status == NULL))
+        return false;
+    BOOL result = true;
+    for (int i = 0; i < nk; i++) {
+        if ((strcmp (contacts [i], contact) == 0) &&
+            ((status [i] & KEYS_INCOMPLETE_NO_CONTACT_PUBKEY) != 0))
+            result = false;
+    }
+    return result;
+}
+
 - (uint64_t) last_time_read: (const char *) contact
 {
     keyset *k = NULL;
@@ -457,6 +471,49 @@ static char * contact_last_read_path (const char * contact, keyset k)
         delta = time (NULL) - allnet_time();  // record the difference in epoch
     // NSLog(@"for %s last time is %lld/%lld, now %ld/%lld\n", contact, last_read, last_read - delta, time(NULL), allnet_time());
     return last_read - delta;
+}
+
++ (void) send_push_request: (NSData*) device_token
+{
+    const char * token = (char *) [device_token bytes];
+    const char public_key [] =
+    "-----BEGIN RSA PUBLIC KEY-----\n"
+    "MIICCgKCAgEA22TQgMWDQ8HqpEh96L+eb9UpvY26bqtTZAR+9zTIM5bC880Bn/t1\n"
+    "81znkrJjVyors3POm5JKrBHfnC5WNIF+YUXqwxzQsAPD5k6/6R5G9mfcW7jFKpbr\n"
+    "FGH/V59HPUwCzDg0S2PTZBIlv4vhcT1uBh+KBATEd1j+HCPSLm/FosGRW2MyG1Zh\n"
+    "sGmKcboNXwhQf9Fzd8SeISIbdG4ZBXhSuWaxM0YT9U8W/V/ZKuh/opDHNC0rKK5p\n"
+    "K69RafPXB6iLVd3eFzV6GAj3LbPR6HRmI2qmxiTYVrNkYQeMc8+SNmLPMrETvpFU\n"
+    "nkEgECwck0Ij37mvXAI75F83ZZGVrurYjmeqzTlzRy5xsYSCSR0WzOjvUC4UmRX6\n"
+    "e0rUJBMJ22Mv+xLMFO2WAYwVMDCxsD0L49TcwoLOfglYTuLz+Z9nM60WGluWHBxG\n"
+    "ldRzQOssEYeOpXflFx4SChwkhZ7BZuDHqp8xj5lIqwOggQHVTjbo4uXO641fmfpP\n"
+    "1xYKTIrHK4cjU5H4fEA4jxjl3B04w6nO2O5l2MTTRcKhSklc0ghWCLFsnZaHNJzE\n"
+    "8/LNRA31BTjPDbsW7K3ZhIpfQ1d2seWe/5LoN/HHWKubtPxUpCqZLPSsiVb2NrID\n"
+    "pbTwtDNiNsjkyY+Vox3f+tWiocIop3MZsSiGceqTxlY1NgN9lZl/AyECAwEAAQ==\n"
+    "-----END RSA PUBLIC KEY-----\n";
+    allnet_rsa_pubkey rsa;
+    NSString * fname = [NSTemporaryDirectory() stringByAppendingString:@"allnet-push-pubkey.txt"];
+    write_file (fname.UTF8String, public_key, sizeof (public_key), 1);
+    if (allnet_rsa_read_pubkey (fname.UTF8String, &rsa) == 0) {
+        printf ("failed to read pubkey\n");
+        return;
+    }
+    char buf [ALLNET_MTU];
+    struct allnet_header * hp = (struct allnet_header *) buf;
+    char * data = buf + sizeof (struct allnet_header);
+    char timestamp [ALLNET_TIME_SIZE];
+    writeb64(timestamp, allnet_time());
+    memset(hp, 0, sizeof (struct allnet_header));  // default everything to zero
+    hp->version = ALLNET_VERSION;
+    hp->message_type = ALLNET_TYPE_DATA;
+    hp->max_hops = 5;
+    hp->transport = ALLNET_TRANSPORT_DO_NOT_CACHE;
+    // char since [] = { 0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47 };
+    // NSLog(@"temporary directory is %@\n", NSTemporaryDirectory());
+    int r = create_push_request (rsa, ALLNET_PUSH_APNS_ID,
+                                 token, (int)[device_token length], timestamp, NULL, data,
+                                 sizeof (buf) - sizeof (struct allnet_header));
+    // send an encrypted request for everything to the push server
+    local_send (buf, r + sizeof (struct allnet_header), 99);
 }
 @end
 

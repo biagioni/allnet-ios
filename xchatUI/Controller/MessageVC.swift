@@ -126,8 +126,9 @@ extension MessageVC: UITableViewDataSource {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateStyle = .medium
                 dateFormatter.timeStyle = .medium
-                let dateMessage = dateFormatter.date(from: item.dated)
-                let elapsed = Date().timeIntervalSince(dateMessage!)
+                // let dateMessage = dateFormatter.date(from: item.dated)
+                let receivedMessage = ((item.received == nil) ? dateFormatter.date(from: item.dated) : dateFormatter.date(from: item.received))
+                let elapsed = Date().timeIntervalSince(receivedMessage!)
                 if elapsed < SECONDS_PER_DAY {
                     fractionOfDay = elapsed / SECONDS_PER_DAY
                 }

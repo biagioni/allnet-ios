@@ -19,7 +19,7 @@ class NetworkManager {
     }
     
     func updateTimeRead(contact: String){
-        var k: Keyset
+        var k: Keyset = nil
         let nkeys = all_keys(contact, &k)
         for ikey in 0..<nkeys{
             if let path = contactLastReadPath(contact: contact, k: k![Int(ikey)]){
@@ -56,7 +56,7 @@ class NetworkManager {
         return String(utf8String: &buffer)!
     }
     
-    func  generateRandoKey() -> String {
+    func  generateRandomKey() -> String {
         var buffer: Int8 = 0
         random_string(&buffer, 15)
         normalize_secret(&buffer)
@@ -65,7 +65,7 @@ class NetworkManager {
     
     func getMessages(contact: String) -> [MsgModel] {
         updateTimeRead(contact: contact)
-        var k: Keyset
+        var k: Keyset = nil
         let nk = all_keys(contact, &k)
         var result_messages = [MsgModel]()
         for ik in 0..<nk{
@@ -81,7 +81,8 @@ class NetworkManager {
                 while (next != MSG_TYPE_DONE) {
                     if ((next == MSG_TYPE_RCVD) || (next == MSG_TYPE_SENT)) {  // ignore acks
                         if message != nil {
-                            var model = MsgModel(message: String(cString: message!), msg_type: Int(next), dated: basicDate(time: Int(time), tzMin: Int(tz_min)), message_has_been_acked: 0, msize: Int(msize), seq: Int(seq), prev_missing: 0)
+                            var model = MsgModel(message: String(cString: message!), msg_type: Int(next), dated: basicDate(time: Int(time), tzMin: Int(tz_min)), received: basicDate(time: Int(rcvd_time), tzMin: localTimeOffset()), message_has_been_acked: 0, msize: Int(msize), seq: Int(seq), prev_missing: 0)
+                            print("received at ", model.received)
                             if (next == MSG_TYPE_SENT) && (is_acked_one(contact, k![Int(ik)], seq, nil)) == 1 {
                                 model.message_has_been_acked = 1
                             }
@@ -156,7 +157,7 @@ class NetworkManager {
     func getKeyFor(contact: String) -> String? {
         var randomSecret:String? = nil
         var enteredSecret:String? = nil
-        var keys: Keyset
+        var keys: Keyset = nil
         let nk = all_keys (contact, &keys);
         for ki in 0..<nk {
             var s1: Pointer?

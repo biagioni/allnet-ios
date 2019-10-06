@@ -28,7 +28,7 @@ class ContactNewVC: UIViewController {
         self.navigationController?.view.backgroundColor = UIColor.white
         heightPicker.constant = 0
         tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
-        connectionValues = ["regular internet contact", "nearby wireless contact","new group"]
+        connectionValues = ["regular internet contact", "nearby wireless contact","new group (no secret)"]
     }
     deinit {
         tableView.removeObserver(self, forKeyPath: "contentSize")
@@ -51,6 +51,7 @@ class ContactNewVC: UIViewController {
             let destination = segue.destination as! KeyExchangeVC
             destination.info = info
             destination.isGroup = (sender as! Bool)
+            destination.isExchanged = CHelper.exchange_is_complete(info.name)
             destination.keyVM = keyVM
         }
     }
@@ -85,13 +86,13 @@ class ContactNewVC: UIViewController {
             ///TODO message
             return
         }
-        if pickerViewConnection.selectedRow(inComponent: 0) == 2 {
+        if pickerViewConnection.selectedRow(inComponent: 0) == 2 { // group
             info = (name, textFieldSecret.text, 0)
             self.performSegue(withIdentifier: "showKeyExchange", sender: true)
         }else{
-            if pickerViewConnection.selectedRow(inComponent: 0) == 0 {
+            if pickerViewConnection.selectedRow(inComponent: 0) == 0 {  // regular internet contact
                 hops = 6
-            } else if pickerViewConnection.selectedRow(inComponent: 0) == 1 {
+            } else if pickerViewConnection.selectedRow(inComponent: 0) == 1 {  // 1-hop contact
                 hops = 1
             }
             info = (name, textFieldSecret.text, hops)

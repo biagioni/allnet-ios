@@ -10,6 +10,7 @@ import UIKit
 import NotificationCenter
 import UserNotifications
 import MultipeerConnectivity
+import AVFoundation   // play a sound
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -43,6 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         createAllNetDir()
         startAllnet(application: application, firstCall: true)
         sleep(1)
+        let minute = TimeInterval.init(60)
+        application.setMinimumBackgroundFetchInterval(minute)
         
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
@@ -50,14 +53,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             UNUserNotificationCenter.current().delegate = self
             UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        } else {
+            // https://stackoverflow.com/questions/41912386/using-unusernotificationcenter-for-ios-10
+            // plus fixed anything the compiler suggested I fix
+            application.registerUserNotificationSettings(UIUserNotificationSettings(types: UIUserNotificationType(rawValue: UIUserNotificationType.sound.rawValue | UIUserNotificationType.alert.rawValue |
+                UIUserNotificationType.badge.rawValue), categories: nil))
         }
         application.applicationIconBadgeNumber = 0
         
         setPeer()
+        UIApplication.shared.registerForRemoteNotifications()
         
         UIDevice.current.isBatteryMonitoringEnabled = true
         NotificationCenter.default.addObserver(self, selector: #selector(batteryChanged), name: UIDevice.batteryStateDidChangeNotification, object: nil)
-        
+
         return true
     }
     
@@ -66,26 +75,79 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
-        enterBackground()
+        // enterBackground(caller: "appWRA")
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        enterBackground()
+        enterBackground(caller: "appDEB")
+// self.notifyMessageReceived(contact: "application", message: "entered background")
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         startAllnet(application: application, firstCall: false)
         set_speculative_computation (UIDevice.current.batteryState != UIDevice.BatteryState.unplugged ? 0 : 1)
+        print ("application entered foreground, \(application.applicationIconBadgeNumber) badges")
+        application.applicationIconBadgeNumber = 0
     }
     
-    
+    func application(_ application: UIApplication,
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print ("application registered for remote notification, token \(deviceToken)")
+        for d in deviceToken {
+            let s = String(format:"%02X", d)
+            print ("\(s)", terminator: ":")
+        }
+        print ("")  // newline
+        CHelper.send_push_request(deviceToken)
+    }
+
+    func application(_ application: UIApplication,
+                     didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+                     fetchCompletionHandler completionHandler:@escaping (UIBackgroundFetchResult)->Void) {
+        if self.connected {
+            print ("foreground application received remote notification")
+            self.notifyMessageReceived(contact: "application in foreground:",
+                                       message: "remote notification")
+            completionHandler(UIBackgroundFetchResult.noData)
+        } else {
+            print ("application received remote notification")
+            self.notifyMessageReceived(contact: "application in background:",
+                                       message: "remote notification")
+            let original = XChat.userMessagesReceived()
+            startAllnet(application: application, firstCall: false)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(25)) {
+                // self.shutdownAllnet()
+                let final = XChat.userMessagesReceived()
+                let result = final > original ?
+                    UIBackgroundFetchResult.newData : UIBackgroundFetchResult.noData
+                self.notifyMessageReceived(contact: "this is",
+                                           message: "a test: final \(final), original \(original)")
+                print ("final result of remote notification is \(final) >? \(original)")
+                completionHandler(result)
+            }
+            /*
+            sleep(25)
+            // self.shutdownAllnet()
+            let final = XChat.userMessagesReceived()
+            let result = final > original ?
+                UIBackgroundFetchResult.newData : UIBackgroundFetchResult.noData
+            notifyMessageReceived(contact: "this is", message: "a test")
+            print ("final result of remote notification is \(final) >? \(original)")
+            completionHandler(result)
+ */
+        }
+    }
+
     @objc func notifyMessageReceived(contact: String, message: String){
+        // AudioServicesPlayAlertSound(SystemSoundID(1003))
+        // AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         if #available(iOS 10.0, *) {
             let content = UNMutableNotificationContent()
             content.title = contact
             content.body = message
+            content.sound = UNNotificationSound.default
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-            let request = UNNotificationRequest(identifier: "testRequest", content: content, trigger: trigger)
+            let request = UNNotificationRequest(identifier: "req", content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
                 DispatchQueue.main.async {
                     if UIApplication.shared.applicationState != .active {
@@ -96,7 +158,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func enterBackground(){
+    func enterBackground(caller: String) {
+        print("\(caller) entered background, connected is \(self.connected)")
         pcache_write()
         set_speculative_computation(0);
     }
@@ -114,43 +177,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(error)
         }
     }
-
-    func startAllnet(application: UIApplication, firstCall: Bool) {
-        if !firstCall {
-            NSLog("reconnecting to ad\n")
-            if (self.connected) {
-                self.xChat.disconnect()
-                stop_allnet_threads()
-                close (self.mp_socket)
-                self.socket_counter = self.socket_counter + 1  // terminate loop, if any
-            }
-            self.xChat.reconnect()
-            self.connected = true
-        }
-        application.beginBackgroundTask {
-             NSLog("allnet task ending background task (started by calling astart_main)\n")
+    
+    func shutdownAllnet() {
+        objc_sync_enter(self)  // only one thread at a time
+        defer{  objc_sync_exit(self)  }  // called when we exit the function
+        if self.connected {
+            print("shutdownAllnet actually performing the shutdown")
             pcache_write()
             self.xChat.disconnect()
             stop_allnet_threads()
-            self.connected = false;
+            self.socket_counter = self.socket_counter + 1
+            self.connected = false
+        }
+    }
+
+    func startAllnet(application: UIApplication, firstCall: Bool) {
+        objc_sync_enter(self)    // synchronize so only called by one thread at a time
+        defer{  objc_sync_exit(self)  }  // called when we exit the function
+        if self.connected {
+            print ("startAllnet called, but already connected, doing nothing")
+            return
+        }
+        var task = UIBackgroundTaskIdentifier.invalid
+        task = application.beginBackgroundTask {
+            if task != UIBackgroundTaskIdentifier.invalid {
+                print("allnet task ending background task")
+                self.shutdownAllnet()
+                let local_task = task
+                task = UIBackgroundTaskIdentifier.invalid
+                application.endBackgroundTask(local_task)
+            }
         }
         if firstCall {
             allnet_log = init_log ("AppDelegate.m")
         }
-        NSLog("calling astart_main\n")
         DispatchQueue.global(qos: .userInitiated).async {
-            if firstCall {
+            if firstCall || !self.connected {
+                NSLog("calling astart_main\n")
                 let args = ["allnet", nil]
                 var pointer = args.map{Pointer(mutating: (($0 ?? "") as NSString).utf8String)}
                 astart_main(1, &pointer)
                 NSLog("astart_main has completed\n")
+                if !firstCall {
+                    print("reconnecting to ad")
+                    sleep(1)
+                    self.xChat.reconnect()
+                }
+                self.connected = true
             }
             // set up a connection to the allnet daemon that we can use to send and receive multipeer packets
-            NSLog("(re)starting multipeer connection %d\n", self.socket_counter + 1)
+            NSLog("(re)starting multipeer connection %d\n", self.socket_counter)
             self.mp_socket = socket (AF_INET, SOCK_DGRAM, IPPROTO_UDP)
-            self.socket_counter = self.socket_counter + 1
             let initial_socket_counter = self.socket_counter
-            while (initial_socket_counter == self.socket_counter) {  // read the socket, forward messages to the peers
+            while initial_socket_counter == self.socket_counter {  // read the socket, forward messages to the peers
                 var sa = sockaddr ()
                 var sal = socklen_t(16)
                 var buffer: [CChar] = Array(repeating: CChar(0), count: Int(ALLNET_MTU))
@@ -162,10 +241,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 self.sendKeepalive ()
             }
-            NSLog("finished multipeer forwarding %d != %d\n", initial_socket_counter, self.socket_counter)
+            // print("finished multipeer forwarding \(initial_socket_counter) != \(self.socket_counter)")
         }
-        NSLog("astart_main has been started\n")
+        print("astart_main has been started")
     }
+
     func sendSession(buffer: [CChar], length: Int) {
         let send = Data(bytes: buffer, count: length)
         for i in 0..<self.sessions.count {
@@ -261,7 +341,7 @@ extension AppDelegate: MCNearbyServiceBrowserDelegate {
     }
 
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        if let index = sessions.index(where: { $0.connectedPeers.contains(peerID)}) {
+        if let index = sessions.firstIndex(where: { $0.connectedPeers.contains(peerID)}) {
             sessions.remove(at: index)
             NSLog("multipeer browser %@ removed lost peer %@\n", browser, peerID)
         } else {
@@ -288,13 +368,15 @@ extension AppDelegate: MCSessionDelegate {
             sessions.append(session)
             message = "connected"
         case .notConnected:
-            if let index = sessions.index(where: { $0.myPeerID == peerID}) {
+            if let index = sessions.firstIndex(where: { $0.myPeerID == peerID}) {
                 sessions.remove(at: index)
                 NSLog("removing session %@ from sessions %@\n", session, sessions)
             }
             message = "not connected"
         case .connecting:
             message = "connecting"
+        @unknown default:
+            message = "unknown (really unknown!)"
         }
         NSLog("multipeer session %@ peer %@ changed state to %ld (%@)\n", session, peerID, state.rawValue, message)
     }

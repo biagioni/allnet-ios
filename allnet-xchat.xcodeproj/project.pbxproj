@@ -65,8 +65,9 @@
 		29EB67F920374DD300D9647F /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB67F820374DD300D9647F /* MessageVC.swift */; };
 		29EB6801203769CC00D9647F /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB6800203769CC00D9647F /* MessageViewModel.swift */; };
 		29EB680C20379D7300D9647F /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 29EB680B20379D7300D9647F /* MessageModel.m */; };
+		4257B384229BD7B000876D6D /* atcpd.c in Sources */ = {isa = PBXBuildFile; fileRef = 4257B383229BD7B000876D6D /* atcpd.c */; };
 		425A7DA11AEC898C00C74E12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 425A7D9F1AEC898C00C74E12 /* Main.storyboard */; };
-		425A7DA61AEC898C00C74E12 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 425A7DA41AEC898C00C74E12 /* LaunchScreen.xib */; };
+		4269E61D23374A280096B92F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4269E61B23374A280096B92F /* LaunchScreen.storyboard */; };
 		426CFD7B20AB573B00231854 /* abc.c in Sources */ = {isa = PBXBuildFile; fileRef = 426CFD7920AB573A00231854 /* abc.c */; };
 		42CC391120AA76F7006BABB7 /* sockets.c in Sources */ = {isa = PBXBuildFile; fileRef = 42CC391020AA76F7006BABB7 /* sockets.c */; };
 		42CC391420AA770C006BABB7 /* adht.c in Sources */ = {isa = PBXBuildFile; fileRef = 42CC391220AA770C006BABB7 /* adht.c */; };
@@ -245,10 +246,11 @@
 		29EB680B20379D7300D9647F /* MessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
 		29EB680D20379DBB00D9647F /* MessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
 		422B56221E9E9B890072212E /* allnet-xchat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "allnet-xchat.entitlements"; sourceTree = "<group>"; };
+		4257B383229BD7B000876D6D /* atcpd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = atcpd.c; path = ../../../allnet/v3/src/atcpd.c; sourceTree = "<group>"; };
 		425A7D8F1AEC898C00C74E12 /* allnet-xchat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "allnet-xchat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		425A7D931AEC898C00C74E12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		425A7DA01AEC898C00C74E12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		425A7DA51AEC898C00C74E12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		4269E61C23374A280096B92F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = xchatUI/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		426CFD7920AB573A00231854 /* abc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = abc.c; path = ../../../v3/src/lib/abc.c; sourceTree = "<group>"; };
 		426CFD7A20AB573B00231854 /* abc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = abc.h; path = ../../../v3/src/lib/abc.h; sourceTree = "<group>"; };
 		428DEE961B0FB9D000163976 /* XChat.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = XChat.m; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 		2986C9C7205A71F40024325F /* src */ = {
 			isa = PBXGroup;
 			children = (
+				4257B383229BD7B000876D6D /* atcpd.c */,
 				2986C9C9205A71F40024325F /* voa */,
 				2986C9DA205A71F40024325F /* track.c */,
 				2986C9DB205A71F40024325F /* mgmt */,
@@ -632,7 +635,7 @@
 			children = (
 				29B44929203358400050B64D /* allnet-xchat-Bridging-Header.h */,
 				29B449CB20337A2B0050B64D /* Images.xcassets */,
-				425A7DA41AEC898C00C74E12 /* LaunchScreen.xib */,
+				4269E61B23374A280096B92F /* LaunchScreen.storyboard */,
 				2986CAAA205B55BC0024325F /* TODO.swift */,
 				425A7D9F1AEC898C00C74E12 /* Main.storyboard */,
 				425A7D931AEC898C00C74E12 /* Info.plist */,
@@ -684,7 +687,7 @@
 					425A7D8E1AEC898C00C74E12 = {
 						CreatedOnToolsVersion = 6.3;
 						DevelopmentTeam = 96W3QVVZ52;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -694,7 +697,7 @@
 								enabled = 1;
 							};
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.WAC = {
 								enabled = 0;
@@ -705,12 +708,11 @@
 			};
 			buildConfigurationList = 425A7D8A1AEC898C00C74E12 /* Build configuration list for PBXProject "allnet-xchat" */;
 			compatibilityVersion = "Xcode 6.3";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
-				English,
 			);
 			mainGroup = 425A7D861AEC898C00C74E12;
 			productRefGroup = 425A7D901AEC898C00C74E12 /* Products */;
@@ -728,8 +730,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				29B449D620337A2B0050B64D /* Images.xcassets in Resources */,
+				4269E61D23374A280096B92F /* LaunchScreen.storyboard in Resources */,
 				425A7DA11AEC898C00C74E12 /* Main.storyboard in Resources */,
-				425A7DA61AEC898C00C74E12 /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -807,6 +809,7 @@
 				2986CA99205A72670024325F /* cutil.c in Sources */,
 				42CC391720AA7722006BABB7 /* pcache.c in Sources */,
 				2986CA9A205A72670024325F /* retransmit.c in Sources */,
+				4257B384229BD7B000876D6D /* atcpd.c in Sources */,
 				2986CA9C205A72670024325F /* message.c in Sources */,
 				2986CA7E205A72450024325F /* priority.c in Sources */,
 				2986CA80205A72450024325F /* table.c in Sources */,
@@ -867,12 +870,12 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		425A7DA41AEC898C00C74E12 /* LaunchScreen.xib */ = {
+		4269E61B23374A280096B92F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				425A7DA51AEC898C00C74E12 /* Base */,
+				4269E61C23374A280096B92F /* Base */,
 			);
-			name = LaunchScreen.xib;
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -929,7 +932,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
@@ -981,7 +984,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
@@ -1004,6 +1007,7 @@
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_STATIC_ANALYZER_MODE = deep;
+				CODE_SIGN_ENTITLEMENTS = "allnet-xchat.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1044,8 +1048,7 @@
 				STRIP_PNG_TEXT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "xchatUI/allnet-xchat-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1066,6 +1069,7 @@
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_STATIC_ANALYZER_MODE = deep;
+				CODE_SIGN_ENTITLEMENTS = "allnet-xchat.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 0.001;
@@ -1103,8 +1107,7 @@
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				STRIP_PNG_TEXT = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "xchatUI/allnet-xchat-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";

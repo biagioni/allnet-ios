@@ -10,6 +10,7 @@ struct MsgModel {
     var message: String
     var msg_type: Int
     var dated: String
+    var received: String
     var message_has_been_acked: Int
     var msize: Int
     var seq: Int

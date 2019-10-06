@@ -47,7 +47,7 @@ class ContactViewModel: NSObject {
         _groups.removeAll()
         fetchData()
         var allMembers = [String]()
-        var pointer: PointerMz
+        var pointer: PointerMz = nil
         let n = group_membership(_contact, &pointer)
         for i in 0..<n {
             allMembers.append(String(cString: pointer![Int(i)]!))
@@ -58,7 +58,7 @@ class ContactViewModel: NSObject {
         _groups.removeAll()
         fetchData()
         var allGroups = [String]()
-        var pointer: PointerMz
+        var pointer: PointerMz = nil
         let n = member_of_groups(_contact, &pointer)
         for i in 0..<n {
             allGroups.append(String(cString: pointer![Int(i)]!))
@@ -102,7 +102,7 @@ class ContactViewModel: NSObject {
     }
     
     func indexOf(contact: String) -> Int? {
-        return _contacts.index(where: {$0.0 == contact})
+        return _contacts.firstIndex(where: {$0.0 == contact})
     }
     
     func setTimeForNewMessage(index: Int){
@@ -112,7 +112,7 @@ class ContactViewModel: NSObject {
     func fetchData(){
         _contacts.removeAll()
         _hiddenContacts.removeAll()
-        var c:PointerMz
+        var c:PointerMz = nil
         var nc = all_contacts(&c)
         for i  in 0..<nc {
             if let title = String(utf8String: c![Int(i)]!) {
@@ -150,7 +150,7 @@ class ContactViewModel: NSObject {
     }
     
     func lastTime(objCContact: String, msgType: Int) -> Double {
-        var k: Keyset
+        var k: Keyset = nil
         let contactPointer = (objCContact as NSString).utf8String//objCContact.utf8CString
         let nk = all_keys(contactPointer, &k)
         var latest_time: UInt64 = 0

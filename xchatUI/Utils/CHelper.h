@@ -18,9 +18,11 @@
 - (void) initialize: (int) sock : (NSString *) contact;
 - (MessageModel*)sendMessage:(NSString*) message;
 - (NSString *) getMessagesSize;
-+ (NSString *) generateRandoKey;
++ (NSString *) generateRandomKey;
 + (NSString *) getKeyFor: (const char *) contact;
 - (uint64_t) last_time_read: (const char *) contact;
++ (BOOL) exchange_is_complete: (const char *) contact;
++ (void) send_push_request: (NSData*) device_token;
 @end
 
 

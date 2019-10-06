@@ -37,7 +37,9 @@
 @property ContactViewModel * contacts;
 @property MoreViewModel * more;
 @property KeyViewModel * key;
-@property CFRunLoopSourceRef runLoop;
+@property CFRunLoopSourceRef runLoopSource;
+@property CFSocketRef iOSSock;
+@property CFRunLoopRef initialRunLoop;
 
 @end
 
@@ -45,8 +47,7 @@
 
 // globals
 static pthread_mutex_t key_generated_mutex;
-static int waiting_for_key = 0;
-static char * keyContact = NULL;
+static int user_messages_received = 0;
 
 // variables for tracing
 static int trace_count = 0;
@@ -57,64 +58,69 @@ static char expecting_trace [MESSAGE_ID_SIZE];
 static XChat * mySelf = NULL;
 
 - (void) initialize {
-  // NSLog(@"calling xchat_init\n");
-  self.sock = xchat_init ("xchat", NULL);
-  NSLog(@"Xchat.m result of calling xchat_init is %d\n", self.sock);
-  CFSocketRef iOSSock = CFSocketCreateWithNative(NULL, self.sock, kCFSocketDataCallBack,
-                                                 (CFSocketCallBack)&dataAvailable, NULL);
-  self.runLoop = CFSocketCreateRunLoopSource(NULL, iOSSock, 100);
-  CFRunLoopRef currentRunLoop = CFRunLoopGetCurrent();
-  CFRunLoopAddSource(currentRunLoop, self.runLoop, kCFRunLoopCommonModes);
+  self.initialRunLoop = CFRunLoopGetCurrent();
+  [self initSocket:@"initialize"];
   mySelf = self;
   pthread_mutex_init(&key_generated_mutex, NULL);
-  waiting_for_key = 0;
 }
 
 - (void)disconnect {
   NSLog (@"Xchat disconnect socket %d\n", self.sock);
+  CFRunLoopRemoveSource(self.initialRunLoop, self.runLoopSource, kCFRunLoopCommonModes);
+  NSLog(@"after removing, run loop %p %s source\n", self.initialRunLoop,
+        (CFRunLoopContainsSource(self.initialRunLoop, self.runLoopSource, kCFRunLoopCommonModes) ?
+         "contains" : "does not contain"));
+  // NSLog(@"CFRunLoopRemoveSource(%@, %@)\n", currentRunLoop, self.runLoop);
   xchat_end (self.sock);   // close the socket, and do any other cleanup needed
-  CFRunLoopRef currentRunLoop = CFRunLoopGetCurrent();
-  CFRunLoopRemoveSource(currentRunLoop, self.runLoop, kCFRunLoopCommonModes);
+  CFSocketInvalidate(self.iOSSock);
+  close (self.sock);
 }
 
 - (void)reconnect {
-  self.sock = xchat_init ("xchat reconnect", NULL);
-  NSLog(@"Xchat.m reconnect result of calling xchat_init is %d\n", self.sock);
-  if (self.sock >= 0) {
-    CFSocketRef iOSSock = CFSocketCreateWithNative(NULL, self.sock, kCFSocketDataCallBack,
-                                                   (CFSocketCallBack)&dataAvailable, NULL);
-    // if you ever need to bind, use CFSocketSetAddress -- but not needed here
-    self.runLoop = CFSocketCreateRunLoopSource(NULL, iOSSock, 100);
-    CFRunLoopRef currentRunLoop = CFRunLoopGetCurrent();
-    CFRunLoopAddSource(currentRunLoop, self.runLoop, kCFRunLoopCommonModes);
-  } else {
-    char * crash = NULL;
-    printf ("crashing %d\n", *crash);
-  }
+  [self initSocket:@"reconnect"];
   NSLog (@"Xchat reconnect set socket to %d\n", self.sock);
+}
+
+- (void)initSocket: (NSString *)debugInfo {
+  self.sock = xchat_init ("xchat", NULL);
+  NSLog(@"Xchat.m %@ result of calling xchat_init is %d\n", debugInfo, self.sock);
+  self.iOSSock = CFSocketCreateWithNative(NULL, self.sock, kCFSocketDataCallBack,
+                                                 (CFSocketCallBack)&dataAvailable, NULL);
+  // if you ever need to bind, use CFSocketSetAddress -- but not needed here
+  self.runLoopSource = CFSocketCreateRunLoopSource(NULL, self.iOSSock, 100);
+  NSLog(@"%@: before adding, run loop %p %s source\n", debugInfo, self.initialRunLoop,
+        (CFRunLoopContainsSource(self.initialRunLoop, self.runLoopSource, kCFRunLoopCommonModes) ? "contains" : "does not contain"));
+  CFRunLoopAddSource(self.initialRunLoop, self.runLoopSource, kCFRunLoopCommonModes);
+  // NSLog(@"CFRunLoopAddSource(%@, %@)\n", currentRunLoop, self.runLoop);
+  NSLog(@"%@: after adding, run loop %p %s source\n", debugInfo, self.initialRunLoop,
+        (CFRunLoopContainsSource(self.initialRunLoop, self.runLoopSource, kCFRunLoopCommonModes) ? "contains" : "does not contain"));
 }
 
 - (int)getSocket {
   return self.sock;
 }
 
-struct request_key_arg {
++ (int)userMessagesReceived {
+  return user_messages_received;
+}
+
+struct send_key_arg {
   int sock;
   char * contact;
   char * secret1;
   char * secret2;
   int hops;
 };
+
 // invoked with lock held, releases the lock
-static void * request_key (void * arg_void) {
+static void * send_key (void * arg_void) {
   // now save the result
-  struct request_key_arg * arg = (struct request_key_arg *) arg_void;
-  waiting_for_key = 1;
+  struct send_key_arg * arg = (struct send_key_arg *) arg_void;
   // next line will be slow if it has to generate the key from scratch
   create_contact_send_key(arg->sock, arg->contact, arg->secret1, arg->secret2, arg->hops);
   make_invisible(arg->contact);  // make sure the new contact is not (yet) visible
-  waiting_for_key = 0;
   pthread_mutex_unlock(&key_generated_mutex);
+  [mySelf.key notificationOfGeneratedKeyForContact:[[NSString alloc] initWithUTF8String:arg->contact]];
   free(arg->contact);
   if (arg->secret1 != NULL)
     free (arg->secret1);
@@ -129,10 +135,9 @@ static void * request_key (void * arg_void) {
 - (void) requestNewContact:(NSString *)contact maxHops: (NSUInteger) hops
                    secret1:(NSString *) s1 optionalSecret2:(NSString *) s2 {
   pthread_mutex_lock(&key_generated_mutex);
-  struct request_key_arg * arg =
-  (struct request_key_arg *)malloc_or_fail(sizeof (struct request_key_arg), "request_key thread");
+  struct send_key_arg * arg =
+  (struct send_key_arg *)malloc_or_fail(sizeof (struct send_key_arg), "send_key thread");
   arg->sock = self.sock;
-  keyContact = strcpy_malloc (contact.UTF8String, "requestNewContact contact");
   arg->contact = strcpy_malloc (contact.UTF8String, "requestNewContact contact");
   arg->secret1 = NULL;
   arg->secret2 = NULL;
@@ -145,18 +150,17 @@ static void * request_key (void * arg_void) {
     normalize_secret(arg->secret2);
   }
   arg->hops = (int)hops;
-  //create_contact_send_key(self.sock, keyContact, keySecret, keySecret2, (int)hops);
+  //create_contact_send_key(self.sock, contact, s1, s2, (int)hops);
   pthread_t thread;
-  pthread_create(&thread, NULL, request_key, (void *) arg);
+  pthread_create(&thread, NULL, send_key, (void *) arg);
 }
 
-- (void)requestKey:(NSString *)contact maxHops: (NSUInteger) hops {
+- (void)requestBroadcastKey:(NSString *)contact maxHops: (NSUInteger) hops {
   subscribe_broadcast(self.sock, (char *) (contact.UTF8String));
 }
 
 static void dataAvailable (CFSocketRef s, CFSocketCallBackType callbackType, CFDataRef address,
                            const void * dataVoid, void * info) {
-  // static pthread_mutex_t packet_mutex = PTHREAD_MUTEX_INITIALIZER;
   if (dataVoid == NULL)
     return;
   CFDataRef data = (CFDataRef) ((char *)dataVoid);
@@ -165,18 +169,14 @@ static void dataAvailable (CFSocketRef s, CFSocketCallBackType callbackType, CFD
     return;
   unsigned int psize = (unsigned int)signed_size;
   char * dataChar = (char *)(CFDataGetBytePtr(data));
-  // pthread_mutex_lock (&packet_mutex);
   int sock = CFSocketGetNative(s);
-  // splitPacket(sock, dataChar, psize);  /* does all the packet processing */
-  // pthread_mutex_unlock (&packet_mutex);
-  // int priority = ALLNET_PRIORITY_EPSILON;
   if (psize > 4) {
     psize -= 4;
     // priority = readb32 (dataChar + psize);
   }
   if (psize < ALLNET_HEADER_SIZE)
     return;
-  local_send_keepalive(1);
+  local_send_keepalive(0);
   struct allnet_header * hp = (struct allnet_header *) dataChar;
   if (hp->message_type == ALLNET_TYPE_KEY_REQ) { // special handling for key requests
     extern void keyd_handle_packet (const char * message, int msize); // from keyd.c
@@ -193,6 +193,7 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
   if (dlen != last_length) {
     last_length = dlen;
   }
+  // NSLog (@"received %d-byte packet, type %d\n", dlen, data [1] & 0xff);
   int verified, duplicate, broadcast;
   uint64_t seq;
   char * peer;
@@ -203,19 +204,14 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
   acks.num_acks = 0;
   struct allnet_mgmt_trace_reply * trace = NULL;
   time_t mtime = 0;
-  pthread_mutex_lock(&key_generated_mutex);  // don't allow changes to keyContact until a key has been generated
-  if ((! waiting_for_key) && (mySelf.key != nil)  && (keyContact != nil)) {
-    // waiting_for_key = !waiting_for_key;
-    [mySelf.key notificationOfGeneratedKeyForContact:[[NSString alloc] initWithUTF8String:keyContact]];
-  }
   int mlen = handle_packet(sock, (char *)data, dlen, priority, &peer, &kset, &message, &desc,
                            &verified, &seq, &mtime, &duplicate, &broadcast, &acks, &trace);
-  pthread_mutex_unlock(&key_generated_mutex);
   if ((mlen > 0) && verified) {  // received a packet
     NSLog(@"mlen %d, verified %d, duplicate %d, broadcast %d, peer %s\n",
           mlen, verified, duplicate, broadcast, peer);
     NSString * contact = [[NSString alloc] initWithUTF8String:peer];
     if (! duplicate) {
+      user_messages_received++;
       NSString * msg = [[NSString alloc] initWithUTF8String:message];
       if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
         [mySelf.conversation receivedNewMessageForContact:contact message:msg];
@@ -226,12 +222,9 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
     }
     // NSLog(@"XChat.m: refreshed the conversation UI text view and the contacts UI table view\n");
   } else if (mlen == -1) {        // successfully exchanged keys
-    waiting_for_key = 0;
-    NSLog(@"key exchange successfully completed for peer %s\n", keyContact);
-    NSString * contact = [[NSString alloc] initWithUTF8String:keyContact];
+    NSLog(@"key exchange successfully completed for peer %s\n", peer);
+    NSString * contact = [[NSString alloc] initWithUTF8String:peer];
     [mySelf.key notificationkeyExchangeCompletedForContact:contact];
-    pthread_mutex_lock(&key_generated_mutex);  // changing globals, forbid access for others that may also change them
-    pthread_mutex_unlock(&key_generated_mutex);
   } else if (mlen == -2) {  // confirm successful subscription
       NSLog(@"got subscription %s\n", peer);
   } else if ((mlen == -4) && (trace != NULL) &&
@@ -272,16 +265,13 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
 }
 
 - (void) resendKeyForNewContact: (NSString *) contact {
-  if (! waiting_for_key) {
-    NSLog(@"resending key to %@\n", contact);
-    resend_contact_key (self.sock, contact.UTF8String);
-    NSLog(@"resent key to %@\n", contact);
-  } else {
-    NSLog(@"resend key for new contact %@: still generating key\n", contact);
-  }
+  NSLog(@"resending key to %@\n", contact);
+  resend_contact_key (self.sock, contact.UTF8String);
+  NSLog(@"resent key to %@\n", contact);
 }
 
 - (void) completeExchange: (NSString *) contact {
+  NSLog(@"XChat.m key exchange completed, deleting exchange file\n");
   const char * sContact = (char *)contact.UTF8String;
   keyset * keys = NULL;
   int nk = all_keys (sContact, &keys);

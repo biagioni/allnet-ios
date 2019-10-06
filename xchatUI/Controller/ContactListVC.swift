@@ -160,7 +160,7 @@ extension ContactListVC: UITableViewDelegate {
         }
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 1 {
+        if section == 1 && (invisible_contacts(nil) > 0){
             let label = UILabel()
             label.text = "  Hidden Contacts"
             label.font = UIFont(name: "Avenir", size: 16)

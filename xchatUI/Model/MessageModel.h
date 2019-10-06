@@ -10,9 +10,10 @@
 #define MessageModel_h
 
 @interface MessageModel : NSObject
-@property  NSString *message;
+@property NSString *message;
 @property int msg_type;
-@property  NSString *dated;
+@property NSString *dated;
+@property NSString * received;
 @property int message_has_been_acked;
 @property int *msize;
 @property int *seq;
