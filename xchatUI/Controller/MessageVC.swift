@@ -120,6 +120,11 @@ extension MessageVC: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MessageCell
             cell.labelMessage.text = item.message
             cell.labelDate.text = item.dated
+            if (item.contact_name != nil) &&
+                (item.contact_name.lengthOfBytes(using: String.Encoding.utf8) > 0) {
+                let toFrom = (item.msg_type == MSG_TYPE_RCVD) ? "from" : "to"
+                cell.labelDate.text = toFrom + " " + item.contact_name + ", " + item.dated
+            }
             if item.msg_type == MSG_TYPE_RCVD {
                 var fractionOfDay:Double = 1
                 let SECONDS_PER_DAY: Double = 24 * 60 * 60
@@ -136,7 +141,13 @@ extension MessageVC: UITableViewDataSource {
             }else if item.msg_type == MSG_MISSED {
                 cell.viewMessage.backgroundColor = UIColor.red
             }else{
-                if item.message_has_been_acked == 0 {
+                if item.group_sent.count > 1 {   // sent to a group, color is based on the number of acks
+                    print ("sent message to \(item.group_sent.count), acked \(item.group_acked.count)")
+                    let factor = CGFloat(item.group_acked.count) / CGFloat(item.group_sent.count)
+                    cell.viewMessage.backgroundColor = // if the counts are the same, same color as E2F9CB
+                        UIColor(red: 0.8862745098, green: 0.9764705882,
+                                blue: 0.7960784313, alpha: factor)
+                } else if item.message_has_been_acked == 0 {
                     cell.viewMessage.backgroundColor = UIColor(hex: "FFD8E5")
                 }else{
                     cell.viewMessage.backgroundColor = UIColor(hex: "E2F9CB")

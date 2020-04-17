@@ -40,9 +40,9 @@ import UIKit
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.view.backgroundColor = UIColor.white
+        // self.navigationController?.view.backgroundColor = UIColor.white
         appDelegate = (UIApplication.shared.delegate as! AppDelegate)
-        appDelegate.xChat.initialize()
+        // appDelegate.xChat.initialize()
         
         messageVM = MessageViewModel()
         messageVM.contactDelegate = self
@@ -164,7 +164,7 @@ extension ContactListVC: UITableViewDelegate {
             let label = UILabel()
             label.text = "  Hidden Contacts"
             label.font = UIFont(name: "Avenir", size: 16)
-            label.backgroundColor = UIColor(hex: "EEEEEE")
+            // label.backgroundColor = UIColor(hex: "EEEEEE")
             return label
         }
         return nil

@@ -60,94 +60,32 @@
     update_time_read (contact.UTF8String);
 }
 
+static char * contact_for_key (keyset k)
+{
+    char * result = "";
+    char ** contacts = NULL;
+    int nc = all_contacts(&contacts);
+    for (int ic = 0; ic < nc; ic++) {
+        keyset * keys = NULL;
+        int nk = all_keys (contacts [ic], &keys);
+        for (int ik = 0; ik < nk; ik++) {
+            if ((keys [ik] == k) && (! is_group (contacts [ic]))) {
+                printf ("key %d matches contact %s\n", k, contacts [ic]);
+                result = strcpy_malloc(contacts [ic], "contact_for_key");
+            }
+        }
+        if (keys != NULL)
+            free (keys);
+    }
+    if (contacts != NULL)
+        free (contacts);
+    return result;
+}
+
 //clean
 - (NSMutableArray *)getMessages {
     update_time_read(self.xcontact);
-    NSMutableArray * result_messages = [[NSMutableArray alloc] initWithCapacity:1000];
-    keyset * k;
-    int nk = all_keys (self.xcontact, &k);
-    for (int ik = 0; ik < nk; ik++) {
-        struct msg_iter * iter = start_iter (self.xcontact, k [ik]);
-        if (iter != NULL) {
-            uint64_t seq;
-            uint64_t time = 0;
-            uint64_t rcvd_time = 0;
-            int tz_min;
-            char ack [MESSAGE_ID_SIZE];
-            char * message = NULL;
-            int msize;
-            int next = prev_message(iter, &seq, &time, &tz_min, &rcvd_time, ack, &message, &msize);
-            while (next != MSG_TYPE_DONE) {
-                BOOL inserted = false;
-                if ((next == MSG_TYPE_RCVD) || (next == MSG_TYPE_SENT)) {  // ignore acks
-                    struct message_store_info mi;
-                    if (message != NULL) {
-                        mi.message = message;
-                        mi.msize = msize;
-                        mi.seq = seq;
-                        mi.time = time;
-                        mi.tz_min = tz_min;
-                        mi.msg_type = next;
-                        mi.message_has_been_acked = 0;
-                        mi.prev_missing = 0;
-                        if ((next == MSG_TYPE_SENT) &&
-                            (is_acked_one(self.xcontact, k [ik], seq, NULL)))
-                            mi.message_has_been_acked = 1;
-                        NSObject * mipObject = [NSValue value:(&mi)
-                                                 withObjCType:@encode(struct message_store_info)];
-                        for (long i = (long)result_messages.count - 1; ((i >= 0) && (! inserted)); i--) {
-                            struct message_store_info mi_from_array;
-                            [(result_messages [i]) getValue:&mi_from_array];
-                            if (mi.time <= mi_from_array.time) {  // insert here
-                                [result_messages insertObject:mipObject atIndex:i + 1];
-                                inserted = true;
-                            }
-                        }
-                        if (! inserted) {  // should save it at the very beginning
-                            [result_messages insertObject:mipObject atIndex:0];
-                            inserted = true;
-                        }
-                    }
-                }
-                if ((! inserted) && (message != NULL))
-                    free(message);
-                message = NULL;
-                next = prev_message(iter, &seq, &time, &tz_min, &rcvd_time, ack, &message, &msize);
-            }
-            free_iter(iter);
-        }
-    }
-    if (nk > 0)  // release the storage for the keys
-        free (k);
-    uint64_t last_seq = 0;
-    NSValue * last_received = NULL;
-    NSMutableArray * converted_messages = [[NSMutableArray alloc] initWithCapacity:[result_messages count]];
-    for (NSValue * obj in result_messages) {  // create a bubble for each message
-        struct message_store_info mi;
-        [obj getValue:&mi];
-        @try {   // initWithUTF8String will fail if the string is not valid UTF8
-            MessageModel *model = [[MessageModel alloc] init];
-            model.message = [[NSString alloc] initWithUTF8String:mi.message];
-            model.msg_type = mi.msg_type;
-            model.dated = basicDate(mi.time, mi.tz_min);
-            model.message_has_been_acked = mi.message_has_been_acked;
-            model.rcvd_ackd_time = mi.rcvd_ackd_time;
-            if (mi.msg_type == MSG_TYPE_RCVD) {
-                if ((last_seq != 0) && (last_received != NULL) &&
-                    (mi.seq + 1 < last_seq)) {
-                    model.prev_missing = (int)(last_seq - mi.seq - 1);
-                }
-                last_received = obj;
-                last_seq = mi.seq;
-            }
-            [converted_messages addObject:model];
-        } @catch (NSException *e) {
-            NSLog(@"message %s is not valid UTF8, ignoring\n", mi.message);
-        }
-        free ((void *)mi.message);
-    }
-    converted_messages = (NSMutableArray *)[[converted_messages reverseObjectEnumerator] allObjects];
-    return converted_messages;
+    return [self allMessages];
 }
 
 - (NSMutableArray *) allMessages{
@@ -157,16 +95,48 @@
     list_all_messages (self.xcontact, &messages, &messages_allocated, &messages_used);
     NSMutableArray * converted_messages = [[NSMutableArray alloc] initWithCapacity:messages_used];
     if (messages_used > 0) {
+        struct message_store_info * prev_mi = NULL;
+        MessageModel * prevModel = nil;
         for (int i = 0; i < messages_used; i++) {
-            struct message_store_info mi = *(messages + (messages_used - i - 1));
-            MessageModel *model = [[MessageModel alloc] init];
-            model.message = [[NSString alloc] initWithUTF8String:mi.message];
-            model.msg_type = mi.msg_type;
-            model.dated = basicDate(mi.time, mi.tz_min);
-            model.message_has_been_acked = mi.message_has_been_acked;
-            model.rcvd_ackd_time = mi.rcvd_ackd_time;
-            model.prev_missing = (int)mi.prev_missing;
-            [converted_messages addObject:model];
+            int index = messages_used - i - 1;
+            struct message_store_info mi = messages [index];
+            NSString *contactName = [[NSString alloc] initWithUTF8String: contact_for_key(mi.keyset)];
+            if ((prev_mi != NULL) && (prevModel != nil) &&
+                (mi.msg_type == MSG_TYPE_SENT) && (prev_mi->msg_type == MSG_TYPE_SENT) &&
+                (mi.time == prev_mi->time) && (strcmp (mi.message, prev_mi->message) == 0)) {
+            // redundant group message, add info rather than message
+                [prevModel.group_sent addObject:contactName];
+                if (mi.message_has_been_acked)
+                    [prevModel.group_acked addObject:contactName];
+                prevModel.message_has_been_acked |= mi.message_has_been_acked;
+                prevModel.contact_name = nil;
+            } else {
+printf ("message %s, prev %p/%p, contactName %s, index %d\n", mi.message, prev_mi, prevModel, contactName.UTF8String, index);
+if ((prevModel != nil) && (prev_mi != NULL)) printf ("msg_type %d %d, time %d %d, strcmp %d\n", mi.msg_type, prev_mi->msg_type, (int)mi.time, (int)prev_mi->time, strcmp (mi.message, prev_mi->message));
+                MessageModel *model = [[MessageModel alloc] init];
+                @try {   // initWithUTF8String will fail if the string is not valid UTF8
+                    model.message = [[NSString alloc] initWithUTF8String:mi.message];
+                } @catch (NSException *e) {
+                    NSLog(@"message %s is not valid UTF8, ignoring\n", mi.message);
+                    model.message = @"(message is invalid UTF8, cannot be displayed)";
+                }
+                model.msg_type = mi.msg_type;
+                model.dated = basicDate(mi.time, mi.tz_min);
+                model.message_has_been_acked = mi.message_has_been_acked;
+                model.sent_time = mi.time;
+                model.rcvd_ackd_time = mi.rcvd_ackd_time;
+                model.prev_missing = (int)mi.prev_missing;
+                model.contact_name = (is_group(self.xcontact) ? contactName : nil);
+                model.group_sent = [[NSMutableSet alloc] initWithObjects:contactName, nil];
+                if (mi.message_has_been_acked) {
+                    model.group_acked = [[NSMutableSet alloc] initWithObjects:contactName, nil];
+                } else {
+                    model.group_acked = [[NSMutableSet alloc] init];
+                }
+                [converted_messages addObject:model];
+                prevModel = model;
+            }
+            prev_mi = messages + index;
         }
     }
     if (messages != NULL)
@@ -235,6 +205,7 @@ static NSString * basicDate (uint64_t time, int tzMin) {
 //        [dateString stringByAppendingString:offset];
 //    }
 //    dateString = [dateString stringByAppendingString:@"\n"];
+    // NSString * dateWithName = [dateString stringByAppendingString:@" foo"];
     return dateString;
 }
 
@@ -321,34 +292,23 @@ struct data_to_send {
 //clean
 - (MessageModel*)sendMessage:(NSString*) message {
     if ((message.length > 0) && (self.xcontact != NULL)) {  // don't send empty messages
+NSLog(@"sending message %@\n", message);
         char * message_to_send = strcpy_malloc(message.UTF8String, "messageEntered/to_save");
         size_t length_to_send = strlen(message_to_send); // not textView.text.length
         send_message_in_separate_thread (self.sock, self.xcontact, message_to_send, length_to_send);
         MessageModel *model = [[MessageModel alloc] init];
-        model.message = [[NSString alloc] initWithUTF8String:message_to_send];
+        model.message = message;
         model.msg_type = MSG_TYPE_SENT;
         model.dated = basicDate(allnet_time(), local_time_offset());
         model.msize = (int *)length_to_send;
+        model.prev_missing = 0;
+        model.contact_name = nil;
+        model.group_sent = [[NSMutableSet alloc] init];
+        model.group_acked = [[NSMutableSet alloc] init];
         return model;
     }
     return NULL;
 }
-#if 0
-- (void)sendMessage:(NSString*) message {
-    if ((message.length > 0) && (self.xcontact != NULL)) {  // don't send empty messages
-        char * message_to_send = strcpy_malloc(message.UTF8String, "messageEntered/to_save");
-        size_t length_to_send = strlen(message_to_send); // not textView.text.length
-        send_message_in_separate_thread (self.sock, self.xcontact, message_to_send, length_to_send);
-        struct message_store_info info;
-        bzero (&info, sizeof (info));
-        info.msg_type = MSG_TYPE_SENT;
-        info.message = message_to_send;
-        info.msize = length_to_send;
-        info.time = allnet_time();
-        info.tz_min = local_time_offset();
-    }
-}
-#endif
 
 
 // if n is 0, sets to zero.  Otherwise, adds n (positive or negative) to the current badge number

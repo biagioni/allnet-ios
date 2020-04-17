@@ -57,9 +57,8 @@ static char expecting_trace [MESSAGE_ID_SIZE];
 // hack to make self object available to C code -- should only be one Xchat object anyway
 static XChat * mySelf = NULL;
 
-- (void) initialize {
+- (void)initialize {
   self.initialRunLoop = CFRunLoopGetCurrent();
-  [self initSocket:@"initialize"];
   mySelf = self;
   pthread_mutex_init(&key_generated_mutex, NULL);
 }
@@ -76,24 +75,21 @@ static XChat * mySelf = NULL;
   close (self.sock);
 }
 
-- (void)reconnect {
-  [self initSocket:@"reconnect"];
-  NSLog (@"Xchat reconnect set socket to %d\n", self.sock);
+- (BOOL)connect {
+  return [self initSocket:@"reconnect"];
 }
 
-- (void)initSocket: (NSString *)debugInfo {
+- (BOOL)initSocket: (NSString *)debugInfo {
   self.sock = xchat_init ("xchat", NULL);
+  if (self.sock < 0)
+    return false;
   NSLog(@"Xchat.m %@ result of calling xchat_init is %d\n", debugInfo, self.sock);
   self.iOSSock = CFSocketCreateWithNative(NULL, self.sock, kCFSocketDataCallBack,
                                                  (CFSocketCallBack)&dataAvailable, NULL);
   // if you ever need to bind, use CFSocketSetAddress -- but not needed here
   self.runLoopSource = CFSocketCreateRunLoopSource(NULL, self.iOSSock, 100);
-  NSLog(@"%@: before adding, run loop %p %s source\n", debugInfo, self.initialRunLoop,
-        (CFRunLoopContainsSource(self.initialRunLoop, self.runLoopSource, kCFRunLoopCommonModes) ? "contains" : "does not contain"));
   CFRunLoopAddSource(self.initialRunLoop, self.runLoopSource, kCFRunLoopCommonModes);
-  // NSLog(@"CFRunLoopAddSource(%@, %@)\n", currentRunLoop, self.runLoop);
-  NSLog(@"%@: after adding, run loop %p %s source\n", debugInfo, self.initialRunLoop,
-        (CFRunLoopContainsSource(self.initialRunLoop, self.runLoopSource, kCFRunLoopCommonModes) ? "contains" : "does not contain"));
+  return true;
 }
 
 - (int)getSocket {
@@ -170,25 +166,26 @@ static void dataAvailable (CFSocketRef s, CFSocketCallBackType callbackType, CFD
   unsigned int psize = (unsigned int)signed_size;
   char * dataChar = (char *)(CFDataGetBytePtr(data));
   int sock = CFSocketGetNative(s);
+  unsigned int priority = ALLNET_PRIORITY_EPSILON;
   if (psize > 4) {
     psize -= 4;
-    // priority = readb32 (dataChar + psize);
+    priority = (unsigned int) readb32 (dataChar + psize);
   }
-  if (psize < ALLNET_HEADER_SIZE)
-    return;
-  local_send_keepalive(0);
-  struct allnet_header * hp = (struct allnet_header *) dataChar;
-  if (hp->message_type == ALLNET_TYPE_KEY_REQ) { // special handling for key requests
-    extern void keyd_handle_packet (const char * message, int msize); // from keyd.c
-    keyd_handle_packet (dataChar, psize);
-  } else {   // any other kind of packet
-    receivePacket(sock, dataChar, psize, ALLNET_PRIORITY_EPSILON);
-  }
+  receivePacket(sock, dataChar, psize, priority);
 }
 
 // main function to call handle_packet and process the results
-static void receivePacket (int sock, char * data, unsigned int dlen, unsigned int priority)
+static void receivePacket (int sock, const char * data, unsigned int dlen, unsigned int priority)
 {
+  if (dlen < ALLNET_HEADER_SIZE)
+    return;
+  local_send_keepalive(0);
+  const struct allnet_header * hp = (struct allnet_header *) data;
+  if (hp->message_type == ALLNET_TYPE_KEY_REQ) { // special handling for key requests
+    extern void keyd_handle_packet (const char * message, int msize); // from keyd.c
+    keyd_handle_packet (data, dlen);
+    return;
+  }   // else: any other kind of packet
   static int last_length = 0;
   if (dlen != last_length) {
     last_length = dlen;
@@ -196,6 +193,7 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
   // NSLog (@"received %d-byte packet, type %d\n", dlen, data [1] & 0xff);
   int verified, duplicate, broadcast;
   uint64_t seq;
+  uint64_t missing;
   char * peer;
   keyset kset;
   char * desc;
@@ -205,7 +203,7 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
   struct allnet_mgmt_trace_reply * trace = NULL;
   time_t mtime = 0;
   int mlen = handle_packet(sock, (char *)data, dlen, priority, &peer, &kset, &message, &desc,
-                           &verified, &seq, &mtime, &duplicate, &broadcast, &acks, &trace);
+                           &verified, &seq, &mtime, &missing, &duplicate, &broadcast, &acks, &trace);
   if ((mlen > 0) && verified) {  // received a packet
     NSLog(@"mlen %d, verified %d, duplicate %d, broadcast %d, peer %s\n",
           mlen, verified, duplicate, broadcast, peer);
@@ -215,7 +213,7 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
       NSString * msg = [[NSString alloc] initWithUTF8String:message];
       if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
         [mySelf.conversation receivedNewMessageForContact:contact message:msg];
-      }else{
+      } else {
         AppDelegate * appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
         [appDelegate notifyMessageReceivedWithContact:contact message:msg];
       }
@@ -241,6 +239,19 @@ static void receivePacket (int sock, char * data, unsigned int dlen, unsigned in
     [mySelf.conversation ackMessageForContact:nsContact];
   }
 }
+
+// call receivePacket in the main thread
+void receiveAdPacket (const char * data, unsigned int dlen, unsigned int priority)
+{
+  if ((dlen > ALLNET_MTU) || (dlen <= 0))
+    return;
+  char * bufferedData = memcpy_malloc(data, dlen, "receiveAdPacket");
+  dispatch_async(dispatch_get_main_queue(), ^{
+    receivePacket(-1, bufferedData, dlen, priority);
+    free(bufferedData);
+  });
+}
+
 
 - (void) setMessageVM:(NSObject *)object {
   mySelf.conversation = (MessageViewModel*)object;

@@ -11,7 +11,6 @@ import UIKit
 class KeyExchangeVC: UIViewController {
     
     @IBOutlet weak var labelGeneratedKey: UILabel!
-    @IBOutlet weak var labelInformedKey: UILabel!
     @IBOutlet weak var textViewInformation: UITextView!
     
     var info: (name: String, key: String?, hops: Int)!
@@ -33,7 +32,6 @@ class KeyExchangeVC: UIViewController {
         if isGroup {
             if create_group(info.name) == 1 {
                 labelGeneratedKey.text = "None"
-                labelInformedKey.text =  "None"
                 textViewInformation.textColor = UIColor(hex: "19BB7B")
                 textViewInformation.text = "Created group \(info.name) with success!"
             }else{
@@ -55,8 +53,6 @@ class KeyExchangeVC: UIViewController {
             appDelegate.xChat.requestNewContact(info.name, maxHops: UInt(info.hops), secret1: s1, optionalSecret2: nil)
             labelGeneratedKey.text = s1
             info.key = info.key ?? ""
-            // labelInformedKey.text = !(info.key?.isEmpty)! ? info.key! : "None"
-            labelInformedKey.text = "None"
             textViewInformation.textColor = UIColor(hex: "A85363")
             textViewInformation.text = "Key exchange in progress\nWaiting for key from:\n\(info.name)"
         }

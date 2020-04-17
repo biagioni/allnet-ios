@@ -15,7 +15,7 @@
 
 - (void) initialize;
 - (void) disconnect;
-- (void) reconnect;
+- (BOOL) connect;
 
 - (void) setMessageVM:(NSObject *)object;
 - (void) setContactVM:(NSObject *)object;
@@ -40,9 +40,6 @@
 // returns the contents of the exchange file, if any: hops\nsecret1\n[secret2\n]
 - (NSString *) incompleteExchangeData: (NSString *) contact;
 - (void) unhideContact: (NSString *) contact;
-
-// internal method(s), do not use outside
-- (void)initSocket: (NSString *)debugInfo;
 
 @end
 

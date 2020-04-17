@@ -18,6 +18,7 @@ class ContactNewVC: UIViewController {
     @IBOutlet weak var labelImcomplete: UILabel!
     @IBOutlet weak var heightPicker: NSLayoutConstraint!
     @IBOutlet weak var buttonSelection: UIButton!
+    @IBOutlet weak var requestButton: UIButton!
     
     var keyVM: KeyViewModel!
     var connectionValues: [String]!
@@ -25,7 +26,7 @@ class ContactNewVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.view.backgroundColor = UIColor.white
+        // self.navigationController?.view.backgroundColor = UIColor.white
         heightPicker.constant = 0
         tableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         connectionValues = ["regular internet contact", "nearby wireless contact","new group (no secret)"]
@@ -153,6 +154,13 @@ extension ContactNewVC: UITextFieldDelegate {
         if textField == textFieldName {
             textField.resignFirstResponder()
             textFieldSecret.becomeFirstResponder()
+        } else if textField == textFieldSecret {
+            if (textFieldSecret.text?.count ?? 0) > 0 {
+                requestButton.setTitle("Request contact", for: .normal)
+            } else {
+                requestButton.setTitle("Request contact (and show secret)", for: .normal)
+            }
+            textFieldSecret.resignFirstResponder()
         }else{
             textField.resignFirstResponder()
         }

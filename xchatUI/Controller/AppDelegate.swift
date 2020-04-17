@@ -40,10 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         sessions = [MCSession]()
-        self.xChat = XChat()
         createAllNetDir()
+        self.xChat = XChat()
+        self.xChat.initialize()
         startAllnet(application: application, firstCall: true)
-        sleep(1)
         let minute = TimeInterval.init(60)
         application.setMinimumBackgroundFetchInterval(minute)
         
@@ -66,7 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIDevice.current.isBatteryMonitoringEnabled = true
         NotificationCenter.default.addObserver(self, selector: #selector(batteryChanged), name: UIDevice.batteryStateDidChangeNotification, object: nil)
-
         return true
     }
     
@@ -80,6 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         enterBackground(caller: "appDEB")
+        debugToMaru(message: "applicationDidEnterBackground")
 // self.notifyMessageReceived(contact: "application", message: "entered background")
     }
     
@@ -88,11 +88,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         set_speculative_computation (UIDevice.current.batteryState != UIDevice.BatteryState.unplugged ? 0 : 1)
         print ("application entered foreground, \(application.applicationIconBadgeNumber) badges")
         application.applicationIconBadgeNumber = 0
+        debugToMaru(message: "applicationWillEnterForeground")
     }
     
     func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         print ("application registered for remote notification, token \(deviceToken)")
+        debugToMaru(message: "application registered for remote notification, token \(deviceToken)")
         for d in deviceToken {
             let s = String(format:"%02X", d)
             print ("\(s)", terminator: ":")
@@ -104,43 +106,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didReceiveRemoteNotification userInfo: [AnyHashable : Any],
                      fetchCompletionHandler completionHandler:@escaping (UIBackgroundFetchResult)->Void) {
-        if self.connected {
-            print ("foreground application received remote notification")
-            self.notifyMessageReceived(contact: "application in foreground:",
-                                       message: "remote notification")
-            completionHandler(UIBackgroundFetchResult.noData)
-        } else {
-            print ("application received remote notification")
-            self.notifyMessageReceived(contact: "application in background:",
-                                       message: "remote notification")
-            let original = XChat.userMessagesReceived()
+        let foreground = self.connected
+        let fb = foreground ? "foreground" : "background"
+        print ("\(fb) application received remote notification")
+        debugToMaru(message: "\(fb) application received remote notification")
+        //self.notifyMessageReceived(contact: "application in \(fb):", message: "remote notification")
+        let messageIfAny = userInfo["message"] as? String
+        let original = XChat.userMessagesReceived()
+        if !foreground {
             startAllnet(application: application, firstCall: false)
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(25)) {
-                // self.shutdownAllnet()
-                let final = XChat.userMessagesReceived()
-                let result = final > original ?
-                    UIBackgroundFetchResult.newData : UIBackgroundFetchResult.noData
-                self.notifyMessageReceived(contact: "this is",
-                                           message: "a test: final \(final), original \(original)")
-                print ("final result of remote notification is \(final) >? \(original)")
-                completionHandler(result)
+            sleep (1)
+        }
+        if let message: String = messageIfAny {
+            print ("message is \(message), \(message.count) bytes")
+            let length = (message.count % 2 == 0) ? message.count / 2 : 0
+            let values = UnsafeMutablePointer<UInt8>.allocate(capacity: length)
+            let vptr = UnsafeMutableBufferPointer(start: values, count: length)
+            var mcopy = message
+            for i in 0..<length {
+                let twoBytes = mcopy.prefix(2)
+                vptr[i] = UInt8(twoBytes, radix: 16)!
+                mcopy = String(mcopy.dropFirst(2))
             }
-            /*
-            sleep(25)
-            // self.shutdownAllnet()
+            // for e in 0..<length { print ("sending \(e): \(values[e])") }
+            sendToAd(buffer: values, size: length)
+            print ("sendToAd for remote notification complete")
+        }
+        let sleep_seconds = foreground ? 5 : 25
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(sleep_seconds)) {
             let final = XChat.userMessagesReceived()
-            let result = final > original ?
-                UIBackgroundFetchResult.newData : UIBackgroundFetchResult.noData
-            notifyMessageReceived(contact: "this is", message: "a test")
+            let result = final > original ? UIBackgroundFetchResult.newData : UIBackgroundFetchResult.noData
+    //        self.notifyMessageReceived(contact: "final \(final)", message: "original \(original)")
             print ("final result of remote notification is \(final) >? \(original)")
+            self.debugToMaru(message: "final result of remote notification is \(final) >? \(original)")
             completionHandler(result)
- */
         }
     }
 
     @objc func notifyMessageReceived(contact: String, message: String){
-        // AudioServicesPlayAlertSound(SystemSoundID(1003))
-        // AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         if #available(iOS 10.0, *) {
             let content = UNMutableNotificationContent()
             content.title = contact
@@ -201,10 +204,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var task = UIBackgroundTaskIdentifier.invalid
         task = application.beginBackgroundTask {
             if task != UIBackgroundTaskIdentifier.invalid {
-                print("allnet task ending background task")
-                self.shutdownAllnet()
                 let local_task = task
                 task = UIBackgroundTaskIdentifier.invalid
+                self.shutdownAllnet()
+                print("allnet task ending background task \(local_task)")
                 application.endBackgroundTask(local_task)
             }
         }
@@ -217,13 +220,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let args = ["allnet", nil]
                 var pointer = args.map{Pointer(mutating: (($0 ?? "") as NSString).utf8String)}
                 astart_main(1, &pointer)
-                NSLog("astart_main has completed\n")
-                if !firstCall {
-                    print("reconnecting to ad")
+                print("astart_main has completed")
+                var success = false
+                var repeatCount = 5 // try up to five times
+                repeat {
                     sleep(1)
-                    self.xChat.reconnect()
-                }
-                self.connected = true
+                    print("(re)connecting to ad")
+                    success = self.xChat.connect()
+                    repeatCount -= 1
+                    if !success {
+                        let call = firstCall ? "initialize" : "reconnect"
+                        print("\(call) failed, count \(repeatCount)")
+                    }
+                } while (!success) && (repeatCount > 0)
+                self.connected = success
+                let call = firstCall ? "initialize" : "reconnect"
+                let resString = success ? "success" : "failed"
+                print("\(call) result is \(resString)")
             }
             // set up a connection to the allnet daemon that we can use to send and receive multipeer packets
             NSLog("(re)starting multipeer connection %d\n", self.socket_counter)
@@ -256,7 +269,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func send_udp(buffer: UnsafeRawPointer, size: Int) {
+    // send a packet to the local ad
+    func sendToAd(buffer: UnsafeRawPointer, size: Int) {
         let slen = socklen_t(MemoryLayout<sockaddr_in>.size)
         var addr = self.mp_sin
         let sent = withUnsafePointer(to: &addr) {
@@ -266,7 +280,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         if (sent != size) {  // if returned -1, only print once
             if ((sent != -1) || (self.printedSendError == false)) {
-                perror("AppDelegate.swift send_udp for multipeer socket")
+                perror("AppDelegate.swift sendToAd for multipeer socket")
                 NSLog("sent %d instead of %d\n", sent, size)
                 if (sent == -1) {
                     self.printedSendError = true
@@ -282,7 +296,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.last_sent = allnet_time()
         var size: UInt32 = 0;
         let buffer: UnsafeRawPointer = UnsafeRawPointer(keepalive_packet(&size))
-        send_udp (buffer:buffer, size:Int(size))
+        sendToAd (buffer:buffer, size:Int(size))
     }
     
     func setPeer(){
@@ -300,7 +314,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func getPeer() -> MCPeerID {
         let peerIDKey = "peerID"
-        var result: MCPeerID?
+        var result: MCPeerID? = nil
         if let peerIdData = UserDefaults.standard.data(forKey: peerIDKey){
             result = NSKeyedUnarchiver.unarchiveObject(with: peerIdData) as? MCPeerID
             NSLog("found peer ID %@\n", result!.displayName)
@@ -324,6 +338,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
+
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .badge, .sound])
@@ -331,6 +346,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 }
 
 extension AppDelegate: MCNearbyServiceBrowserDelegate {
+
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         let session = MCSession(peer: currentPeerID, securityIdentity: nil, encryptionPreference: .none)
         session.delegate = self
@@ -387,7 +403,7 @@ extension AppDelegate: MCSessionDelegate {
         let values = UnsafeMutablePointer<UInt8>.allocate(capacity: length)
         let vptr = UnsafeMutableBufferPointer(start: values, count: length)
         let send_size = data.copyBytes(to: vptr)
-        send_udp(buffer: values, size: send_size)
+        sendToAd(buffer: values, size: send_size)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -401,4 +417,33 @@ extension AppDelegate: MCSessionDelegate {
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         NSLog("multipeer session %@ did finish %@ from %@ url %@ error %@\n", session.myPeerID.displayName, resourceName, peerID, localURL!.absoluteString, error!.localizedDescription)
     }
+
+    func debugToMaru(message: String) {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let dateString = formatter.string(from: date)
+        let totalString = dateString + ": " + message + "\n"
+        print ("debug message is \(totalString)")
+        let s = socket (AF_INET, SOCK_DGRAM, IPPROTO_UDP)
+        var sin = sockaddr_in()
+        sin.sin_len = UInt8(MemoryLayout.size(ofValue: sin))
+        sin.sin_family = sa_family_t(AF_INET)
+        sin.sin_port = UInt16(allnet_htons (Int32(23654)))
+        sin.sin_addr.s_addr = inet_addr ("128.171.10.147")
+        var sinCopy = sin   // not sure why this is needed, but it keeps the compiler happy
+        let sent = totalString.withCString( { cstr -> Int in
+            withUnsafePointer(to: &sinCopy) {
+                $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
+                    sendto (s, cstr, strlen(cstr), MSG_DONTWAIT, $0, socklen_t(sin.sin_len))
+                }
+            }
+        })
+        if sent < 10 {
+            print ("sent less than 10")
+        }
+        // sin.sin_addr.s_addr = inet_addr("128.171.10.147")
+        close(s)
+    }
+
 }

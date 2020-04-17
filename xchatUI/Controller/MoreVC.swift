@@ -29,6 +29,7 @@ class MoreVC: UITableViewController {
     @IBAction func clearData(_ sender: UIBarButtonItem) {
         textViewTraceOutput.text = ""
     }
+    
     @IBAction func startTracing(_ sender: UIButton) {
         guard let hops = textFieldHops.text, !hops.isEmpty else {
             ///TODO MESSAGE

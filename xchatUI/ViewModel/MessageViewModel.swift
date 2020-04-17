@@ -59,7 +59,9 @@ class MessageViewModel : NSObject {
             let messages = _cHelper.getMessages() as! [MessageModel]
             _messages = messages
             checkMissingMessages()
-            delegate?.addedNewMessage(index: count-1)
+            let idx = newMessageIndex(forContact: contact, message: message)
+            // delegate?.addedNewMessage(index: count-1)
+            delegate?.addedNewMessage(index: idx)
         }else{
             contactDelegate?.newMessageReceived(fromContact: contact, message: message)
         }
@@ -74,6 +76,9 @@ class MessageViewModel : NSObject {
             _messages = messages
             checkMissingMessages()
             modifiedMessagesIndexes = modifiedMessagesIndexes.filter{$0 != nil}
+            for index in modifiedMessagesIndexes {
+                _messages[index!].group_acked.add(contact)
+            }
             delegate?.ackMessages(forIndexes: modifiedMessagesIndexes as! [Int])
         }
     }
@@ -98,5 +103,10 @@ class MessageViewModel : NSObject {
             msgModel.msg_type = Int32(MSG_MISSED)
             _messages.insert(msgModel, at: msg.offset + 1)
         }
+    }
+    
+    func newMessageIndex(forContact contact: String, message: String) -> Int {
+        print ("returning index \(count - 1) for new message \(message)")
+        return count - 1
     }
 }
