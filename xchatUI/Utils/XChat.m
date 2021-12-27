@@ -312,13 +312,14 @@ void receiveAdPacket (const char * data, unsigned int dlen, unsigned int priorit
   return nil;
 }
 
-- (void) startTrace: (BOOL) wide_enough maxHops: (NSUInteger) hops showDetails: (BOOL) details {
+- (void) startTrace: (BOOL) wide_enough maxHops: (NSUInteger) hops showDetails: (BOOL) show_details {
 
   unsigned char addr [MESSAGE_ID_SIZE];
   memset (addr, 0, MESSAGE_ID_SIZE);
   trace_count++;
   trace_start_time = allnet_time_ms();
-  if (! start_trace(self.sock, addr , 0, (int)hops, 0, expecting_trace, 0)) {
+  int details = (show_details ? 1 : 0);
+  if (! start_trace(self.sock, addr , 0, (int)hops, details, expecting_trace, 0)) {
     NSLog(@"unable to start trace\n");
   }
 }
