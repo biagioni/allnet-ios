@@ -78,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        enterBackground(caller: "appDEB")
+        enterBackground(application: application, caller: "appDEB")
         debugToMaru(message: "applicationDidEnterBackground")
 // self.notifyMessageReceived(contact: "application", message: "entered background")
     }
@@ -161,10 +161,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func enterBackground(caller: String) {
+    func enterBackground(application: UIApplication, caller: String) {
         print("\(caller) entered background, connected is \(self.connected)")
         pcache_write()
-        set_speculative_computation(0);
+        set_speculative_computation(0)
+        self.shutdownAllnet()
     }
     
     func createAllNetDir() {
@@ -201,16 +202,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print ("startAllnet called, but already connected, doing nothing")
             return
         }
-        var task = UIBackgroundTaskIdentifier.invalid
-        task = application.beginBackgroundTask {
-            if task != UIBackgroundTaskIdentifier.invalid {
-                let local_task = task
-                task = UIBackgroundTaskIdentifier.invalid
-                self.shutdownAllnet()
-                print("allnet task ending background task \(local_task)")
-                application.endBackgroundTask(local_task)
-            }
-        }
+// esb 2021/08/10  I think this belongs in the code where we enter background, and can be simplified
+//        var task = UIBackgroundTaskIdentifier.invalid
+//        task = application.beginBackgroundTask {
+//            if task != UIBackgroundTaskIdentifier.invalid {
+//                let local_task = task
+//                print("allnet task starting background task \(local_task)")
+//                task = UIBackgroundTaskIdentifier.invalid
+//                self.shutdownAllnet()
+//                print("allnet task ending background task \(local_task)")
+//                application.endBackgroundTask(local_task)
+//            }
+//        }
         if firstCall {
             allnet_log = init_log ("AppDelegate.m")
         }
@@ -315,10 +318,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func getPeer() -> MCPeerID {
         let peerIDKey = "peerID"
         var result: MCPeerID? = nil
-        if let peerIdData = UserDefaults.standard.data(forKey: peerIDKey){
-            result = NSKeyedUnarchiver.unarchiveObject(with: peerIdData) as? MCPeerID
-            NSLog("found peer ID %@\n", result!.displayName)
-        }
+        do {
+            if let peerIdData = UserDefaults.standard.data(forKey: peerIDKey) {
+                result = try NSKeyedUnarchiver.unarchivedObject(ofClass: MCPeerID.self, from: peerIdData)
+                // result = NSKeyedUnarchiver.unarchiveObject(with: peerIdData) as? MCPeerID
+                NSLog("found peer ID %@\n", result!.displayName)
+            }
+        } catch { print(error) }
         
         if result == nil {
             let deviceName = UIDevice.current.name
@@ -328,10 +334,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let displayName = deviceName + ", unique " + randomValue!
             result = MCPeerID(displayName: displayName)
             NSLog("created peer ID %@\n", result!.description)
-            let peerID = NSKeyedArchiver.archivedData(withRootObject: result!)
-            let defaults = UserDefaults.standard
-            defaults.setValue(peerID, forKey: peerIDKey)
-            defaults.synchronize()
+            do {
+                let peerID = try  NSKeyedArchiver.archivedData(withRootObject: result!, requiringSecureCoding: false)
+                // NSKeyedArchiver.archivedData(withRootObject: result!)
+                let defaults = UserDefaults.standard
+                defaults.setValue(peerID, forKey: peerIDKey)
+                defaults.synchronize()
+            } catch { print (error) }
         }
         return result!
     }
