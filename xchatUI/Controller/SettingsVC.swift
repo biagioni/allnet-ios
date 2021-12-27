@@ -81,7 +81,8 @@ class SettingsVC: UITableViewController {
     }
     
     @IBAction func deleteUser(_ sender: UIButton) {
-        let alert = UIAlertController(title: nil, message: "Are you sure you want to delete the contact?", preferredStyle: .alert)
+        let contactName = self.contactVM.selectedContact!
+        let alert = UIAlertController(title: nil, message: "Are you sure you want to delete the contact '" + contactName + "'?", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let delete = UIAlertAction(title: "Delete", style: .destructive){
             action in
