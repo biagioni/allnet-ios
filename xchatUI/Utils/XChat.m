@@ -21,6 +21,7 @@
 
 #include "xchat/xcommon.h"
 #include "limits.h"
+#include "lib/packet.h"
 #include "lib/util.h"
 #include "xchat/cutil.h"
 #include "lib/app_util.h"
@@ -52,7 +53,7 @@ static int user_messages_received = 0;
 // variables for tracing
 static int trace_count = 0;
 static unsigned long long int trace_start_time = 0;
-static char expecting_trace [MESSAGE_ID_SIZE];
+static char expecting_trace [ALLNET_MESSAGE_ID_SIZE];
 
 // hack to make self object available to C code -- should only be one Xchat object anyway
 static XChat * mySelf = NULL;
@@ -80,7 +81,7 @@ static XChat * mySelf = NULL;
 }
 
 - (BOOL)initSocket: (NSString *)debugInfo {
-  self.sock = xchat_init ("xchat", NULL);
+  self.sock = xchat_init ("xchat", NULL, 0);
   if (self.sock < 0)
     return false;
   NSLog(@"Xchat.m %@ result of calling xchat_init is %d\n", debugInfo, self.sock);
@@ -226,7 +227,7 @@ static void receivePacket (int sock, const char * data, unsigned int dlen, unsig
   } else if (mlen == -2) {  // confirm successful subscription
       NSLog(@"got subscription %s\n", peer);
   } else if ((mlen == -4) && (trace != NULL) &&
-             (memcmp (trace->trace_id, expecting_trace, MESSAGE_ID_SIZE) == 0)) {  // got trace result
+             (memcmp (trace->trace_id, expecting_trace, ALLNET_MESSAGE_ID_SIZE) == 0)) {  // got trace result
     // NSLog(@"got trace result with %d entries\n", trace->num_entries);
     char string [10000];
     trace_to_string(string, sizeof (string), trace, trace_count, trace_start_time);
@@ -314,8 +315,8 @@ void receiveAdPacket (const char * data, unsigned int dlen, unsigned int priorit
 
 - (void) startTrace: (BOOL) wide_enough maxHops: (NSUInteger) hops showDetails: (BOOL) show_details {
 
-  unsigned char addr [MESSAGE_ID_SIZE];
-  memset (addr, 0, MESSAGE_ID_SIZE);
+  unsigned char addr [ALLNET_MESSAGE_ID_SIZE];
+  memset (addr, 0, ALLNET_MESSAGE_ID_SIZE);
   trace_count++;
   trace_start_time = allnet_time_ms();
   int details = (show_details ? 1 : 0);
